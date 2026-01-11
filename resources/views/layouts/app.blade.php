@@ -11,7 +11,6 @@
 
 <body class="bg-gray-100">
     <div class="container mx-auto p-4">
-
         <h1 class="text-3xl font-bold mb-4">{{ $title ?? 'Welcome to My Application' }}</h1>
 
         <div class="bg-white p
