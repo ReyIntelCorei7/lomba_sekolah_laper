@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metland School</title>
+    <title>Metland School - Program Keahlian</title>
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -20,7 +20,7 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#1E2188',
+                        primary: '#008D8E',
                         'primary-dark': '#006d6e',
                         'primary-light': '#00a7a8'
                     }
@@ -69,7 +69,7 @@ class="bg-gray-100 overflow-x-hidden"
 
         <!-- Logo -->
         <div class="flex items-center gap-3">
-            <img src="{{ asset('image/logometland.png') }}" alt="Logo" class="w-8 h-auto">
+            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center font-bold">M</div>
             <span class="font-semibold tracking-wide">Metland School</span>
         </div>
 
@@ -109,41 +109,35 @@ class="bg-gray-100 overflow-x-hidden"
     <div class="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900"></div>
     <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-primary-dark"></div>
 
-
-    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
-     style="background-image: url('{{ asset('image/sekolahsmkmetland.png') }}')">
-    </div>
-
     <div class="relative z-10 h-full flex items-center justify-center text-center px-6">
         <div class="max-w-3xl text-white">
 
-            <img src="{{ asset('image/logometland.png') }}" alt="Logo" class="w-40 h-auto mx-auto mb-6">
+            <div class="mx-auto w-28 h-28 bg-primary rounded-full flex items-center justify-center mb-6">
+                <span class="text-4xl font-bold">M</span>
+            </div>
 
             <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
                 Bridging the Gap Between
-                <span class="text-blue-600">Education</span> and
-                <span class="text-blue-600">Industry</span>
+                <span class="text-primary-light">Education</span> and
+                <span class="text-primary-light">Industry</span>
             </h1>
 
             <p class="text-gray-200 mb-10 transition-all duration-300"
                x-text="t[lang].tagline"></p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#" style="color: #1E2188;" class="bg-white font-semibold px-8 py-3 rounded-full hover:scale-105 transition"
+                <a href="#" class="bg-white text-primary font-semibold px-8 py-3 rounded-full hover:scale-105 transition"
                    x-text="t[lang].ppdb"></a>
 
-                <a href="#" style="background-color: #1E2188;" class="text-white font-semibold px-8 py-3 rounded-full hover:bg-primary-light transition"
+                <a href="#" class="bg-primary text-white font-semibold px-8 py-3 rounded-full hover:bg-primary-light transition"
                    x-text="t[lang].contact"></a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- About School -->
-
-
 <!-- ================= PROGRAM KEAHLIAN ================= -->
-<section id="jurusan" class="py-20" style="background-color: #1E2188;">
+<section id="jurusan" class="py-20 bg-primary-dark">
     <div class="max-w-7xl mx-auto px-6">
 
         <div class="text-center mb-12">
