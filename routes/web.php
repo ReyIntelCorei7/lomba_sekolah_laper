@@ -8,3 +8,6 @@ Route::get('/', function () {
 Route::get('/layout', function () {
     return view('layouts.app');
 });
+Route::get('/news', function () {
+    return view('news.index');
+});
