@@ -147,11 +147,7 @@ class="bg-gray-50 overflow-x-hidden"
             <a href="#" class="hover:text-primary-light transition" x-text="t[lang].about"></a>
             <a href="index.html#jurusan" class="hover:text-primary-light transition" x-text="t[lang].program"></a>
             <a href="#" class="hover:text-primary-light transition" x-text="t[lang].curriculum"></a>
-<<<<<<< HEAD
-            <a href="/news" class="hover:text-primary-light transition" x-text="t[lang].news"></a>
-=======
             <a href="news.html" class="text-primary-light font-semibold transition" x-text="t[lang].news"></a>
->>>>>>> d699ec9c10dadebd5b4f704424d5159fde5c44a0
         </nav>
 
         <!-- Language Toggle -->
