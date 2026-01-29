@@ -79,8 +79,8 @@
             <nav class="hidden md:flex gap-8 text-sm font-medium">
                 <a href="#" class="hover:text-primary-light transition" x-text="t[lang].home"></a>
                 <a href="#" class="hover:text-primary-light transition" x-text="t[lang].about"></a>
-                <a href="#jurusan" class="hover:text-primary-light transition" x-text="t[lang].program"></a>
-                <a href="#" class="hover:text-primary-light transition" x-text="t[lang].curriculum"></a>
+                <a href="/prokeh" wire:navigate class="hover:text-primary-light transition" x-text="t[lang].program">
+                </a> <a href="#" class="hover:text-primary-light transition" x-text="t[lang].curriculum"></a>
                 <a href="#" class="hover:text-primary-light transition" x-text="t[lang].news"></a>
             </nav>
 
