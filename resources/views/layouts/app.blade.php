@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metland School</title>
+    <title>Metland School - Berita Sekolah</title>
 
 <!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -21,9 +21,10 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#1E2188',
+                        primary: '#1e40af',
                         'primary-dark': '#006d6e',
-                        'primary-light': '#00a7a8'
+                        'primary-light': '#00a7a8',
+                        'secondary': '#f59e0b',
                     }
                 }
             }
@@ -167,7 +168,23 @@ x-data="{
             ppdb: 'PPDB',
             contact: 'Hubungi Kami',
             programTitle: 'Program Keahlian',
-            programDesc: 'Pilih jurusan sesuai minat dan bakatmu untuk masa depan yang lebih cerah'
+            programDesc: 'Pilih jurusan sesuai minat dan bakatmu untuk masa depan yang lebih cerah',
+            newsTitle: 'Berita Sekolah',
+            newsSubtitle: 'Ikuti perkembangan terbaru dari Metland School',
+            popularNews: 'Berita Terpopuler',
+            readMore: 'Baca Selengkapnya',
+            allCategories: 'Semua Kategori',
+            academic: 'Akademik',
+            activity: 'Kegiatan',
+            extracurricular: 'Ekstrakurikuler',
+            arts: 'Seni & Budaya',
+            alumni: 'Alumni',
+            scout: 'Kepramukaan',
+            workshop: 'Workshop',
+            achievement: 'Prestasi',
+            share: 'Bagikan',
+            filter: 'Filter Kategori',
+            latestNews: 'Berita Terbaru'
         },
         en: {
             home: 'Home',
@@ -179,11 +196,55 @@ x-data="{
             ppdb: 'Admissions',
             contact: 'Contact Support',
             programTitle: 'Study Programs',
-            programDesc: 'Choose a major that matches your passion for a brighter future'
+            programDesc: 'Choose a major that matches your passion for a brighter future',
+            newsTitle: 'School News',
+            newsSubtitle: 'Stay updated with the latest news from Metland School',
+            popularNews: 'Popular News',
+            readMore: 'Read More',
+            allCategories: 'All Categories',
+            academic: 'Academic',
+            activity: 'Activity',
+            extracurricular: 'Extracurricular',
+            arts: 'Arts & Culture',
+            alumni: 'Alumni',
+            scout: 'Scouting',
+            workshop: 'Workshop',
+            achievement: 'Achievement',
+            share: 'Share',
+            filter: 'Filter Categories',
+            latestNews: 'Latest News'
         }
+    },
+    activeFilter: 'all',
+    showShareModal: false,
+    currentArticle: null,
+    
+    filterNews(category) {
+        this.activeFilter = category;
+    },
+    
+    shareArticle(title, description) {
+        this.currentArticle = { title, description };
+        this.showShareModal = true;
+        
+        if (navigator.share) {
+            navigator.share({
+                title: title,
+                text: description,
+                url: window.location.href,
+            }).then(() => {
+                this.showShareModal = false;
+            });
+        }
+    },
+    
+    copyLink() {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Link berhasil disalin ke clipboard!');
+        this.showShareModal = false;
     }
 }"
-class="bg-gray-100 overflow-x-hidden"
+class="bg-gray-50 overflow-x-hidden"
 >
 
 <!-- Header -->
@@ -197,7 +258,7 @@ class="bg-gray-100 overflow-x-hidden"
 
         <!-- Logo -->
         <div class="flex items-center gap-3">
-            <img src="{{ asset('image/logometland.png') }}" alt="Logo" class="w-8 h-auto">
+            <img src="{{ asset('image/logometland.png') }}" class="h-8">
             <span class="font-semibold tracking-wide">Metland School</span>
         </div>
 
@@ -207,7 +268,7 @@ class="bg-gray-100 overflow-x-hidden"
             <a href="#" class="hover:text-primary-light transition" x-text="t[lang].about"></a>
             <a href="#" class="hover:text-primary-light transition" x-text="t[lang].program"></a>
             <a href="#" class="hover:text-primary-light transition" x-text="t[lang].curriculum"></a>
-            <a href="#" class="hover:text-primary-light transition" x-text="t[lang].news"></a>
+            <a href="news.html" class="hover:text-primary-light font-semibold transition" x-text="t[lang].news"></a>
         </nav>
 
         <!-- Language Toggle -->
@@ -240,15 +301,15 @@ class="bg-gray-100 overflow-x-hidden"
 >
     <!-- Overlay -->
     <div class="absolute inset-0 bg-gradient-to-br from-gray-900/90 to-gray-800/90"></div>
-    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-primary-dark"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-black/60 via-black/50 to-primary-dark"></div>
 
     <!-- Layer 1 -->
     <div
         class="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform will-change-opacity"
         :style="'background-image: url(' + images[index] + ')'"
         :class="showA 
-            ? 'opacity-40 scale-105 transition-all duration-[2000ms] ease-in-out' 
-            : 'opacity-0 scale-100 transition-all duration-[2000ms] ease-in-out'"
+            ? 'opacity-40 scale-105 transition-all duration-2000 ease-in-out' 
+            : 'opacity-0 scale-100 transition-all duration-2000 ease-in-out'"
     ></div>
 
     <!-- Layer 2 -->
@@ -256,8 +317,8 @@ class="bg-gray-100 overflow-x-hidden"
         class="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform will-change-opacity"
         :style="'background-image: url(' + images[nextIndex] + ')'"
         :class="!showA 
-            ? 'opacity-40 scale-105 transition-all duration-[2000ms] ease-in-out' 
-            : 'opacity-0 scale-100 transition-all duration-[2000ms] ease-in-out'"
+            ? 'opacity-40 scale-105 transition-all duration-2000 ease-in-out' 
+            : 'opacity-0 scale-100 transition-all duration-2000 ease-in-out'"
     ></div>
 
     <!-- Content -->
@@ -484,7 +545,56 @@ class="bg-gray-100 overflow-x-hidden"
 
         </div>
     </div>
-</section>
+</footer>
+
+
+<div
+    x-show="showShareModal"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+    class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-6"
+    style="display: none;"
+    @click.self="showShareModal = false"
+>
+    <div class="bg-white rounded-2xl max-w-md w-full p-8">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="text-2xl font-bold text-gray-900">Bagikan Berita</h3>
+            <button @click="showShareModal = false" class="text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        
+        <template x-if="currentArticle">
+            <div class="mb-6">
+                <h4 class="font-bold text-lg mb-2" x-text="currentArticle.title"></h4>
+                <p class="text-gray-600 text-sm" x-text="currentArticle.description"></p>
+            </div>
+        </template>
+        
+        <div class="flex gap-4">
+            <button
+                @click="copyLink()"
+                class="flex-1 bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary-dark transition flex items-center justify-center gap-3"
+            >
+                <i class="fas fa-copy"></i>
+                Salin Link
+            </button>
+            
+            <a
+                href="https://wa.me/?text=Saya%20membaca%20artikel%20ini:%20" + encodeURIComponent(window.location.href)
+                target="_blank"
+                class="flex-1 bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition flex items-center justify-center gap-3"
+            >
+                <i class="fab fa-whatsapp"></i>
+                WhatsApp
+            </a>
+        </div>
+    </div>
+</div>
 
 <!-- Berita Sekolah -->
 
