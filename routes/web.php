@@ -8,6 +8,9 @@ Route::get('/', function () {
 Route::get('/layout', function () {
     return view('layouts.app');
 });
+Route::get('/prokeh', function () {
+    return view('program_keahlian.index');
+});
 Route::get('/news', function () {
     return view('news.index');
 });
