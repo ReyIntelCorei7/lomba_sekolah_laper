@@ -12,3 +12,6 @@ Route::get('/prokeh', function () {
     return view('program_keahlian.index');
 });
 
+Route::get('/news', function () {
+    return view('news.index');
+});
