@@ -11,3 +11,7 @@ Route::get('/layout', function () {
 Route::get('/news', function () {
     return view('news.index');
 });
+Route::get('/about', function () {
+    return view('aboutschool.index');
+});
+

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metland School - Berita Sekolah</title>
+    <title>Metland School</title>
 
 <!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -265,18 +265,10 @@ class="bg-gray-50 overflow-x-hidden"
         <!-- Menu -->
         <nav class="hidden md:flex gap-8 text-sm mr-20 font-medium">
             <a href="#" class="hover:text-primary-light transition" x-text="t[lang].home"></a>
-            <a href="#" class="hover:text-primary-light transition" x-text="t[lang].about"></a>
+            <a href="/about" class="hover:text-primary-light transition" x-text="t[lang].about"></a>
             <a href="#" class="hover:text-primary-light transition" x-text="t[lang].program"></a>
             <a href="#" class="hover:text-primary-light transition" x-text="t[lang].curriculum"></a>
-<<<<<<< HEAD
-            <a href="news.html" class="hover:text-primary-light font-semibold transition" x-text="t[lang].news"></a>
-=======
-<<<<<<< HEAD
             <a href="/news" class="hover:text-primary-light transition" x-text="t[lang].news"></a>
-=======
-            <a href="news.html" class="text-primary-light font-semibold transition" x-text="t[lang].news"></a>
->>>>>>> d699ec9c10dadebd5b4f704424d5159fde5c44a0
->>>>>>> 3db4cabc9fcc9816b7e92793f1c8cd7fb1b7cc90
         </nav>
 
         <!-- Language Toggle -->
