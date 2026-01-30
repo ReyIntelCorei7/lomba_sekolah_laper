@@ -20,21 +20,19 @@ Route::get('/prokeh', function () {
 Route::get('/news', function () {
     return view('news.app');
 });
-Route::get('/login', function () {
-    return view('admin.news.index');
-});
+
 
 Route::prefix('admin')->name('admin.')->group(function () {
     
     // Login Page (Public)
     Route::get('/login', function () {
-        return view('auth.login');
+        return view('admin.auth.login');
     })->name('login');
     
     // Dashboard (Protected - perlu auth)
     Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', function () {
-            return view('admin.dashboard');
+            return view('admin.layout.app');
         })->name('dashboard');
         
         // News Management
