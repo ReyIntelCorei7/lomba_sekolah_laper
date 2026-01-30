@@ -186,7 +186,7 @@
     </header>
 
     <!-- ================= HERO NEWS ================= -->
-    <section class="relative pt-32 pb-20 bg-gradient-to-br from-primary-dark to-primary overflow-hidden">
+    <section  class="relative pt-32 pb-20 bg-gradient-to-br from-primary-dark to-primary overflow-hidden">
         <div class="absolute inset-0 opacity-10">
             <div class="absolute top-0 right-0 w-96 h-96 bg-white rounded-full -translate-y-48 translate-x-48"></div>
             <div class="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full -translate-x-32 translate-y-32"></div>
@@ -194,7 +194,7 @@
 
         <div class="relative z-10 max-w-7xl mx-auto px-6">
             <!-- Breadcrumb -->
-            <div class="flex items-center text-white/80 mb-8 text-sm">
+            <div id="hero" class="flex items-center text-white/80 mb-8 text-sm">
                 <a href="index.html" class="hover:text-white transition" x-text="t[lang].home"></a>
                 <span class="breadcrumb-arrow"></span>
                 <span class="text-white font-semibold" x-text="t[lang].news"></span>
