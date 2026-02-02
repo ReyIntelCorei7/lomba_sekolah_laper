@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metland School</title>
+    <title>Metland School - Berita Sekolah</title>
 
 <!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -266,9 +266,9 @@ class="bg-gray-50 overflow-x-hidden"
         <nav class="hidden md:flex gap-8 text-sm mr-20 font-medium">
             <a href="#" class="hover:text-primary-light transition" x-text="t[lang].home"></a>
             <a href="/about" class="hover:text-primary-light transition" x-text="t[lang].about"></a>
-            <a href="#" class="hover:text-primary-light transition" x-text="t[lang].program"></a>
+            <a href="/prokeh" class="hover:text-primary-light transition" x-text="t[lang].program"></a>
             <a href="#" class="hover:text-primary-light transition" x-text="t[lang].curriculum"></a>
-            <a href="/news" class="hover:text-primary-light transition" x-text="t[lang].news"></a>
+            <a href="/news" class="hover:text-primary-light font-semibold transition" x-text="t[lang].news"></a>
         </nav>
 
         <!-- Language Toggle -->
@@ -301,15 +301,15 @@ class="bg-gray-50 overflow-x-hidden"
 >
     <!-- Overlay -->
     <div class="absolute inset-0 bg-gradient-to-br from-gray-900/90 to-gray-800/90"></div>
-    <div class="absolute inset-0 bg-gradient-to-br from-black/60 via-black/50 to-primary-dark"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-primary-dark"></div>
 
     <!-- Layer 1 -->
     <div
         class="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform will-change-opacity"
         :style="'background-image: url(' + images[index] + ')'"
         :class="showA 
-            ? 'opacity-40 scale-105 transition-all duration-2000 ease-in-out' 
-            : 'opacity-0 scale-100 transition-all duration-2000 ease-in-out'"
+            ? 'opacity-40 scale-105 transition-all duration-[2000ms] ease-in-out' 
+            : 'opacity-0 scale-100 transition-all duration-[2000ms] ease-in-out'"
     ></div>
 
     <!-- Layer 2 -->
@@ -317,8 +317,8 @@ class="bg-gray-50 overflow-x-hidden"
         class="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform will-change-opacity"
         :style="'background-image: url(' + images[nextIndex] + ')'"
         :class="!showA 
-            ? 'opacity-40 scale-105 transition-all duration-2000 ease-in-out' 
-            : 'opacity-0 scale-100 transition-all duration-2000 ease-in-out'"
+            ? 'opacity-40 scale-105 transition-all duration-[2000ms] ease-in-out' 
+            : 'opacity-0 scale-100 transition-all duration-[2000ms] ease-in-out'"
     ></div>
 
     <!-- Content -->
