@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <!-- Tailwind -->
+    <title>Akuntansi - SMK Metland</title>
+    <link rel="icon" href="/image/logometland.png" type="image/png">    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Alpine -->
@@ -14,6 +14,7 @@
 </head>
 
 <body>
+
     <div class="w-full relative bg-gray-900">
         <!-- Section 1 -->
         <div class="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden z-0">
@@ -67,7 +68,7 @@
                     class="absolute inset-0 w-full h-full object-cover brightness-[0.4]" alt="Background Image 2">
             </picture>
 
-           <div class="relative z-50 w-full max-w-8xl px-4 sm:px-6 lg:px-8">
+            <div class="relative z-50 w-full max-w-8xl px-4 sm:px-6 lg:px-8">
                 <div
                     class="w-full h-[90vh] sm:h-[95vh] md:h-[90vh] border border-white/60 p-3 sm:p-4 transition-all opacity-100">
                     <div class="w-full h-full border relative p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-end">

@@ -8,14 +8,25 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CurriculumController;
 
 
+
 Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/layout', function () {
     return view('layouts.app');
 });
-Route::get('/prokeh', function () {
-    return view('program_keahlian.index');
+
+Route::get('/prokeh/akuntansi', function () {
+    return view('program_keahlian.akuntansi');
+});
+Route::get('/prokeh/DKV', function () {
+    return view('program_keahlian.dkv');
+});
+Route::get('/prokeh/PPLG', function () {
+    return view('program_keahlian.pplg');
+});
+Route::get('/prokeh/Kuliner', function () {
+    return view('program_keahlian.kuliner');
+});
+Route::get('/prokeh/Hotel', function () {
+    return view('program_keahlian.hotel');
 });
 Route::get('/news', function () {
     return view('news.app');
@@ -23,6 +34,14 @@ Route::get('/news', function () {
 Route::get('/about', function () {
     return view('aboutschool.index');
 });
+Route::get('/login', function () {
+    return view('admin.news.index');
+});
+Route::get('/hero-animation', function () {
+    return view('layouts.hero-animation');
+});
+
+
 
 
 Route::prefix('admin')->name('admin.')->group(function () {

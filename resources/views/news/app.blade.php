@@ -166,7 +166,7 @@
 
             <!-- Menu -->
             <nav class="hidden md:flex gap-8 text-sm mr-20 font-medium">
-                <a href="/layout" class="hover:text-primary-light transition" x-text="t[lang].home"></a>
+                <a href="/" class="hover:text-primary-light transition" x-text="t[lang].home"></a>
                 <a href="#" class="hover:text-primary-light transition" x-text="t[lang].about"></a>
                 <a href="/prokeh" class="hover:text-primary-light transition" x-text="t[lang].program"></a>
                 <a href="#" class="hover:text-primary-light transition" x-text="t[lang].curriculum"></a>

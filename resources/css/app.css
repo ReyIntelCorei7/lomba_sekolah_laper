@@ -8,3 +8,15 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+/* Bentuk Perisai Metland Aproksimasi */
+.metland-shield {
+    /* Ini membuat bentuk perisai: Datar di atas, melengkung ke titik bawah */
+    clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 50% 100%, 0% 75%);
+    /* Agar transisi perubahan ukuran halus */
+    transition: transform 0.1s linear; 
+}
+
+/* Jika animasi sudah selesai, kita hapus clip-path agar full screen sempurna */
+.is-full-screen {
+    clip-path: none !important;
+}
