@@ -256,23 +256,30 @@ class="bg-gray-50 overflow-x-hidden"
     <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between transition-colors duration-300"
     :class="scrolled ? 'text-white' : 'text-white'">
 
-
-    <!-- Logo -->
+        <!-- Logo -->
         <div class="flex items-center gap-3">
             <img src="{{ asset('image/logometland.png') }}" class="h-8">
             <span class="font-semibold tracking-wide">Metland School</span>
         </div>
-            
-            <!-- Menu -->
-            <nav class="hidden md:flex gap-8 text-sm mr-20 font-medium">
-                <a href="#" class="hover:text-primary-light transition" x-text="t[lang].home"></a>
-                <a href="/about" class="hover:text-primary-light transition" x-text="t[lang].about"></a>
-                <a href="/prokeh" class="hover:text-primary-light transition" x-text="t[lang].program"></a>
-                <a href="#" class="hover:text-primary-light transition" x-text="t[lang].curriculum"></a>
-                <a href="/news" class="hover:text-primary-light font-semibold transition" x-text="t[lang].news"></a>
-            </nav>
 
-             <!-- Language Toggle -->
+        <!-- Menu -->
+        <nav class="hidden md:flex gap-8 text-sm mr-20 font-medium">
+            <a href="#" class="hover:text-primary-light transition" x-text="t[lang].home"></a>
+            <a href="#" class="hover:text-primary-light transition" x-text="t[lang].about"></a>
+            <a href="#" class="hover:text-primary-light transition" x-text="t[lang].program"></a>
+            <a href="#" class="hover:text-primary-light transition" x-text="t[lang].curriculum"></a>
+<<<<<<< HEAD
+            <a href="news.html" class="hover:text-primary-light font-semibold transition" x-text="t[lang].news"></a>
+=======
+<<<<<<< HEAD
+            <a href="/news" class="hover:text-primary-light transition" x-text="t[lang].news"></a>
+=======
+            <a href="news.html" class="text-primary-light font-semibold transition" x-text="t[lang].news"></a>
+>>>>>>> d699ec9c10dadebd5b4f704424d5159fde5c44a0
+>>>>>>> 3db4cabc9fcc9816b7e92793f1c8cd7fb1b7cc90
+        </nav>
+
+        <!-- Language Toggle -->
         <div class="relative flex items-center bg-white/20 rounded-full p-1 text-xs w-20">
             <div
                 class="absolute top-1 bottom-1 w-1/2 bg-primary rounded-full transition-all duration-300"
@@ -292,7 +299,7 @@ class="bg-gray-50 overflow-x-hidden"
             >EN</button>
         </div>
     </div>
-    </header>
+</header>
 
 <!-- Hero -->
 <section id="hero"
@@ -302,15 +309,15 @@ class="bg-gray-50 overflow-x-hidden"
 >
     <!-- Overlay -->
     <div class="absolute inset-0 bg-gradient-to-br from-gray-900/90 to-gray-800/90"></div>
-    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-primary-dark"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-black/60 via-black/50 to-primary-dark"></div>
 
     <!-- Layer 1 -->
     <div
         class="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform will-change-opacity"
         :style="'background-image: url(' + images[index] + ')'"
         :class="showA 
-            ? 'opacity-40 scale-105 transition-all duration-[2000ms] ease-in-out' 
-            : 'opacity-0 scale-100 transition-all duration-[2000ms] ease-in-out'"
+            ? 'opacity-40 scale-105 transition-all duration-2000 ease-in-out' 
+            : 'opacity-0 scale-100 transition-all duration-2000 ease-in-out'"
     ></div>
 
     <!-- Layer 2 -->
@@ -318,8 +325,8 @@ class="bg-gray-50 overflow-x-hidden"
         class="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform will-change-opacity"
         :style="'background-image: url(' + images[nextIndex] + ')'"
         :class="!showA 
-            ? 'opacity-40 scale-105 transition-all duration-[2000ms] ease-in-out' 
-            : 'opacity-0 scale-100 transition-all duration-[2000ms] ease-in-out'"
+            ? 'opacity-40 scale-105 transition-all duration-2000 ease-in-out' 
+            : 'opacity-0 scale-100 transition-all duration-2000 ease-in-out'"
     ></div>
 
     <!-- Content -->
@@ -361,7 +368,75 @@ class="bg-gray-50 overflow-x-hidden"
 
 <!-- About School -->
 
-@livewire('bawah-hero-section')
+<section id="about" class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-6 space-y-24">
+
+        <!-- ITEM 1 -->
+        <div x-data="scrollAnim()" x-init="init()" class="grid md:grid-cols-2 gap-12 items-center">
+            
+            <!-- TEXT -->
+            <div :class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
+                 class="transition-all duration-1000 ease-out">
+                <h2 class="text-3xl font-bold mb-4">About Our School</h2>
+                <p class="text-gray-600 leading-relaxed">
+                    SMK Metland didirikan oleh Yayasan Pendidikan Metland (YPM), berada di bawah naungan PT Metropolitan Land, Tbk. 
+                    Keberhasilan pengembangan SMK Metland di kawasan Metland Transyogi Bogor (dalam kurun waktu 10 tahun) sebagai SMK 
+                    dengan standar internasional mendorong Yayasan Pendidikan Metland untuk mengembangkan SMK Metland di kawasan Perumahan Metland Cibitung yang dimulai pada tahun 2021.
+                    Hal ini ditandai dengan didirikannya bangunan sekolah dengan fasilitas lengkap pada tahun 2022 di lokasi yang strategis.
+                </p>
+            </div>
+
+            <!-- IMAGE -->
+            <div :class="show ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-16'"
+                 class="transition-all duration-1000 ease-out">
+                <img src="{{ asset('image/sekolahsmkmetland.png') }}" class="rounded-xl shadow-lg w-full">
+            </div>
+
+        </div>
+
+
+        <!-- ITEM 2 -->
+        <div x-data="scrollAnim()" x-init="init()" class="grid md:grid-cols-2 gap-12 items-center">
+            
+            <div :class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
+                 class="transition-all duration-1000 ease-out order-2 md:order-1">
+                <h2 class="text-3xl font-bold mb-4">Industry Based Learning</h2>
+                <p class="text-gray-600 leading-relaxed">
+                    Program Industry Based Learning di sekolah kami dirancang untuk menjembatani pendidikan dengan kebutuhan industri nyata. 
+                    Siswa tidak hanya mempelajari teori di kelas, tetapi juga mendapatkan pengalaman praktik berbasis standar dunia kerja sehingga lebih siap menghadapi tantangan profesional setelah lulus.
+                    Siswa dibimbing langsung oleh mentor profesional agar siap masuk dunia kerja.
+                </p>
+            </div>
+
+            <div :class="show ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-16'"
+                 class="transition-all duration-1000 ease-out order-1 md:order-2">
+                <img src="{{ asset('image/sekolahsmkmetland3.png') }}" class="rounded-xl shadow-lg w-full">
+            </div>
+
+        </div>
+
+
+        <!-- ITEM 3 -->
+        <div x-data="scrollAnim()" x-init="init()" class="grid md:grid-cols-2 gap-12 items-center">
+            
+            <div :class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'"
+                 class="transition-all duration-1000 ease-out">
+                <h2 class="text-3xl font-bold mb-4">Generasi Cinta Prestasi</h2>
+                <p class="text-gray-600 leading-relaxed">
+                    Generasi Cinta Prestasi (GCP) adalah program unggulan di SMK Pariwisata Metland School Cileungsi yang dirancang untuk menyambut siswa baru sekaligus menanamkan budaya prestasi dalam diri setiap peserta didik. 
+                    Program ini memberikan pengalaman edukatif yang memotivasi siswa untuk mengembangkan kemampuan akademik, kreativitas, karakter, dan soft skills sejak awal masa sekolah.
+                </p>
+            </div>
+
+            <div :class="show ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-16'"
+                 class="transition-all duration-1000 ease-out">
+                <img src="{{ asset('image/sekolahsmkmetland4.png') }}" class="rounded-xl shadow-lg w-full">
+            </div>
+
+        </div>
+
+    </div>
+</section>
 
 <!-- Infografis -->
 
