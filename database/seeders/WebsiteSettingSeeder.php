@@ -176,6 +176,14 @@ class WebsiteSettingSeeder extends Seeder
                 'label' => 'Program Section Description',
                 'description' => 'Description for programs section'
             ],
+            [
+                'key' => 'program_bg_color',
+                'value' => '#1E2188',
+                'type' => 'color',
+                'group' => 'programs',
+                'label' => 'Program Section Background Color',
+                'description' => 'Background color for programs section'
+            ],
             
             // News Section
             [

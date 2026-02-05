@@ -5,6 +5,7 @@ module.exports = {
         "./resources/**/*.js",
         "./resources/**/*.vue",
     ],
+    darkMode: 'class', // Enable dark mode via class strategy
     theme: {
         extend: {
             colors: {
@@ -15,30 +16,14 @@ module.exports = {
             fontFamily: {
                 'sans': ['Inter', 'system-ui', 'sans-serif'],
             },
-        },
-    },
-    plugins: [],
-}
-// tailwind.config.js
-module.exports = {
-  theme: {
-    extend: {
-      animation: {
-        'spin-slow': 'spin 15s linear infinite', // Berputar penuh dalam 15 detik
-      }
-    }
-  },
-  // ...
-}
-
-// tailwind.config.js
-module.exports = {
-    theme: {
-        extend: {
+            animation: {
+                'spin-slow': 'spin 15s linear infinite',
+            },
             transitionProperty: {
                 'height': 'height',
                 'spacing': 'margin, padding',
             }
-        }
-    }
+        },
+    },
+    plugins: [],
 }
