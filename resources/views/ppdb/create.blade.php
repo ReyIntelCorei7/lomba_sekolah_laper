@@ -7,11 +7,16 @@
     <title>Formulir Pendaftaran - PPDB SMK Metland</title>
     
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+    </style>
 </head>
 <body class="bg-gray-50">
     <!-- Navigation -->
@@ -19,7 +24,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <img src="{{ asset('public/image/logometland.png') }}" alt="SMK Metland" class="h-8 w-auto">
+                    <img src="{{ asset('image/logometland.png') }}" alt="SMK Metland" class="h-8 w-auto">
                     <span class="ml-2 text-xl font-bold text-gray-900">SMK Metland</span>
                 </div>
                 <div class="flex items-center space-x-4">

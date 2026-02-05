@@ -36,6 +36,13 @@ class Program extends Model
     }
 
     // Accessors
+    
+    // Override current_students to count from actual students in database
+    public function getCurrentStudentsAttribute()
+    {
+        return $this->students()->count();
+    }
+
     public function getAvailableSlotsAttribute()
     {
         return $this->capacity - $this->current_students;

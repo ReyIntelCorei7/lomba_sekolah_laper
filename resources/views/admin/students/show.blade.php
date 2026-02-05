@@ -174,7 +174,7 @@
                 <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Actions</h3>
                 <div class="space-y-3">
                     @if($student->status === 'pending')
-                        <form method="POST" action="{{ route('admin.students.updateStatus', $student) }}">
+                        <form method="POST" action="{{ route('admin.students.update-status', $student) }}">
                             @csrf
                             @method('PATCH')
                             <input type="hidden" name="status" value="accepted">
@@ -182,7 +182,7 @@
                                 Accept Student
                             </button>
                         </form>
-                        <form method="POST" action="{{ route('admin.students.updateStatus', $student) }}">
+                        <form method="POST" action="{{ route('admin.students.update-status', $student) }}">
                             @csrf
                             @method('PATCH')
                             <input type="hidden" name="status" value="rejected">

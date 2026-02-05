@@ -803,17 +803,17 @@
                 },
 
                 init() {
-                    // 1. Loading Simulation
+                    // 1. Loading Simulation (faster for better UX)
                     let progressInterval = setInterval(() => {
-                        this.loadingProgress += Math.random() * 15;
+                        this.loadingProgress += Math.random() * 25 + 10;
                         if (this.loadingProgress >= 100) {
                             this.loadingProgress = 100;
                             clearInterval(progressInterval);
                             setTimeout(() => {
                                 this.isLoading = false;
-                            }, 800);
+                            }, 300);
                         }
-                    }, 200);
+                    }, 80);
 
                     // 2. Scroll Tracking
                     window.addEventListener('scroll', () => {
@@ -842,21 +842,9 @@
 
                 startAnimation() {
                     const targets = {
-                        students: {
-                            {
-                                $settings['stat_students'] ?? 683
-                            }
-                        },
-                        teachers: {
-                            {
-                                $settings['stat_teachers'] ?? 54
-                            }
-                        },
-                        staff: {
-                            {
-                                $settings['stat_staff'] ?? 41
-                            }
-                        }
+                        students: {{ $settings['stat_students'] ?? 683 }},
+                        teachers: {{ $settings['stat_teachers'] ?? 54 }},
+                        staff: {{ $settings['stat_staff'] ?? 41 }}
                     };
 
                     this.animateValue('students', targets.students);

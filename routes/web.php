@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 // PUBLIC ROUTES
 // ============================================================================
 
-// Homepage - Main landing page with settings and news
+// Homepage 
 Route::get('/', function () {
     $settings = \App\Models\WebsiteSetting::all()->pluck('value', 'key');
     $latestNews = \App\Models\News::where('is_published', true)
@@ -60,17 +60,17 @@ Route::prefix('prokeh')->name('prokeh.')->group(function () {
     Route::get('/hotel', fn() => view('program_keahlian.hotel'))->name('hotel');
 });
 
-// ============================================================================
+//
 // AUTH ROUTES
-// ============================================================================
+// 
 
 Route::get('/login', [LoginController::class, 'create'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
-// ============================================================================
+// 
 // PPDB ROUTES (Penerimaan Peserta Didik Baru)
-// ============================================================================
+// 
 
 Route::prefix('ppdb')->name('ppdb.')->group(function () {
     Route::get('/', [PPDBController::class, 'index'])->name('index');
