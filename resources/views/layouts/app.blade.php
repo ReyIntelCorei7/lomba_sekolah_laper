@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metland School - Berita Sekolah</title>
 
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Alpine -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+<!-- Alpine -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <!-- Font Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -317,12 +315,25 @@
                     colors: {
                         primary: '#1e40af',
                         'primary-dark': '#006d6e',
+                        'primary-light': '#00a7a8',
                         'secondary': '#f59e0b',
                     }
                 }
             }
         }
     </script>
+<!-- Hero -->
+<script>
+function heroSlider() {
+    return {
+        images: [
+            "{{ asset('image/sekolahsmkmetland4.png') }}",
+            "{{ asset('image/sekolahsmkmetland3.png') }}",
+            "{{ asset('image/sekolahsmkmetland.png') }}"
+        ],
+        index: 0,
+        nextIndex: 1,
+        showA: true,
 
     <!-- Hero -->
     <script>
@@ -356,7 +367,9 @@
                 }
             }
         }
-    </script>
+    }
+}
+</script>
 
     <!-- Scroll Animation -->
     <script>
@@ -420,28 +433,94 @@
                             requestAnimationFrame(step)
                         }
                     }
-                    requestAnimationFrame(step)
+                });
+            }, { threshold: 0.3 });
+
+            observer.observe(this.$el);
+        }
+    }
+}
+</script>
+
+<!-- Navbar -->
+<script>
+function navbar() {
+    return {
+        scrolled: false,
+        init() {
+            const hero = document.getElementById('hero')
+
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    this.scrolled = !entry.isIntersecting
                 },
-                init() {
-                    const section = document.getElementById('stats')
-                    const observer = new IntersectionObserver(([entry]) => {
-                        if (entry.isIntersecting && !this.show) {
-                            this.show = true
-                            this.animateValue('students', this.targetStudents)
-                            this.animateValue('teachers', this.targetTeachers)
-                            this.animateValue('staff', this.targetStaff)
-                        }
-                    }, {
-                        threshold: 0.4
-                    })
-                    observer.observe(section)
+                { threshold: 0.1 }
+            )
+
+            if (hero) observer.observe(hero)
+        }
+    }
+}
+</script>
+
+<!-- statistik -->
+<script>
+function statsSection() {
+    return {
+        show: false,
+        students: 0,
+        teachers: 0,
+        staff: 0,
+
+        targetStudents: 683,
+        targetTeachers: 54,
+        targetStaff: 41,
+
+        animateValue(key, target, duration = 1500) {
+            let start = 0
+            let startTime = null
+
+            const step = (timestamp) => {
+                if (!startTime) startTime = timestamp
+                const progress = Math.min((timestamp - startTime) / duration, 1)
+                this[key] = Math.floor(progress * target)
+
+                if (progress < 1) {
+                    requestAnimationFrame(step)
                 }
             }
+            requestAnimationFrame(step)
+        },
+
+        init() {
+            const section = document.getElementById('stats')
+
+            const observer = new IntersectionObserver(([entry]) => {
+                if (entry.isIntersecting && !this.show) {
+                    this.show = true
+
+                    this.animateValue('students', this.targetStudents)
+                    this.animateValue('teachers', this.targetTeachers)
+                    this.animateValue('staff', this.targetStaff)
+                }
+            }, { threshold: 0.4 })
+
+            observer.observe(section)
         }
-    </script>
+    }
+}
+</script>
+
+<!-- Berita -->
+
+
+
+
+
 </head>
 
-<body class="scroll-smooth" x-data="{
+<body
+x-data="{
     lang: 'id',
     isLoading: true,
     loadingProgress: 0,
@@ -512,12 +591,15 @@
     activeFilter: 'all',
     showShareModal: false,
     currentArticle: null,
+    
     filterNews(category) {
         this.activeFilter = category;
     },
+    
     shareArticle(title, description) {
         this.currentArticle = { title, description };
         this.showShareModal = true;
+        
         if (navigator.share) {
             navigator.share({
                 title: title,
@@ -528,6 +610,7 @@
             });
         }
     },
+    
     copyLink() {
         navigator.clipboard.writeText(window.location.href);
         alert('Link berhasil disalin ke clipboard!');
@@ -1035,5 +1118,4 @@
         });
     </script>
 </body>
-
 </html>
