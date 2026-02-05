@@ -866,7 +866,7 @@
 
                 animateValue(key, target) {
                     let start = 0;
-                    const duration = 2000;
+                    const duration = 150;
                     const step = timestamp => {
                         if (!start) start = timestamp;
                         const progress = Math.min((timestamp - start) / duration, 1);
