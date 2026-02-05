@@ -589,6 +589,7 @@
             <div x-data="{
                 active: null,
                 leaving: null,
+                isMobile: window.innerWidth < 768,
                 items: [
                     @foreach($programs as $program)
                     { 
