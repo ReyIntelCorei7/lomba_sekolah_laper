@@ -32,7 +32,7 @@ Route::get('/', function () {
         ->limit(3)
         ->get();
     $programs = \App\Models\Program::active()->get();
-    
+
     return view('layouts.app', compact('settings', 'latestNews', 'programs'));
 })->name('home');
 
@@ -53,6 +53,7 @@ Route::get('/kurikulum', fn() => view('kurikulum.app'))->name('kurikulum');
 // ============================================================================
 
 Route::prefix('prokeh')->name('prokeh.')->group(function () {
+    Route::get('/', fn() => view('program_keahlian.index'))->name('index');
     Route::get('/akuntansi', fn() => view('program_keahlian.akuntansi'))->name('akuntansi');
     Route::get('/dkv', fn() => view('program_keahlian.dkv'))->name('dkv');
     Route::get('/pplg', fn() => view('program_keahlian.pplg'))->name('pplg');
@@ -86,28 +87,28 @@ Route::prefix('ppdb')->name('ppdb.')->group(function () {
 // ============================================================================
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    
+
     // Public admin routes (login page)
     Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AdminAuthController::class, 'login'])->name('login.post');
-    
+
     // Protected admin routes (requires authentication)
     Route::middleware(['admin.auth'])->group(function () {
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
-        
+
         // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        
+
         // Students Management
         Route::resource('students', StudentController::class)->except(['create', 'store']);
         Route::patch('students/{student}/status', [StudentController::class, 'updateStatus'])
             ->name('students.update-status');
         Route::get('students/export', [StudentController::class, 'export'])
             ->name('students.export');
-        
+
         // Programs Management
         Route::resource('programs', ProgramController::class);
-        
+
         // News Management
         Route::get('news', [NewsController::class, 'adminIndex'])->name('news.index');
         Route::get('news/create', [NewsController::class, 'create'])->name('news.create');
@@ -118,7 +119,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
         Route::patch('news/{news}/toggle-publish', [NewsController::class, 'togglePublish'])
             ->name('news.toggle-publish');
-        
+
         // Website Settings
         Route::get('settings', [WebsiteSettingController::class, 'index'])->name('settings.index');
         Route::post('settings', [WebsiteSettingController::class, 'update'])->name('settings.update');
