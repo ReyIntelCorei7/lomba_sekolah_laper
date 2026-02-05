@@ -842,21 +842,9 @@
 
                 startAnimation() {
                     const targets = {
-                        students: {
-                            {
-                                $settings['stat_students'] ?? 683
-                            }
-                        },
-                        teachers: {
-                            {
-                                $settings['stat_teachers'] ?? 54
-                            }
-                        },
-                        staff: {
-                            {
-                                $settings['stat_staff'] ?? 41
-                            }
-                        }
+                        students: {{ $settings['stat_students'] ?? 683 }},
+                        teachers: {{ $settings['stat_teachers'] ?? 54 }},
+                        staff: {{ $settings['stat_staff'] ?? 41 }}
                     };
 
                     this.animateValue('students', targets.students);
