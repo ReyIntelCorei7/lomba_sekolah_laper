@@ -264,11 +264,11 @@
                 <!-- Text Links (Consolidated) -->
                 <div class="flex items-center gap-10 text-[11px] font-bold tracking-[0.15em] text-white transition-all duration-500 delay-75"
                     :class="menuOpen ? '-translate-y-10 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'">
-                    <a href="#" class="hover:text-blue-400 transition-colors uppercase">Beranda</a>
-                    <a href="#about" class="hover:text-blue-400 transition-colors uppercase">Tentang Sekolah</a>
-                    <a href="#jurusan" class="hover:text-blue-400 transition-colors uppercase">Program Keahlian</a>
-                    <a href="#" class="hover:text-blue-400 transition-colors uppercase">Kurikulum</a>
-                    <a href="#berita" class="hover:text-blue-400 transition-colors uppercase">Berita Sekolah</a>
+                    <a href="/" class="hover:text-blue-400 transition-colors uppercase">Beranda</a>
+                    <a href="/about" class="hover:text-blue-400 transition-colors uppercase">Tentang Sekolah</a>
+                    <a href="/prokeh" class="hover:text-blue-400 transition-colors uppercase">Program Keahlian</a>
+                    <a href="/curriculum" class="hover:text-blue-400 transition-colors uppercase">Kurikulum</a>
+                    <a href="/news" class="hover:text-blue-400 transition-colors uppercase">Berita Sekolah</a>
                 </div>
 
                 <!-- Language Toggle -->
@@ -842,9 +842,21 @@
 
                 startAnimation() {
                     const targets = {
-                        students: {{ $settings['stat_students'] ?? 683 }},
-                        teachers: {{ $settings['stat_teachers'] ?? 54 }},
-                        staff: {{ $settings['stat_staff'] ?? 41 }}
+                        students: {
+                            {
+                                $settings['stat_students'] ?? 683
+                            }
+                        },
+                        teachers: {
+                            {
+                                $settings['stat_teachers'] ?? 54
+                            }
+                        },
+                        staff: {
+                            {
+                                $settings['stat_staff'] ?? 41
+                            }
+                        }
                     };
 
                     this.animateValue('students', targets.students);
