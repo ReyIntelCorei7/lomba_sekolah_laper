@@ -335,11 +335,39 @@
     <div class="relative h-[200vh]" x-data="{ scrollProgress: 0 }" @scroll.window="scrollProgress = Math.min(Math.max((window.pageYOffset) / (window.innerHeight), 0), 1.5)">
         
         <!-- STICKY HERO SECTION -->
-        <section id="hero" class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-[#0a0a0a]">
+        <section id="hero" class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-[#101010]">
             
-            <!-- Outer Background Texture (Visible when mask is closed) -->
-            <div class="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#1E2188]/10 pointer-events-none"></div>
+            <!-- Outer Background Texture: Premium Yearbook Theme -->
+            <!-- Leather/Binding Texture -->
+            <div class="absolute inset-0 opacity-40 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/binding-dark.png')]"></div>
+            
+            <!-- Cinematic Vignette for Depth -->
+            <div class="absolute inset-0 bg-radial-at-c from-transparent via-[#000]/40 to-[#000]/90 pointer-events-none"></div>
+
+            <!-- Elegant Book Frame Borders -->
+            <div class="absolute inset-6 border border-white/10 rounded-sm pointer-events-none"></div>
+            <div class="absolute inset-8 border border-white/5 rounded-sm pointer-events-none"></div>
+
+            <!-- Welcome Text (Book Title Style) - Straddling the Shield -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center z-0 transition-transform duration-500 will-change-transform pointer-events-none"
+                 :style="`opacity: ${1 - scrollProgress * 4}; transform: scale(${1 + scrollProgress});`">
+                
+                <!-- Top Text -->
+                <div class="mb-24 md:mb-28 text-center">
+                    <p class="text-blue-200/80 font-serif italic text-xl mb-4 tracking-widest">Welcome to</p>
+                    <h1 class="text-5xl md:text-7xl font-bold text-white tracking-[0.2em] font-serif uppercase drop-shadow-2xl">
+                        METLAND
+                    </h1>
+                </div>
+
+                <!-- Bottom Text -->
+                <div class="mt-24 md:mt-28 text-center">
+                    <h1 class="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-white/50 tracking-[0.2em] font-serif uppercase drop-shadow-2xl">
+                        SCHOOL
+                    </h1>
+                    <div class="w-24 h-1 bg-blue-600/50 mx-auto mt-6 rounded-full"></div>
+                </div>
+            </div>
             
             <!-- Content Wrapper with MASK -->
             <!-- The mask starts small (logo size) and grows to cover viewport -->
