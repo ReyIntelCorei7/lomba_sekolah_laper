@@ -458,14 +458,12 @@
                     </div>
                 </div>
 
-                <!-- Slider Indicators -->
-                <div class="absolute right-8 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-4">
+                <!-- Simple Slider Indicators (Dots) -->
+                <div class="absolute right-12 bottom-12 z-30 flex gap-4">
                     <template x-for="(img, idx) in heroImages" :key="idx">
                         <button @click="currentHeroIndex = idx" 
-                                class="w-1.5 h-12 rounded-full transition-all duration-500 ease-out relative overflow-hidden bg-white/20"
-                                :class="currentHeroIndex === idx ? 'bg-white/20 scale-y-110' : 'hover:bg-white/40'">
-                                <div class="absolute inset-0 bg-blue-500 -translate-y-full transition-transform duration-[8000ms] ease-linear"
-                                     :class="currentHeroIndex === idx ? 'translate-y-0' : ''"></div>
+                                class="w-3 h-3 rounded-full transition-all duration-300"
+                                :class="currentHeroIndex === idx ? 'bg-white scale-125' : 'bg-white/30 hover:bg-white/60'">
                         </button>
                     </template>
                 </div>

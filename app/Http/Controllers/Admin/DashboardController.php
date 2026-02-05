@@ -39,7 +39,7 @@ class DashboardController extends Controller
                 ];
             });
 
-        $monthly_registrations = Student::selectRaw("strftime('%m', created_at) as month, COUNT(*) as count")
+        $monthly_registrations = Student::selectRaw("DATE_FORMAT(created_at, '%m') as month, COUNT(*) as count")
             ->whereYear('created_at', date('Y'))
             ->groupBy('month')
             ->orderBy('month')
