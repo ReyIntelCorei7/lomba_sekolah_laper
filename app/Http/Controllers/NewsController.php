@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
+    // Public methods for frontend
     public function index()
     {
         $news = News::where('is_published', true)
@@ -80,5 +82,148 @@ class NewsController extends Controller
             'categorySlug' => $category,
             'categories' => $categories
         ]);
+    }
+
+    // Admin methods
+    public function adminIndex(Request $request)
+    {
+        $query = News::query();
+
+        // Search
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('content', 'like', "%{$search}%")
+                  ->orWhere('author', 'like', "%{$search}%");
+            });
+        }
+
+        // Filter by category
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
+
+        // Filter by status
+        if ($request->filled('status')) {
+            if ($request->status === 'published') {
+                $query->where('is_published', true);
+            } else {
+                $query->where('is_published', false);
+            }
+        }
+
+        $news = $query->latest()->paginate(15);
+
+        return view('admin.news.index', compact('news'));
+    }
+
+    public function create()
+    {
+        return view('admin.news.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'category' => 'required|string',
+            'content' => 'required|string',
+            'excerpt' => 'nullable|string',
+            'author' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'published_at' => 'nullable|date',
+            'is_published' => 'boolean',
+            'is_featured' => 'boolean'
+        ]);
+
+        $data = $request->all();
+        $data['author'] = $data['author'] ?? auth('admin')->user()->name;
+        $data['is_published'] = $request->boolean('is_published');
+        $data['is_featured'] = $request->boolean('is_featured');
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('news', 'public');
+        }
+
+        if (!$data['published_at'] && $data['is_published']) {
+            $data['published_at'] = now();
+        }
+
+        News::create($data);
+
+        return redirect()->route('admin.news.index')
+            ->with('success', 'News article created successfully.');
+    }
+
+    public function adminShow(News $news)
+    {
+        return view('admin.news.show', compact('news'));
+    }
+
+    public function edit(News $news)
+    {
+        return view('admin.news.edit', compact('news'));
+    }
+
+    public function update(Request $request, News $news)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'category' => 'required|string',
+            'content' => 'required|string',
+            'excerpt' => 'nullable|string',
+            'author' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'published_at' => 'nullable|date',
+            'is_published' => 'boolean',
+            'is_featured' => 'boolean'
+        ]);
+
+        $data = $request->all();
+        $data['is_published'] = $request->boolean('is_published');
+        $data['is_featured'] = $request->boolean('is_featured');
+
+        if ($request->hasFile('image')) {
+            // Delete old image
+            if ($news->image) {
+                Storage::delete($news->image);
+            }
+            $data['image'] = $request->file('image')->store('news', 'public');
+        }
+
+        if (!$data['published_at'] && $data['is_published'] && !$news->published_at) {
+            $data['published_at'] = now();
+        }
+
+        $news->update($data);
+
+        return redirect()->route('admin.news.index')
+            ->with('success', 'News article updated successfully.');
+    }
+
+    public function destroy(News $news)
+    {
+        // Delete image
+        if ($news->image) {
+            Storage::delete($news->image);
+        }
+
+        $news->delete();
+
+        return redirect()->route('admin.news.index')
+            ->with('success', 'News article deleted successfully.');
+    }
+
+    public function togglePublish(News $news)
+    {
+        $news->update([
+            'is_published' => !$news->is_published,
+            'published_at' => !$news->is_published ? null : ($news->published_at ?? now())
+        ]);
+
+        $status = $news->is_published ? 'published' : 'unpublished';
+        
+        return back()->with('success', "Article {$status} successfully.");
     }
 }

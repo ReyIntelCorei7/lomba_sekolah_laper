@@ -19,3 +19,26 @@ module.exports = {
     },
     plugins: [],
 }
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      animation: {
+        'spin-slow': 'spin 15s linear infinite', // Berputar penuh dalam 15 detik
+      }
+    }
+  },
+  // ...
+}
+
+// tailwind.config.js
+module.exports = {
+    theme: {
+        extend: {
+            transitionProperty: {
+                'height': 'height',
+                'spacing': 'margin, padding',
+            }
+        }
+    }
+}
