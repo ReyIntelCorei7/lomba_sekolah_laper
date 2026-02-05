@@ -14,13 +14,6 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <style>
-        [x-cloak] { display: none !important; }
-        .breadcrumb-arrow::after {
-            content: '›';
-            margin: 0 8px;
-        }
-    </style>
     
     <script>
         tailwind.config = {
