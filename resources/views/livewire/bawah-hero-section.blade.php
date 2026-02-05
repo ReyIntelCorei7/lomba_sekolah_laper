@@ -1,4 +1,4 @@
-<div class="bg-white">
+<div id="about" class="bg-white">
     <div 
         x-data="{
             activeSlide: 1,
