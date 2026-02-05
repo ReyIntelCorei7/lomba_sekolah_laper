@@ -44,18 +44,27 @@ function heroSlider() {
         showA: true,
 
         init() {
-            setInterval(() => {
-                this.showA = !this.showA;
+            this.loop()
+        },
+
+        loop() {
+            setTimeout(() => {
+
+                this.showA = !this.showA
 
                 setTimeout(() => {
-                    this.index = this.nextIndex;
-                    this.nextIndex = (this.nextIndex + 1) % this.images.length;
-                }, 2000); // sinkron sama durasi animasi
-            }, 5000); // jeda antar slide
+                    this.index = (this.index + 1) % this.images.length
+                    this.nextIndex = (this.index + 1) % this.images.length
+                    this.loop()
+                }, 2000)
+
+            }, 5000)
         }
     }
 }
 </script>
+
+
 
 <!-- Scroll Animation -->
 <script>
@@ -147,10 +156,6 @@ function statsSection() {
 </script>
 
 <!-- Berita -->
-
-
-
-
 
 </head>
 
@@ -344,16 +349,21 @@ class="bg-gray-50 overflow-x-hidden"
         </div>
     </div>
 
-    <!-- Dot Indicators -->
-<div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+ <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
     <template x-for="(img, i) in images" :key="i">
         <div
             @click="goTo(i)"
-            class="w-3 h-3 rounded-full cursor-pointer transition-all duration-300"
-            :class="i === index ? 'bg-white scale-125' : 'bg-white/40 hover:bg-white/70'"
-        ></div>
+            class="relative h-[3px] w-8 md:w-10 cursor-pointer overflow-hidden rounded-full bg-white/25"
+        >
+            <!-- Active fill animation -->
+            <div
+                class="absolute inset-0 bg-white transition-all duration-500 ease-in-out"
+                :class="i === index ? 'w-full' : 'w-0'"
+            ></div>
+        </div>
     </template>
 </div>
+
 
 </section>
 
@@ -420,39 +430,49 @@ class="bg-gray-50 overflow-x-hidden"
             x-data="{
                 active: null,
                 leaving: null,
+                isMobile: window.innerWidth < 768,
                 items: [
-                    { id: 1, title: 'PPLG', image: '{{ asset('image/pplg1.png') }}' },
+                    { id: 1, title: 'PPLG', image: '{{ asset('image/PPLG.png') }}' },
                     { id: 2, title: 'DKV', image: '{{ asset('image/dkv1.png') }}' },
                     { id: 3, title: 'AKUNTANSI', image: '{{ asset('image/akuntansi1.png') }}' },
                     { id: 4, title: 'KULINER', image: '{{ asset('image/kuliner1.png') }}' },
                     { id: 5, title: 'PERHOTELAN', image: '{{ asset('image/perhotelan1.png') }}' }
-                ]
+                ],
+                updateScreen() {
+                    this.isMobile = window.innerWidth < 768
+                }
             }"
+            x-init="updateScreen(); window.addEventListener('resize', updateScreen)"
             x-cloak
-            class="flex flex-col md:flex-row gap-3 h-[700px] md:h-[420px]"
+            class="flex flex-col md:flex-row gap-4 md:gap-3 h-auto md:h-[420px]"
         >
 
             <template x-for="item in items" :key="item.id">
                 <div
-                    @mouseenter="if (window.innerWidth >= 768) { leaving=null; active=item.id }"
-                    @mouseleave="if (window.innerWidth >= 768) {
+                    @mouseenter="if (!isMobile) { leaving=null; active=item.id }"
+                    @mouseleave="if (!isMobile) {
                         leaving=item.id;
                         setTimeout(()=>{ if(leaving===item.id){ active=null; leaving=null }},300)
                     }"
-                    @click="active = active === item.id ? null : item.id"
-                    class="relative overflow-hidden rounded-xl cursor-pointer transition-[flex,transform] duration-700 ease-in-out"
-                    :class="active === item.id ? 'md:flex-[5]' : active === null ? 'md:flex-1' : 'md:flex-[0.6]'"
+                    @click="if (isMobile) active = active === item.id ? null : item.id"
+                    class="relative overflow-hidden rounded-xl cursor-pointer transition-all duration-700 ease-in-out"
+
+                    :class="{
+                        'md:flex-[5]': active === item.id && !isMobile,
+                        'md:flex-1': active === null && !isMobile,
+                        'md:flex-[0.6]': active !== null && active !== item.id && !isMobile,
+                        'h-[220px]': isMobile && active !== item.id,
+                        'h-[340px]': isMobile && active === item.id
+                    }"
                 >
 
-                    <!-- FOTO BACKGROUND -->
+                    <!-- BACKGROUND IMAGE -->
                     <div
                         class="absolute inset-0 bg-cover bg-center transition-all duration-700"
                         :style="'background-image: url(' + item.image + ')'"
                         :class="active === item.id 
-                            ? 'scale-105 brightness-100' 
-                            : leaving === item.id 
-                                ? 'brightness-75' 
-                                : 'brightness-50'"
+                            ? 'scale-100 brightness-100' 
+                            : 'scale-105 brightness-75'"
                     ></div>
 
                     <!-- OVERLAY -->
@@ -462,9 +482,11 @@ class="bg-gray-50 overflow-x-hidden"
                     <div
                         class="absolute pointer-events-none transition-all duration-700"
                         :style="
-                            active === item.id
-                            ? 'left:2rem;bottom:2rem;transform:none'
-                            : 'left:50%;top:50%;transform:translate(-50%,-50%) rotate(-90deg)'
+                            isMobile
+                            ? 'left:1.5rem;bottom:1.5rem;transform:none'
+                            : active === item.id
+                                ? 'left:2rem;bottom:2rem;transform:none'
+                                : 'left:50%;top:50%;transform:translate(-50%,-50%) rotate(-90deg)'
                         "
                     >
                         <h2
@@ -473,12 +495,13 @@ class="bg-gray-50 overflow-x-hidden"
                             x-text="item.title"
                         ></h2>
                     </div>
+
                 </div>
             </template>
 
         </div>
     </div>
-</footer>
+</section>
 
 
 <div
