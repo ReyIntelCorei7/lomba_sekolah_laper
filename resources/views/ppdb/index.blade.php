@@ -1,26 +1,31 @@
+z
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>PPDB - SMK Pariwisata Metland School</title>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
+
     <style>
-        body { font-family: 'Poppins', sans-serif; }
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
     </style>
 </head>
+
 <body class="bg-gray-50">
     <!-- Navbar Component -->
     <x-navbar :solid-background="true" />
@@ -50,10 +55,10 @@
                 <div class="bg-white shadow-xl rounded-lg overflow-hidden">
                     <div class="px-6 py-8">
                         <h2 class="text-2xl font-bold text-gray-900 mb-6">Daftar Sekarang</h2>
-                        
+
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                            <a href="{{ route('ppdb.create') }}" 
-                               class="group relative bg-gradient-to-r from-blue-500 to-blue-600 p-6 rounded-lg text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-105">
+                            <a href="{{ route('ppdb.create') }}"
+                                class="group relative bg-gradient-to-r from-blue-500 to-blue-600 p-6 rounded-lg text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-105">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
                                         <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -71,7 +76,7 @@
                                     </svg>
                                 </div>
                             </a>
-                            
+
                             <div class="bg-gradient-to-r from-gray-500 to-gray-600 p-6 rounded-lg text-white">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0">
@@ -131,17 +136,17 @@
                     <div class="p-6">
                         <div class="space-y-4">
                             @foreach($programs as $program)
-                                <div class="border border-gray-200 rounded-lg p-4">
-                                    <h4 class="font-medium text-gray-900">{{ $program->name }}</h4>
-                                    <p class="text-sm text-gray-600 mt-1">{{ $program->code }}</p>
-                                    <p class="text-xs text-gray-500 mt-2">Kapasitas: {{ $program->capacity }} siswa</p>
-                                    <div class="mt-2">
-                                        <div class="w-full bg-gray-200 rounded-full h-2">
-                                            <div class="bg-blue-600 h-2 rounded-full" style="width: {{ $program->occupancy_percentage }}%"></div>
-                                        </div>
-                                        <p class="text-xs text-gray-500 mt-1">{{ $program->current_students }}/{{ $program->capacity }} terdaftar</p>
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-medium text-gray-900">{{ $program->name }}</h4>
+                                <p class="text-sm text-gray-600 mt-1">{{ $program->code }}</p>
+                                <p class="text-xs text-gray-500 mt-2">Kapasitas: {{ $program->capacity }} siswa</p>
+                                <div class="mt-2">
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-600 h-2 rounded-full" style="width: {{ $program->occupancy_percentage }}%"></div>
                                     </div>
+                                    <p class="text-xs text-gray-500 mt-1">{{ $program->current_students }}/{{ $program->capacity }} terdaftar</p>
                                 </div>
+                            </div>
                             @endforeach
                         </div>
                     </div>
@@ -162,7 +167,7 @@
                                 <p class="text-sm text-gray-600">+62 21 1234 5678</p>
                             </div>
                         </div>
-                        
+
                         <div class="flex items-start">
                             <svg class="h-5 w-5 text-gray-400 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
@@ -172,7 +177,7 @@
                                 <p class="text-sm text-gray-600">ppdb@smkmetland.sch.id</p>
                             </div>
                         </div>
-                        
+
                         <div class="flex items-start">
                             <svg class="h-5 w-5 text-gray-400 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
@@ -193,8 +198,8 @@
                     </div>
                     <div class="p-6">
                         <p class="text-sm text-gray-600 mb-4">Sudah mendaftar? Cek status pendaftaran Anda di sini.</p>
-                        <a href="{{ route('ppdb.check') }}" 
-                           class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
+                        <a href="{{ route('ppdb.check') }}"
+                            class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
                             Cek Status
                         </a>
                     </div>
@@ -212,4 +217,5 @@
         </div>
     </footer>
 </body>
+
 </html>
