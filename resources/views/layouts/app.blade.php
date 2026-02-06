@@ -293,9 +293,7 @@
                         :class="menuOpen ? 'h-[500px] -top-0 bg-blue-700' : 'h-32 -top-0 hover:h-36'"
                         style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), 50% 100%, 0 calc(100% - 20px)); right: 0;">
 
-                        <!-- Content Wrapper -->
                         <div class="h-full flex flex-col justify-end items-center pb-6 gap-2">
-                            <!-- Arrow Icon (Rotating) -->
                             <div class="transition-transform duration-500"
                                 :class="menuOpen ? 'rotate-180 mb-2' : 'rotate-0'">
                                 <svg class="w-5 h-5 text-white animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -307,7 +305,6 @@
                 </div>
             </nav>
 
-            <!-- Mobile Toggle -->
             <button class="md:hidden text-white p-2" @click="menuOpen = !menuOpen">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>

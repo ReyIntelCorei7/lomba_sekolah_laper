@@ -152,10 +152,8 @@
 }"
     class="bg-gray-50 overflow-x-hidden">
 
-    <!-- ================= NAVBAR ================= -->
     <x-navbar :solid-background="false" />
 
-    <!-- ================= HERO NEWS ================= -->
     <section class="relative pt-32 pb-20 bg-cover bg-center overflow-hidden" style="background-image: url('image/sekolahsmkmetland.png');">
         <div class="absolute inset-0 bg-black opacity-80"></div>
         <div class="absolute inset-0 opacity-10">
@@ -164,7 +162,6 @@
         </div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-6">
-            <!-- Breadcrumb -->
             <div id="hero" class="flex items-center text-white/80 mb-8 text-sm">
                 <a href="index.html" class="hover:text-white transition" x-text="t[lang].home"></a>
                 <span class="breadcrumb-arrow"></span>
