@@ -121,11 +121,11 @@
                         <div class="flex text-sm text-gray-600 dark:text-slate-400">
                             <label for="image" class="relative cursor-pointer rounded-md font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500 focus-within:outline-none">
                                 <span>Upload a file</span>
-                                <input id="image" name="image" type="file" class="sr-only" accept="image/*">
+                                <input id="image" name="image" type="file" class="sr-only" accept=".png,.jpg,.jpeg">
                             </label>
                             <p class="pl-1">or drag and drop</p>
                         </div>
-                        <p class="text-xs text-gray-500 dark:text-slate-500">PNG, JPG, GIF up to 2MB</p>
+                        <p class="text-xs text-gray-500 dark:text-slate-500">PNG, JPG up to 2MB</p>
                     </div>
                 </div>
                 @error('image')
