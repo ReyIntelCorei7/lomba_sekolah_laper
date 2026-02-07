@@ -315,35 +315,61 @@
                 <p class="text-gray-500 mt-1 md:mt-2 text-sm md:text-base" x-text="t[lang].newsSubtitle"></p>
             </div>
 
-            <!-- Category Filter -->
-            <div class="flex flex-wrap gap-1.5 sm:gap-2 w-full md:w-auto">
+            <!-- Category Filter Pills -->
+            <div class="flex flex-wrap gap-2 w-full md:w-auto">
                 <button
                     @click="filterNews('all')"
-                    :class="activeFilter === 'all' ? 'bg-primary text-white' : 'bg-white text-gray-700 hover:bg-gray-100'"
-                    class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-all duration-200 shadow-sm"
-                    style="border-radius: 5px;"
+                    :class="activeFilter === 'all' ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'"
+                    class="px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200 rounded-full"
                     x-text="t[lang].allCategories">
                 </button>
                 <button
                     @click="filterNews('academic')"
-                    :class="activeFilter === 'academic' ? 'bg-primary text-white' : 'bg-white text-gray-700 hover:bg-gray-100'"
-                    class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-all duration-200 shadow-sm"
-                    style="border-radius: 5px;"
+                    :class="activeFilter === 'academic' ? 'bg-green-500 text-white shadow-lg' : 'bg-green-50 text-green-700 hover:bg-green-100 border border-green-200'"
+                    class="px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200 rounded-full"
                     x-text="t[lang].academic">
                 </button>
                 <button
                     @click="filterNews('achievement')"
-                    :class="activeFilter === 'achievement' ? 'bg-primary text-white' : 'bg-white text-gray-700 hover:bg-gray-100'"
-                    class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-all duration-200 shadow-sm"
-                    style="border-radius: 5px;"
+                    :class="activeFilter === 'achievement' ? 'bg-yellow-500 text-white shadow-lg' : 'bg-yellow-50 text-yellow-700 hover:bg-yellow-100 border border-yellow-200'"
+                    class="px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200 rounded-full"
                     x-text="t[lang].achievement">
                 </button>
                 <button
                     @click="filterNews('activity')"
-                    :class="activeFilter === 'activity' ? 'bg-primary text-white' : 'bg-white text-gray-700 hover:bg-gray-100'"
-                    class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-all duration-200 shadow-sm"
-                    style="border-radius: 5px;"
+                    :class="activeFilter === 'activity' ? 'bg-purple-500 text-white shadow-lg' : 'bg-purple-50 text-purple-700 hover:bg-purple-100 border border-purple-200'"
+                    class="px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200 rounded-full"
                     x-text="t[lang].activity">
+                </button>
+                <button
+                    @click="filterNews('extracurricular')"
+                    :class="activeFilter === 'extracurricular' ? 'bg-blue-500 text-white shadow-lg' : 'bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200'"
+                    class="px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200 rounded-full"
+                    x-text="t[lang].extracurricular">
+                </button>
+                <button
+                    @click="filterNews('workshop')"
+                    :class="activeFilter === 'workshop' ? 'bg-orange-500 text-white shadow-lg' : 'bg-orange-50 text-orange-700 hover:bg-orange-100 border border-orange-200'"
+                    class="px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200 rounded-full"
+                    x-text="t[lang].workshop">
+                </button>
+                <button
+                    @click="filterNews('arts')"
+                    :class="activeFilter === 'arts' ? 'bg-pink-500 text-white shadow-lg' : 'bg-pink-50 text-pink-700 hover:bg-pink-100 border border-pink-200'"
+                    class="px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200 rounded-full"
+                    x-text="t[lang].arts">
+                </button>
+                <button
+                    @click="filterNews('alumni')"
+                    :class="activeFilter === 'alumni' ? 'bg-indigo-500 text-white shadow-lg' : 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200'"
+                    class="px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200 rounded-full"
+                    x-text="t[lang].alumni">
+                </button>
+                <button
+                    @click="filterNews('scout')"
+                    :class="activeFilter === 'scout' ? 'bg-red-500 text-white shadow-lg' : 'bg-red-50 text-red-700 hover:bg-red-100 border border-red-200'"
+                    class="px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200 rounded-full"
+                    x-text="t[lang].scout">
                 </button>
             </div>
         </div>
@@ -393,7 +419,13 @@
 
             <!-- Regular News Cards - Loop from Database -->
             @forelse($news->where('is_featured', false)->take(6) as $item)
-            <a href="{{ route('news.show', $item->slug) }}" class="group bg-white shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden block" style="border-radius: 5px;">
+            <a href="{{ route('news.show', $item->slug) }}"
+                class="group bg-white shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden block"
+                style="border-radius: 5px;"
+                x-show="activeFilter === 'all' || activeFilter === '{{ $item->category }}'"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 transform scale-95"
+                x-transition:enter-end="opacity-100 transform scale-100">
                 <div class="h-40 overflow-hidden">
                     @if($item->image)
                     <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
@@ -410,6 +442,8 @@
                     'workshop' => 'bg-orange-100 text-orange-700',
                     'extracurricular' => 'bg-blue-100 text-blue-700',
                     'scout' => 'bg-red-100 text-red-700',
+                    'arts' => 'bg-pink-100 text-pink-700',
+                    'alumni' => 'bg-indigo-100 text-indigo-700',
                     ];
                     $colorClass = $categoryColors[$item->category] ?? 'bg-gray-100 text-gray-700';
                     @endphp
