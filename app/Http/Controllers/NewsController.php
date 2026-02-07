@@ -8,24 +8,47 @@ use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
+    // Public method for /news page with custom layout
+    public function showNewsPage()
+    {
+        $featuredNews = News::where('is_published', true)
+            ->where('is_featured', true)
+            ->latest('published_at')
+            ->first();
+
+        $news = News::where('is_published', true)
+            ->orderBy('published_at', 'desc')
+            ->get();
+
+        $categories = [
+            'all' => 'Semua',
+            'academic' => 'Akademik',
+            'activity' => 'Kegiatan',
+            'achievement' => 'Prestasi',
+            'workshop' => 'Workshop',
+        ];
+
+        return view('news.app', compact('featuredNews', 'news', 'categories'));
+    }
+
     // Public methods for frontend
     public function index()
     {
         $news = News::where('is_published', true)
-                    ->orderBy('published_at', 'desc')
-                    ->paginate(6);
-        
+            ->orderBy('published_at', 'desc')
+            ->paginate(6);
+
         $popularNews = News::where('is_published', true)
-                          ->orderBy('views', 'desc')
-                          ->limit(5)
-                          ->get();
-        
+            ->orderBy('views', 'desc')
+            ->limit(5)
+            ->get();
+
         $featuredNews = News::where('is_published', true)
-                           ->where('is_featured', true)
-                           ->latest()
-                           ->limit(3)
-                           ->get();
-        
+            ->where('is_featured', true)
+            ->latest()
+            ->limit(3)
+            ->get();
+
         $categories = [
             'academic' => 'Akademik',
             'activity' => 'Kegiatan',
@@ -36,35 +59,35 @@ class NewsController extends Controller
             'achievement' => 'Prestasi',
             'scout' => 'Kepramukaan'
         ];
-        
+
         return view('news.index', compact('news', 'popularNews', 'featuredNews', 'categories'));
     }
-    
+
     public function show($slug)
     {
         $news = News::where('slug', $slug)
-                    ->where('is_published', true)
-                    ->firstOrFail();
-        
+            ->where('is_published', true)
+            ->firstOrFail();
+
         // Increment views
         $news->increment('views');
-        
+
         $relatedNews = News::where('category', $news->category)
-                          ->where('id', '!=', $news->id)
-                          ->where('is_published', true)
-                          ->limit(3)
-                          ->get();
-        
+            ->where('id', '!=', $news->id)
+            ->where('is_published', true)
+            ->limit(3)
+            ->get();
+
         return view('news.show', compact('news', 'relatedNews'));
     }
-    
+
     public function category($category)
     {
         $news = News::where('category', $category)
-                    ->where('is_published', true)
-                    ->orderBy('published_at', 'desc')
-                    ->paginate(6);
-        
+            ->where('is_published', true)
+            ->orderBy('published_at', 'desc')
+            ->paginate(6);
+
         $categories = [
             'academic' => 'Akademik',
             'activity' => 'Kegiatan',
@@ -75,7 +98,7 @@ class NewsController extends Controller
             'achievement' => 'Prestasi',
             'scout' => 'Kepramukaan'
         ];
-        
+
         return view('news.category', [
             'news' => $news,
             'categoryName' => $categories[$category] ?? $category,
@@ -94,8 +117,8 @@ class NewsController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('content', 'like', "%{$search}%")
-                  ->orWhere('author', 'like', "%{$search}%");
+                    ->orWhere('content', 'like', "%{$search}%")
+                    ->orWhere('author', 'like', "%{$search}%");
             });
         }
 
@@ -223,7 +246,7 @@ class NewsController extends Controller
         ]);
 
         $status = $news->is_published ? 'published' : 'unpublished';
-        
+
         return back()->with('success', "Article {$status} successfully.");
     }
 }

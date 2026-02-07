@@ -307,7 +307,6 @@
         </div>
     </section>
 
-    <!-- ================= NEWS GRID WIDGETS ================= -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12 lg:py-16">
         <!-- Section Header -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-6 mb-6 md:mb-10">
@@ -316,7 +315,7 @@
                 <p class="text-gray-500 mt-1 md:mt-2 text-sm md:text-base" x-text="t[lang].newsSubtitle"></p>
             </div>
 
-            <!-- Category Filter Pills -->
+            <!-- Category Filter -->
             <div class="flex flex-wrap gap-1.5 sm:gap-2 w-full md:w-auto">
                 <button
                     @click="filterNews('all')"
@@ -352,146 +351,95 @@
         <!-- News Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
 
-            <!-- Featured Widget (Large) -->
-            <div class="sm:col-span-2 lg:row-span-2 group relative overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all duration-300" style="border-radius: 5px;">
+            <!-- Featured Widget (Large) - From Database -->
+            @if($featuredNews)
+            <a href="{{ route('news.show', $featuredNews->slug) }}" class="sm:col-span-2 lg:row-span-2 group relative overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all duration-300 block" style="border-radius: 5px;">
                 <div class="absolute inset-0">
-                    <img src="{{ asset('image/sekolahsmkmetland.png') }}" alt="Featured News" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    @if($featuredNews->image)
+                    <img src="{{ asset('storage/' . $featuredNews->image) }}" alt="{{ $featuredNews->title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    @else
+                    <img src="{{ asset('image/sekolahsmkmetland.png') }}" alt="{{ $featuredNews->title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    @endif
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                 </div>
                 <div class="relative h-full min-h-[280px] sm:min-h-[350px] lg:min-h-[500px] p-4 sm:p-6 flex flex-col justify-end">
                     <span class="inline-block px-2 sm:px-3 py-1 bg-primary text-white text-[10px] sm:text-xs font-bold uppercase tracking-wide mb-2 sm:mb-3 w-fit" style="border-radius: 5px;">Featured</span>
                     <h3 class="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-2 sm:mb-3 line-clamp-2 group-hover:text-blue-200 transition-colors">
-                        Prestasi Gemilang Siswa SMK Metland di Olimpiade Sains Nasional 2024
+                        {{ $featuredNews->title }}
                     </h3>
                     <p class="text-white/80 mb-3 sm:mb-4 line-clamp-2 text-sm sm:text-base">
-                        Tim olimpiade sains SMK Metland berhasil meraih medali emas dalam kompetisi tingkat nasional.
+                        {{ $featuredNews->excerpt ?? Str::limit(strip_tags($featuredNews->content), 120) }}
                     </p>
                     <div class="flex items-center justify-between">
-                        <span class="text-white/60 text-xs sm:text-sm"><i class="far fa-calendar-alt mr-1 sm:mr-2"></i>15 Jan 2024</span>
-                        <a href="#" class="text-white font-semibold hover:text-blue-300 transition flex items-center gap-1 sm:gap-2 text-sm sm:text-base" x-text="t[lang].readMore + ' →'"></a>
+                        <span class="text-white/60 text-xs sm:text-sm"><i class="far fa-calendar-alt mr-1 sm:mr-2"></i>{{ $featuredNews->formatted_date }}</span>
+                        <span class="text-white font-semibold hover:text-blue-300 transition flex items-center gap-1 sm:gap-2 text-sm sm:text-base" x-text="t[lang].readMore + ' →'"></span>
                     </div>
                 </div>
+            </a>
+            @else
+            <!-- Fallback if no featured news -->
+            <div class="sm:col-span-2 lg:row-span-2 group relative overflow-hidden bg-white shadow-sm transition-all duration-300" style="border-radius: 5px;">
+                <div class="absolute inset-0">
+                    <img src="{{ asset('image/sekolahsmkmetland.png') }}" alt="No Featured News" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                </div>
+                <div class="relative h-full min-h-[280px] sm:min-h-[350px] lg:min-h-[500px] p-4 sm:p-6 flex flex-col justify-end">
+                    <span class="inline-block px-2 sm:px-3 py-1 bg-gray-500 text-white text-[10px] sm:text-xs font-bold uppercase tracking-wide mb-2 sm:mb-3 w-fit" style="border-radius: 5px;">No Featured</span>
+                    <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-2">Belum ada berita featured</h3>
+                    <p class="text-white/80 text-sm">Tambahkan berita dari dashboard admin dan tandai sebagai "Featured"</p>
+                </div>
             </div>
+            @endif
 
-            <!-- Widget Card 1 -->
-            <div class="group bg-white shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden" style="border-radius: 5px;">
+            <!-- Regular News Cards - Loop from Database -->
+            @forelse($news->where('is_featured', false)->take(6) as $item)
+            <a href="{{ route('news.show', $item->slug) }}" class="group bg-white shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden block" style="border-radius: 5px;">
                 <div class="h-40 overflow-hidden">
-                    <img src="{{ asset('image/sekolahsmkmetland3.png') }}" alt="News" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    @if($item->image)
+                    <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    @else
+                    <img src="{{ asset('image/sekolahsmkmetland.png') }}" alt="{{ $item->title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    @endif
                 </div>
                 <div class="p-4">
-                    <span class="inline-block px-2 py-1 bg-green-100 text-green-700 text-xs font-semibold mb-2" style="border-radius: 5px;" x-text="t[lang].academic"></span>
+                    @php
+                    $categoryColors = [
+                    'academic' => 'bg-green-100 text-green-700',
+                    'achievement' => 'bg-yellow-100 text-yellow-700',
+                    'activity' => 'bg-purple-100 text-purple-700',
+                    'workshop' => 'bg-orange-100 text-orange-700',
+                    'extracurricular' => 'bg-blue-100 text-blue-700',
+                    'scout' => 'bg-red-100 text-red-700',
+                    ];
+                    $colorClass = $categoryColors[$item->category] ?? 'bg-gray-100 text-gray-700';
+                    @endphp
+                    <span class="inline-block px-2 py-1 {{ $colorClass }} text-xs font-semibold mb-2" style="border-radius: 5px;">
+                        {{ ucfirst($item->category) }}
+                    </span>
                     <h4 class="font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                        Workshop Kurikulum Merdeka Belajar
+                        {{ $item->title }}
                     </h4>
                     <p class="text-gray-500 text-sm line-clamp-2 mb-3">
-                        Para guru mengikuti pelatihan implementasi kurikulum baru.
+                        {{ $item->excerpt ?? Str::limit(strip_tags($item->content), 80) }}
                     </p>
                     <div class="flex items-center justify-between text-xs text-gray-400">
-                        <span><i class="far fa-calendar-alt mr-1"></i>12 Jan 2024</span>
-                        <span><i class="far fa-eye mr-1"></i>245</span>
+                        <span><i class="far fa-calendar-alt mr-1"></i>{{ $item->formatted_date }}</span>
+                        <span><i class="far fa-eye mr-1"></i>{{ $item->views ?? 0 }}</span>
                     </div>
                 </div>
+            </a>
+            @empty
+            <!-- No news available message -->
+            <div class="sm:col-span-2 lg:col-span-4 text-center py-12">
+                <div class="text-gray-400 mb-4">
+                    <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-600 mb-2">Belum Ada Berita</h3>
+                <p class="text-gray-400">Berita akan muncul di sini setelah ditambahkan dari panel admin</p>
             </div>
-
-            <!-- Widget Card 2 -->
-            <div class="group bg-white shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden" style="border-radius: 5px;">
-                <div class="h-40 overflow-hidden">
-                    <img src="{{ asset('image/sekolahsmkmetland4.png') }}" alt="News" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                </div>
-                <div class="p-4">
-                    <span class="inline-block px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-semibold mb-2" style="border-radius: 5px;" x-text="t[lang].achievement"></span>
-                    <h4 class="font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                        Juara 1 Lomba Debat Bahasa Inggris
-                    </h4>
-                    <p class="text-gray-500 text-sm line-clamp-2 mb-3">
-                        Tim debat sekolah meraih juara pertama tingkat provinsi.
-                    </p>
-                    <div class="flex items-center justify-between text-xs text-gray-400">
-                        <span><i class="far fa-calendar-alt mr-1"></i>10 Jan 2024</span>
-                        <span><i class="far fa-eye mr-1"></i>189</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Widget Card 3 -->
-            <div class="group bg-white shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden" style="border-radius: 5px;">
-                <div class="h-40 overflow-hidden">
-                    <img src="{{ asset('image/sekolahsmkmetland.png') }}" alt="News" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                </div>
-                <div class="p-4">
-                    <span class="inline-block px-2 py-1 bg-purple-100 text-purple-700 text-xs font-semibold mb-2" style="border-radius: 5px;" x-text="t[lang].activity"></span>
-                    <h4 class="font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                        Kegiatan Bakti Sosial di Panti Asuhan
-                    </h4>
-                    <p class="text-gray-500 text-sm line-clamp-2 mb-3">
-                        OSIS mengadakan kunjungan dan donasi ke panti asuhan.
-                    </p>
-                    <div class="flex items-center justify-between text-xs text-gray-400">
-                        <span><i class="far fa-calendar-alt mr-1"></i>8 Jan 2024</span>
-                        <span><i class="far fa-eye mr-1"></i>156</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Widget Card 4 -->
-            <div class="group bg-white shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden" style="border-radius: 5px;">
-                <div class="h-40 overflow-hidden">
-                    <img src="{{ asset('image/sekolahsmkmetland3.png') }}" alt="News" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                </div>
-                <div class="p-4">
-                    <span class="inline-block px-2 py-1 bg-blue-100 text-blue-700 text-xs font-semibold mb-2" style="border-radius: 5px;" x-text="t[lang].extracurricular"></span>
-                    <h4 class="font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                        Pentas Seni Akhir Tahun 2024
-                    </h4>
-                    <p class="text-gray-500 text-sm line-clamp-2 mb-3">
-                        Pertunjukan spektakuler dari seluruh ekstrakurikuler sekolah.
-                    </p>
-                    <div class="flex items-center justify-between text-xs text-gray-400">
-                        <span><i class="far fa-calendar-alt mr-1"></i>5 Jan 2024</span>
-                        <span><i class="far fa-eye mr-1"></i>312</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Widget Card 5 -->
-            <div class="group bg-white shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden" style="border-radius: 5px;">
-                <div class="h-40 overflow-hidden">
-                    <img src="{{ asset('image/sekolahsmkmetland4.png') }}" alt="News" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                </div>
-                <div class="p-4">
-                    <span class="inline-block px-2 py-1 bg-red-100 text-red-700 text-xs font-semibold mb-2" style="border-radius: 5px;" x-text="t[lang].scout"></span>
-                    <h4 class="font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                        Perkemahan Pramuka Tingkat Kota
-                    </h4>
-                    <p class="text-gray-500 text-sm line-clamp-2 mb-3">
-                        Kontingen pramuka ikuti jambore dan raih penghargaan.
-                    </p>
-                    <div class="flex items-center justify-between text-xs text-gray-400">
-                        <span><i class="far fa-calendar-alt mr-1"></i>3 Jan 2024</span>
-                        <span><i class="far fa-eye mr-1"></i>98</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Widget Card 6 -->
-            <div class="group bg-white shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden" style="border-radius: 5px;">
-                <div class="h-40 overflow-hidden">
-                    <img src="{{ asset('image/sekolahsmkmetland.png') }}" alt="News" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                </div>
-                <div class="p-4">
-                    <span class="inline-block px-2 py-1 bg-orange-100 text-orange-700 text-xs font-semibold mb-2" style="border-radius: 5px;" x-text="t[lang].workshop"></span>
-                    <h4 class="font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                        Seminar Kewirausahaan Digital
-                    </h4>
-                    <p class="text-gray-500 text-sm line-clamp-2 mb-3">
-                        Pelatihan bisnis online untuk siswa kelas XII.
-                    </p>
-                    <div class="flex items-center justify-between text-xs text-gray-400">
-                        <span><i class="far fa-calendar-alt mr-1"></i>1 Jan 2024</span>
-                        <span><i class="far fa-eye mr-1"></i>276</span>
-                    </div>
-                </div>
-            </div>
+            @endforelse
 
         </div>
 

@@ -44,7 +44,7 @@ Route::prefix('berita')->name('news.')->group(function () {
 });
 
 // Static pages
-Route::get('/news', fn() => view('news.app'))->name('news.page');
+Route::get('/news', [NewsController::class, 'showNewsPage'])->name('news.page');
 Route::get('/about', fn() => view('aboutschool.index'))->name('about');
 Route::get('/kurikulum', fn() => view('kurikulum.app'))->name('kurikulum');
 
