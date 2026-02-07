@@ -156,7 +156,7 @@
 }"
     class="bg-gray-50 overflow-x-hidden">
 
-   <!-- Navbar -->
+    <!-- Navbar -->
     <header x-data="{ scrolled: false, menuOpen: false }"
         @scroll.window="scrolled = (window.pageYOffset > 50)"
         class="fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b border-transparent flex items-center"
@@ -281,68 +281,68 @@
             </div>
         </div>
     </header>
-    
+
     <!-- ================= HERO SECTION ================= -->
-    <section class="relative min-h-[60vh] bg-[#1a1a1a] flex items-center pt-24">
+    <section class="relative min-h-[40vh] md:min-h-[50vh] lg:min-h-[60vh] bg-[#1a1a1a] flex items-center pt-20 md:pt-24">
         <!-- Background Image -->
         <div class="absolute inset-0">
             <img src="{{ asset('image/sekolahsmkmetland.png') }}" class="w-full h-full object-cover opacity-40">
             <div class="absolute inset-0 bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a]/80 to-transparent"></div>
         </div>
-        
-        <div class="relative z-10 max-w-7xl px-40">
-            <div id="hero" class="flex items-center text-white/80 mb-8 text-sm">
+
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+            <div id="hero" class="flex items-center text-white/80 mb-4 md:mb-8 text-xs md:text-sm">
                 <a href="/" class="hover:text-white transition" x-text="t[lang].home"></a>
                 <span class="breadcrumb-arrow"></span>
                 <span class="text-white font-semibold" x-text="t[lang].news"></span>
             </div>
 
-            <h1 class="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight">
                 <span class="block">BERITA</span>
                 <span class="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">SEKOLAH</span>
             </h1>
 
-            <p class="text-white/80 max-w-xl text-lg mb-8" x-text="t[lang].newsSubtitle"></p>
-            
+            <p class="text-white/80 max-w-xl text-sm md:text-base lg:text-lg mb-6 md:mb-8" x-text="t[lang].newsSubtitle"></p>
+
         </div>
     </section>
 
     <!-- ================= NEWS GRID WIDGETS ================= -->
-    <section class="max-w-7xl mx-auto px-6 py-16">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12 lg:py-16">
         <!-- Section Header -->
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-6 mb-6 md:mb-10">
             <div>
-                <h2 class="text-3xl font-bold text-gray-900" x-text="t[lang].latestNews">Berita Terbaru</h2>
-                <p class="text-gray-500 mt-2" x-text="t[lang].newsSubtitle"></p>
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900" x-text="t[lang].latestNews">Berita Terbaru</h2>
+                <p class="text-gray-500 mt-1 md:mt-2 text-sm md:text-base" x-text="t[lang].newsSubtitle"></p>
             </div>
 
             <!-- Category Filter Pills -->
-            <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-1.5 sm:gap-2 w-full md:w-auto">
                 <button
                     @click="filterNews('all')"
                     :class="activeFilter === 'all' ? 'bg-primary text-white' : 'bg-white text-gray-700 hover:bg-gray-100'"
-                    class="px-4 py-2 text-sm font-medium transition-all duration-200"
+                    class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-all duration-200 shadow-sm"
                     style="border-radius: 5px;"
                     x-text="t[lang].allCategories">
                 </button>
                 <button
                     @click="filterNews('academic')"
                     :class="activeFilter === 'academic' ? 'bg-primary text-white' : 'bg-white text-gray-700 hover:bg-gray-100'"
-                    class="px-4 py-2 text-sm font-medium transition-all duration-200"
+                    class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-all duration-200 shadow-sm"
                     style="border-radius: 5px;"
                     x-text="t[lang].academic">
                 </button>
                 <button
                     @click="filterNews('achievement')"
                     :class="activeFilter === 'achievement' ? 'bg-primary text-white' : 'bg-white text-gray-700 hover:bg-gray-100'"
-                    class="px-4 py-2 text-sm font-medium transition-all duration-200"
+                    class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-all duration-200 shadow-sm"
                     style="border-radius: 5px;"
                     x-text="t[lang].achievement">
                 </button>
                 <button
                     @click="filterNews('activity')"
                     :class="activeFilter === 'activity' ? 'bg-primary text-white' : 'bg-white text-gray-700 hover:bg-gray-100'"
-                    class="px-4 py-2 text-sm font-medium transition-all duration-200"
+                    class="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-all duration-200 shadow-sm"
                     style="border-radius: 5px;"
                     x-text="t[lang].activity">
                 </button>
@@ -350,25 +350,25 @@
         </div>
 
         <!-- News Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
 
             <!-- Featured Widget (Large) -->
-            <div class="md:col-span-2 lg:row-span-2 group relative overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all duration-300" style="border-radius: 5px;">
+            <div class="sm:col-span-2 lg:row-span-2 group relative overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all duration-300" style="border-radius: 5px;">
                 <div class="absolute inset-0">
                     <img src="{{ asset('image/sekolahsmkmetland.png') }}" alt="Featured News" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                 </div>
-                <div class="relative h-full min-h-[400px] lg:min-h-[500px] p-6 flex flex-col justify-end">
-                    <span class="inline-block px-3 py-1 bg-primary text-white text-xs font-bold uppercase tracking-wide mb-3 w-fit" style="border-radius: 5px;">Featured</span>
-                    <h3 class="text-2xl lg:text-3xl font-bold text-white mb-3 line-clamp-2 group-hover:text-blue-200 transition-colors">
+                <div class="relative h-full min-h-[280px] sm:min-h-[350px] lg:min-h-[500px] p-4 sm:p-6 flex flex-col justify-end">
+                    <span class="inline-block px-2 sm:px-3 py-1 bg-primary text-white text-[10px] sm:text-xs font-bold uppercase tracking-wide mb-2 sm:mb-3 w-fit" style="border-radius: 5px;">Featured</span>
+                    <h3 class="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-2 sm:mb-3 line-clamp-2 group-hover:text-blue-200 transition-colors">
                         Prestasi Gemilang Siswa SMK Metland di Olimpiade Sains Nasional 2024
                     </h3>
-                    <p class="text-white/80 mb-4 line-clamp-2">
+                    <p class="text-white/80 mb-3 sm:mb-4 line-clamp-2 text-sm sm:text-base">
                         Tim olimpiade sains SMK Metland berhasil meraih medali emas dalam kompetisi tingkat nasional.
                     </p>
                     <div class="flex items-center justify-between">
-                        <span class="text-white/60 text-sm"><i class="far fa-calendar-alt mr-2"></i>15 Jan 2024</span>
-                        <a href="#" class="text-white font-semibold hover:text-blue-300 transition flex items-center gap-2" x-text="t[lang].readMore + ' →'"></a>
+                        <span class="text-white/60 text-xs sm:text-sm"><i class="far fa-calendar-alt mr-1 sm:mr-2"></i>15 Jan 2024</span>
+                        <a href="#" class="text-white font-semibold hover:text-blue-300 transition flex items-center gap-1 sm:gap-2 text-sm sm:text-base" x-text="t[lang].readMore + ' →'"></a>
                     </div>
                 </div>
             </div>
@@ -496,51 +496,51 @@
         </div>
 
         <!-- Load More Button -->
-        <div class="text-center mt-12">
-            <button class="px-8 py-3 bg-primary text-white font-semibold hover:bg-primary-dark transition-all duration-200 shadow-lg hover:shadow-xl" style="border-radius: 5px;">
+        <div class="text-center mt-8 md:mt-12">
+            <button class="px-6 sm:px-8 py-2.5 sm:py-3 bg-primary text-white font-semibold hover:bg-primary-dark transition-all duration-200 shadow-lg hover:shadow-xl text-sm sm:text-base" style="border-radius: 5px;">
                 <i class="fas fa-sync-alt mr-2"></i>Muat Lebih Banyak
             </button>
         </div>
     </section>
 
     <!-- ================= FOOTER ================= -->
-    <footer class="bg-gray-900 text-white py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+    <footer class="bg-gray-900 text-white py-10 md:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
                 <!-- Logo -->
-                <div class="flex items-center gap-4">
-                    <img src="image/logometland.png" alt="Logo Metland School" class="w-16 h-16   flex items-center justify-center text-2xl font-bold shadow-lg">
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <img src="image/logometland.png" alt="Logo Metland School" class="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center text-2xl font-bold shadow-lg">
 
                     <div>
-                        <h3 class="text-2xl font-bold">Metland School</h3>
-                        <p class="text-gray-400">Sekolah Menengah Kejuruan</p>
+                        <h3 class="text-xl sm:text-2xl font-bold">Metland School</h3>
+                        <p class="text-gray-400 text-sm sm:text-base">Sekolah Menengah Kejuruan</p>
                     </div>
                 </div>
 
                 <!-- Quick Links -->
-                <div class="flex gap-12">
+                <div class="flex flex-col sm:flex-row gap-8 sm:gap-12 text-center sm:text-left">
                     <div>
-                        <h4 class="font-bold text-lg mb-4">Tautan Cepat</h4>
-                        <ul class="space-y-3 text-gray-400">
-                            <li><a href="index.html" class="hover:text-white transition">Beranda</a></li>
-                            <li><a href="#" class="hover:text-white transition">Tentang Sekolah</a></li>
-                            <li><a href="index.html#jurusan" class="hover:text-white transition">Program Keahlian</a></li>
-                            <li><a href="news.html" class="hover:text-white transition">Berita Sekolah</a></li>
+                        <h4 class="font-bold text-base sm:text-lg mb-3 sm:mb-4">Tautan Cepat</h4>
+                        <ul class="space-y-2 sm:space-y-3 text-gray-400 text-sm sm:text-base">
+                            <li><a href="/" class="hover:text-white transition">Beranda</a></li>
+                            <li><a href="/about" class="hover:text-white transition">Tentang Sekolah</a></li>
+                            <li><a href="/prokeh" class="hover:text-white transition">Program Keahlian</a></li>
+                            <li><a href="/news" class="hover:text-white transition">Berita Sekolah</a></li>
                         </ul>
                     </div>
 
                     <div>
-                        <h4 class="font-bold text-lg mb-4">Kontak</h4>
-                        <ul class="space-y-3 text-gray-400">
-                            <li class="flex items-center gap-3">
+                        <h4 class="font-bold text-base sm:text-lg mb-3 sm:mb-4">Kontak</h4>
+                        <ul class="space-y-2 sm:space-y-3 text-gray-400 text-sm sm:text-base">
+                            <li class="flex items-center gap-2 sm:gap-3 justify-center sm:justify-start">
                                 <i class="fas fa-map-marker-alt text-primary"></i>
                                 <span>Jl. Pendidikan No. 123, Jakarta</span>
                             </li>
-                            <li class="flex items-center gap-3">
+                            <li class="flex items-center gap-2 sm:gap-3 justify-center sm:justify-start">
                                 <i class="fas fa-phone text-primary"></i>
                                 <span>(021) 1234-5678</span>
                             </li>
-                            <li class="flex items-center gap-3">
+                            <li class="flex items-center gap-2 sm:gap-3 justify-center sm:justify-start">
                                 <i class="fas fa-envelope text-primary"></i>
                                 <span>info@metlandschool.sch.id</span>
                             </li>
@@ -549,7 +549,7 @@
                 </div>
             </div>
 
-            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-500">
+            <div class="mt-8 md:mt-12 pt-6 md:pt-8 border-t border-gray-800 text-center text-gray-500 text-sm sm:text-base">
                 <p>&copy; 2024 Metland School. All rights reserved.</p>
             </div>
         </div>
