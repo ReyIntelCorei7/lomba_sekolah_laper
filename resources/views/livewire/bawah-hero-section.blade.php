@@ -73,11 +73,11 @@
                                :class="activeSlide === 2 ? 'text-gray-600' : 'text-blue-50'">
                                 <span class="font-bold text-2xl block mb-2 transition-colors duration-500"
                                       :class="activeSlide === 2 ? 'text-blue-600' : 'text-white border-l-4 border-white pl-3'">
-                                    03. Fasilitas Modern
+                                    03. Generasi Cinta Prestasi
                                 </span>
-                                Pada tahun 2021, hal ini ditandai dengan didirikannya bangunan sekolah dengan 
-                                <span class="font-bold" :class="activeSlide === 2 ? 'text-blue-600' : 'text-white'">fasilitas lengkap</span> 
-                                dan modern. Gedung bertingkat dengan lapangan olahraga yang memadai menjadi pusat aktivitas siswa kami.
+                                Menjadikan Siswa siswi SMK Metland School sebagai generasi yang cinta akan prestasi - prestasi.
+                                <span class="font-bold" :class="activeSlide === 2 ? 'text-blue-600' : 'text-white'">Cinta</span> 
+                                akan hal - hal baik, positif dan berprestasi.
                             </p>
                         </div>
 
@@ -105,7 +105,7 @@
                     <div class="relative overflow-hidden rounded-3xl shadow-2xl transition-transform duration-300 hover:scale-[1.02] w-full border-4 border-white/20">
                         <img src="{{ asset('image/sekolahsmkmetland.png') }}" class="w-full h-full object-cover max-h-[500px]">
                         <div class="absolute bottom-0 left-0 bg-gradient-to-t from-black/80 to-transparent text-white p-8 w-full">
-                            <p class="font-bold text-xl tracking-wide">Gedung Utama Transyogi</p>
+                            <p class="font-bold text-xl tracking-wide">Sejarah awal</p>
                         </div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                     <div class="relative overflow-hidden rounded-3xl shadow-2xl transition-transform duration-300 hover:scale-[1.02] w-full border-4 border-white/20">
                         <img src="{{ asset('image/sekolahsmkmetland3.png') }}" class="w-full h-full object-cover max-h-[500px]">
                         <div class="absolute bottom-0 left-0 bg-gradient-to-t from-black/80 to-transparent text-white p-8 w-full">
-                            <p class="font-bold text-xl tracking-wide">Ekspansi Cibitung</p>
+                            <p class="font-bold text-xl tracking-wide">SMK Metland School</p>
                         </div>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                     <div class="relative overflow-hidden rounded-3xl shadow-2xl transition-transform duration-300 hover:scale-[1.02] w-full border-4 border-white/20">
                         <img src="{{ asset('image/sekolahsmkmetland4.png') }}" class="w-full h-full object-cover max-h-[500px]">
                         <div class="absolute bottom-0 left-0 bg-gradient-to-t from-black/80 to-transparent text-white p-8 w-full">
-                            <p class="font-bold text-xl tracking-wide">Fasilitas Olahraga</p>
+                            <p class="font-bold text-xl tracking-wide">Nilai Budaya</p>
                         </div>
                     </div>
                 </div>
