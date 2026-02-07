@@ -105,7 +105,7 @@
                     <div class="relative overflow-hidden rounded-3xl shadow-2xl transition-transform duration-300 hover:scale-[1.02] w-full border-4 border-white/20">
                         <img src="{{ asset('image/sekolahsmkmetland.png') }}" class="w-full h-full object-cover max-h-[500px]">
                         <div class="absolute bottom-0 left-0 bg-gradient-to-t from-black/80 to-transparent text-white p-8 w-full">
-                            <p class="font-bold text-xl tracking-wide">Sejarah awal</p>
+                            <p class="font-bold text-xl tracking-wide">Sejarah Awal</p>
                         </div>
                     </div>
                 </div>
