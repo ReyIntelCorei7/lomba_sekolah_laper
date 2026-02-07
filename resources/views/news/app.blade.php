@@ -148,39 +148,162 @@
         navigator.clipboard.writeText(window.location.href);
         alert('Link berhasil disalin ke clipboard!');
         this.showShareModal = false;
+    },
+    
+    toggleLang() {
+        this.lang = this.lang === 'id' ? 'en' : 'id';
     }
 }"
     class="bg-gray-50 overflow-x-hidden">
 
-    <x-navbar :solid-background="false" />
+   <!-- Navbar -->
+    <header x-data="{ scrolled: false, menuOpen: false }"
+        @scroll.window="scrolled = (window.pageYOffset > 50)"
+        class="fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b border-transparent flex items-center"
+        :class="scrolled ? 'bg-[#1a1a1a] shadow-lg border-white/10 h-16' : 'bg-[#1a1a1a] h-20'">
 
-    <section class="relative pt-32 pb-20 bg-cover bg-center overflow-hidden" style="background-image: url('image/sekolahsmkmetland.png');">
-        <div class="absolute inset-0 bg-black opacity-80"></div>
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-0 right-0 w-96 h-96 bg-white rounded-full -translate-y-48 translate-x-48"></div>
-            <div class="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full -translate-x-32 translate-y-32"></div>
+        <!-- Main Header Content -->
+        <div class="max-w-[1400px] mx-auto h-20 flex items-center justify-between gap-16 relative z-50"
+            :class="scrolled ? 'h-16' : 'h-24'">
+
+            <!-- Logo area -->
+            <a href="/" class="flex items-center gap-4 group transition-all duration-500"
+                :class="menuOpen ? '-translate-y-10 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'">
+                <div class="relative w-12 h-12">
+                    <img src="{{ asset('image/logometland.png') }}" class="w-full h-full object-contain transition-transform group-hover:scale-110">
+                </div>
+                <div class="flex flex-col text-white">
+                    <span class="font-bold text-base leading-none tracking-wider">SMK METLAND</span>
+                    <span class="text-[9px] tracking-[0.3em] font-light text-gray-400 uppercase">School of Tourism</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center h-full gap-10 ml-auto">
+                <!-- Text Links (Consolidated) -->
+                <div class="flex items-center gap-10 text-[11px] font-bold tracking-[0.15em] text-white transition-all duration-500 delay-75"
+                    :class="menuOpen ? '-translate-y-10 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'">
+                    <a href="/" class="hover:text-blue-400 transition-colors uppercase">Beranda</a>
+                    <a href="/about" class="hover:text-blue-400 transition-colors uppercase">Tentang Sekolah</a>
+                    <a href="/prokeh" class="hover:text-blue-400 transition-colors uppercase">Program Keahlian</a>
+                    <a href="/curriculum" class="hover:text-blue-400 transition-colors uppercase">Kurikulum</a>
+                    <a href="/news" class="hover:text-blue-400 transition-colors uppercase">Berita Sekolah</a>
+                </div>
+
+                <!-- Language Toggle -->
+                <button @click="toggleLang()"
+                    class="flex items-center bg-white rounded-full px-1 py-1 w-16 h-8 relative shadow-inner transition-all duration-500 delay-100"
+                    :class="menuOpen ? '-translate-y-10 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'"
+                    :title="lang === 'id' ? 'Switch to English' : 'Ganti ke Indonesia'">
+                    <div class="absolute inset-0 flex items-center justify-between px-2 text-[9px] font-bold text-gray-400">
+                        <span>ID</span>
+                        <span>EN</span>
+                    </div>
+                    <div class="w-6 h-6 bg-[#1a1a1a] rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center text-[8px] font-bold text-white z-10"
+                        :class="lang === 'en' ? 'translate-x-8' : 'translate-x-0'">
+                        <span x-text="lang.toUpperCase()"></span>
+                    </div>
+                </button>
+
+                <!-- Blue Pull Ribbon (Toggle) -->
+                <div class="relative group h-full flex items-start z-50 w-20 justify-end">
+                    <button @click="menuOpen = !menuOpen"
+                        class="absolute w-16 bg-[#1E2188] hover:bg-blue-700 text-white flex flex-col items-center pb-4 transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] shadow-2xl shadow-blue-900/50 cursor-pointer"
+                        :class="menuOpen ? 'h-[500px] -top-0 bg-blue-700' : 'h-32 -top-0 hover:h-36'"
+                        style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), 50% 100%, 0 calc(100% - 20px)); right: 0;">
+
+                        <!-- Content Wrapper -->
+                        <div class="h-full flex flex-col justify-end items-center pb-6 gap-2">
+                            <!-- Arrow Icon (Rotating) -->
+                            <div class="transition-transform duration-500"
+                                :class="menuOpen ? 'rotate-180 mb-2' : 'rotate-0'">
+                                <svg class="w-5 h-5 text-white animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Mobile Toggle -->
+            <button class="md:hidden text-white p-2" @click="menuOpen = !menuOpen">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
         </div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-6">
+        <!-- Mega Menu Overlay -->
+        <div class="fixed inset-0 bg-[#1E2188] z-40 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            :class="menuOpen ? 'translate-y-0' : '-translate-y-full'"
+            style="top: 0;">
+
+            <div class="max-w-[1400px] mx-auto px-6 pt-32 pb-12 h-full flex flex-col">
+                <!-- Header in Menu -->
+                <div class="flex items-center gap-4 mb-20 fade-in-up delay-100">
+                    <img src="{{ asset('image/logometland.png') }}" class="w-16 h-16 object-contain brightness-0 invert">
+                    <h2 class="text-3xl font-bold text-white tracking-widest uppercase">METLAND SCHOOL</h2>
+                </div>
+
+                <!-- Grid Content -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-white">
+                    <!-- Column 1 -->
+                    <div class="space-y-8 fade-in-up delay-200">
+                        <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Profile Sekolah</a>
+                        <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Visi dan Misi</a>
+                        <a href="#jurusan" @click="menuOpen=false" class="block text-xl font-bold hover:text-blue-200 transition-colors">Program Keahlian</a>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="space-y-8 fade-in-up delay-300">
+                        <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Ekstrakurikuler</a>
+                        <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Organisasi</a>
+                        <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Produk/Karya Siswa</a>
+                    </div>
+
+                    <!-- Column 3 -->
+                    <div class="space-y-8 fade-in-up delay-400">
+                        <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Tentang Alumni</a>
+                        <a href="#berita" @click="menuOpen=false" class="block text-xl font-bold hover:text-blue-200 transition-colors">Berita Sekolah</a>
+                        <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Kontak Sekolah</a>
+                    </div>
+                </div>
+
+                <div class="mt-auto border-t border-white/20 pt-8 flex justify-between text-white/60 text-sm">
+                    <p>&copy; 2024 SMK Metland School</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="hover:text-white">Instagram</a>
+                        <a href="#" class="hover:text-white">Facebook</a>
+                        <a href="#" class="hover:text-white">Youtube</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- ================= HERO SECTION ================= -->
+    <section class="relative min-h-[60vh] bg-[#1a1a1a] flex items-center pt-24">
+        <!-- Background Image -->
+        <div class="absolute inset-0">
+            <img src="{{ asset('image/sekolahsmkmetland.png') }}" class="w-full h-full object-cover opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-r from-[#1a1a1a] via-[#1a1a1a]/80 to-transparent"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl px-40">
             <div id="hero" class="flex items-center text-white/80 mb-8 text-sm">
-                <a href="index.html" class="hover:text-white transition" x-text="t[lang].home"></a>
+                <a href="/" class="hover:text-white transition" x-text="t[lang].home"></a>
                 <span class="breadcrumb-arrow"></span>
                 <span class="text-white font-semibold" x-text="t[lang].news"></span>
             </div>
 
-
-            <h1 class="text-2xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                <span class="block">CONGRATULATIONS</span>
-                <span class="block">INDONESIA</span>
+            <h1 class="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                <span class="block">BERITA</span>
+                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">SEKOLAH</span>
             </h1>
 
-            <p class="text-3xl md:text-4xl font-bold text-white/90 mb-8">
-                SCIENCE OLYMPICS
-            </p>
-
-            <p class="text-white/80 mx-auto text-lg"
-                x-text="t[lang].newsSubtitle"></p>
-        </div>
+            <p class="text-white/80 max-w-xl text-lg mb-8" x-text="t[lang].newsSubtitle"></p>
+            
         </div>
     </section>
 
