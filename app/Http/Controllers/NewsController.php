@@ -208,7 +208,6 @@ class NewsController extends Controller
         $data['is_featured'] = $request->boolean('is_featured');
 
         if ($request->hasFile('image')) {
-            // Delete old image
             if ($news->image) {
                 Storage::delete($news->image);
             }
@@ -227,7 +226,6 @@ class NewsController extends Controller
 
     public function destroy(News $news)
     {
-        // Delete image
         if ($news->image) {
             Storage::delete($news->image);
         }
