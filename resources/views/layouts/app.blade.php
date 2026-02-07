@@ -458,7 +458,9 @@
                 </div>
 
                 <!-- Hero Content (Text & Buttons) -->
-                <div class="relative z-30 w-full max-w-7xl mx-auto px-6 mt-32">
+                <!-- Hidden when shield is closed, appears with fade-in when shield opens -->
+                <div class="relative z-30 w-full max-w-7xl mx-auto px-6 mt-32 transition-all duration-700"
+                    :style="`opacity: ${scrollProgress < 0.15 ? 0 : Math.min(1, (scrollProgress - 0.15) * 4)}; transform: translateY(${scrollProgress < 0.15 ? 40 : Math.max(0, 40 - (scrollProgress - 0.15) * 200)}px);`">
                     <div class="max-w-4xl" x-show="!isLoading">
                         <!-- Badge -->
                         <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-medium mb-6 fade-in-up">
