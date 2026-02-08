@@ -30,7 +30,7 @@
             <div class="space-y-8">
                 <a href="/eskul" @click="menuOpen=false" class="block text-xl font-bold hover:text-blue-200 transition-colors">Ekstrakurikuler</a>
                 <a href="/organisasi" @click="menuOpen=false" class="block text-xl font-bold hover:text-blue-200 transition-colors">Organisasi</a>
-                <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Produk/Karya Siswa</a>
+                <a href="/smile" @click="menuOpen=false" class="block text-xl font-bold hover:text-blue-200 transition-colors">Produk/Karya Siswa</a>
             </div>
 
             <!-- Column 3 -->

@@ -105,6 +105,14 @@ Route::prefix('ppdb')->name('ppdb.')->group(function () {
     Route::post('/status', [PPDBController::class, 'status'])->name('status');
 });
 
+
+// Smile route
+
+Route::get('/smile', function () {
+    return redirect('https://smile-metschoo.com');
+});
+
+
 // ============================================================================
 // ADMIN ROUTES
 // ============================================================================
