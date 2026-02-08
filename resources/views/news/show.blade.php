@@ -139,69 +139,7 @@
 }" class="bg-gray-50 overflow-x-hidden">
 
     <!-- Navbar -->
-    <header x-data="{ scrolled: false, menuOpen: false }"
-        @scroll.window="scrolled = (window.pageYOffset > 50)"
-        class="fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b border-transparent flex items-center"
-        :class="scrolled ? 'bg-[#1a1a1a] shadow-lg border-white/10 h-16' : 'bg-[#1a1a1a] h-20'">
-
-        <div class="max-w-[1400px] w-full mx-auto px-6 h-20 flex items-center justify-between gap-16 relative z-50"
-            :class="scrolled ? 'h-16' : 'h-24'">
-
-            <!-- Logo -->
-            <a href="/" class="flex items-center gap-4 group transition-all duration-500">
-                <div class="relative w-12 h-12">
-                    <img src="{{ asset('image/logometland.png') }}" class="w-full h-full object-contain transition-transform group-hover:scale-110">
-                </div>
-                <div class="flex flex-col text-white">
-                    <span class="font-bold text-base leading-none tracking-wider">SMK METLAND</span>
-                    <span class="text-[9px] tracking-[0.3em] font-light text-gray-400 uppercase">School of Tourism</span>
-                </div>
-            </a>
-
-            <!-- Desktop Menu -->
-            <nav class="hidden md:flex items-center h-full gap-10 ml-auto">
-                <div class="flex items-center gap-10 text-[11px] font-bold tracking-[0.15em] text-white">
-                    <a href="/" class="hover:text-blue-400 transition-colors uppercase">Beranda</a>
-                    <a href="/about" class="hover:text-blue-400 transition-colors uppercase">Tentang Sekolah</a>
-                    <a href="/prokeh" class="hover:text-blue-400 transition-colors uppercase">Program Keahlian</a>
-                    <a href="/kurikulum" class="hover:text-blue-400 transition-colors uppercase">Kurikulum</a>
-                    <a href="/news" class="text-blue-400 transition-colors uppercase">Berita Sekolah</a>
-                </div>
-
-                <!-- Language Toggle -->
-                <button @click="toggleLang()"
-                    class="flex items-center bg-white rounded-full px-1 py-1 w-16 h-8 relative shadow-inner"
-                    :title="lang === 'id' ? 'Switch to English' : 'Ganti ke Indonesia'">
-                    <div class="absolute inset-0 flex items-center justify-between px-2 text-[9px] font-bold text-gray-400">
-                        <span>ID</span>
-                        <span>EN</span>
-                    </div>
-                    <div class="w-6 h-6 bg-[#1a1a1a] rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center text-[8px] font-bold text-white z-10"
-                        :class="lang === 'en' ? 'translate-x-8' : 'translate-x-0'">
-                        <span x-text="lang.toUpperCase()"></span>
-                    </div>
-                </button>
-            </nav>
-
-            <!-- Mobile Toggle -->
-            <button class="md:hidden text-white p-2" @click="menuOpen = !menuOpen">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div x-show="menuOpen" x-transition class="md:hidden absolute top-full left-0 w-full bg-[#1a1a1a] border-t border-white/10 py-4">
-            <div class="flex flex-col gap-4 px-6 text-white text-sm">
-                <a href="/" class="hover:text-blue-400">Beranda</a>
-                <a href="/about" class="hover:text-blue-400">Tentang Sekolah</a>
-                <a href="/prokeh" class="hover:text-blue-400">Program Keahlian</a>
-                <a href="/kurikulum" class="hover:text-blue-400">Kurikulum</a>
-                <a href="/news" class="text-blue-400">Berita Sekolah</a>
-            </div>
-        </div>
-    </header>
+    <x-navbar :solid-background="true" :show-on-scroll="false" />
 
     <!-- Hero Section -->
     <section class="relative min-h-[35vh] md:min-h-[45vh] bg-[#1a1a1a] flex items-end pt-20">

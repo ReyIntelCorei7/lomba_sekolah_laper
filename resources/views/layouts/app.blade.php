@@ -778,51 +778,10 @@
 
                 toggleLang() {
                     this.lang = this.lang === 'id' ? 'en' : 'id';
-                },
-
-                stats: {
-                    students: 0,
-                    teachers: 0,
-                    staff: 0
-                },
-
-                startAnimation() {
-                    const targets = {
-                        students: {
-                            {
-                                $settings['stat_students'] ?? 683
-                            }
-                        },
-                        teachers: {
-                            {
-                                $settings['stat_teachers'] ?? 54
-                            }
-                        },
-                        staff: {
-                            {
-                                $settings['stat_staff'] ?? 41
-                            }
-                        }
-                    };
-
-                    this.animateValue('students', targets.students);
-                    this.animateValue('teachers', targets.teachers);
-                    this.animateValue('staff', targets.staff);
-                },
-
-                animateValue(key, target) {
-                    let start = 0;
-                    const duration = 150;
-                    const step = timestamp => {
-                        if (!start) start = timestamp;
-                        const progress = Math.min((timestamp - start) / duration, 1);
-                        this.stats[key] = Math.floor(progress * target);
-                        if (progress < 1) requestAnimationFrame(step);
-                    };
-                    requestAnimationFrame(step);
                 }
             }
         }
+
 
         function statsSection() {
             return {
@@ -833,21 +792,9 @@
                 },
                 startAnimation() {
                     const targets = {
-                        students: {
-                            {
-                                $settings['stat_students'] ?? 683
-                            }
-                        },
-                        teachers: {
-                            {
-                                $settings['stat_teachers'] ?? 54
-                            }
-                        },
-                        staff: {
-                            {
-                                $settings['stat_staff'] ?? 41
-                            }
-                        }
+                        students: @json($settings['stat_students'] ?? 683),
+                        teachers: @json($settings['stat_teachers'] ?? 54),
+                        staff: @json($settings['stat_staff'] ?? 41)
                     };
 
                     this.animateValue('students', targets.students);
