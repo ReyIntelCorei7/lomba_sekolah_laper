@@ -22,6 +22,8 @@
                 <a href="/about" @click="menuOpen=false" class="block text-xl font-bold hover:text-blue-200 transition-colors">Profile Sekolah</a>
                 <a href="/about" @click="menuOpen=false" class="block text-xl font-bold hover:text-blue-200 transition-colors">Visi dan Misi</a>
                 <a href="/prokeh" @click="menuOpen=false" class="block text-xl font-bold hover:text-blue-200 transition-colors">Program Keahlian</a>
+                <a href="/" @click="menuOpen=false" class="block text-xl font-bold hover:text-blue-200 transition-colors">Home</a>
+                <a href="/kurikulum" @click="menuOpen=false" class="block text-xl font-bold hover:text-blue-200 transition-colors">Kurikulum</a>
             </div>
 
             <!-- Column 2 -->
