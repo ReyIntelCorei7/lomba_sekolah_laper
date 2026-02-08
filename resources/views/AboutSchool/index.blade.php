@@ -253,22 +253,10 @@
                             <div class="text-xs text-gray-400 uppercase tracking-wider">Didirikan</div>
                         </div>
                         <div class="text-center">
-                            <div class="text-3xl font-bold text-white">659+</div>
-                            <div class="text-xs text-gray-400 uppercase tracking-wider">Siswa</div>
-                        </div>
-                        <div class="text-center">
                             <div class="text-3xl font-bold text-white">A</div>
                             <div class="text-xs text-gray-400 uppercase tracking-wider">Akreditasi</div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Scroll Indicator -->
-            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/60">
-                <span class="text-xs uppercase tracking-widest">Scroll</span>
-                <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
-                    <div class="w-1.5 h-3 bg-white/60 rounded-full animate-bounce"></div>
                 </div>
             </div>
         </section>
@@ -371,46 +359,73 @@
                 <div x-show="active==='visi'"
                     x-transition.opacity.duration.500ms
                     x-cloak
-                    class="space-y-6">
+                    class="bg-white rounded-2xl shadow-xl p-8 md:p-10">
 
-                    <!-- Visi Card -->
-                    <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-8 md:p-10 text-white relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-                        <div class="relative">
-                            <span class="text-blue-200 font-semibold text-sm uppercase tracking-wider">Visi Kami</span>
-                            <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-6">Visi SMK Metland</h2>
-                            <blockquote class="text-xl md:text-2xl font-light leading-relaxed border-l-4 border-white/30 pl-6">
-                                "Menjadi SMK Yang Lulusannya Memiliki Performa Karakter Unggul Dan Berkompetensi Berstandar Internasional"
-                            </blockquote>
+                    <span class="text-indigo-600 font-semibold text-sm uppercase tracking-wider">Visi & Misi</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-6">Visi dan Misi SMK Metland</h2>
+
+                    <!-- Image -->
+                    <div class="relative mb-8 group">
+                        <img src="/image/sekolahsmkmetland4.png" class="w-full h-[300px] object-cover rounded-xl shadow-lg">
+                        <div class="absolute bottom-4 right-4 bg-indigo-600 text-white px-4 py-2 rounded-lg shadow-lg">
+                            <div class="text-xl font-bold">Visi Misi</div>
+                            <div class="text-xs opacity-80">SMK Metland</div>
                         </div>
                     </div>
 
-                    <!-- Misi Card -->
-                    <div class="bg-white rounded-2xl p-8 md:p-10 shadow-xl">
-                        <span class="text-indigo-600 font-semibold text-sm uppercase tracking-wider">Langkah Kami</span>
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-8">Misi SMK Metland</h2>
+                    <!-- Visi Section -->
+                    <div class="mb-8">
+                        <div class="flex items-center gap-2 mb-4">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                            <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Visi Kami</span>
+                        </div>
+                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border-l-4 border-blue-600">
+                            <p class="text-lg md:text-xl text-gray-800 font-medium leading-relaxed italic">
+                                "Menjadi SMK Yang Lulusannya Memiliki Performa Karakter Unggul Dan Berkompetensi Berstandar Internasional"
+                            </p>
+                        </div>
+                    </div>
 
-                        <div class="space-y-4">
+                    <!-- Misi Section -->
+                    <div>
+                        <div class="flex items-center gap-2 mb-4">
+                            <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                            </svg>
+                            <span class="text-indigo-600 font-semibold text-sm uppercase tracking-wider">Misi Kami</span>
+                        </div>
+
+                        <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-4">
                             <div class="flex gap-4 p-5 bg-gradient-to-r from-blue-50 to-white rounded-xl border border-blue-100">
                                 <div class="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center text-lg font-bold shrink-0">1</div>
-                                <p class="text-gray-700 leading-relaxed">Memberikan layanan pendidikan bagi peserta didik yang berorientasi pada pengembangan knowledge, skill, dan attitude berbasis industri 4.0, serta menguatkan karakter GENERASI CINTA PRESTASI.</p>
+                                <p class="text-gray-700 leading-relaxed m-0">Memberikan layanan pendidikan bagi peserta didik yang berorientasi pada pengembangan knowledge, skill, dan attitude berbasis industri 4.0, serta menguatkan karakter GENERASI CINTA PRESTASI.</p>
                             </div>
 
                             <div class="flex gap-4 p-5 bg-gradient-to-r from-indigo-50 to-white rounded-xl border border-indigo-100">
                                 <div class="w-10 h-10 bg-indigo-600 text-white rounded-lg flex items-center justify-center text-lg font-bold shrink-0">2</div>
-                                <p class="text-gray-700 leading-relaxed">Mengembangkan profesionalisme guru berdasarkan nilai-nilai METLAND SCHOOL TEACHER'S VALUE dan mampu beradaptasi dengan tuntutan industri 4.0.</p>
+                                <p class="text-gray-700 leading-relaxed m-0">Mengembangkan profesionalisme guru berdasarkan nilai-nilai METLAND SCHOOL TEACHER'S VALUE dan mampu beradaptasi dengan tuntutan industri 4.0.</p>
                             </div>
 
                             <div class="flex gap-4 p-5 bg-gradient-to-r from-purple-50 to-white rounded-xl border border-purple-100">
                                 <div class="w-10 h-10 bg-purple-600 text-white rounded-lg flex items-center justify-center text-lg font-bold shrink-0">3</div>
-                                <p class="text-gray-700 leading-relaxed">Mengembangkan jaringan kerjasama kemitraan dengan DUDI dan perguruan tinggi vokasi baik di dalam maupun di luar negeri untuk pengembangan program akademik.</p>
+                                <p class="text-gray-700 leading-relaxed m-0">Mengembangkan jaringan kerjasama kemitraan dengan DUDI dan perguruan tinggi vokasi baik di dalam maupun di luar negeri untuk pengembangan program akademik.</p>
                             </div>
 
                             <div class="flex gap-4 p-5 bg-gradient-to-r from-cyan-50 to-white rounded-xl border border-cyan-100">
                                 <div class="w-10 h-10 bg-cyan-600 text-white rounded-lg flex items-center justify-center text-lg font-bold shrink-0">4</div>
-                                <p class="text-gray-700 leading-relaxed">Mengembangkan jaringan kerjasama dengan DUDI di dalam dan di luar negeri untuk mewujudkan zero unemployment lulusan.</p>
+                                <p class="text-gray-700 leading-relaxed m-0">Mengembangkan jaringan kerjasama dengan DUDI di dalam dan di luar negeri untuk mewujudkan zero unemployment lulusan.</p>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Achievement Badges -->
+                    <div class="flex flex-wrap gap-3 mt-8">
+                        <span class="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">✓ Karakter Unggul</span>
+                        <span class="px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">✓ Standar Internasional</span>
+                        <span class="px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">✓ Industri 4.0</span>
                     </div>
                 </div>
 
