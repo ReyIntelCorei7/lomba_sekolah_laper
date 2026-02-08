@@ -262,6 +262,22 @@ class WebsiteSettingSeeder extends Seeder
                 'label' => 'WhatsApp Number',
                 'description' => 'WhatsApp contact number'
             ],
+            [
+                'key' => 'social_tiktok',
+                'value' => 'https://tiktok.com/@smkmetland',
+                'type' => 'text',
+                'group' => 'social',
+                'label' => 'TikTok URL',
+                'description' => 'TikTok profile URL'
+            ],
+            [
+                'key' => 'social_twitter',
+                'value' => 'https://twitter.com/smkmetland',
+                'type' => 'text',
+                'group' => 'social',
+                'label' => 'X (Twitter) URL',
+                'description' => 'X (formerly Twitter) profile URL'
+            ],
         ];
 
         foreach ($settings as $setting) {
