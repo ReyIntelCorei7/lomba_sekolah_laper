@@ -4,7 +4,9 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PPDBController;
 use App\Http\Controllers\EskulController;
 use App\Http\Controllers\OrganisasiController;
+use App\Http\Controllers\AlumniPublicController;
 use App\Http\Controllers\Admin\Auth\AdminAuthController;
+use App\Http\Controllers\Admin\AlumniController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ProgramController;
@@ -84,6 +86,12 @@ Route::prefix('organisasi')->name('organisasi.')->group(function () {
     Route::get('/{slug}', [OrganisasiController::class, 'show'])->name('show');
 });
 
+// ============================================================================
+// ALUMNI ROUTES
+// ============================================================================
+
+Route::get('/alumni', [AlumniPublicController::class, 'index'])->name('alumni.index');
+
 // 
 // PPDB ROUTES (Penerimaan Peserta Didik Baru)
 // 
@@ -148,6 +156,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('organizations', OrganizationController::class);
         Route::patch('organizations/{organization}/toggle-active', [OrganizationController::class, 'toggleActive'])
             ->name('organizations.toggle-active');
+
+        // Alumni Management
+        Route::resource('alumni', AlumniController::class);
+        Route::patch('alumni/{alumni}/toggle-active', [AlumniController::class, 'toggleActive'])
+            ->name('alumni.toggle-active');
     });
 });
 

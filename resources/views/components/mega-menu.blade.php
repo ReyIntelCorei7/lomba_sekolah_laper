@@ -35,7 +35,7 @@
 
             <!-- Column 3 -->
             <div class="space-y-8">
-                <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Tentang Alumni</a>
+                <a href="/alumni" @click="menuOpen=false" class="block text-xl font-bold hover:text-blue-200 transition-colors">Tentang Alumni</a>
                 <a href="/news" @click="menuOpen=false" class="block text-xl font-bold hover:text-blue-200 transition-colors">Berita Sekolah</a>
                 <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Kontak Sekolah</a>
             </div>
