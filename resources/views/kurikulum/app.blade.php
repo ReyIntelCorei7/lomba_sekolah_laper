@@ -171,6 +171,9 @@
         </div>
 
     </header>
+
+    @include('components.footer')
+
 </body>
 
 </html>

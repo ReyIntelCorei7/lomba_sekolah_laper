@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Cek Status Pendaftaran - PPDB SMK Metland</title>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
+
     <style>
-        body { font-family: 'Poppins', sans-serif; }
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
     </style>
 </head>
+
 <body class="bg-gray-50">
     <!-- Navbar Component -->
     <x-navbar :solid-background="true" />
@@ -41,32 +45,32 @@
 
                 <form method="POST" action="{{ route('ppdb.status') }}" class="space-y-6">
                     @csrf
-                    
+
                     <div>
                         <label for="registration_number" class="block text-sm font-medium text-gray-700">Nomor Pendaftaran</label>
-                        <input type="text" name="registration_number" id="registration_number" required 
-                               value="{{ old('registration_number') }}"
-                               placeholder="Contoh: 20260001"
-                               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 @error('registration_number') border-red-500 @enderror">
+                        <input type="text" name="registration_number" id="registration_number" required
+                            value="{{ old('registration_number') }}"
+                            placeholder="Contoh: 20260001"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 @error('registration_number') border-red-500 @enderror">
                         @error('registration_number')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                        <input type="email" name="email" id="email" required 
-                               value="{{ old('email') }}"
-                               placeholder="email@example.com"
-                               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 @error('email') border-red-500 @enderror">
-                        @error('email')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div>
-                        <button type="submit" 
-                                class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" name="email" id="email" required
+                            value="{{ old('email') }}"
+                            placeholder="email@example.com"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 @error('email') border-red-500 @enderror">
+                        @error('email')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <button type="submit"
+                            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                             Cek Status
                         </button>
                     </div>
@@ -100,18 +104,20 @@
                 <!-- Contact -->
                 <div class="mt-6 text-center">
                     <p class="text-sm text-gray-600">
-                        Belum mendaftar? 
+                        Belum mendaftar?
                         <a href="{{ route('ppdb.create') }}" class="text-blue-600 hover:text-blue-500 font-medium">
                             Daftar sekarang
                         </a>
                     </p>
                     <p class="text-sm text-gray-600 mt-2">
-                        Butuh bantuan? Hubungi kami di 
+                        Butuh bantuan? Hubungi kami di
                         <a href="tel:+6221234567" class="text-blue-600 hover:text-blue-500">+62 21 1234 5678</a>
                     </p>
                 </div>
             </div>
         </div>
     </div>
+    @include('components.footer')
 </body>
+
 </html>

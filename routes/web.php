@@ -10,15 +10,7 @@ use App\Http\Controllers\Admin\WebsiteSettingController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| TALL Stack: Tailwind, Alpine.js, Laravel, Livewire
-| Routes organized by: Public > Auth > Program Keahlian > PPDB > Admin
-|
-*/
+
 
 // ============================================================================
 // PUBLIC ROUTES
@@ -37,10 +29,11 @@ Route::get('/', function () {
 })->name('home');
 
 // News (Public)
-Route::prefix('berita')->name('news.')->group(function () {
+Route::prefix('news')->name('news.')->group(function () {
     Route::get('/', [NewsController::class, 'index'])->name('index');
-    Route::get('/{slug}', [NewsController::class, 'show'])->name('show');
+    Route::get('/load-more', [NewsController::class, 'loadMoreNews'])->name('load-more');
     Route::get('/kategori/{category}', [NewsController::class, 'category'])->name('category');
+    Route::get('/{slug}', [NewsController::class, 'show'])->name('show');
 });
 
 // Static pages

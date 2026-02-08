@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
-    // Public method for /news page with custom layout
     public function showNewsPage()
     {
         $featuredNews = News::where('is_published', true)
@@ -16,9 +15,17 @@ class NewsController extends Controller
             ->latest('published_at')
             ->first();
 
+        // Load first 7 news items (+ 1 featured = 8 total)
         $news = News::where('is_published', true)
+            ->where('is_featured', false)
             ->orderBy('published_at', 'desc')
+            ->take(8)
             ->get();
+
+        // Get total count for "load more" button visibility
+        $totalNews = News::where('is_published', true)
+            ->where('is_featured', false)
+            ->count();
 
         $categories = [
             'all' => 'Semua',
@@ -28,10 +35,65 @@ class NewsController extends Controller
             'workshop' => 'Workshop',
         ];
 
-        return view('news.app', compact('featuredNews', 'news', 'categories'));
+        // Get site settings for footer
+        $settings = \App\Models\WebsiteSetting::all()->pluck('value', 'key');
+        $logoUrl = isset($settings['site_logo']) && $settings['site_logo']
+            ? asset('storage/' . $settings['site_logo'])
+            : asset('image/logometland.png');
+
+        return view('news.app', compact('featuredNews', 'news', 'categories', 'totalNews', 'settings', 'logoUrl'));
     }
 
-    // Public methods for frontend
+    //load more news
+    public function loadMoreNews(Request $request)
+    {
+        $offset = $request->input('offset', 0);
+        $limit = $request->input('limit', 9);
+        $category = $request->input('category', 'all');
+
+        $query = News::where('is_published', true)
+            ->where('is_featured', false)
+            ->orderBy('published_at', 'desc');
+
+        // Filter by category if not 'all'
+        if ($category !== 'all') {
+            $query->where('category', $category);
+        }
+
+        $news = $query->skip($offset)->take($limit)->get();
+
+        // Get total count for this category
+        $totalQuery = News::where('is_published', true)
+            ->where('is_featured', false);
+
+        if ($category !== 'all') {
+            $totalQuery->where('category', $category);
+        }
+
+        $total = $totalQuery->count();
+
+        $newsData = $news->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'title' => $item->title,
+                'slug' => $item->slug,
+                'category' => $item->category,
+                'excerpt' => $item->excerpt ?? \Illuminate\Support\Str::limit(strip_tags($item->content), 80),
+                'image' => $item->image ? asset('storage/' . $item->image) : asset('image/sekolahsmkmetland.png'),
+                'formatted_date' => $item->formatted_date,
+                'views' => $item->views ?? 0,
+                'url' => route('news.show', $item->slug),
+            ];
+        });
+
+        return response()->json([
+            'news' => $newsData,
+            'hasMore' => ($offset + $limit) < $total,
+            'total' => $total,
+        ]);
+    }
+
+    // Public frontend
     public function index()
     {
         $news = News::where('is_published', true)
@@ -69,7 +131,7 @@ class NewsController extends Controller
             ->where('is_published', true)
             ->firstOrFail();
 
-        // Increment views
+        // Category views
         $news->increment('views');
 
         $relatedNews = News::where('category', $news->category)
@@ -107,7 +169,7 @@ class NewsController extends Controller
         ]);
     }
 
-    // Admin methods
+
     public function adminIndex(Request $request)
     {
         $query = News::query();
@@ -145,7 +207,7 @@ class NewsController extends Controller
     {
         return view('admin.news.create');
     }
-
+    //Store News
     public function store(Request $request)
     {
         $request->validate([
@@ -164,6 +226,11 @@ class NewsController extends Controller
         $data['author'] = $data['author'] ?? auth('admin')->user()->name;
         $data['is_published'] = $request->boolean('is_published');
         $data['is_featured'] = $request->boolean('is_featured');
+
+        // Only one featured news allowed - unfeatured all others
+        if ($data['is_featured']) {
+            News::where('is_featured', true)->update(['is_featured' => false]);
+        }
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('news', 'public');
@@ -206,6 +273,13 @@ class NewsController extends Controller
         $data = $request->all();
         $data['is_published'] = $request->boolean('is_published');
         $data['is_featured'] = $request->boolean('is_featured');
+
+        //Featured News
+        if ($data['is_featured']) {
+            News::where('is_featured', true)
+                ->where('id', '!=', $news->id)
+                ->update(['is_featured' => false]);
+        }
 
         if ($request->hasFile('image')) {
             if ($news->image) {
