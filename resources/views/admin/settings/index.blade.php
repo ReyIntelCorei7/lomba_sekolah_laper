@@ -30,13 +30,12 @@
         </div>
     </div>
 
-    @if($settings->count() > 0)
+    @if(count($settings) > 0)
     <!-- Settings Form -->
     <form method="POST" action="{{ route('admin.settings.update') }}" enctype="multipart/form-data">
         @csrf
         
         @foreach($settings as $group => $groupSettings)
-            @if(is_iterable($groupSettings))
             <div class="bg-white dark:bg-slate-800/50 shadow rounded-xl border border-gray-200 dark:border-slate-700 mb-6 overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800/80">
                     <h3 class="text-lg font-bold text-gray-900 dark:text-white capitalize">{{ str_replace('_', ' ', $group) }} Settings</h3>
@@ -134,7 +133,6 @@
                     @endforeach
                 </div>
             </div>
-            @endif
         @endforeach
         
         <!-- Submit Button -->

@@ -11,7 +11,17 @@ class WebsiteSettingController extends Controller
 {
     public function index()
     {
-        $settings = WebsiteSetting::orderBy('group')->orderBy('key')->get()->groupBy('group');
+        // Get distinct groups
+        $groups = WebsiteSetting::distinct()->pluck('group')->toArray();
+        
+        // Build settings array grouped by group name
+        $settings = [];
+        foreach ($groups as $group) {
+            $settings[$group] = WebsiteSetting::where('group', $group)
+                ->orderBy('key')
+                ->get();
+        }
+        
         return view('admin.settings.index', compact('settings'));
     }
 

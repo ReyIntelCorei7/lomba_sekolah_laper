@@ -21,8 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Share settings and logoUrl to all views for footer
-        View::composer('*', function ($view) {
+        // Share settings and logoUrl to public views only (exclude admin views)
+        View::composer(['layouts.*', 'news.*', 'ppdb.*', 'aboutschool.*', 'kurikulum.*', 'program_keahlian.*', 'errors.*', 'eskul.*'], function ($view) {
             $settings = WebsiteSetting::all()->pluck('value', 'key');
             $logoUrl = isset($settings['site_logo']) && $settings['site_logo']
                 ? asset('storage/' . $settings['site_logo'])
