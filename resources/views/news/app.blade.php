@@ -207,7 +207,7 @@
     class="bg-gray-50 overflow-x-hidden">
 
     <!-- Navbar -->
-    @include('components.mega-menu')
+    <x-navbar :solid-background="true" :show-on-scroll="false" />
 
 
     <!-- ================= HERO SECTION ================= -->
