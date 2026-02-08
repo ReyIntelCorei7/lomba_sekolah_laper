@@ -434,8 +434,8 @@
 
 
 <div class="flex flex-col sm:flex-row items-center gap-4 md:gap-6 mb-6 mt-6">
-    <img src="/image/teachervalue.jpeg" class="w-full max-w-[200px] md:max-w-[250px] mx-auto rounded-lg shadow-md">
-    <img src="/image/8goldenrules.jpeg" class="w-full max-w-[200px] md:max-w-[250px] mx-auto rounded-lg shadow-md">
+    <img src="/image/teachervalue.jpeg" class="w-full max-w-[200px] md:max-w-[350px] mx-auto rounded-lg shadow-md">
+    <img src="/image/8goldenrules.jpeg" class="w-full max-w-[200px] md:max-w-[350px] mx-auto rounded-lg shadow-md">
 </div>
 
 </div>
