@@ -13,7 +13,10 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
-<body>
+<body x-data="{ menuOpen: false, lang: 'id', toggleLang() { this.lang = this.lang === 'id' ? 'en' : 'id'; } }" class="bg-gray-900">
+
+    <!-- Navbar Component -->
+    <x-navbar :solidBackground="true" :showOnScroll="false" />
 
     <div class="w-full relative bg-gray-900">
         <!-- Section 1 -->
@@ -164,6 +167,9 @@
             </div>
         </div>
     </div>
+
+    <!-- Footer Component -->
+    @include('components.footer')
 </body>
 
 </html>

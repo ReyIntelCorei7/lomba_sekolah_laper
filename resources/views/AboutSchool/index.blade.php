@@ -168,6 +168,7 @@
             </button>
         </div>
 
+<<<<<<< HEAD
         <!-- Mega Menu Overlay -->
         <div class="fixed inset-0 bg-[#1E2188] z-40 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
             :class="menuOpen ? 'translate-y-0' : '-translate-y-full'"
@@ -214,6 +215,10 @@
                 </div>
             </div>
         </div>
+=======
+        <!-- Mega Menu Component -->
+        @include('components.mega-menu', ['logoUrl' => asset('image/logometland.png'), 'settings' => []])
+>>>>>>> 0dcdeaa0f447377bc62f4f85fed797b9b4297064
     </header>
 
     <!-- Hero Section - Modern Cinematic Design -->
