@@ -1,6 +1,7 @@
 @props([
 'solidBackground' => false,
-'showOnScroll' => true
+'showOnScroll' => true,
+'logoUrl' => asset('image/logometland.png')
 ])
 
 <!-- Navbar -->
@@ -50,7 +51,7 @@
                 <a href="/" class="hover:text-blue-400 transition-colors uppercase {{ request()->is('/') ? 'text-blue-400' : '' }}">Beranda</a>
                 <a href="/about" class="hover:text-blue-400 transition-colors uppercase {{ request()->is('about') ? 'text-blue-400' : '' }}">Tentang Sekolah</a>
                 <a href="/prokeh" class="hover:text-blue-400 transition-colors uppercase {{ request()->is('prokeh*') ? 'text-blue-400' : '' }}">Program Keahlian</a>
-                <a href="/kurikulum" class="hover:text-blue-400 transition-colors uppercase {{ request()->is('kurikulum') ? 'text-blue-400' : '' }}">Kurikulum</a>
+                <a href="/eskul" class="hover:text-blue-400 transition-colors uppercase {{ request()->is('eskul*') ? 'text-blue-400' : '' }}">Eskul</a>
                 <a href="/news" class="hover:text-blue-400 transition-colors uppercase {{ request()->is('news*') ? 'text-blue-400' : '' }}">Berita Sekolah</a>
             </div>
 
@@ -119,8 +120,8 @@
 
                 <!-- Column 2 -->
                 <div class="space-y-8">
-                    <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Ekstrakurikuler</a>
-                    <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Organisasi</a>
+                    <a href="/eskul" @click="menuOpen=false" class="block text-xl font-bold hover:text-blue-200 transition-colors">Ekstrakurikuler</a>
+                    <a href="/organisasi" @click="menuOpen=false" class="block text-xl font-bold hover:text-blue-200 transition-colors">Organisasi</a>
                     <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Produk/Karya Siswa</a>
                 </div>
 

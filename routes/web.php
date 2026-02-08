@@ -3,12 +3,14 @@
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PPDBController;
 use App\Http\Controllers\EskulController;
+use App\Http\Controllers\OrganisasiController;
 use App\Http\Controllers\Admin\Auth\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\WebsiteSettingController;
 use App\Http\Controllers\Admin\ExtracurricularController;
+use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -73,6 +75,15 @@ Route::prefix('eskul')->name('eskul.')->group(function () {
     Route::get('/{slug}', [EskulController::class, 'show'])->name('show');
 });
 
+// ============================================================================
+// ORGANIZATION (ORGANISASI) ROUTES
+// ============================================================================
+
+Route::prefix('organisasi')->name('organisasi.')->group(function () {
+    Route::get('/', [OrganisasiController::class, 'index'])->name('index');
+    Route::get('/{slug}', [OrganisasiController::class, 'show'])->name('show');
+});
+
 // 
 // PPDB ROUTES (Penerimaan Peserta Didik Baru)
 // 
@@ -132,6 +143,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('extracurriculars', ExtracurricularController::class);
         Route::patch('extracurriculars/{extracurricular}/toggle-active', [ExtracurricularController::class, 'toggleActive'])
             ->name('extracurriculars.toggle-active');
+
+        // Organizations Management
+        Route::resource('organizations', OrganizationController::class);
+        Route::patch('organizations/{organization}/toggle-active', [OrganizationController::class, 'toggleActive'])
+            ->name('organizations.toggle-active');
     });
 });
 

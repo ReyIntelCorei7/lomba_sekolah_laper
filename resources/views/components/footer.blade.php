@@ -1,3 +1,8 @@
+@php
+    $logoUrl = $logoUrl ?? asset('image/logometland.png');
+    $settings = $settings ?? [];
+@endphp
+
 <!-- Footer -->
 <footer class="bg-gray-900 text-white pt-20 pb-10 border-t border-gray-800">
     <div class="max-w-7xl mx-auto px-6">
