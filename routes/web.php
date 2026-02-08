@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\WebsiteSettingController;
 use App\Http\Controllers\Admin\ExtracurricularController;
 use App\Http\Controllers\Admin\OrganizationController;
+use App\Http\Controllers\Admin\ProgramKeahlianController as AdminProgramKeahlianController;
+use App\Http\Controllers\ProgramKeahlianController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,12 +54,8 @@ Route::get('/kurikulum', fn() => view('kurikulum.app'))->name('kurikulum');
 // ============================================================================
 
 Route::prefix('prokeh')->name('prokeh.')->group(function () {
-    Route::get('/', fn() => view('program_keahlian.index'))->name('index');
-    Route::get('/akuntansi', fn() => view('program_keahlian.akuntansi'))->name('akuntansi');
-    Route::get('/dkv', fn() => view('program_keahlian.dkv'))->name('dkv');
-    Route::get('/pplg', fn() => view('program_keahlian.pplg'))->name('pplg');
-    Route::get('/kuliner', fn() => view('program_keahlian.kuliner'))->name('kuliner');
-    Route::get('/hotel', fn() => view('program_keahlian.hotel'))->name('hotel');
+    Route::get('/', [ProgramKeahlianController::class, 'index'])->name('index');
+    Route::get('/{slug}', [ProgramKeahlianController::class, 'show'])->name('show');
 });
 
 //
@@ -169,6 +167,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('alumni', AlumniController::class);
         Route::patch('alumni/{alumni}/toggle-active', [AlumniController::class, 'toggleActive'])
             ->name('alumni.toggle-active');
+
+        // Program Keahlian Management
+        Route::resource('program-keahlian', AdminProgramKeahlianController::class);
+        Route::post('program-keahlian/{program_keahlian}/skills', [AdminProgramKeahlianController::class, 'storeSkill'])
+            ->name('program-keahlian.skills.store');
+        Route::put('program-keahlian/skills/{skill}', [AdminProgramKeahlianController::class, 'updateSkill'])
+            ->name('program-keahlian.skills.update');
+        Route::delete('program-keahlian/skills/{skill}', [AdminProgramKeahlianController::class, 'destroySkill'])
+            ->name('program-keahlian.skills.destroy');
+        Route::post('program-keahlian/{program_keahlian}/careers', [AdminProgramKeahlianController::class, 'storeCareer'])
+            ->name('program-keahlian.careers.store');
+        Route::put('program-keahlian/careers/{career}', [AdminProgramKeahlianController::class, 'updateCareer'])
+            ->name('program-keahlian.careers.update');
+        Route::delete('program-keahlian/careers/{career}', [AdminProgramKeahlianController::class, 'destroyCareer'])
+            ->name('program-keahlian.careers.destroy');
     });
 });
 
