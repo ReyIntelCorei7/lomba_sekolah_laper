@@ -1,6 +1,6 @@
 @props([
 'solidBackground' => false,
-'showOnScroll' => true,
+'showOnScroll' => false,
 'logoUrl' => asset('image/logometland.png')
 ])
 
