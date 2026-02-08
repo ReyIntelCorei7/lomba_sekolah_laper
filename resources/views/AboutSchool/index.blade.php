@@ -97,7 +97,7 @@
         :class="scrolled ? 'bg-[#1a1a1a] shadow-lg border-white/10 h-16' : 'bg-[#1a1a1a] h-20'">
 
         <!-- Main Header Content -->
-        <div class="max-w-[1400px] mx-auto px-4 md:px-6 h-20 flex items-center justify-between gap-4 md:gap-16 relative z-50 w-full"
+        <div class="max-w-[1400px] mx-auto px-4 md:px-6 h-20 flex items-center justify-between gap-4 md:gap-16 relative z-50"
             :class="scrolled ? 'h-16' : 'h-24'">
 
             <!-- Logo area -->
@@ -168,7 +168,6 @@
             </button>
         </div>
 
-<<<<<<< HEAD
         <!-- Mega Menu Overlay -->
         <div class="fixed inset-0 bg-[#1E2188] z-40 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
             :class="menuOpen ? 'translate-y-0' : '-translate-y-full'"
@@ -215,10 +214,8 @@
                 </div>
             </div>
         </div>
-=======
         <!-- Mega Menu Component -->
-        @include('components.mega-menu', ['logoUrl' => asset('image/logometland.png'), 'settings' => []])
->>>>>>> 0dcdeaa0f447377bc62f4f85fed797b9b4297064
+    @include('components.mega-menu', ['logoUrl' => $logoUrl, 'settings' => $settings ?? []])
     </header>
 
     <!-- Hero Section - Modern Cinematic Design -->
