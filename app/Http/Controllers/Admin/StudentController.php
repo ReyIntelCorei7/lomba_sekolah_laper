@@ -63,7 +63,7 @@ class StudentController extends Controller
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|unique:students,email,' . $student->id,
             'phone' => 'required|string|max:20',
-            'gender' => 'required|in:male,female',
+            'gender' => 'required|in:L,P',
             'birth_date' => 'required|date',
             'birth_place' => 'required|string|max:255',
             'address' => 'required|string',

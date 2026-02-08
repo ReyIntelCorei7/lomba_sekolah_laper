@@ -92,7 +92,7 @@
                     </div>
                     <div class="px-6 py-4 flex justify-between">
                         <span class="text-sm text-gray-500 dark:text-slate-400">Gender</span>
-                        <span class="text-sm text-gray-900 dark:text-white">{{ ucfirst($student->gender ?? '-') }}</span>
+                        <span class="text-sm text-gray-900 dark:text-white">{{ $student->gender == 'L' ? 'Laki-laki' : ($student->gender == 'P' ? 'Perempuan' : '-') }}</span>
                     </div>
                     <div class="px-6 py-4 flex justify-between">
                         <span class="text-sm text-gray-500 dark:text-slate-400">Birth Date</span>

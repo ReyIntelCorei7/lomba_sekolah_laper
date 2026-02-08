@@ -27,7 +27,7 @@ class PPDBController extends Controller
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|unique:students,email',
             'phone' => 'required|string|max:20',
-            'gender' => 'required|in:male,female',
+            'gender' => 'required|in:L,P',
             'birth_date' => 'required|date|before:today',
             'birth_place' => 'required|string|max:255',
             'address' => 'required|string',

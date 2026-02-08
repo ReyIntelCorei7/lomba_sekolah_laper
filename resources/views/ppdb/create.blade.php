@@ -80,8 +80,8 @@
                                 <select name="gender" id="gender" required
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 @error('gender') border-red-500 @enderror">
                                     <option value="">Pilih Jenis Kelamin</option>
-                                    <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Laki-laki</option>
-                                    <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Perempuan</option>
+                                    <option value="L" {{ old('gender') == 'L' ? 'selected' : '' }}>Laki-laki</option>
+                                    <option value="P" {{ old('gender') == 'P' ? 'selected' : '' }}>Perempuan</option>
                                 </select>
                                 @error('gender')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
