@@ -26,18 +26,7 @@
 
 <body class="bg-gray-900 text-gray-100 min-h-screen">
     <!-- Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900/90 backdrop-blur-lg border-b border-gray-800">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-3">
-                <img src="{{ $logoUrl ?? asset('image/logometland.png') }}" class="w-10 h-10 object-contain">
-                <span class="font-bold text-lg text-white">SMK METLAND</span>
-            </a>
-            <div class="flex items-center gap-6">
-                <a href="/" class="text-gray-400 hover:text-white transition-colors text-sm font-medium">Beranda</a>
-                <a href="/eskul" class="text-white font-medium text-sm">Eskul</a>
-            </div>
-        </div>
-    </nav>
+    @include('components.navbar', ['solidBackground' => true, 'showOnScroll' => false])
 
     <!-- Hero with Image -->
     <section class="pt-16 relative">
