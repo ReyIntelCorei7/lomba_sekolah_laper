@@ -168,52 +168,8 @@
             </button>
         </div>
 
-        <!-- Mega Menu Overlay -->
-        <div class="fixed inset-0 bg-[#1E2188] z-40 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
-            :class="menuOpen ? 'translate-y-0' : '-translate-y-full'"
-            style="top: 0;">
-
-            <div class="max-w-[1400px] mx-auto px-6 pt-32 pb-12 h-full flex flex-col">
-                <!-- Header in Menu -->
-                <div class="flex items-center gap-4 mb-20 fade-in-up delay-100">
-                    <img src="{{ $logoUrl }}" class="w-16 h-16 object-contain">
-                    <h2 class="text-3xl font-bold text-white tracking-widest uppercase">METLAND SCHOOL</h2>
-                </div>
-
-                <!-- Grid Content -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-white">
-                    <!-- Column 1 -->
-                    <div class="space-y-8 fade-in-up delay-200">
-                        <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Profile Sekolah</a>
-                        <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Visi dan Misi</a>
-                        <a href="#jurusan" @click="menuOpen=false" class="block text-xl font-bold hover:text-blue-200 transition-colors">Program Keahlian</a>
-                    </div>
-
-                    <!-- Column 2 -->
-                    <div class="space-y-8 fade-in-up delay-300">
-                        <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Ekstrakurikuler</a>
-                        <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Organisasi</a>
-                        <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Produk/Karya Siswa</a>
-                    </div>
-
-                    <!-- Column 3 -->
-                    <div class="space-y-8 fade-in-up delay-400">
-                        <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Tentang Alumni</a>
-                        <a href="#berita" @click="menuOpen=false" class="block text-xl font-bold hover:text-blue-200 transition-colors">Berita Sekolah</a>
-                        <a href="#" class="block text-xl font-bold hover:text-blue-200 transition-colors">Kontak Sekolah</a>
-                    </div>
-                </div>
-
-                <div class="mt-auto border-t border-white/20 pt-8 flex justify-between text-white/60 text-sm">
-                    <p>&copy; 2024 SMK Metland School</p>
-                    <div class="flex gap-4">
-                        <a href="#" class="hover:text-white">Instagram</a>
-                        <a href="#" class="hover:text-white">Facebook</a>
-                        <a href="#" class="hover:text-white">Youtube</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Mega Menu Component -->
+        @include('components.mega-menu', ['logoUrl' => asset('image/logometland.png'), 'settings' => []])
     </header>
 
     <!-- Hero Section - Modern Cinematic Design -->
