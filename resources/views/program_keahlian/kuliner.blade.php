@@ -1,173 +1,331 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Kuliner - SMK Metland</title>
-    <link rel="icon" href="/image/logometland.png" type="image/png"> <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Kuliner / Tata Boga - SMK Metland School</title>
+    <meta name="description" content="Program keahlian Kuliner SMK Metland - Kuasai teknik memasak profesional, pastry, dan manajemen dapur">
+    <link rel="icon" href="/image/logometland.png" type="image/png">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <!-- Alpine -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animated-gradient {
+            background: linear-gradient(135deg, #f97316, #eab308, #f97316);
+            background-size: 300% 300%;
+            animation: gradient-shift 4s ease infinite;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .floating { animation: float 6s ease-in-out infinite; }
+        .floating-delay { animation: float 6s ease-in-out infinite; animation-delay: 2s; }
+        .skill-card {
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .skill-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(249, 115, 22, 0.25);
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(249, 115, 22, 0.6); }
+        }
+        .pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+    </style>
 </head>
 
-<body x-data="{ menuOpen: false, lang: 'id', toggleLang() { this.lang = this.lang === 'id' ? 'en' : 'id'; } }" class="bg-gray-900">
+<body x-data="{ activeTab: 'materi' }" class="bg-gray-50">
+    @include('components.navbar', ['solidBackground' => true, 'showOnScroll' => false])
 
-    <!-- Navbar Component -->
-    <x-navbar :solidBackground="true" :showOnScroll="false" />
-
-    <div class="w-full relative bg-gray-900">
-        <!-- Section 1 -->
-        <div class="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden z-0">
-            <!-- Gambar responsif -->
-            <picture>
-                <source media="(min-width: 768px)" srcset="{{ asset('image/1.png') }}">
-                <source media="(min-width: 640px)" srcset="{{ asset('image/1 2.png') }}">
-                <img src="{{ asset('image/1 3.png') }}"
-                    class="absolute inset-0 w-full h-full object-cover brightness-[0.4]" alt="Background Image 1">
-            </picture>
-
-            <div class="relative z-50 w-full max-w-8xl px-4 sm:px-6 lg:px-8">
-                <div
-                    class="w-full h-[90vh] sm:h-[95vh] md:h-[90vh] border border-white/60 p-3 sm:p-4 transition-all opacity-100">
-                    <div class="w-full h-full border relative p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-end">
-
-                        <div class="max-w-2xl pb-4">
-                            <h2
-                                class="text-white font-bold text-lg sm:text-xl md:text-2xl mb-3 md:mb-4 uppercase drop-shadow-2xl">
-                                Kuliner
-                            </h2>
-                            <p class="text-white text-xs sm:text-sm md:text-base leading-relaxed font-normal">
-                                Kompetensi keahlian akuntansi di SMK Metland meliputi pembelajaran Akuntansi Manual dan
-                                Akutansi Komputer (MYOB, Zahir). Kompetensi Keahlian Akuntansi di SMK Metland bertujuan
-                                agar siswa dapat mengetahui Akuntansi baik untuk perusahaan jasa, perusahaan dagang,
-                                perusahaan manufaktur dan perhotelan. Siswa kompetensi Keahlian Akuntansi diharapkan
-                                dapat melakukan Siklus Akuntansi minimal bagi dirinya sendiri dan perusahaan pada
-                                umumnya dan sekaligus mampu menerapkan Sistem Perpajakan di Indonesia
-                            </p>
-                        </div>
-
-                        <div
-                            class="absolute bottom-3 right-4 sm:bottom-4 sm:right-6 md:bottom-6 md:right-10 opacity-30 
-                                    text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-8xl 
-                                    font-black text-white italic select-none pointer-events-none uppercase">
-                            MANAGER
-                        </div>
-                    </div>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="{{ asset('image/kuliner1.png') }}" alt="Kuliner SMK Metland" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-br from-orange-900/90 via-slate-900/80 to-amber-900/90"></div>
+        </div>
+        
+        <div class="absolute top-20 left-10 w-32 h-32 rounded-full bg-orange-500/20 blur-3xl floating"></div>
+        <div class="absolute bottom-40 right-20 w-48 h-48 rounded-full bg-amber-500/20 blur-3xl floating-delay"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6 py-32 text-center">
+            <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white mb-8">
+                <span class="relative flex h-2.5 w-2.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-400"></span>
+                </span>
+                <span class="text-sm font-medium">🍳 Program Keahlian Kuliner</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
+                Kuliner / <br class="hidden md:block">
+                <span class="animated-gradient">Tata Boga</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-orange-100 max-w-3xl mx-auto mb-10 leading-relaxed">
+                Kuasai teknik memasak profesional, pastry & bakery, dan manajemen dapur untuk berkarir di industri kuliner kelas dunia.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+                <a href="/ppdb" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-orange-700 font-bold rounded-xl hover:bg-orange-50 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    Daftar Sekarang
+                </a>
+                <a href="#overview" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-white/50 text-white font-semibold rounded-xl hover:bg-white/10 transition-all">
+                    Pelajari Lebih Lanjut
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto">
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/20">
+                    <div class="text-3xl md:text-4xl font-bold text-white">100+</div>
+                    <div class="text-xs md:text-sm text-orange-200 uppercase tracking-wider">Resep</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/20">
+                    <div class="text-3xl md:text-4xl font-bold text-white">⭐5</div>
+                    <div class="text-xs md:text-sm text-orange-200 uppercase tracking-wider">Hotel Mitra</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/20">
+                    <div class="text-3xl md:text-4xl font-bold text-white">100%</div>
+                    <div class="text-xs md:text-sm text-orange-200 uppercase tracking-wider">Praktik</div>
                 </div>
             </div>
         </div>
-
-        <!-- Section 2 -->
-        <div
-            class="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden z-10 shadow-[0_-50px_100px_rgba(0,0,0,1)]">
-            <!-- Gambar responsif -->
-            <picture>
-                <source media="(min-width: 768px)" srcset="{{ asset('image/2.png') }}">
-                <source media="(min-width: 640px)" srcset="{{ asset('image/2 2.png') }}">
-                <img src="{{ asset('image/2 3.png') }}"
-                    class="absolute inset-0 w-full h-full object-cover brightness-[0.4]" alt="Background Image 2">
-            </picture>
-
-            <div class="relative z-50 w-full max-w-8xl px-4 sm:px-6 lg:px-8">
-                <div
-                    class="w-full h-[90vh] sm:h-[95vh] md:h-[90vh] border border-white/60 p-3 sm:p-4 transition-all opacity-100">
-                    <div class="w-full h-full border relative p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-end">
-
-                        <div class="max-w-2xl pb-4">
-                            <h2
-                                class="text-white font-bold text-lg sm:text-xl md:text-2xl mb-3 md:mb-4 uppercase drop-shadow-2xl">
-                                Kuliner </h2>
-                            <p class="text-white text-xs sm:text-sm md:text-base leading-relaxed font-normal">
-                                Lulusan Kompetensi Keahlian Akuntansi SMK Metland , ada yang kuliah , bekerja dan tidak
-                                sedikit yang melanjutkan kuliah sambil bekerja. Untuk Kompetensi Keahlian Akuntansi
-                                belajar mengenai Siklus Akuntansi, maka tidak ada karya yang bersifat riil atau produk
-                                nyata yang bisa di pamerkan. Tapi Laporan Keuangan merupakan produk jasa akuntansi
-                            </p>
-                        </div>
-
-                        <div
-                            class="absolute bottom-3 right-4 sm:bottom-4 sm:right-6 md:bottom-6 md:right-10 opacity-30 
-                                    text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-8xl 
-                                    font-black text-white italic uppercase">
-                            TELLER
-                        </div>
-                    </div>
-                </div>
-            </div>
+        
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <a href="#overview" class="text-white/60 hover:text-white transition-colors">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                </svg>
+            </a>
         </div>
+    </section>
 
-        <!-- Section 3 -->
-        <div
-            class="relative z-20 h-screen w-full flex items-center justify-center bg-gray-900 shadow-[0_-50px_100px_rgba(0,0,0,1)]">
-            <!-- Gambar responsif -->
-            <picture>
-                <source media="(min-width: 768px)" srcset="{{ asset('image/3.png') }}">
-                <source media="(min-width: 640px)" srcset="{{ asset('image/3 2.png') }}">
-                <img src="{{ asset('image/3 3.png') }}"
-                    class="absolute inset-0 w-full h-full object-cover brightness-[0.4]" alt="Background Image 3">
-            </picture>
-
-            <div class="relative z-50 w-full max-w-8xl px-4 sm:px-6 lg:px-8">
-                <div
-                    class="w-full h-[90vh] sm:h-[95vh] md:h-[90vh] border border-white/60 p-3 sm:p-4 transition-all opacity-100">
-                    <div class="w-full h-full border relative p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-end">
-
-                        <div class="max-w-2xl">
-                            <h2
-                                class="text-white font-bold text-lg sm:text-xl md:text-2xl mb-3 md:mb-4 uppercase drop-shadow-2xl">
-                                Kuliner </h2>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
-                                <div>
-                                    <h3
-                                        class="flex items-center text-white font-bold text-sm md:text-base border-l-4 pl-3 uppercase mb-2">
-                                        Kompetensi / Materi yang Diajarkan :
-                                    </h3>
-                                    <ul class="text-white text-xs sm:text-sm leading-normal font-normal space-y-1">
-                                        <li>01. Pengantar Ekonomi dan Bisnis</li>
-                                        <li>02. Pengantar Administrasi Perkantoran</li>
-                                        <li>03. Akuntansi Keuangan</li>
-                                        <li>04. Akuntansi Perusahaan Dagang</li>
-                                        <li>05. Akuntansi Manufaktur</li>
-                                        <li>06. Komputer Akuntansi</li>
-                                        <li>07. Administrasi Pajak</li>
-                                    </ul>
-                                </div>
-
-                                <div class="mt-4 md:mt-0">
-                                    <h3
-                                        class="flex items-center text-white font-bold text-sm md:text-base border-l-4 pl-3 uppercase mb-2">
-                                        Profesi / Bidang Pekerjaan :
-                                    </h3>
-                                    <ul class="text-white text-xs sm:text-sm leading-normal font-normal space-y-1">
-                                        <li>01. Penata Buku Muda dalam lingkup akuntan</li>
-                                        <li>02. Kasir / Teller</li>
-                                        <li>03. Juru Penggajian</li>
-                                        <li>04. Operator Mesin Hitung</li>
-                                        <li>05. Administrasi Gudang</li>
-                                        <li>06. Menyusun Laporan Keuangan</li>
-                                        <li>07. DLL</li>
-                                    </ul>
-                                </div>
+    <!-- Overview Section -->
+    <section id="overview" class="py-20 md:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div>
+                    <span class="inline-block px-4 py-1.5 bg-orange-100 text-orange-700 text-sm font-semibold rounded-full mb-6">TENTANG PROGRAM</span>
+                    <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                        Menjadi <span class="text-orange-600">Chef Profesional</span> Kelas Dunia
+                    </h2>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                        Program Kuliner SMK Metland membekali siswa dengan kemampuan memasak profesional, pastry & bakery, food presentation, dan manajemen dapur. Belajar langsung dari chef berpengalaman dengan standar hotel bintang lima.
+                    </p>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center flex-shrink-0">
+                                <span class="text-2xl">👨‍🍳</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900">Chef Profesional</h3>
+                                <p class="text-gray-600">Belajar dari chef berpengalaman</p>
                             </div>
                         </div>
-
-                        <div
-                            class="absolute bottom-3 right-4 sm:bottom-4 sm:right-6 md:bottom-6 md:right-10 opacity-30 
-                                    text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-8xl 
-                                    font-black text-white italic uppercase">
-                            LAB TKJ
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center flex-shrink-0">
+                                <span class="text-2xl">🥐</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900">Pastry & Bakery</h3>
+                                <p class="text-gray-600">Kue, roti, dessert profesional</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center flex-shrink-0">
+                                <span class="text-2xl">🏨</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900">Magang Hotel</h3>
+                                <p class="text-gray-600">Praktik di hotel bintang 4-5</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+                        <img src="{{ asset('image/kuliner2.png') }}" alt="Siswa Kuliner" class="w-full h-auto">
+                        <div class="absolute inset-0 bg-gradient-to-t from-orange-900/50 to-transparent"></div>
+                    </div>
+                    
+                    <div class="absolute -bottom-6 -left-6 md:-left-12 bg-white rounded-2xl shadow-xl p-4 md:p-6 border border-gray-100 pulse-glow">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center">
+                                <span class="text-2xl">🍽️</span>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold text-gray-900">Rp 8-20 Jt</div>
+                                <div class="text-gray-500 text-sm">Gaji Chef Hotel</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Footer Component -->
+    <!-- Tab Section -->
+    <section class="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
+            <div class="text-center mb-12">
+                <span class="inline-block px-4 py-1.5 bg-orange-100 text-orange-700 text-sm font-semibold rounded-full mb-4">KURIKULUM & KARIR</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Apa yang Akan Kamu Pelajari?</h2>
+            </div>
+            
+            <div class="flex justify-center mb-12">
+                <div class="inline-flex bg-gray-100 rounded-xl p-1.5">
+                    <button @click="activeTab = 'materi'" 
+                            :class="activeTab === 'materi' ? 'bg-white shadow-lg text-orange-600' : 'text-gray-600 hover:text-gray-900'"
+                            class="px-6 py-3 rounded-lg font-semibold transition-all">
+                        🍳 Materi Pembelajaran
+                    </button>
+                    <button @click="activeTab = 'karir'" 
+                            :class="activeTab === 'karir' ? 'bg-white shadow-lg text-orange-600' : 'text-gray-600 hover:text-gray-900'"
+                            class="px-6 py-3 rounded-lg font-semibold transition-all">
+                        👨‍🍳 Peluang Karir
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Tab Content: Materi -->
+            <div x-show="activeTab === 'materi'" x-transition>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="skill-card bg-white rounded-2xl p-6 border border-gray-100 shadow-lg">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center mb-4">
+                            <span class="text-2xl">🔪</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Teknik Memasak</h3>
+                        <p class="text-gray-600">Knife skill, teknik dasar memasak: sautéing, grilling, roasting, braising.</p>
+                    </div>
+                    
+                    <div class="skill-card bg-white rounded-2xl p-6 border border-gray-100 shadow-lg">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center mb-4">
+                            <span class="text-2xl">🥐</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Pastry & Bakery</h3>
+                        <p class="text-gray-600">Pembuatan roti, kue, dessert, dan berbagai hidangan penutup.</p>
+                    </div>
+                    
+                    <div class="skill-card bg-white rounded-2xl p-6 border border-gray-100 shadow-lg">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mb-4">
+                            <span class="text-2xl">🌿</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Food Safety & Hygiene</h3>
+                        <p class="text-gray-600">Standar kebersihan makanan dan keamanan dapur profesional.</p>
+                    </div>
+                    
+                    <div class="skill-card bg-white rounded-2xl p-6 border border-gray-100 shadow-lg">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center mb-4">
+                            <span class="text-2xl">🍽️</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Food Presentation</h3>
+                        <p class="text-gray-600">Plating, garnishing, dan seni penyajian makanan menarik.</p>
+                    </div>
+                    
+                    <div class="skill-card bg-white rounded-2xl p-6 border border-gray-100 shadow-lg">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center mb-4">
+                            <span class="text-2xl">📊</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Kitchen Management</h3>
+                        <p class="text-gray-600">Manajemen dapur, food cost, dan operasional restoran.</p>
+                    </div>
+                    
+                    <div class="skill-card bg-white rounded-2xl p-6 border border-gray-100 shadow-lg">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center mb-4">
+                            <span class="text-2xl">🌍</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Internasional Cuisine</h3>
+                        <p class="text-gray-600">Masakan Indonesia, Asia, dan Western dengan standar internasional.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tab Content: Karir -->
+            <div x-show="activeTab === 'karir'" x-transition>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="skill-card bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl p-6 text-white">
+                        <div class="text-4xl mb-4">👨‍🍳</div>
+                        <h3 class="text-xl font-bold mb-2">Chef de Partie</h3>
+                        <p class="text-orange-100 text-sm">Chef di bagian khusus restoran</p>
+                    </div>
+                    <div class="skill-card bg-gradient-to-br from-amber-500 to-yellow-600 rounded-2xl p-6 text-white">
+                        <div class="text-4xl mb-4">🥐</div>
+                        <h3 class="text-xl font-bold mb-2">Pastry Chef</h3>
+                        <p class="text-amber-100 text-sm">Spesialis kue dan dessert</p>
+                    </div>
+                    <div class="skill-card bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl p-6 text-white">
+                        <div class="text-4xl mb-4">🏨</div>
+                        <h3 class="text-xl font-bold mb-2">Hotel Chef</h3>
+                        <p class="text-blue-100 text-sm">Chef di hotel bintang 4-5</p>
+                    </div>
+                    <div class="skill-card bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl p-6 text-white">
+                        <div class="text-4xl mb-4">🍕</div>
+                        <h3 class="text-xl font-bold mb-2">Restaurant Owner</h3>
+                        <p class="text-green-100 text-sm">Pemilik restoran sendiri</p>
+                    </div>
+                    <div class="skill-card bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl p-6 text-white">
+                        <div class="text-4xl mb-4">🍰</div>
+                        <h3 class="text-xl font-bold mb-2">Cake Shop Owner</h3>
+                        <p class="text-purple-100 text-sm">Usaha kue dan bakery</p>
+                    </div>
+                    <div class="skill-card bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl p-6 text-white">
+                        <div class="text-4xl mb-4">📺</div>
+                        <h3 class="text-xl font-bold mb-2">Food Blogger</h3>
+                        <p class="text-pink-100 text-sm">Content creator kuliner</p>
+                    </div>
+                    <div class="skill-card bg-gradient-to-br from-indigo-500 to-blue-600 rounded-2xl p-6 text-white">
+                        <div class="text-4xl mb-4">✈️</div>
+                        <h3 class="text-xl font-bold mb-2">Cruise Ship Chef</h3>
+                        <p class="text-indigo-100 text-sm">Chef di kapal pesiar</p>
+                    </div>
+                    <div class="skill-card bg-gradient-to-br from-slate-600 to-slate-800 rounded-2xl p-6 text-white">
+                        <div class="text-4xl mb-4">🍴</div>
+                        <h3 class="text-xl font-bold mb-2">Catering Service</h3>
+                        <p class="text-slate-300 text-sm">Usaha catering premium</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="relative py-20 overflow-hidden bg-gradient-to-br from-orange-600 via-amber-600 to-orange-700">
+        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\"><circle cx=\"40\" cy=\"40\" r=\"2\" fill=\"white\"/></svg>'); background-size: 40px 40px;"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6 text-center">
+            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Siap Menjadi Chef Profesional?</h2>
+            <p class="text-xl text-orange-100 mb-10 max-w-2xl mx-auto">
+                Bergabunglah dengan program Kuliner SMK Metland dan wujudkan karirmu di dapur profesional!
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/ppdb" class="inline-flex items-center justify-center gap-2 px-10 py-5 bg-white text-orange-700 font-bold text-lg rounded-xl hover:bg-gray-100 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1">
+                    Daftar PPDB Sekarang
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+                <a href="/prokeh" class="inline-flex items-center justify-center gap-2 px-10 py-5 bg-transparent border-2 border-white text-white font-semibold text-lg rounded-xl hover:bg-white/10 transition-all">
+                    ← Lihat Jurusan Lain
+                </a>
+            </div>
+        </div>
+    </section>
+
     @include('components.footer')
 </body>
-
 </html>
