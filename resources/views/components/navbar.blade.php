@@ -51,7 +51,7 @@
                 <a href="/" class="hover:text-blue-400 transition-colors uppercase {{ request()->is('/') ? 'text-blue-400' : '' }}">Beranda</a>
                 <a href="/about" class="hover:text-blue-400 transition-colors uppercase {{ request()->is('about') ? 'text-blue-400' : '' }}">Tentang Sekolah</a>
                 <a href="/prokeh" class="hover:text-blue-400 transition-colors uppercase {{ request()->is('prokeh*') ? 'text-blue-400' : '' }}">Program Keahlian</a>
-                <a href="/curriculum" class="hover:text-blue-400 transition-colors uppercase {{ request()->is('curriculum*') ? 'text-blue-400' : '' }}">Kurikulum</a>
+                <a href="/kurikulum" class="hover:text-blue-400 transition-colors uppercase {{ request()->is('kurikulum*') ? 'text-blue-400' : '' }}">Kurikulum</a>
                 <a href="/news" class="hover:text-blue-400 transition-colors uppercase {{ request()->is('news*') ? 'text-blue-400' : '' }}">Berita Sekolah</a>
             </div>
 
