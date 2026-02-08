@@ -323,7 +323,7 @@
             <div class="max-w-[1400px] mx-auto px-6 pt-32 pb-12 h-full flex flex-col">
                 <!-- Header in Menu -->
                 <div class="flex items-center gap-4 mb-20 fade-in-up delay-100">
-                    <img src="{{ $logoUrl }}" class="w-16 h-16 object-contain brightness-0 invert">
+                    <img src="{{ $logoUrl }}" class="w-16 h-16 object-contain">
                     <h2 class="text-3xl font-bold text-white tracking-widest uppercase">METLAND SCHOOL</h2>
                 </div>
 
