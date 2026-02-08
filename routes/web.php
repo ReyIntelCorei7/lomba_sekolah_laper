@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PPDBController;
+use App\Http\Controllers\EskulController;
 use App\Http\Controllers\Admin\Auth\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\WebsiteSettingController;
+use App\Http\Controllers\Admin\ExtracurricularController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -62,6 +64,15 @@ Route::get('/login', [LoginController::class, 'create'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
+// ============================================================================
+// EXTRACURRICULAR (ESKUL) ROUTES
+// ============================================================================
+
+Route::prefix('eskul')->name('eskul.')->group(function () {
+    Route::get('/', [EskulController::class, 'index'])->name('index');
+    Route::get('/{slug}', [EskulController::class, 'show'])->name('show');
+});
+
 // 
 // PPDB ROUTES (Penerimaan Peserta Didik Baru)
 // 
@@ -116,6 +127,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Website Settings
         Route::get('settings', [WebsiteSettingController::class, 'index'])->name('settings.index');
         Route::post('settings', [WebsiteSettingController::class, 'update'])->name('settings.update');
+
+        // Extracurriculars Management
+        Route::resource('extracurriculars', ExtracurricularController::class);
+        Route::patch('extracurriculars/{extracurricular}/toggle-active', [ExtracurricularController::class, 'toggleActive'])
+            ->name('extracurriculars.toggle-active');
     });
 });
 
