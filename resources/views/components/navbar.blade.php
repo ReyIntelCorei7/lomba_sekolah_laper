@@ -21,14 +21,14 @@
         headerVisible = (window.pageYOffset > window.innerHeight * 0.7);
         @endif
     "
-    class="fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b border-transparent flex items-center"
+    class="fixed top-0 left-0 w-full z-50 transition-all duration-1000 border-b border-transparent flex items-center"
     :class="[
-        scrolled || {{ $solidBackground ? 'true' : 'false' }} ? 'bg-[#1a1a1a] shadow-lg border-white/10 h-16' : 'bg-transparent h-20',
+        scrolled || {{ $solidBackground ? 'true' : 'false' }} ? 'bg-[#1a1a1a] shadow-lg border-white/10 h-16' : 'bg-transparent h-24',
         {{ $showOnScroll ? 'headerVisible' : 'true' }} ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
     ]">
 
     <!-- Main Header Content -->
-    <div class="max-w-[1400px] w-full mx-auto px-6 h-20 flex items-center justify-between gap-16 relative z-50"
+    <div class="max-w-[1400px] mx-auto h-20 flex items-center justify-between gap-16 relative z-50"
         :class="scrolled || {{ $solidBackground ? 'true' : 'false' }} ? 'h-16' : 'h-24'">
 
         <!-- Logo area -->
@@ -51,7 +51,7 @@
                 <a href="/" class="hover:text-blue-400 transition-colors uppercase {{ request()->is('/') ? 'text-blue-400' : '' }}">Beranda</a>
                 <a href="/about" class="hover:text-blue-400 transition-colors uppercase {{ request()->is('about') ? 'text-blue-400' : '' }}">Tentang Sekolah</a>
                 <a href="/prokeh" class="hover:text-blue-400 transition-colors uppercase {{ request()->is('prokeh*') ? 'text-blue-400' : '' }}">Program Keahlian</a>
-                <a href="/kurikulum" class="hover:text-blue-400 transition-colors uppercase {{ request()->is('kurikulum*') ? 'text-blue-400' : '' }}">Kurikulum</a>
+                <a href="/curriculum" class="hover:text-blue-400 transition-colors uppercase {{ request()->is('curriculum*') ? 'text-blue-400' : '' }}">Kurikulum</a>
                 <a href="/news" class="hover:text-blue-400 transition-colors uppercase {{ request()->is('news*') ? 'text-blue-400' : '' }}">Berita Sekolah</a>
             </div>
 
@@ -106,7 +106,7 @@
             <a href="/" class="hover:text-blue-400 {{ request()->is('/') ? 'text-blue-400' : '' }}">Beranda</a>
             <a href="/about" class="hover:text-blue-400 {{ request()->is('about') ? 'text-blue-400' : '' }}">Tentang Sekolah</a>
             <a href="/prokeh" class="hover:text-blue-400 {{ request()->is('prokeh*') ? 'text-blue-400' : '' }}">Program Keahlian</a>
-            <a href="/kurikulum" class="hover:text-blue-400 {{ request()->is('kurikulum') ? 'text-blue-400' : '' }}">Kurikulum</a>
+            <a href="/curriculum" class="hover:text-blue-400 {{ request()->is('curriculum') ? 'text-blue-400' : '' }}">Kurikulum</a>
             <a href="/news" class="hover:text-blue-400 {{ request()->is('news*') ? 'text-blue-400' : '' }}">Berita Sekolah</a>
         </div>
     </div>
