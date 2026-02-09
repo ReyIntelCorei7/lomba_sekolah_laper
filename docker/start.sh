@@ -15,5 +15,5 @@ php artisan cache:clear
 
 # Start PHP built-in server directly (NOT artisan serve)
 # This avoids the ServeCommand.php string/int type error
-cd /app/public
-exec php -S 0.0.0.0:8080 ../artisan serve-static.php 2>/dev/null || exec php -S 0.0.0.0:8080
+cd /app
+exec php -S 0.0.0.0:8080 -t public server.php

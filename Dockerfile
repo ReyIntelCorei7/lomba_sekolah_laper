@@ -57,10 +57,6 @@ RUN composer dump-autoload --optimize
 # Build frontend assets
 RUN npm run build
 
-# Convert start script to Unix line endings and make executable
-RUN dos2unix /app/docker/start.sh 2>/dev/null || sed -i 's/\r$//' /app/docker/start.sh
-RUN chmod +x /app/docker/start.sh
-
 # Expose port
 EXPOSE 8080
 
@@ -68,4 +64,5 @@ EXPOSE 8080
 ENV PORT=8080
 
 # Start using PHP built-in server (NOT artisan serve)
+# Using correct path: server.php is in root, serving from public directory
 CMD ["bash", "-c", "php artisan migrate --force && php artisan storage:link --force 2>/dev/null; php -S 0.0.0.0:8080 -t public server.php"]
