@@ -24,11 +24,25 @@
                 toggle() {
                     this.current = this.current === 'id' ? 'en' : 'id';
                     localStorage.setItem('lang', this.current);
+                    // Dispatch event for auto-translation system
+                    window.dispatchEvent(new CustomEvent('languageChanged', { 
+                        detail: { lang: this.current } 
+                    }));
+                    // Also trigger applyTranslations directly for immediate update
+                    if (window.applyTranslations) {
+                        window.applyTranslations(this.current);
+                    }
                 },
                 
                 set(lang) {
                     this.current = lang;
                     localStorage.setItem('lang', this.current);
+                    window.dispatchEvent(new CustomEvent('languageChanged', { 
+                        detail: { lang: this.current } 
+                    }));
+                    if (window.applyTranslations) {
+                        window.applyTranslations(this.current);
+                    }
                 },
                 
                 t(key) {
@@ -515,11 +529,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <!-- Section Header -->
             <div class="text-center mb-10 lg:mb-16">
-                <span class="inline-block px-4 py-1.5 bg-[#1E2188]/10 text-[#1E2188] text-sm font-semibold rounded-full mb-4">
+                <span class="inline-block px-4 py-1.5 bg-[#1E2188]/10 text-[#1E2188] text-sm font-semibold rounded-full mb-4" x-text="$store.lang.t('principal_badge')">
                     Pesan Kepala Sekolah
                 </span>
                 <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">
-                    Sambutan <span class="text-[#1E2188]">Kepala Sekolah</span>
+                    <span x-text="$store.lang.t('principal_title')">Sambutan</span> <span class="text-[#1E2188]" x-text="$store.lang.t('principal_kepsek')">Kepala Sekolah</span>
                 </h2>
             </div>
             
@@ -545,7 +559,7 @@
                             <!-- Name Card -->
                             <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white px-6 py-3 rounded-xl shadow-lg border border-gray-100 text-center min-w-[200px]">
                                 <h3 class="font-bold text-gray-900 text-lg">{{ $settings['principal_name'] ?? 'Dr. Darmawan Sunarja, MM.Par, Drs.' }}</h3>
-                                <p class="text-[#1E2188] text-sm font-medium">Kepala Sekolah</p>
+                                <p class="text-[#1E2188] text-sm font-medium" x-text="$store.lang.t('principal_kepsek')">Kepala Sekolah</p>
                             </div>
                         </div>
                     </div>
@@ -563,34 +577,26 @@
                         
                         <!-- Welcome Message -->
                         <div class="pt-6 lg:pt-4">
-                            <p class="text-gray-600 leading-relaxed text-sm sm:text-base font-semibold mb-6">Assalamu’alaikum warahmatullahi wabarakatuh.
-                               Salam sejahtera untuk kita semua.</p>
+                            <p class="text-gray-600 leading-relaxed text-sm sm:text-base font-semibold mb-6" x-text="$store.lang.t('principal_greeting')">Assalamu'alaikum warahmatullahi wabarakatuh. Salam sejahtera untuk kita semua.</p>
                             
                             <div class="space-y-4 text-gray-600 leading-relaxed text-sm sm:text-base">
-                                <p>
-                                    Puji syukur kita panjatkan ke hadirat Allah SWT atas limpahan rahmat dan karunia-Nya, 
-                                    sehingga SMK Metland Cileungsi terus berkembang menjadi sekolah vokasi yang mampu beradaptasi dan menjawab tantangan zaman. 
-                                    Kehadiran website resmi ini merupakan wujud komitmen kami dalam menghadirkan layanan informasi yang cepat, transparan, 
-                                    dan mudah diakses oleh seluruh peserta didik, orang tua, mitra industri, serta masyarakat luas.
+                                <p x-text="$store.lang.t('principal_message_1')">
+                                    Puji syukur kita panjatkan ke hadirat Allah SWT atas limpahan rahmat dan karunia-Nya...
                                 </p>
-                                <p>
-                                    Di era digital yang terus berkembang, transformasi digital menjadi kunci keberhasilan institusi pendidikan. 
-                                    SMK Metland Cileungsi menyadari pentingnya adaptasi terhadap perubahan ini. Oleh karena itu, kami terus berinovasi dalam 
-                                    pengembangan kurikulum, peningkatan kompetensi guru, dan pemanfaatan teknologi dalam proses pembelajaran. 
-                                    Fasilitas modern, laboratorium yang representatif, serta program praktik kerja industri yang terintegrasi 
-                                    dengan dunia usaha dan dunia industri (DUDI) menjadi nilai tambah yang kami tawarkan untuk mempersiapkan lulusan yang 
-                                    siap kerja dan berdaya saing global.
+                                <p x-text="$store.lang.t('principal_message_2')">
+                                    Di era digital yang terus berkembang...
                                 </p>
-                                <p>
-                                    Akhir kata, kami mengajak seluruh siswa, orang tua, guru, dan mitra untuk terus bersinergi dalam membangun masa depan pendidikan vokasi yang lebih baik. Semoga Allah SWT senantiasa memberikan kemudahan dan keberkahan bagi setiap langkah kita.
+                                <p x-text="$store.lang.t('principal_message_3')">
+                                    Akhir kata, kami mengajak seluruh siswa...
+                                </p>
                             </div>
                             
                             <!-- Signature -->
                             <div class="mt-6 pt-6 border-t border-gray-100">
-                                <p class="text-[#1E2188] font-semibold italic text-lg">Wassalamu'alaikum Wr. Wb.</p>
+                                <p class="text-[#1E2188] font-semibold italic text-lg" x-text="$store.lang.t('principal_closing')">Wassalamu'alaikum Wr. Wb.</p>
                                 <div class="mt-3 flex items-center gap-3">
                                     <div class="w-12 h-1 bg-[#1E2188] rounded-full"></div>
-                                    <span class="text-gray-500 text-sm">Kepala Sekolah SMK Metland</span>
+                                    <span class="text-gray-500 text-sm"><span x-text="$store.lang.t('principal_kepsek')">Kepala Sekolah</span> SMK Metland</span>
                                 </div>
                             </div>
                         </div>
@@ -610,7 +616,7 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between mb-12 gap-6">
                 <div>
-                    <h2 class="text-4xl font-bold text-blue-500 mt-2">Infografis Sekolah</h2>
+                    <h2 class="text-4xl font-bold text-blue-500 mt-2" x-text="$store.lang.t('infografis_title')">Infografis Sekolah</h2>
                 </div>
             </div>
     </section>
@@ -631,7 +637,7 @@
                     <h3 class="text-5xl font-bold text-gray-900 mb-2">
                         <span x-text="stats.students">0</span>
                     </h3>
-                    <p class="text-gray-500 font-medium">Siswa Aktif</p>
+                    <p class="text-gray-500 font-medium" x-text="$store.lang.t('stats_label_students')">Siswa Aktif</p>
                 </div>
 
                 <!-- Stat Card 2 -->
@@ -644,7 +650,7 @@
                     <h3 class="text-5xl font-bold text-gray-900 mb-2">
                         <span x-text="stats.teachers">0</span>
                     </h3>
-                    <p class="text-gray-500 font-medium">Guru Profesional</p>
+                    <p class="text-gray-500 font-medium" x-text="$store.lang.t('stats_teachers')">Guru Profesional</p>
                 </div>
 
                 <!-- Stat Card 3 -->
@@ -657,7 +663,7 @@
                     <h3 class="text-5xl font-bold text-gray-900 mb-2">
                         <span x-text="stats.staff">0</span>
                     </h3>
-                    <p class="text-gray-500 font-medium">Tenaga Kependidikan</p>
+                    <p class="text-gray-500 font-medium" x-text="$store.lang.t('stats_label_teachers')">Tenaga Kependidikan</p>
                 </div>
             </div>
         </div>
@@ -667,8 +673,8 @@
     <section id="jurusan" class="py-20" style="background-color: {{ $settings['program_bg_color'] ?? '#1E2188' }};">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-12">
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">{{ $settings['program_title'] ?? 'Program Keahlian' }}</h1>
-                <p class="text-gray-300 max-w-xl mx-auto">{{ $settings['program_description'] ?? 'Pilih jurusan sesuai minat dan bakatmu untuk masa depan yang lebih cerah' }}</p>
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4" x-text="$store.lang.t('program_title')">{{ $settings['program_title'] ?? 'Program Keahlian' }}</h1>
+                <p class="text-gray-300 max-w-xl mx-auto" x-text="$store.lang.t('program_subtitle')">{{ $settings['program_description'] ?? 'Pilih jurusan sesuai minat dan bakatmu untuk masa depan yang lebih cerah' }}</p>
             </div>
 
             <div x-data="{
@@ -723,7 +729,7 @@
                         <!-- TAP INDICATOR ON MOBILE -->
                         <div x-show="isMobile && active !== item.id" class="absolute bottom-2 left-1/2 -translate-x-1/2 text-white/60 text-xs flex items-center gap-1">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
-                            <span>Tap</span>
+                            <span x-text="$store.lang.t('label_tap')">Tap</span>
                         </div>
                     </div>
                 </template>
@@ -737,11 +743,11 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between mb-12 gap-6">
                 <div>
-                    <span class="text-blue-300 font-bold tracking-wider uppercase text-sm">Latest Updates</span>
-                    <h2 class="text-4xl font-bold text-blue-500 mt-2">{{ $settings['news_title'] ?? 'Berita Sekolah' }}</h2>
+                    <span class="text-blue-300 font-bold tracking-wider uppercase text-sm" x-text="$store.lang.t('news_latest_updates')">Latest Updates</span>
+                    <h2 class="text-4xl font-bold text-blue-500 mt-2" x-text="$store.lang.t('section_news_title')">{{ $settings['news_title'] ?? 'Berita Sekolah' }}</h2>
                 </div>
                 <a href="/news" class="hidden md:inline-flex items-center px-6 py-3 rounded-full bg-blue/10 backdrop-blur-sm border border-blue/20 text-blue-500 font-medium hover:bg-blue/20 hover:shadow-md transition-all">
-                    Lihat Semua Berita
+                    <span x-text="$store.lang.t('news_view_all')">Lihat Semua Berita</span>
                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                     </svg>
@@ -780,7 +786,7 @@
                             {{ $news->excerpt ?? Str::limit(strip_tags($news->content), 100) }}
                         </p>
                         <a href="{{ route('news.show', $news->slug) }}" class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700">
-                            Baca Selengkapnya
+                            <span x-text="$store.lang.t('news_read_more')">Baca Selengkapnya</span>
                             <svg class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                             </svg>
@@ -788,7 +794,7 @@
                     </div>
                 </article>
                 @empty
-                <div class="col-span-full text-center py-12 text-white/60">
+                <div class="col-span-full text-center py-12 text-white/60" x-text="$store.lang.t('news_empty')">
                     Belum ada berita terbaru.
                 </div>
                 @endforelse
@@ -796,7 +802,7 @@
             
             <div class="mt-8 text-center md:hidden">
                 <a href="/news" class="inline-flex items-center px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium hover:bg-white/20">
-                    Lihat Semua Berita
+                    <span x-text="$store.lang.t('news_view_all')">Lihat Semua Berita</span>
                 </a>
             </div>
         </div>
@@ -808,7 +814,7 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between gap-6">
                 <div>
-                    <h2 class="text-4xl font-bold text-blue-500 mt-2">Kerja Sama Industri Dan Perguran Tinggi</h2>
+                    <h2 class="text-4xl font-bold text-blue-500 mt-2" x-text="$store.lang.t('industry_title')">Kerja Sama Industri Dan Perguruan Tinggi</h2>
                 </div>
             </div>
     </section>
