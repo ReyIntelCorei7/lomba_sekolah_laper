@@ -20,9 +20,8 @@ use Illuminate\Support\Facades\Route;
 
 
 
-// ============================================================================
-// PUBLIC ROUTES
-// ============================================================================
+
+// USER ROUTES
 
 // Homepage 
 Route::get('/', function () {
@@ -36,7 +35,7 @@ Route::get('/', function () {
     return view('layouts.app', compact('settings', 'latestNews', 'programs'));
 })->name('home');
 
-// News (Public)
+// News 
 Route::prefix('news')->name('news.')->group(function () {
     Route::get('/', [NewsController::class, 'index'])->name('index');
     Route::get('/load-more', [NewsController::class, 'loadMoreNews'])->name('load-more');
@@ -49,50 +48,53 @@ Route::get('/news', [NewsController::class, 'showNewsPage'])->name('news.page');
 Route::get('/about', fn() => view('aboutschool.index'))->name('about');
 Route::get('/kurikulum', fn() => view('kurikulum.app'))->name('kurikulum');
 
-// ============================================================================
+
 // PROGRAM KEAHLIAN ROUTES
-// ============================================================================
+
 
 Route::prefix('prokeh')->name('prokeh.')->group(function () {
-    Route::get('/', [ProgramKeahlianController::class, 'index'])->name('index');
-    Route::get('/{slug}', [ProgramKeahlianController::class, 'show'])->name('show');
+    Route::get('/', fn() => view('program_keahlian.index'))->name('index');
+    Route::get('/akuntansi', fn() => view('program_keahlian.akuntansi'))->name('akuntansi');
+    Route::get('/dkv', fn() => view('program_keahlian.dkv'))->name('dkv');
+    Route::get('/hotel', fn() => view('program_keahlian.hotel'))->name('hotel');
+    Route::get('/kuliner', fn() => view('program_keahlian.kuliner'))->name('kuliner');
+    Route::get('/pplg', fn() => view('program_keahlian.pplg'))->name('pplg');
 });
 
-//
+
 // AUTH ROUTES
-// 
+
 
 Route::get('/login', [LoginController::class, 'create'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
-// ============================================================================
-// EXTRACURRICULAR (ESKUL) ROUTES
-// ============================================================================
+
+//  ESKUL ROUTES
+
 
 Route::prefix('eskul')->name('eskul.')->group(function () {
     Route::get('/', [EskulController::class, 'index'])->name('index');
     Route::get('/{slug}', [EskulController::class, 'show'])->name('show');
 });
 
-// ============================================================================
-// ORGANIZATION (ORGANISASI) ROUTES
-// ============================================================================
+
+// ORGANISASI ROUTES
+
 
 Route::prefix('organisasi')->name('organisasi.')->group(function () {
     Route::get('/', [OrganisasiController::class, 'index'])->name('index');
     Route::get('/{slug}', [OrganisasiController::class, 'show'])->name('show');
 });
 
-// ============================================================================
 // ALUMNI ROUTES
-// ============================================================================
+
 
 Route::get('/alumni', [AlumniPublicController::class, 'index'])->name('alumni.index');
 
-// 
-// PPDB ROUTES (Penerimaan Peserta Didik Baru)
-// 
+
+// PPDB ROUTES
+
 
 Route::prefix('ppdb')->name('ppdb.')->group(function () {
     Route::get('/', [PPDBController::class, 'index'])->name('index');
@@ -111,34 +113,34 @@ Route::get('/smile', function () {
 });
 
 
-// ============================================================================
+
 // ADMIN ROUTES
-// ============================================================================
+
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
-    // Public admin routes (login page)
+    // Login
     Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AdminAuthController::class, 'login'])->name('login.post');
 
-    // Protected admin routes (requires authentication)
+    // Logout
     Route::middleware(['admin.auth'])->group(function () {
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
         // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        // Students Management
+        // Students 
         Route::resource('students', StudentController::class)->except(['create', 'store']);
         Route::patch('students/{student}/status', [StudentController::class, 'updateStatus'])
             ->name('students.update-status');
         Route::get('students/export', [StudentController::class, 'export'])
             ->name('students.export');
 
-        // Programs Management
+        // Programs 
         Route::resource('programs', ProgramController::class);
 
-        // News Management
+        // News 
         Route::get('news', [NewsController::class, 'adminIndex'])->name('news.index');
         Route::get('news/create', [NewsController::class, 'create'])->name('news.create');
         Route::post('news', [NewsController::class, 'store'])->name('news.store');
@@ -153,22 +155,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('settings', [WebsiteSettingController::class, 'index'])->name('settings.index');
         Route::post('settings', [WebsiteSettingController::class, 'update'])->name('settings.update');
 
-        // Extracurriculars Management
+        // Extracurriculars 
         Route::resource('extracurriculars', ExtracurricularController::class);
         Route::patch('extracurriculars/{extracurricular}/toggle-active', [ExtracurricularController::class, 'toggleActive'])
             ->name('extracurriculars.toggle-active');
 
-        // Organizations Management
+        // Organizations 
         Route::resource('organizations', OrganizationController::class);
         Route::patch('organizations/{organization}/toggle-active', [OrganizationController::class, 'toggleActive'])
             ->name('organizations.toggle-active');
 
-        // Alumni Management
+        // Alumni 
         Route::resource('alumni', AlumniController::class);
         Route::patch('alumni/{alumni}/toggle-active', [AlumniController::class, 'toggleActive'])
             ->name('alumni.toggle-active');
 
-        // Program Keahlian Management
+        // Program Keahlian 
         Route::resource('program-keahlian', AdminProgramKeahlianController::class);
         Route::post('program-keahlian/{program_keahlian}/skills', [AdminProgramKeahlianController::class, 'storeSkill'])
             ->name('program-keahlian.skills.store');
@@ -185,8 +187,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 
-// ============================================================================
-// FALLBACK ROUTE (404)
-// ============================================================================
+// Not Found Page
 
 Route::fallback(fn() => view('errors.404'));
