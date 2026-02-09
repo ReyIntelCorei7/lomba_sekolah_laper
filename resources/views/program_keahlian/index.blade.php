@@ -156,12 +156,8 @@
                         <div class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider">Program</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-2xl md:text-3xl font-bold text-white">100+</div>
+                        <div class="text-2xl md:text-3xl font-bold text-white">20+</div>
                         <div class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider">Mitra Industri</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-2xl md:text-3xl font-bold text-white">95%</div>
-                        <div class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider">Tingkat Kerja</div>
                     </div>
                 </div>
             </div>
