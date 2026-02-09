@@ -13,7 +13,7 @@ class WebsiteSettingController extends Controller
     {
         // Get distinct groups
         $groups = WebsiteSetting::distinct()->pluck('group')->toArray();
-        
+
         // Build settings array grouped by group name
         $settings = [];
         foreach ($groups as $group) {
@@ -21,7 +21,7 @@ class WebsiteSettingController extends Controller
                 ->orderBy('key')
                 ->get();
         }
-        
+
         return view('admin.settings.index', compact('settings'));
     }
 
@@ -32,26 +32,26 @@ class WebsiteSettingController extends Controller
         // Handle regular settings first
         foreach ($settings as $key => $value) {
             $setting = WebsiteSetting::where('key', $key)->first();
-            
+
             if ($setting && $setting->type !== 'image') {
                 $setting->update(['value' => $value]);
             }
         }
 
-        // Handle image uploads separately - check if settings array has files
+        // Handle image uploads separately 
         if ($request->hasFile('settings')) {
             $files = $request->file('settings');
-            
+
             foreach ($files as $key => $file) {
                 if ($file && $file->isValid()) {
                     $setting = WebsiteSetting::where('key', $key)->where('type', 'image')->first();
-                    
+
                     if ($setting) {
                         // Delete old image if it exists and is in storage
                         if ($setting->value && str_starts_with($setting->value, 'settings/') && Storage::disk('public')->exists($setting->value)) {
                             Storage::disk('public')->delete($setting->value);
                         }
-                        
+
                         // Store new image
                         $newImagePath = $file->store('settings', 'public');
                         $setting->update(['value' => $newImagePath]);

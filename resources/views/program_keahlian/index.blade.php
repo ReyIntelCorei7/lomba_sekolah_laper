@@ -104,7 +104,7 @@
         }
 
         .animated-gradient {
-            background: linear-gradient(135deg, #60a5fa, #a78bfa, #60a5fa, #34d399);
+            background: linear-gradient(135deg, #60a5fa, #3b82f6, #60a5fa);
             background-size: 300% 300%;
             animation: gradient-shift 6s ease infinite;
             -webkit-background-clip: text;
@@ -209,17 +209,17 @@
                 <!-- Akuntansi -->
                 <a href="{{ route('prokeh.akuntansi') }}" class="program-card group">
                     <div class="program-card-inner glow relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-full">
-                        <div class="h-2 bg-gradient-to-r from-emerald-500 to-teal-600"></div>
+                        <div class="h-2 bg-gradient-to-r from-[#1E2188] to-blue-600"></div>
                         <div class="pt-8 pb-4 px-6">
-                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/30 text-3xl">
+                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-[#1E2188] to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/30 text-3xl">
                                 💰
                             </div>
                         </div>
                         <div class="px-6 pb-8 text-center">
-                            <div class="inline-block px-3 py-1 bg-emerald-100/50 text-emerald-600 text-xs font-bold rounded-full mb-3">AKL</div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-600 transition-colors">Akuntansi & Keuangan Lembaga</h3>
+                            <div class="inline-block px-3 py-1 bg-blue-100/50 text-blue-700 text-xs font-bold rounded-full mb-3">AKL</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1E2188] transition-colors">Akuntansi & Keuangan Lembaga</h3>
                             <p class="text-gray-600 text-sm mb-4 line-clamp-3">Menjadi ahli keuangan profesional dengan pemahaman akuntansi dan manajemen keuangan yang solid.</p>
-                            <div class="flex items-center justify-center gap-1 text-emerald-600 font-semibold text-sm">
+                            <div class="flex items-center justify-center gap-1 text-[#1E2188] font-semibold text-sm">
                                 Lihat Detail
                                 <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -232,17 +232,17 @@
                 <!-- DKV -->
                 <a href="{{ route('prokeh.dkv') }}" class="program-card group">
                     <div class="program-card-inner glow relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-full">
-                        <div class="h-2 bg-gradient-to-r from-purple-500 to-pink-600"></div>
+                        <div class="h-2 bg-gradient-to-r from-blue-500 to-indigo-600"></div>
                         <div class="pt-8 pb-4 px-6">
-                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg shadow-purple-500/30 text-3xl">
+                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/30 text-3xl">
                                 🎨
                             </div>
                         </div>
                         <div class="px-6 pb-8 text-center">
-                            <div class="inline-block px-3 py-1 bg-purple-100/50 text-purple-600 text-xs font-bold rounded-full mb-3">DKV</div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">Desain Komunikasi Visual</h3>
+                            <div class="inline-block px-3 py-1 bg-blue-100/50 text-blue-700 text-xs font-bold rounded-full mb-3">DKV</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1E2188] transition-colors">Desain Komunikasi Visual</h3>
                             <p class="text-gray-600 text-sm mb-4 line-clamp-3">Ekspresikan kreativitasmu melalui desain grafis, multimedia, dan seni visual yang memukau.</p>
-                            <div class="flex items-center justify-center gap-1 text-purple-600 font-semibold text-sm">
+                            <div class="flex items-center justify-center gap-1 text-[#1E2188] font-semibold text-sm">
                                 Lihat Detail
                                 <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -255,17 +255,17 @@
                 <!-- Perhotelan -->
                 <a href="{{ route('prokeh.hotel') }}" class="program-card group">
                     <div class="program-card-inner glow relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-full">
-                        <div class="h-2 bg-gradient-to-r from-amber-500 to-orange-600"></div>
+                        <div class="h-2 bg-gradient-to-r from-indigo-500 to-blue-700"></div>
                         <div class="pt-8 pb-4 px-6">
-                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/30 text-3xl">
+                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-indigo-500 to-blue-700 flex items-center justify-center shadow-lg shadow-indigo-500/30 text-3xl">
                                 🏨
                             </div>
                         </div>
                         <div class="px-6 pb-8 text-center">
-                            <div class="inline-block px-3 py-1 bg-amber-100/50 text-amber-600 text-xs font-bold rounded-full mb-3">HOTEL</div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition-colors">Perhotelan</h3>
+                            <div class="inline-block px-3 py-1 bg-blue-100/50 text-blue-700 text-xs font-bold rounded-full mb-3">HOTEL</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1E2188] transition-colors">Perhotelan</h3>
                             <p class="text-gray-600 text-sm mb-4 line-clamp-3">Kuasai industri hospitality dengan standar pelayanan internasional dan manajemen hotel.</p>
-                            <div class="flex items-center justify-center gap-1 text-amber-600 font-semibold text-sm">
+                            <div class="flex items-center justify-center gap-1 text-[#1E2188] font-semibold text-sm">
                                 Lihat Detail
                                 <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -278,17 +278,17 @@
                 <!-- Kuliner -->
                 <a href="{{ route('prokeh.kuliner') }}" class="program-card group">
                     <div class="program-card-inner glow relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-full">
-                        <div class="h-2 bg-gradient-to-r from-red-500 to-rose-600"></div>
+                        <div class="h-2 bg-gradient-to-r from-blue-600 to-[#1E2188]"></div>
                         <div class="pt-8 pb-4 px-6">
-                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center shadow-lg shadow-red-500/30 text-3xl">
+                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-blue-600 to-[#1E2188] flex items-center justify-center shadow-lg shadow-blue-500/30 text-3xl">
                                 👨‍🍳
                             </div>
                         </div>
                         <div class="px-6 pb-8 text-center">
-                            <div class="inline-block px-3 py-1 bg-red-100/50 text-red-600 text-xs font-bold rounded-full mb-3">KULINER</div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors">Kuliner</h3>
+                            <div class="inline-block px-3 py-1 bg-blue-100/50 text-blue-700 text-xs font-bold rounded-full mb-3">KULINER</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1E2188] transition-colors">Kuliner</h3>
                             <p class="text-gray-600 text-sm mb-4 line-clamp-3">Jadilah chef profesional dengan menguasai seni memasak dan manajemen dapur modern.</p>
-                            <div class="flex items-center justify-center gap-1 text-red-600 font-semibold text-sm">
+                            <div class="flex items-center justify-center gap-1 text-[#1E2188] font-semibold text-sm">
                                 Lihat Detail
                                 <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -301,17 +301,17 @@
                 <!-- PPLG -->
                 <a href="{{ route('prokeh.pplg') }}" class="program-card group">
                     <div class="program-card-inner glow relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-full">
-                        <div class="h-2 bg-gradient-to-r from-indigo-500 to-blue-600"></div>
+                        <div class="h-2 bg-gradient-to-r from-indigo-600 to-blue-600"></div>
                         <div class="pt-8 pb-4 px-6">
-                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/30 text-3xl">
+                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-indigo-600 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/30 text-3xl">
                                 💻
                             </div>
                         </div>
                         <div class="px-6 pb-8 text-center">
-                            <div class="inline-block px-3 py-1 bg-indigo-100/50 text-indigo-600 text-xs font-bold rounded-full mb-3">PPLG</div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors">Pengembangan Perangkat Lunak & Gim</h3>
+                            <div class="inline-block px-3 py-1 bg-blue-100/50 text-blue-700 text-xs font-bold rounded-full mb-3">PPLG</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1E2188] transition-colors">Pengembangan Perangkat Lunak & Gim</h3>
                             <p class="text-gray-600 text-sm mb-4 line-clamp-3">Kuasai pemrograman dan pengembangan software untuk menjadi developer profesional.</p>
-                            <div class="flex items-center justify-center gap-1 text-indigo-600 font-semibold text-sm">
+                            <div class="flex items-center justify-center gap-1 text-[#1E2188] font-semibold text-sm">
                                 Lihat Detail
                                 <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
