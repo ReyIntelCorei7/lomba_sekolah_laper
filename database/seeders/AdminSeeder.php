@@ -13,28 +13,34 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        Admin::create([
-            'name' => 'Super Admin',
-            'email' => 'admin@smkmetland.sch.id',
-            'password' => Hash::make('admin123'),
-            'role' => 'super_admin',
-            'is_active' => true,
-        ]);
+        Admin::updateOrCreate(
+            ['email' => 'admin@smkmetland.sch.id'],
+            [
+                'name' => 'Super Admin',
+                'password' => Hash::make('admin123'),
+                'role' => 'super_admin',
+                'is_active' => true,
+            ]
+        );
 
-        Admin::create([
-            'name' => 'Admin PPDB',
-            'email' => 'ppdb@smkmetland.sch.id',
-            'password' => Hash::make('ppdb123'),
-            'role' => 'admin',
-            'is_active' => true,
-        ]);
+        Admin::updateOrCreate(
+            ['email' => 'ppdb@smkmetland.sch.id'],
+            [
+                'name' => 'Admin PPDB',
+                'password' => Hash::make('ppdb123'),
+                'role' => 'admin',
+                'is_active' => true,
+            ]
+        );
 
-        Admin::create([
-            'name' => 'Staff TU',
-            'email' => 'staff@smkmetland.sch.id',
-            'password' => Hash::make('staff123'),
-            'role' => 'staff',
-            'is_active' => true,
-        ]);
+        Admin::updateOrCreate(
+            ['email' => 'staff@smkmetland.sch.id'],
+            [
+                'name' => 'Staff TU',
+                'password' => Hash::make('staff123'),
+                'role' => 'staff',
+                'is_active' => true,
+            ]
+        );
     }
 }
