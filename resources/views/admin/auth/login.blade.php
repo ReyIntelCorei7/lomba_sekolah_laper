@@ -99,14 +99,7 @@
                 </button>
             </div>
             
-            <div class="text-center">
-                <div class="text-sm text-gray-600">
-                    <strong>Demo Accounts:</strong><br>
-                    Super Admin: admin@smkmetland.sch.id / admin123<br>
-                    Admin PPDB: ppdb@smkmetland.sch.id / ppdb123<br>
-                    Staff: staff@smkmetland.sch.id / staff123
-                </div>
-            </div>
+
         </form>
     </div>
 </body>
