@@ -10,11 +10,25 @@
             toggle() {
                 this.current = this.current === 'id' ? 'en' : 'id';
                 localStorage.setItem('lang', this.current);
+                // Dispatch event for auto-translation system
+                window.dispatchEvent(new CustomEvent('languageChanged', { 
+                    detail: { lang: this.current } 
+                }));
+                // Also trigger applyTranslations directly for immediate update
+                if (window.applyTranslations) {
+                    window.applyTranslations(this.current);
+                }
             },
             
             set(lang) {
                 this.current = lang;
                 localStorage.setItem('lang', this.current);
+                window.dispatchEvent(new CustomEvent('languageChanged', { 
+                    detail: { lang: this.current } 
+                }));
+                if (window.applyTranslations) {
+                    window.applyTranslations(this.current);
+                }
             },
             
             t(key) {

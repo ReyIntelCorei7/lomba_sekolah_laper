@@ -24,11 +24,25 @@
                 toggle() {
                     this.current = this.current === 'id' ? 'en' : 'id';
                     localStorage.setItem('lang', this.current);
+                    // Dispatch event for auto-translation system
+                    window.dispatchEvent(new CustomEvent('languageChanged', { 
+                        detail: { lang: this.current } 
+                    }));
+                    // Also trigger applyTranslations directly for immediate update
+                    if (window.applyTranslations) {
+                        window.applyTranslations(this.current);
+                    }
                 },
                 
                 set(lang) {
                     this.current = lang;
                     localStorage.setItem('lang', this.current);
+                    window.dispatchEvent(new CustomEvent('languageChanged', { 
+                        detail: { lang: this.current } 
+                    }));
+                    if (window.applyTranslations) {
+                        window.applyTranslations(this.current);
+                    }
                 },
                 
                 t(key) {
@@ -506,11 +520,108 @@
 
     <!-- CONTENT SECTIONS (Livewire & Others) -->
 
+    <!-- Sambutan Kepala Sekolah -->
+    <section class="py-16 lg:py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+        <!-- Decorative Background Elements -->
+        <div class="absolute top-0 left-0 w-72 h-72 bg-blue-100 rounded-full blur-3xl opacity-40 -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-indigo-100 rounded-full blur-3xl opacity-40 translate-x-1/3 translate-y-1/3"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center mb-10 lg:mb-16">
+                <span class="inline-block px-4 py-1.5 bg-[#1E2188]/10 text-[#1E2188] text-sm font-semibold rounded-full mb-4" x-text="$store.lang.t('principal_badge')">
+                    Pesan Kepala Sekolah
+                </span>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">
+                    <span x-text="$store.lang.t('principal_title')">Sambutan</span> <span class="text-[#1E2188]" x-text="$store.lang.t('principal_kepsek')">Kepala Sekolah</span>
+                </h2>
+            </div>
+            
+            <!-- Content Grid -->
+            <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+                
+                <!-- Photo Column -->
+                <div class="w-full lg:w-2/5 flex justify-center">
+                    <div class="relative">
+                        <!-- Decorative Frame -->
+                        <div class="absolute -inset-4 bg-gradient-to-br from-[#1E2188] to-blue-600 rounded-3xl transform rotate-3 opacity-20"></div>
+                        <div class="absolute -inset-4 bg-gradient-to-br from-blue-600 to-[#1E2188] rounded-3xl transform -rotate-3 opacity-10"></div>
+                        
+                        <!-- Photo Container -->
+                        <div class="relative bg-white p-3 rounded-2xl shadow-2xl">
+                            <div class="relative overflow-hidden rounded-xl">
+                                <img src="{{ asset('image/kepalasekolah.jpg') }}" 
+                                     alt="Kepala Sekolah SMK Metland" 
+                                     class="w-64 h-80 sm:w-72 sm:h-96 lg:w-80 lg:h-[28rem] object-cover object-top"
+                                     onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Kepala+Sekolah&size=400&background=1E2188&color=fff';">
+                            </div>
+                            
+                            <!-- Name Card -->
+                            <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white px-6 py-3 rounded-xl shadow-lg border border-gray-100 text-center min-w-[200px]">
+                                <h3 class="font-bold text-gray-900 text-lg">{{ $settings['principal_name'] ?? 'Dr. Darmawan Sunarja, MM.Par, Drs.' }}</h3>
+                                <p class="text-[#1E2188] text-sm font-medium" x-text="$store.lang.t('principal_kepsek')">Kepala Sekolah</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Message Column -->
+                <div class="w-full lg:w-3/5 mt-8 lg:mt-0">
+                    <div class="bg-white rounded-2xl p-6 sm:p-8 lg:p-10 shadow-xl border border-gray-100 relative">
+                        <!-- Quote Icon -->
+                        <div class="absolute -top-4 -left-2 lg:-left-4 w-12 h-12 lg:w-16 lg:h-16 bg-[#1E2188] rounded-2xl flex items-center justify-center shadow-lg">
+                            <svg class="w-6 h-6 lg:w-8 lg:h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                            </svg>
+                        </div>
+                        
+                        <!-- Welcome Message -->
+                        <div class="pt-6 lg:pt-4">
+                            <p class="text-gray-600 leading-relaxed text-sm sm:text-base font-semibold mb-6" x-text="$store.lang.t('principal_greeting')">Assalamu'alaikum warahmatullahi wabarakatuh. Salam sejahtera untuk kita semua.</p>
+                            
+                            <div class="space-y-4 text-gray-600 leading-relaxed text-sm sm:text-base">
+                                <p x-text="$store.lang.t('principal_message_1')">
+                                    Puji syukur kita panjatkan ke hadirat Allah SWT atas limpahan rahmat dan karunia-Nya...
+                                </p>
+                                <p x-text="$store.lang.t('principal_message_2')">
+                                    Di era digital yang terus berkembang...
+                                </p>
+                                <p x-text="$store.lang.t('principal_message_3')">
+                                    Akhir kata, kami mengajak seluruh siswa...
+                                </p>
+                            </div>
+                            
+                            <!-- Signature -->
+                            <div class="mt-6 pt-6 border-t border-gray-100">
+                                <p class="text-[#1E2188] font-semibold italic text-lg" x-text="$store.lang.t('principal_closing')">Wassalamu'alaikum Wr. Wb.</p>
+                                <div class="mt-3 flex items-center gap-3">
+                                    <div class="w-12 h-1 bg-[#1E2188] rounded-full"></div>
+                                    <span class="text-gray-500 text-sm"><span x-text="$store.lang.t('principal_kepsek')">Kepala Sekolah</span> SMK Metland</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
     <!-- About School -->
     @livewire('bawah-hero-section')
 
     <!-- Infografis -->
-    <section id="stats" x-data="statsSection()" x-intersect="startAnimation()" class="py-24 bg-white relative overflow-hidden">
+
+    <section id="berita" class="py-10" style="background-color: #fff;">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between mb-12 gap-6">
+                <div>
+                    <h2 class="text-4xl font-bold text-blue-500 mt-2" x-text="$store.lang.t('infografis_title')">Infografis Sekolah</h2>
+                </div>
+            </div>
+    </section>
+     
+    <section id="stats" x-data="statsSection()" x-intersect="startAnimation()" class="py-12 bg-white relative overflow-hidden">
         <div class="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-60 -translate-y-1/2 translate-x-1/2"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-indigo-50 rounded-full blur-3xl opacity-60 translate-y-1/3 -translate-x-1/3"></div>
 
@@ -526,7 +637,7 @@
                     <h3 class="text-5xl font-bold text-gray-900 mb-2">
                         <span x-text="stats.students">0</span>
                     </h3>
-                    <p class="text-gray-500 font-medium">Siswa Aktif</p>
+                    <p class="text-gray-500 font-medium" x-text="$store.lang.t('stats_label_students')">Siswa Aktif</p>
                 </div>
 
                 <!-- Stat Card 2 -->
@@ -539,7 +650,7 @@
                     <h3 class="text-5xl font-bold text-gray-900 mb-2">
                         <span x-text="stats.teachers">0</span>
                     </h3>
-                    <p class="text-gray-500 font-medium">Guru Profesional</p>
+                    <p class="text-gray-500 font-medium" x-text="$store.lang.t('stats_teachers')">Guru Profesional</p>
                 </div>
 
                 <!-- Stat Card 3 -->
@@ -552,7 +663,7 @@
                     <h3 class="text-5xl font-bold text-gray-900 mb-2">
                         <span x-text="stats.staff">0</span>
                     </h3>
-                    <p class="text-gray-500 font-medium">Tenaga Kependidikan</p>
+                    <p class="text-gray-500 font-medium" x-text="$store.lang.t('stats_label_teachers')">Tenaga Kependidikan</p>
                 </div>
             </div>
         </div>
@@ -562,8 +673,8 @@
     <section id="jurusan" class="py-20" style="background-color: {{ $settings['program_bg_color'] ?? '#1E2188' }};">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-12">
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">{{ $settings['program_title'] ?? 'Program Keahlian' }}</h1>
-                <p class="text-gray-300 max-w-xl mx-auto">{{ $settings['program_description'] ?? 'Pilih jurusan sesuai minat dan bakatmu untuk masa depan yang lebih cerah' }}</p>
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4" x-text="$store.lang.t('program_title')">{{ $settings['program_title'] ?? 'Program Keahlian' }}</h1>
+                <p class="text-gray-300 max-w-xl mx-auto" x-text="$store.lang.t('program_subtitle')">{{ $settings['program_description'] ?? 'Pilih jurusan sesuai minat dan bakatmu untuk masa depan yang lebih cerah' }}</p>
             </div>
 
             <div x-data="{
@@ -618,7 +729,7 @@
                         <!-- TAP INDICATOR ON MOBILE -->
                         <div x-show="isMobile && active !== item.id" class="absolute bottom-2 left-1/2 -translate-x-1/2 text-white/60 text-xs flex items-center gap-1">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
-                            <span>Tap</span>
+                            <span x-text="$store.lang.t('label_tap')">Tap</span>
                         </div>
                     </div>
                 </template>
@@ -630,13 +741,13 @@
     <!-- Berita Sekolah -->
     <section id="berita" class="py-24" style="background-color: #fff;">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div class="flex flex-col md:flex-row justify-between mb-12 gap-6">
                 <div>
-                    <span class="text-blue-300 font-bold tracking-wider uppercase text-sm">Latest Updates</span>
-                    <h2 class="text-4xl font-bold text-blue-500 mt-2">{{ $settings['news_title'] ?? 'Berita Sekolah' }}</h2>
+                    <span class="text-blue-300 font-bold tracking-wider uppercase text-sm" x-text="$store.lang.t('news_latest_updates')">Latest Updates</span>
+                    <h2 class="text-4xl font-bold text-blue-500 mt-2" x-text="$store.lang.t('section_news_title')">{{ $settings['news_title'] ?? 'Berita Sekolah' }}</h2>
                 </div>
                 <a href="/news" class="hidden md:inline-flex items-center px-6 py-3 rounded-full bg-blue/10 backdrop-blur-sm border border-blue/20 text-blue-500 font-medium hover:bg-blue/20 hover:shadow-md transition-all">
-                    Lihat Semua Berita
+                    <span x-text="$store.lang.t('news_view_all')">Lihat Semua Berita</span>
                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                     </svg>
@@ -675,7 +786,7 @@
                             {{ $news->excerpt ?? Str::limit(strip_tags($news->content), 100) }}
                         </p>
                         <a href="{{ route('news.show', $news->slug) }}" class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700">
-                            Baca Selengkapnya
+                            <span x-text="$store.lang.t('news_read_more')">Baca Selengkapnya</span>
                             <svg class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                             </svg>
@@ -683,7 +794,7 @@
                     </div>
                 </article>
                 @empty
-                <div class="col-span-full text-center py-12 text-white/60">
+                <div class="col-span-full text-center py-12 text-white/60" x-text="$store.lang.t('news_empty')">
                     Belum ada berita terbaru.
                 </div>
                 @endforelse
@@ -691,7 +802,7 @@
             
             <div class="mt-8 text-center md:hidden">
                 <a href="/news" class="inline-flex items-center px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium hover:bg-white/20">
-                    Lihat Semua Berita
+                    <span x-text="$store.lang.t('news_view_all')">Lihat Semua Berita</span>
                 </a>
             </div>
         </div>
@@ -699,17 +810,17 @@
 
 
     <!-- KerjaSama Industri -->
-    <section id="berita" class="py-14" style="background-color: #fff;">
+    <section id="berita" class="py-12" style="background-color: #fff;">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div class="flex flex-col md:flex-row justify-between gap-6">
                 <div>
-                    <h2 class="text-4xl font-bold text-blue-500 mt-2">Kerja Sama Industri Dan Perguran Tinggi</h2>
+                    <h2 class="text-4xl font-bold text-blue-500 mt-2" x-text="$store.lang.t('industry_title')">Kerja Sama Industri Dan Perguruan Tinggi</h2>
                 </div>
             </div>
     </section>
 
     <!-- Partners/Tech Marquee Section -->
-    <section class="py-20 bg-white">
+    <section class="py-12 bg-white">
         @php
             // Get all images from industri folder
             $industriImages = glob(public_path('image/industri/*'));

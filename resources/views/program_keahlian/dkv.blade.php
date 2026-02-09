@@ -103,7 +103,62 @@
     </style>
 </head>
 
-<body x-data="{ activeTab: 'materi' }" class="bg-gray-50">
+<body x-data="{ 
+    activeTab: 'materi',
+    lang: localStorage.getItem('lang') || 'id',
+    t: {
+        id: {
+            badge: 'Program Keahlian Kreatif',
+            title1: 'Desain',
+            title2: 'Komunikasi Visual',
+            subtitle: 'Kuasai desain grafis, multimedia, videografi, dan animasi untuk menjadi kreator visual profesional yang kreatif dan inovatif.',
+            register: 'Daftar Sekarang',
+            learnMore: 'Pelajari Lebih Lanjut',
+            stat1: 'Software',
+            stat2: 'Praktik',
+            stat3: 'Kreativitas',
+            aboutProgram: 'TENTANG PROGRAM',
+            overviewTitle: 'Wujudkan Imajinasi Menjadi Karya Visual',
+            overviewDesc: 'Program DKV SMK Metland membekali siswa dengan kemampuan desain grafis, multimedia, fotografi, videografi, dan animasi. Siswa akan belajar menggunakan software industri dan mengembangkan portofolio profesional.',
+            floatingTitle: 'Freelance',
+            floatingDesc: 'Bisa Kerja Remote',
+            sectionBadge: 'KURIKULUM & KARIR',
+            sectionTitle: 'Apa yang Akan Kamu Pelajari?',
+            tabMateri: 'Materi Pembelajaran',
+            tabKarir: 'Peluang Karir',
+            ctaTitle: 'Siap Menjadi Kreator Visual?',
+            ctaDesc: 'Bergabunglah dengan program DKV SMK Metland dan wujudkan kreativitasmu!',
+            ctaPpdb: 'Daftar PPDB Sekarang',
+            ctaOther: 'Lihat Jurusan Lain'
+        },
+        en: {
+            badge: 'Creative Skills Program',
+            title1: 'Visual',
+            title2: 'Communication Design',
+            subtitle: 'Master graphic design, multimedia, videography, and animation to become a creative and innovative visual creator.',
+            register: 'Register Now',
+            learnMore: 'Learn More',
+            stat1: 'Software',
+            stat2: 'Practice',
+            stat3: 'Creativity',
+            aboutProgram: 'ABOUT PROGRAM',
+            overviewTitle: 'Turn Imagination Into Visual Works',
+            overviewDesc: 'DKV program at SMK Metland equips students with graphic design, multimedia, photography, videography, and animation skills. Students learn using industry software and develop professional portfolios.',
+            floatingTitle: 'Freelance',
+            floatingDesc: 'Work Remotely',
+            sectionBadge: 'CURRICULUM & CAREERS',
+            sectionTitle: 'What Will You Learn?',
+            tabMateri: 'Learning Materials',
+            tabKarir: 'Career Opportunities',
+            ctaTitle: 'Ready to Become a Visual Creator?',
+            ctaDesc: 'Join DKV program at SMK Metland and unleash your creativity!',
+            ctaPpdb: 'Register for PPDB Now',
+            ctaOther: 'View Other Programs'
+        }
+    }
+}" 
+x-init="$watch('$store.lang.current', value => lang = value); window.addEventListener('languageChanged', e => lang = e.detail.lang);" 
+class="bg-gray-50">
     @include('components.navbar', ['solidBackground' => true, 'showOnScroll' => false])
 
     <!-- Hero Section -->
@@ -122,15 +177,15 @@
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-400"></span>
                 </span>
-                <span class="text-sm font-medium">🎨 Program Keahlian Kreatif</span>
+                <span class="text-sm font-medium" x-text="t[lang].badge">🎨 Program Keahlian Kreatif</span>
             </div>
 
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
-                Desain <br class="hidden md:block">
-                <span class="animated-gradient">Komunikasi Visual</span>
+                <span x-text="t[lang].title1">Desain</span> <br class="hidden md:block">
+                <span class="animated-gradient" x-text="t[lang].title2">Komunikasi Visual</span>
             </h1>
 
-            <p class="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto mb-10 leading-relaxed">
+            <p class="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto mb-10 leading-relaxed" x-text="t[lang].subtitle">
                 Kuasai desain grafis, multimedia, videografi, dan animasi untuk menjadi kreator visual profesional yang kreatif dan inovatif.
             </p>
 
@@ -139,25 +194,25 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    Daftar Sekarang
+                    <span x-text="t[lang].register">Daftar Sekarang</span>
                 </a>
                 <a href="#overview" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-white/50 text-white font-semibold rounded-xl hover:bg-white/10 transition-all">
-                    Pelajari Lebih Lanjut
+                    <span x-text="t[lang].learnMore">Pelajari Lebih Lanjut</span>
                 </a>
             </div>
 
             <div class="grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto">
                 <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/20">
                     <div class="text-3xl md:text-4xl font-bold text-white">6+</div>
-                    <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider">Software</div>
+                    <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider" x-text="t[lang].stat1">Software</div>
                 </div>
                 <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/20">
                     <div class="text-3xl md:text-4xl font-bold text-white">100%</div>
-                    <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider">Praktik</div>
+                    <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider" x-text="t[lang].stat2">Praktik</div>
                 </div>
                 <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/20">
                     <div class="text-3xl md:text-4xl font-bold text-white">∞</div>
-                    <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider">Kreativitas</div>
+                    <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider" x-text="t[lang].stat3">Kreativitas</div>
                 </div>
             </div>
         </div>
@@ -176,11 +231,11 @@
         <div class="max-w-7xl mx-auto px-4 md:px-6">
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 <div>
-                    <span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full mb-6">TENTANG PROGRAM</span>
+                    <span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full mb-6" x-text="t[lang].aboutProgram">TENTANG PROGRAM</span>
                     <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                        Wujudkan <span class="text-[#1E2188]">Imajinasi</span> Menjadi Karya Visual
+                        <span x-text="t[lang].overviewTitle">Wujudkan Imajinasi Menjadi Karya Visual</span>
                     </h2>
-                    <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                    <p class="text-gray-600 text-lg leading-relaxed mb-8" x-text="t[lang].overviewDesc">
                         Program DKV SMK Metland membekali siswa dengan kemampuan desain grafis, multimedia, fotografi, videografi, dan animasi. Siswa akan belajar menggunakan software industri dan mengembangkan portofolio profesional.
                     </p>
 
@@ -247,8 +302,8 @@
     <section class="py-20 bg-gradient-to-b from-gray-50 to-white">
         <div class="max-w-7xl mx-auto px-4 md:px-6">
             <div class="text-center mb-12">
-                <span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full mb-4">KURIKULUM & KARIR</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Apa yang Akan Kamu Pelajari?</h2>
+                <span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full mb-4" x-text="t[lang].sectionBadge">KURIKULUM & KARIR</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" x-text="t[lang].sectionTitle">Apa yang Akan Kamu Pelajari?</h2>
             </div>
 
             <div class="flex justify-center mb-12">
@@ -375,20 +430,20 @@
         </div>
 
         <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6 text-center">
-            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Siap Menjadi Kreator Visual?</h2>
-            <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6" x-text="t[lang].ctaTitle">Siap Menjadi Kreator Visual?</h2>
+            <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto" x-text="t[lang].ctaDesc">
                 Bergabunglah dengan program DKV SMK Metland dan wujudkan kreativitasmu!
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="/ppdb" class="inline-flex items-center justify-center gap-2 px-10 py-5 bg-white text-[#1E2188] font-bold text-lg rounded-xl hover:bg-gray-100 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1">
-                    Daftar PPDB Sekarang
+                    <span x-text="t[lang].ctaPpdb">Daftar PPDB Sekarang</span>
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                 </a>
                 <a href="/prokeh" class="inline-flex items-center justify-center gap-2 px-10 py-5 bg-transparent border-2 border-white text-white font-semibold text-lg rounded-xl hover:bg-white/10 transition-all">
-                    ← Lihat Jurusan Lain
+                    ← <span x-text="t[lang].ctaOther">Lihat Jurusan Lain</span>
                 </a>
             </div>
         </div>

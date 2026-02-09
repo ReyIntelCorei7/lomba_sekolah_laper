@@ -2,35 +2,46 @@
      x-data="{
         activeSlide: 1,
         isMobile: window.innerWidth < 1024,
-        slides: [
-            {
-                number: 1,
-                title: '01. Sejarah',
-                keyword: 'SMK Metland',
-                description: 'didirikan oleh Yayasan Pendidikan Metland (YPM). Ini adalah awal mula perjalanan kami di kawasan Metland Transyogi Bogor. Fasilitas kami dirancang untuk standar internasional sejak awal berdiri.',
-                image: '{{ asset('image/sekolahsmkmetland.png') }}',
-                imageLabel: 'Sejarah Awal'
-            },
-            {
-                number: 2,
-                title: '02. Pengembangan',
-                keyword: '10 tahun',
-                description: 'Keberhasilan pengembangan selama mendorong kami mengembangkan sayap ke kawasan Perumahan Metland Cibitung. Kami terus berkomitmen mencetak lulusan yang siap kerja dan kompeten.',
-                image: '{{ asset('image/sekolahsmkmetland3.png') }}',
-                imageLabel: 'SMK Metland School'
-            },
-            {
-                number: 3,
-                title: '03. Generasi Cinta Prestasi',
-                keyword: 'Cinta',
-                description: 'Menjadikan Siswa siswi SMK Metland School sebagai generasi yang cinta akan prestasi - prestasi. akan hal - hal baik, positif dan berprestasi.',
-                image: '{{ asset('image/sekolahsmkmetland4.png') }}',
-                imageLabel: 'Nilai Budaya'
-            }
-        ],
+        getSlides() {
+            const lang = $store.lang.current;
+            return [
+                {
+                    number: 1,
+                    title: lang === 'en' ? '01. History' : '01. Sejarah',
+                    keyword: 'SMK Metland',
+                    description: lang === 'en' ? 'was established by the Metland Education Foundation (YPM). This is the beginning of our journey in the Metland Transyogi Bogor area. Our facilities were designed to international standards from the very beginning.' : 'didirikan oleh Yayasan Pendidikan Metland (YPM). Ini adalah awal mula perjalanan kami di kawasan Metland Transyogi Bogor. Fasilitas kami dirancang untuk standar internasional sejak awal berdiri.',
+                    image: '{{ asset('image/sekolahsmkmetland.png') }}',
+                    imageLabel: lang === 'en' ? 'Early History' : 'Sejarah Awal'
+                },
+                {
+                    number: 2,
+                    title: lang === 'en' ? '02. Development' : '02. Pengembangan',
+                    keyword: lang === 'en' ? '10 years' : '10 tahun',
+                    description: lang === 'en' ? 'The success of development over the years drove us to expand our wings to the Metland Cibitung Housing area. We are committed to producing work-ready and competent graduates.' : 'Keberhasilan pengembangan selama mendorong kami mengembangkan sayap ke kawasan Perumahan Metland Cibitung. Kami terus berkomitmen mencetak lulusan yang siap kerja dan kompeten.',
+                    image: '{{ asset('image/sekolahsmkmetland3.png') }}',
+                    imageLabel: 'SMK Metland School'
+                },
+                {
+                    number: 3,
+                    title: lang === 'en' ? '03. Generation of Achievement Love' : '03. Generasi Cinta Prestasi',
+                    keyword: lang === 'en' ? 'Love' : 'Cinta',
+                    description: lang === 'en' ? 'Making SMK Metland School students a generation that loves achievements - loving good, positive things and being accomplished.' : 'Menjadikan Siswa siswi SMK Metland School sebagai generasi yang cinta akan prestasi - prestasi. akan hal - hal baik, positif dan berprestasi.',
+                    image: '{{ asset('image/sekolahsmkmetland4.png') }}',
+                    imageLabel: lang === 'en' ? 'Cultural Values' : 'Nilai Budaya'
+                }
+            ];
+        },
+        get slides() {
+            return this.getSlides();
+        },
         init() {
             window.addEventListener('resize', () => {
                 this.isMobile = window.innerWidth < 1024;
+            });
+            
+            // Watch for language changes
+            window.addEventListener('languageChanged', () => {
+                this.$forceUpdate && this.$forceUpdate();
             });
             
             // For desktop: Set up intersection observer
@@ -60,7 +71,8 @@
     <div class="lg:hidden max-w-7xl mx-auto px-4 py-12">
         <!-- Title -->
         <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center transition-colors duration-500"
-            :class="activeSlide === 2 ? 'text-gray-900' : 'text-white'">
+            :class="activeSlide === 2 ? 'text-gray-900' : 'text-white'"
+            x-text="$store.lang.t('about_our_school')">
             About Our School
         </h2>
         
@@ -129,7 +141,8 @@
                 <div class="sticky top-32 h-[60vh] flex flex-col justify-center">
                     
                     <h2 class="text-4xl font-bold mb-8 transition-colors duration-500"
-                        :class="activeSlide === 2 ? 'text-gray-900' : 'text-white'">
+                        :class="activeSlide === 2 ? 'text-gray-900' : 'text-white'"
+                        x-text="$store.lang.t('about_our_school')">
                         About Our School
                     </h2>
 
@@ -141,12 +154,12 @@
                             <p class="text-lg leading-relaxed transition-colors duration-500"
                                :class="activeSlide === 2 ? 'text-gray-600' : 'text-blue-50'">
                                 <span class="font-bold text-2xl block mb-2 transition-colors duration-500"
-                                      :class="activeSlide === 2 ? 'text-blue-600' : 'text-white border-l-4 border-white pl-3'">
+                                      :class="activeSlide === 2 ? 'text-blue-600' : 'text-white border-l-4 border-white pl-3'"
+                                      x-text="$store.lang.current === 'en' ? '01. History' : '01. Sejarah'">
                                       01. Sejarah
                                 </span>
-                                <span class="font-bold" :class="activeSlide === 2 ? 'text-blue-600' : 'text-white'">SMK Metland</span> didirikan oleh Yayasan Pendidikan Metland (YPM). 
-                                Ini adalah awal mula perjalanan kami di kawasan Metland Transyogi Bogor. 
-                                Fasilitas kami dirancang untuk standar internasional sejak awal berdiri.
+                                <span class="font-bold" :class="activeSlide === 2 ? 'text-blue-600' : 'text-white'">SMK Metland</span> 
+                                <span x-text="$store.lang.t('about_history_desc')">didirikan oleh Yayasan Pendidikan Metland (YPM). Ini adalah awal mula perjalanan kami di kawasan Metland Transyogi Bogor. Fasilitas kami dirancang untuk standar internasional sejak awal berdiri.</span>
                             </p>
                         </div>
 
@@ -156,13 +169,11 @@
                             <p class="text-lg leading-relaxed transition-colors duration-500"
                                :class="activeSlide === 2 ? 'text-gray-600' : 'text-blue-50'">
                                 <span class="font-bold text-2xl block mb-2 transition-colors duration-500"
-                                      :class="activeSlide === 2 ? 'text-blue-600' : 'text-white border-l-4 border-white pl-3'">
+                                      :class="activeSlide === 2 ? 'text-blue-600' : 'text-white border-l-4 border-white pl-3'"
+                                      x-text="$store.lang.current === 'en' ? '02. Development' : '02. Pengembangan'">
                                       02. Pengembangan
                                 </span>
-                                Keberhasilan pengembangan selama 
-                                <span class="font-bold" :class="activeSlide === 2 ? 'text-blue-600' : 'text-white'">10 tahun</span> 
-                                mendorong kami mengembangkan sayap ke kawasan Perumahan Metland Cibitung. 
-                                Kami terus berkomitmen mencetak lulusan yang siap kerja dan kompeten.
+                                <span x-text="$store.lang.t('about_development_desc')">Keberhasilan pengembangan selama mendorong kami mengembangkan sayap ke kawasan Perumahan Metland Cibitung. Kami terus berkomitmen mencetak lulusan yang siap kerja dan kompeten.</span>
                             </p>
                         </div>
 
@@ -172,12 +183,11 @@
                             <p class="text-lg leading-relaxed transition-colors duration-500"
                                :class="activeSlide === 2 ? 'text-gray-600' : 'text-blue-50'">
                                 <span class="font-bold text-2xl block mb-2 transition-colors duration-500"
-                                      :class="activeSlide === 2 ? 'text-blue-600' : 'text-white border-l-4 border-white pl-3'">
+                                      :class="activeSlide === 2 ? 'text-blue-600' : 'text-white border-l-4 border-white pl-3'"
+                                      x-text="$store.lang.current === 'en' ? '03. Generation of Achievement Love' : '03. Generasi Cinta Prestasi'">
                                     03. Generasi Cinta Prestasi
                                 </span>
-                                Menjadikan Siswa siswi SMK Metland School sebagai generasi yang cinta akan prestasi - prestasi.
-                                <span class="font-bold" :class="activeSlide === 2 ? 'text-blue-600' : 'text-white'">Cinta</span> 
-                                akan hal - hal baik, positif dan berprestasi.
+                                <span x-text="$store.lang.t('about_gcp_desc')">Menjadikan Siswa siswi SMK Metland School sebagai generasi yang cinta akan prestasi - prestasi. akan hal - hal baik, positif dan berprestasi.</span>
                             </p>
                         </div>
 

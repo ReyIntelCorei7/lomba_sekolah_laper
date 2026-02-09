@@ -223,7 +223,7 @@
                         <!-- Share Section -->
                         <div class="mt-8 pt-6 border-t border-gray-200">
                             <div class="flex items-center justify-between flex-wrap gap-4">
-                                <span class="text-gray-600 font-medium"><span x-text="t[lang].share"></span>:</span>
+                                <span class="text-gray-600 font-medium"><span x-text="$store.lang.t('news_share_title')">Bagikan</span>:</span>
                                 <div class="flex gap-2">
                                     <button @click="copyLink()" class="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition" title="Copy Link">
                                         <i class="fas fa-link text-gray-600"></i>
@@ -243,11 +243,10 @@
                     </div>
                 </article>
 
-                <!-- Back Button -->
                 <div class="mt-6">
                     <a href="/news" class="inline-flex items-center gap-2 text-primary hover:text-primary-dark transition font-medium">
                         <i class="fas fa-arrow-left"></i>
-                        <span x-text="t[lang].backToNews"></span>
+                        <span x-text="$store.lang.t('news_back')">Kembali ke Berita</span>
                     </a>
                 </div>
             </div>
@@ -256,7 +255,7 @@
             <div class="lg:col-span-1">
                 @if($relatedNews->count() > 0)
                 <div class="bg-white rounded-xl shadow-sm p-6 sticky top-24">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4 pb-3 border-b border-gray-100" x-text="t[lang].relatedNews"></h3>
+                    <h3 class="text-lg font-bold text-gray-900 mb-4 pb-3 border-b border-gray-100" x-text="$store.lang.t('news_related')">Berita Terkait</h3>
                     <div class="space-y-4">
                         @foreach($relatedNews as $related)
                         <a href="{{ route('news.show', $related->slug) }}" class="block group">

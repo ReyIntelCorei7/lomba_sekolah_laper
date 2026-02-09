@@ -89,7 +89,62 @@
     </style>
 </head>
 
-<body x-data="{ activeTab: 'materi' }" class="bg-gray-50">
+<body x-data="{ 
+    activeTab: 'materi',
+    lang: localStorage.getItem('lang') || 'id',
+    t: {
+        id: {
+            badge: 'Program Keahlian Hospitality',
+            title1: 'Perhotelan',
+            title2: '& Hospitality',
+            subtitle: 'Pelajari hospitality, front office, housekeeping, F&B service, dan manajemen hotel bertaraf internasional untuk karir global.',
+            register: 'Daftar Sekarang',
+            learnMore: 'Pelajari Lebih Lanjut',
+            stat1: 'Hotel Mitra',
+            stat2: 'Karir Global',
+            stat3: 'Praktik',
+            aboutProgram: 'TENTANG PROGRAM',
+            overviewTitle: 'Berkarir di Hotel Bintang Lima',
+            overviewDesc: 'Program Perhotelan SMK Metland membekali siswa dengan hospitality skills bertaraf internasional. Belajar langsung dengan standar hotel bintang 5 dan praktik di hotel ternama seperti Kempinski, Marriott, dan Hyatt.',
+            floatingTitle: 'Global',
+            floatingDesc: 'Karir Internasional',
+            sectionBadge: 'KURIKULUM & KARIR',
+            sectionTitle: 'Apa yang Akan Kamu Pelajari?',
+            tabMateri: 'Materi Pembelajaran',
+            tabKarir: 'Peluang Karir',
+            ctaTitle: 'Siap Berkarir di Industri Hospitality?',
+            ctaDesc: 'Bergabunglah dengan program Perhotelan SMK Metland dan wujudkan karir internasionalmu!',
+            ctaPpdb: 'Daftar PPDB Sekarang',
+            ctaOther: 'Lihat Jurusan Lain'
+        },
+        en: {
+            badge: 'Hospitality Skills Program',
+            title1: 'Hospitality',
+            title2: '& Hotel Management',
+            subtitle: 'Learn hospitality, front office, housekeeping, F&B service, and international hotel management for a global career.',
+            register: 'Register Now',
+            learnMore: 'Learn More',
+            stat1: 'Partner Hotels',
+            stat2: 'Global Career',
+            stat3: 'Practice',
+            aboutProgram: 'ABOUT PROGRAM',
+            overviewTitle: 'Career in 5-Star Hotels',
+            overviewDesc: 'The Hotel Management program at SMK Metland equips students with international hospitality skills. Learn directly with 5-star hotel standards and practice at renowned hotels like Kempinski, Marriott, and Hyatt.',
+            floatingTitle: 'Global',
+            floatingDesc: 'International Career',
+            sectionBadge: 'CURRICULUM & CAREERS',
+            sectionTitle: 'What Will You Learn?',
+            tabMateri: 'Learning Materials',
+            tabKarir: 'Career Opportunities',
+            ctaTitle: 'Ready for a Career in Hospitality?',
+            ctaDesc: 'Join the Hotel Management program at SMK Metland and realize your international career!',
+            ctaPpdb: 'Register for PPDB Now',
+            ctaOther: 'View Other Programs'
+        }
+    }
+}" 
+x-init="$watch('$store.lang.current', value => lang = value); window.addEventListener('languageChanged', e => lang = e.detail.lang);" 
+class="bg-gray-50">
     @include('components.navbar', ['solidBackground' => true, 'showOnScroll' => false])
 
     <!-- Hero Section -->
@@ -108,15 +163,15 @@
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-400"></span>
                 </span>
-                <span class="text-sm font-medium">🏨 Program Keahlian Hospitality</span>
+                <span class="text-sm font-medium" x-text="t[lang].badge">Program Keahlian Hospitality</span>
             </div>
 
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
-                Perhotelan <br class="hidden md:block">
-                <span class="animated-gradient">& Hospitality</span>
+                <span x-text="t[lang].title1">Perhotelan</span> <br class="hidden md:block">
+                <span class="animated-gradient" x-text="t[lang].title2">& Hospitality</span>
             </h1>
 
-            <p class="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto mb-10 leading-relaxed">
+            <p class="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto mb-10 leading-relaxed" x-text="t[lang].subtitle">
                 Pelajari hospitality, front office, housekeeping, F&B service, dan manajemen hotel bertaraf internasional untuk karir global.
             </p>
 
@@ -125,25 +180,25 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    Daftar Sekarang
+                    <span x-text="t[lang].register">Daftar Sekarang</span>
                 </a>
                 <a href="#overview" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-white/50 text-white font-semibold rounded-xl hover:bg-white/10 transition-all">
-                    Pelajari Lebih Lanjut
+                    <span x-text="t[lang].learnMore">Pelajari Lebih Lanjut</span>
                 </a>
             </div>
 
             <div class="grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto">
                 <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/20">
-                    <div class="text-3xl md:text-4xl font-bold text-white">⭐5</div>
-                    <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider">Hotel Mitra</div>
-                </div>
-                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/20">
-                    <div class="text-3xl md:text-4xl font-bold text-white">🌍</div>
-                    <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider">Karir Global</div>
+                    <div class="text-3xl md:text-4xl font-bold text-white">5</div>
+                    <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider" x-text="t[lang].stat1">Hotel Mitra</div>
                 </div>
                 <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/20">
                     <div class="text-3xl md:text-4xl font-bold text-white">100%</div>
-                    <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider">Praktik</div>
+                    <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider" x-text="t[lang].stat2">Karir Global</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/20">
+                    <div class="text-3xl md:text-4xl font-bold text-white">100%</div>
+                    <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider" x-text="t[lang].stat3">Praktik</div>
                 </div>
             </div>
         </div>
@@ -162,11 +217,11 @@
         <div class="max-w-7xl mx-auto px-4 md:px-6">
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 <div>
-                    <span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full mb-6">TENTANG PROGRAM</span>
+                    <span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full mb-6" x-text="t[lang].aboutProgram">TENTANG PROGRAM</span>
                     <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                        Berkarir di <span class="text-[#1E2188]">Hotel Bintang Lima</span>
+                        <span x-text="t[lang].overviewTitle">Berkarir di Hotel Bintang Lima</span>
                     </h2>
-                    <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                    <p class="text-gray-600 text-lg leading-relaxed mb-8" x-text="t[lang].overviewDesc">
                         Program Perhotelan SMK Metland membekali siswa dengan hospitality skills bertaraf internasional. Belajar langsung dengan standar hotel bintang 5 dan praktik di hotel ternama seperti Kempinski, Marriott, dan Hyatt.
                     </p>
 
@@ -227,20 +282,20 @@
     <section class="py-20 bg-gradient-to-b from-gray-50 to-white">
         <div class="max-w-7xl mx-auto px-4 md:px-6">
             <div class="text-center mb-12">
-                <span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full mb-4">KURIKULUM & KARIR</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Apa yang Akan Kamu Pelajari?</h2>
+                <span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full mb-4" x-text="t[lang].sectionBadge">KURIKULUM & KARIR</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" x-text="t[lang].sectionTitle">Apa yang Akan Kamu Pelajari?</h2>
             </div>
 
             <div class="flex justify-center mb-12">
                 <div class="inline-flex bg-gray-100 rounded-xl p-1.5">
                     <button @click="activeTab = 'materi'"
                         :class="activeTab === 'materi' ? 'bg-white shadow-lg text-[#1E2188]' : 'text-gray-600 hover:text-gray-900'"
-                        class="px-6 py-3 rounded-lg font-semibold transition-all">
+                        class="px-6 py-3 rounded-lg font-semibold transition-all" x-text="t[lang].tabMateri">
                         🏨 Materi Pembelajaran
                     </button>
                     <button @click="activeTab = 'karir'"
                         :class="activeTab === 'karir' ? 'bg-white shadow-lg text-[#1E2188]' : 'text-gray-600 hover:text-gray-900'"
-                        class="px-6 py-3 rounded-lg font-semibold transition-all">
+                        class="px-6 py-3 rounded-lg font-semibold transition-all" x-text="t[lang].tabKarir">
                         ✈️ Peluang Karir
                     </button>
                 </div>
@@ -354,20 +409,20 @@
         </div>
 
         <div class="relative z-10 max-w-4xl mx-auto px-4 md:px-6 text-center">
-            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Siap Berkarir di Industri Hospitality?</h2>
-            <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6" x-text="t[lang].ctaTitle">Siap Berkarir di Industri Hospitality?</h2>
+            <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto" x-text="t[lang].ctaDesc">
                 Bergabunglah dengan program Perhotelan SMK Metland dan wujudkan karir internasionalmu!
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="/ppdb" class="inline-flex items-center justify-center gap-2 px-10 py-5 bg-white text-[#1E2188] font-bold text-lg rounded-xl hover:bg-gray-100 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1">
-                    Daftar PPDB Sekarang
+                    <span x-text="t[lang].ctaPpdb">Daftar PPDB Sekarang</span>
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                 </a>
                 <a href="/prokeh" class="inline-flex items-center justify-center gap-2 px-10 py-5 bg-transparent border-2 border-white text-white font-semibold text-lg rounded-xl hover:bg-white/10 transition-all">
-                    ← Lihat Jurusan Lain
+                    ← <span x-text="t[lang].ctaOther">Lihat Jurusan Lain</span>
                 </a>
             </div>
         </div>

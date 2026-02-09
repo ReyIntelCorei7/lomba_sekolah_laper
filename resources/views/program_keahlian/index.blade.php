@@ -116,7 +116,17 @@
     </style>
 </head>
 
-<body class="bg-gray-50">
+<body 
+    x-data="{ 
+        lang: localStorage.getItem('lang') || 'id',
+        t(key) { return $store.lang.t(key); }
+    }" 
+    x-init="
+        $watch('$store.lang.current', value => { lang = value; });
+        window.addEventListener('languageChanged', e => { lang = e.detail.lang; });
+    "
+    x-effect="lang"
+    class="bg-gray-50">
 
     <!-- Navbar Component -->
     <x-navbar :solid-background="true" :show-on-scroll="false" />
@@ -137,14 +147,14 @@
                 <!-- Badge -->
                 <div class="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-[10px] md:text-xs font-medium mb-4 md:mb-6">
                     <span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-blue-500 animate-pulse"></span>
-                    5 Program Keahlian Unggulan
+                    <span x-text="$store.lang.t('prokeh_badge')">5 Program Keahlian Unggulan</span>
                 </div>
 
                 <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 leading-tight">
-                    Program<br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Keahlian</span>
+                    <span x-text="$store.lang.t('prokeh_title_1')">Program</span><br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400" x-text="$store.lang.t('prokeh_title_2')">Keahlian</span>
                 </h1>
-                <p class="text-sm md:text-lg text-gray-300 leading-relaxed max-w-xl">
+                <p class="text-sm md:text-lg text-gray-300 leading-relaxed max-w-xl" x-text="$store.lang.t('prokeh_subtitle')">
                     Temukan program keahlian yang sesuai dengan passion dan bakatmu.
                     Kembangkan skill profesional untuk karir cemerlang di industri.
                 </p>
@@ -153,15 +163,11 @@
                 <div class="flex gap-6 md:gap-8 mt-6 md:mt-8">
                     <div class="text-center">
                         <div class="text-2xl md:text-3xl font-bold text-white">5</div>
-                        <div class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider">Program</div>
+                        <div class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider" x-text="$store.lang.t('prokeh_stats_program')">Program</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-2xl md:text-3xl font-bold text-white">100+</div>
-                        <div class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider">Mitra Industri</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-2xl md:text-3xl font-bold text-white">95%</div>
-                        <div class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider">Tingkat Kerja</div>
+                        <div class="text-2xl md:text-3xl font-bold text-white">20+</div>
+                        <div class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider" x-text="$store.lang.t('prokeh_stats_partners')">Mitra Industri</div>
                     </div>
                 </div>
             </div>
@@ -173,9 +179,9 @@
         <div class="max-w-7xl mx-auto px-4 md:px-6">
             <!-- Section Header -->
             <div class="text-center mb-16">
-                <span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full mb-4">PROGRAM KEAHLIAN</span>
-                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-4">Jurusan Unggulan Kami</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                <span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full mb-4" x-text="$store.lang.t('prokeh_section_badge')">PROGRAM KEAHLIAN</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-4" x-text="$store.lang.t('prokeh_section_title')">Jurusan Unggulan Kami</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg" x-text="$store.lang.t('prokeh_section_desc')">
                     Setiap program dirancang untuk membekali siswa dengan skill praktis dan siap kerja
                 </p>
             </div>
@@ -196,10 +202,10 @@
                         </div>
                         <div class="px-6 pb-8 text-center">
                             <div class="inline-block px-3 py-1 bg-blue-100/50 text-blue-700 text-xs font-bold rounded-full mb-3">AKT</div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1E2188] transition-colors">Akuntansi</h3>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">Menjadi ahli keuangan profesional dengan pemahaman akuntansi dan manajemen keuangan yang solid.</p>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1E2188] transition-colors" x-text="$store.lang.t('prokeh_akuntansi_title')">Akuntansi</h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3" x-text="$store.lang.t('prokeh_akuntansi_desc')">Menjadi ahli keuangan profesional dengan pemahaman akuntansi dan manajemen keuangan yang solid.</p>
                             <div class="flex items-center justify-center gap-1 text-[#1E2188] font-semibold text-sm">
-                                Lihat Detail
+                                <span x-text="$store.lang.t('prokeh_view_detail')">Lihat Detail</span>
                                 <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                 </svg>
@@ -221,10 +227,10 @@
                         </div>
                         <div class="px-6 pb-8 text-center">
                             <div class="inline-block px-3 py-1 bg-blue-100/50 text-blue-700 text-xs font-bold rounded-full mb-3">DKV</div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1E2188] transition-colors">Desain Komunikasi Visual</h3>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">Ekspresikan kreativitasmu melalui desain grafis, multimedia, dan seni visual yang memukau.</p>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1E2188] transition-colors" x-text="$store.lang.t('prokeh_dkv_title')">Desain Komunikasi Visual</h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3" x-text="$store.lang.t('prokeh_dkv_desc')">Ekspresikan kreativitasmu melalui desain grafis, multimedia, dan seni visual yang memukau.</p>
                             <div class="flex items-center justify-center gap-1 text-[#1E2188] font-semibold text-sm">
-                                Lihat Detail
+                                <span x-text="$store.lang.t('prokeh_view_detail')">Lihat Detail</span>
                                 <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                 </svg>
@@ -246,10 +252,10 @@
                         </div>
                         <div class="px-6 pb-8 text-center">
                             <div class="inline-block px-3 py-1 bg-blue-100/50 text-blue-700 text-xs font-bold rounded-full mb-3">HOTEL</div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1E2188] transition-colors">Perhotelan</h3>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">Kuasai industri hospitality dengan standar pelayanan internasional dan manajemen hotel.</p>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1E2188] transition-colors" x-text="$store.lang.t('prokeh_hotel_title')">Perhotelan</h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3" x-text="$store.lang.t('prokeh_hotel_desc')">Kuasai industri hospitality dengan standar pelayanan internasional dan manajemen hotel.</p>
                             <div class="flex items-center justify-center gap-1 text-[#1E2188] font-semibold text-sm">
-                                Lihat Detail
+                                <span x-text="$store.lang.t('prokeh_view_detail')">Lihat Detail</span>
                                 <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                 </svg>
@@ -271,10 +277,10 @@
                         </div>
                         <div class="px-6 pb-8 text-center">
                             <div class="inline-block px-3 py-1 bg-blue-100/50 text-blue-700 text-xs font-bold rounded-full mb-3">KULINER</div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1E2188] transition-colors">Kuliner</h3>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">Jadilah chef profesional dengan menguasai seni memasak dan manajemen dapur modern.</p>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1E2188] transition-colors" x-text="$store.lang.t('prokeh_kuliner_title')">Kuliner</h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3" x-text="$store.lang.t('prokeh_kuliner_desc')">Jadilah chef profesional dengan menguasai seni memasak dan manajemen dapur modern.</p>
                             <div class="flex items-center justify-center gap-1 text-[#1E2188] font-semibold text-sm">
-                                Lihat Detail
+                                <span x-text="$store.lang.t('prokeh_view_detail')">Lihat Detail</span>
                                 <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                 </svg>
@@ -296,10 +302,10 @@
                         </div>
                         <div class="px-6 pb-8 text-center">
                             <div class="inline-block px-3 py-1 bg-blue-100/50 text-blue-700 text-xs font-bold rounded-full mb-3">PPLG</div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1E2188] transition-colors">Pengembangan Perangkat Lunak & Gim</h3>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">Kuasai pemrograman dan pengembangan software untuk menjadi developer profesional.</p>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1E2188] transition-colors" x-text="$store.lang.t('prokeh_pplg_title')">Pengembangan Perangkat Lunak & Gim</h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3" x-text="$store.lang.t('prokeh_pplg_desc')">Kuasai pemrograman dan pengembangan software untuk menjadi developer profesional.</p>
                             <div class="flex items-center justify-center gap-1 text-[#1E2188] font-semibold text-sm">
-                                Lihat Detail
+                                <span x-text="$store.lang.t('prokeh_view_detail')">Lihat Detail</span>
                                 <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                 </svg>
@@ -319,10 +325,10 @@
         <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
 
         <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">
+            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6" x-text="$store.lang.t('prokeh_cta_title')">
                 Siap Memulai Perjalananmu?
             </h2>
-            <p class="text-xl text-blue-200 mb-10 max-w-2xl mx-auto">
+            <p class="text-xl text-blue-200 mb-10 max-w-2xl mx-auto" x-text="$store.lang.t('prokeh_cta_desc')">
                 Daftar sekarang dan jadilah bagian dari SMK Metland untuk masa depan yang cerah
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -330,10 +336,10 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    Daftar PPDB Online
+                    <span x-text="$store.lang.t('prokeh_cta_ppdb')">Daftar PPDB Online</span>
                 </a>
                 <a href="{{ route('about') }}" class="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-white/30 text-white font-bold rounded-2xl hover:bg-white/10 transition-all duration-300">
-                    Tentang Sekolah
+                    <span x-text="$store.lang.t('prokeh_cta_about')">Tentang Sekolah</span>
                 </a>
             </div>
         </div>
