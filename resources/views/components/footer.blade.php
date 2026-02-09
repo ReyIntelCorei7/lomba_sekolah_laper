@@ -4,7 +4,7 @@
 @endphp
 
 <!-- Footer -->
-<footer class="bg-gray-900 text-white pt-12 md:pt-20 pb-8 md:pb-10 border-t border-gray-800">
+<footer class="bg-gray-900 text-white pt-12 md:pt-20 pb-8 md:pb-10 border-t border-gray-800" x-data>
     <div class="max-w-7xl mx-auto px-4 md:px-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-10 md:mb-16">
             <div class="sm:col-span-2">
@@ -12,7 +12,7 @@
                     <img src="{{ $logoUrl }}" class="w-10 h-10 md:w-12 md:h-12 object-contain p-1 md:p-2">
                     <span class="text-xl md:text-2xl font-bold">{{ $settings['site_name'] ?? 'SMK Metland' }}</span>
                 </div>
-                <p class="text-gray-400 leading-relaxed mb-4 md:mb-6 max-w-sm text-sm md:text-base">
+                <p class="text-gray-400 leading-relaxed mb-4 md:mb-6 max-w-sm text-sm md:text-base" x-text="$store.lang.t('footer_about_desc')">
                     {{ $settings['site_description'] ?? 'Mencetak lulusan unggul di bidang pariwisata yang siap bersaing di kancah nasional maupun internasional.' }}
                 </p>
                 <div class="flex gap-3 md:gap-4 flex-wrap">
@@ -59,17 +59,17 @@
             </div>
 
             <div>
-                <h4 class="text-white font-semibold mb-4 md:mb-6 text-sm md:text-base">Quick Links</h4>
+                <h4 class="text-white font-semibold mb-4 md:mb-6 text-sm md:text-base" x-text="$store.lang.t('footer_links')">Quick Links</h4>
                 <ul class="space-y-3 md:space-y-4 text-gray-400 text-sm md:text-base">
-                    <li><a href="/" class="hover:text-blue-400 transition-colors">Beranda</a></li>
-                    <li><a href="/about" class="hover:text-blue-400 transition-colors">Tentang Sekolah</a></li>
-                    <li><a href="/prokeh" class="hover:text-blue-400 transition-colors">Program Keahlian</a></li>
-                    <li><a href="{{ route('ppdb.index') }}" class="hover:text-blue-400 transition-colors">Info PPDB</a></li>
+                    <li><a href="/" class="hover:text-blue-400 transition-colors" x-text="$store.lang.t('nav_home')">Beranda</a></li>
+                    <li><a href="/about" class="hover:text-blue-400 transition-colors" x-text="$store.lang.t('nav_about')">Tentang Sekolah</a></li>
+                    <li><a href="/prokeh" class="hover:text-blue-400 transition-colors" x-text="$store.lang.t('nav_programs')">Program Keahlian</a></li>
+                    <li><a href="{{ route('ppdb.index') }}" class="hover:text-blue-400 transition-colors" x-text="$store.lang.t('nav_ppdb')">Info PPDB</a></li>
                 </ul>
             </div>
 
             <div>
-                <h4 class="text-white font-semibold mb-4 md:mb-6 text-sm md:text-base">Kontak Kami</h4>
+                <h4 class="text-white font-semibold mb-4 md:mb-6 text-sm md:text-base" x-text="$store.lang.t('footer_contact')">Kontak Kami</h4>
                 <ul class="space-y-3 md:space-y-4 text-gray-400 text-sm md:text-base">
                     <li class="flex items-start gap-3">
                         <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -89,7 +89,7 @@
         </div>
 
         <div class="border-t border-gray-800 pt-6 md:pt-8 text-center text-gray-500 text-xs md:text-sm">
-            <p>&copy; {{ date('Y') }} SMK Pariwisata Metland School. All rights reserved.</p>
+            <p>&copy; {{ date('Y') }} SMK Pariwisata Metland School. <span x-text="$store.lang.t('footer_rights')">All rights reserved.</span></p>
         </div>
     </div>
 </footer>

@@ -16,6 +16,9 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Translation System -->
+    @include('partials.translations')
+
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -23,7 +26,7 @@
     </style>
 </head>
 
-<body class="bg-gray-50">
+<body class="bg-gray-50" x-data>
     <!-- Navigation -->
     <nav class="bg-white shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,7 +37,7 @@
                 </div>
                 <div class="flex items-center space-x-4">
                     <a href="{{ route('ppdb.index') }}" class="text-gray-700 hover:text-blue-600">PPDB Home</a>
-                    <a href="/" class="text-gray-700 hover:text-blue-600">Back to Website</a>
+                    <a href="/" class="text-gray-700 hover:text-blue-600" x-text="$store.lang.t('ppdb_success_back_website')">Back to Website</a>
                 </div>
             </div>
         </div>
@@ -51,21 +54,21 @@
                     </svg>
                 </div>
 
-                <h1 class="text-3xl font-bold text-gray-900 mb-4">Pendaftaran Berhasil!</h1>
-                <p class="text-lg text-gray-600 mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-4" x-text="$store.lang.t('ppdb_success_title')">Pendaftaran Berhasil!</h1>
+                <p class="text-lg text-gray-600 mb-8" x-text="$store.lang.t('ppdb_success_thanks')">
                     Terima kasih telah mendaftar di SMK Pariwisata Metland School
                 </p>
 
                 <!-- Registration Details -->
                 <div class="bg-gray-50 rounded-lg p-6 mb-8">
-                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Detail Pendaftaran</h2>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4" x-text="$store.lang.t('ppdb_success_details')">Detail Pendaftaran</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Nomor Pendaftaran</p>
+                            <p class="text-sm font-medium text-gray-500" x-text="$store.lang.t('ppdb_status_reg_number')">Nomor Pendaftaran</p>
                             <p class="text-lg font-bold text-blue-600">{{ $student->registration_number }}</p>
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Nama Lengkap</p>
+                            <p class="text-sm font-medium text-gray-500" x-text="$store.lang.t('ppdb_form_name')">Nama Lengkap</p>
                             <p class="text-lg font-semibold text-gray-900">{{ $student->full_name }}</p>
                         </div>
                         <div>
@@ -73,17 +76,17 @@
                             <p class="text-lg text-gray-700">{{ $student->email }}</p>
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Program Keahlian</p>
+                            <p class="text-sm font-medium text-gray-500" x-text="$store.lang.t('ppdb_form_program')">Program Keahlian</p>
                             <p class="text-lg text-gray-700">{{ $student->program->name }}</p>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-500">Status</p>
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800" x-text="$store.lang.t('ppdb_status_pending')">
                                 Menunggu Verifikasi
                             </span>
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Tanggal Daftar</p>
+                            <p class="text-sm font-medium text-gray-500" x-text="$store.lang.t('ppdb_status_date')">Tanggal Daftar</p>
                             <p class="text-lg text-gray-700">{{ $student->registered_at->format('d F Y, H:i') }}</p>
                         </div>
                     </div>
@@ -91,31 +94,31 @@
 
                 <!-- Important Information -->
                 <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8 text-left">
-                    <h3 class="text-lg font-medium text-blue-900 mb-4">Informasi Penting</h3>
+                    <h3 class="text-lg font-medium text-blue-900 mb-4" x-text="$store.lang.t('ppdb_important_info')">Informasi Penting</h3>
                     <ul class="space-y-2 text-blue-800">
                         <li class="flex items-start">
-                            <svg class="h-5 w-5 text-blue-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="h-5 w-5 text-blue-600 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            <strong>Simpan nomor pendaftaran Anda:</strong> {{ $student->registration_number }}
+                            <span><strong x-text="$store.lang.t('ppdb_success_save')">Simpan nomor pendaftaran Anda:</strong> {{ $student->registration_number }}</span>
                         </li>
                         <li class="flex items-start">
-                            <svg class="h-5 w-5 text-blue-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="h-5 w-5 text-blue-600 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            Data Anda akan diverifikasi dalam 1-3 hari kerja
+                            <span x-text="$store.lang.t('ppdb_success_verify')">Data Anda akan diverifikasi dalam 1-3 hari kerja</span>
                         </li>
                         <li class="flex items-start">
-                            <svg class="h-5 w-5 text-blue-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="h-5 w-5 text-blue-600 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            Hasil seleksi akan dikirim melalui email dan WhatsApp
+                            <span x-text="$store.lang.t('ppdb_success_result')">Hasil seleksi akan dikirim melalui email dan WhatsApp</span>
                         </li>
                         <li class="flex items-start">
-                            <svg class="h-5 w-5 text-blue-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="h-5 w-5 text-blue-600 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            Cek status pendaftaran secara berkala di website
+                            <span x-text="$store.lang.t('ppdb_success_check')">Cek status pendaftaran secara berkala di website</span>
                         </li>
                     </ul>
                 </div>
@@ -127,24 +130,24 @@
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                         </svg>
-                        Cek Status Pendaftaran
+                        <span x-text="$store.lang.t('ppdb_check_status_title')">Cek Status Pendaftaran</span>
                     </a>
 
                     <a href="{{ route('ppdb.index') }}"
                         class="inline-flex items-center px-6 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                        Kembali ke PPDB
+                        <span x-text="$store.lang.t('ppdb_status_back')">Kembali ke PPDB</span>
                     </a>
 
                     <a href="/"
                         class="inline-flex items-center px-6 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                        Kembali ke Website
+                        <span x-text="$store.lang.t('ppdb_success_back_website')">Kembali ke Website</span>
                     </a>
                 </div>
 
                 <!-- Contact Information -->
                 <div class="mt-8 pt-8 border-t border-gray-200">
                     <p class="text-sm text-gray-600 mb-2">
-                        <strong>Butuh bantuan?</strong> Hubungi kami:
+                        <strong x-text="$store.lang.t('ppdb_success_help')">Butuh bantuan?</strong> Hubungi kami:
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center text-sm text-gray-600">
                         <span>📞 +62 21 1234 5678</span>

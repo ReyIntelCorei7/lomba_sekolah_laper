@@ -16,6 +16,9 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Translation System -->
+    @include('partials.translations')
+
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
@@ -26,7 +29,7 @@
     </style>
 </head>
 
-<body class="bg-gray-50">
+<body class="bg-gray-50" x-data>
     <!-- Navbar Component -->
     <x-navbar :solid-background="true" />
 
@@ -65,28 +68,31 @@
                     @endif
                 </div>
 
-                <h1 class="text-3xl font-bold text-gray-900">Status Pendaftaran</h1>
+                <h1 class="text-3xl font-bold text-gray-900" x-text="$store.lang.t('ppdb_status_title')">Status Pendaftaran</h1>
                 <div class="mt-4">
                     <span class="inline-flex items-center px-6 py-2 rounded-full text-lg font-semibold {{ $config['bg'] }} {{ $config['text'] }}">
-                        {{ $config['label'] }}
+                        <template x-if="'{{ $student->status }}' === 'pending'"><span x-text="$store.lang.t('ppdb_status_pending')">{{ $config['label'] }}</span></template>
+                        <template x-if="'{{ $student->status }}' === 'accepted'"><span x-text="$store.lang.t('ppdb_status_accepted')">{{ $config['label'] }}</span></template>
+                        <template x-if="'{{ $student->status }}' === 'rejected'"><span x-text="$store.lang.t('ppdb_status_rejected')">{{ $config['label'] }}</span></template>
+                        <template x-if="'{{ $student->status }}' === 'waiting'"><span x-text="$store.lang.t('ppdb_status_waiting')">{{ $config['label'] }}</span></template>
                     </span>
                 </div>
             </div>
 
             <!-- Student Information -->
             <div class="px-6 py-6">
-                <h2 class="text-lg font-semibold text-gray-900 mb-4">Data Pendaftaran</h2>
+                <h2 class="text-lg font-semibold text-gray-900 mb-4" x-text="$store.lang.t('ppdb_status_data')">Data Pendaftaran</h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Registration Info -->
                     <div class="space-y-4">
                         <div class="bg-gray-50 rounded-lg p-4">
-                            <p class="text-sm text-gray-500">Nomor Pendaftaran</p>
+                            <p class="text-sm text-gray-500" x-text="$store.lang.t('ppdb_status_reg_number')">Nomor Pendaftaran</p>
                             <p class="text-lg font-semibold text-gray-900">{{ $student->registration_number }}</p>
                         </div>
 
                         <div class="bg-gray-50 rounded-lg p-4">
-                            <p class="text-sm text-gray-500">Nama Lengkap</p>
+                            <p class="text-sm text-gray-500" x-text="$store.lang.t('ppdb_form_name')">Nama Lengkap</p>
                             <p class="text-lg font-semibold text-gray-900">{{ $student->full_name }}</p>
                         </div>
 
@@ -99,19 +105,19 @@
                     <!-- Program Info -->
                     <div class="space-y-4">
                         <div class="bg-gray-50 rounded-lg p-4">
-                            <p class="text-sm text-gray-500">Program Keahlian</p>
+                            <p class="text-sm text-gray-500" x-text="$store.lang.t('ppdb_form_program')">Program Keahlian</p>
                             <p class="text-lg font-semibold text-gray-900">{{ $student->program->name ?? '-' }}</p>
                         </div>
 
                         <div class="bg-gray-50 rounded-lg p-4">
-                            <p class="text-sm text-gray-500">Tanggal Pendaftaran</p>
+                            <p class="text-sm text-gray-500" x-text="$store.lang.t('ppdb_status_date')">Tanggal Pendaftaran</p>
                             <p class="text-lg font-semibold text-gray-900">
                                 {{ $student->registered_at ? $student->registered_at->format('d F Y, H:i') : '-' }}
                             </p>
                         </div>
 
                         <div class="bg-gray-50 rounded-lg p-4">
-                            <p class="text-sm text-gray-500">Tipe Pendaftaran</p>
+                            <p class="text-sm text-gray-500" x-text="$store.lang.t('ppdb_status_type')">Tipe Pendaftaran</p>
                             <p class="text-lg font-semibold text-gray-900 capitalize">{{ $student->registration_type ?? 'Online' }}</p>
                         </div>
                     </div>
@@ -120,19 +126,19 @@
                 <!-- Status Message -->
                 <div class="mt-6 p-4 rounded-lg {{ $config['bg'] }} border border-{{ explode('-', $config['text'])[1] }}-200">
                     @if($student->status === 'pending')
-                    <p class="{{ $config['text'] }}">
+                    <p class="{{ $config['text'] }}" x-text="$store.lang.t('ppdb_status_pending_msg')">
                         <strong>Pendaftaran Anda sedang diproses.</strong> Tim kami sedang memverifikasi data dan dokumen yang Anda kirim. Mohon tunggu beberapa hari kerja untuk hasil verifikasi.
                     </p>
                     @elseif($student->status === 'accepted')
-                    <p class="{{ $config['text'] }}">
+                    <p class="{{ $config['text'] }}" x-text="$store.lang.t('ppdb_status_accepted_msg')">
                         <strong>Selamat! Pendaftaran Anda diterima.</strong> Silakan lakukan daftar ulang sesuai dengan jadwal yang telah ditentukan. Informasi lebih lanjut akan dikirim ke email Anda.
                     </p>
                     @elseif($student->status === 'rejected')
-                    <p class="{{ $config['text'] }}">
+                    <p class="{{ $config['text'] }}" x-text="$store.lang.t('ppdb_status_rejected_msg')">
                         <strong>Mohon maaf, pendaftaran Anda tidak dapat kami terima.</strong> Untuk informasi lebih lanjut, silakan hubungi bagian PPDB kami.
                     </p>
                     @elseif($student->status === 'waiting')
-                    <p class="{{ $config['text'] }}">
+                    <p class="{{ $config['text'] }}" x-text="$store.lang.t('ppdb_status_waiting_msg')">
                         <strong>Anda berada dalam waiting list.</strong> Jika ada kuota yang tersedia, kami akan menghubungi Anda melalui email atau telepon.
                     </p>
                     @endif
@@ -140,7 +146,7 @@
 
                 @if($student->notes)
                 <div class="mt-4 p-4 rounded-lg bg-gray-100 border border-gray-200">
-                    <p class="text-sm text-gray-500 mb-1">Catatan Admin:</p>
+                    <p class="text-sm text-gray-500 mb-1" x-text="$store.lang.t('ppdb_status_admin_notes')">Catatan Admin:</p>
                     <p class="text-gray-700">{{ $student->notes }}</p>
                 </div>
                 @endif
@@ -151,11 +157,11 @@
                 <div class="flex flex-col sm:flex-row gap-3">
                     <a href="{{ route('ppdb.check') }}"
                         class="flex-1 text-center px-4 py-3 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">
-                        Cek Pendaftaran Lain
+                        <span x-text="$store.lang.t('ppdb_status_check_other')">Cek Pendaftaran Lain</span>
                     </a>
                     <a href="{{ route('ppdb.index') }}"
                         class="flex-1 text-center px-4 py-3 rounded-lg text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors">
-                        Kembali ke PPDB
+                        <span x-text="$store.lang.t('ppdb_status_back')">Kembali ke PPDB</span>
                     </a>
                 </div>
             </div>
@@ -164,7 +170,7 @@
         <!-- Contact -->
         <div class="mt-6 text-center">
             <p class="text-sm text-gray-600">
-                Ada pertanyaan? Hubungi kami di
+                <span x-text="$store.lang.t('ppdb_status_questions')">Ada pertanyaan? Hubungi kami di</span>
                 <a href="tel:+6221234567" class="text-blue-600 hover:text-blue-500">+62 21 1234 5678</a>
                 atau email
                 <a href="mailto:ppdb@smkmetland.sch.id" class="text-blue-600 hover:text-blue-500">ppdb@smkmetland.sch.id</a>

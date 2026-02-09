@@ -9,6 +9,9 @@
     <meta name="description" content="Temui para alumni SMK Metland yang telah berhasil di berbagai bidang industri">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <!-- Translation System -->
+    @include('partials.translations')
+
     <style>
         .alumni-card {
             perspective: 1000px;
@@ -123,13 +126,13 @@
                 <!-- Badge -->
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-medium mb-6">
                     <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
-                    Cerita Sukses Alumni
+                    <span x-text="$store.lang.t('alumni_success_story')">Cerita Sukses Alumni</span>
                 </div>
 
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-cyan-300 to-blue-300">Alumni</span> Kami
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-cyan-300 to-blue-300">Alumni</span> <span x-text="$store.lang.t('nav_home')==='Home' ? '' : 'Kami'">Kami</span>
                 </h1>
-                <p class="text-base md:text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed">
+                <p class="text-base md:text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed" x-text="$store.lang.t('alumni_subtitle')">
                     Temui para alumni SMK Metland yang telah sukses berkarir di berbagai industri, membuktikan kualitas pendidikan kami.
                 </p>
 
@@ -137,15 +140,15 @@
                 <div class="flex justify-center gap-8 md:gap-12 mt-8">
                     <div class="text-center">
                         <div class="text-3xl md:text-4xl font-bold text-white">{{ $alumni->total() }}+</div>
-                        <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider">Alumni</div>
+                        <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider" x-text="$store.lang.t('alumni_stats')">Alumni</div>
                     </div>
                     <div class="text-center">
                         <div class="text-3xl md:text-4xl font-bold text-white">5</div>
-                        <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider">Jurusan</div>
+                        <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider" x-text="$store.lang.t('alumni_programs')">Jurusan</div>
                     </div>
                     <div class="text-center">
                         <div class="text-3xl md:text-4xl font-bold text-white">10+</div>
-                        <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider">Tahun</div>
+                        <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider" x-text="$store.lang.t('alumni_years')">Tahun</div>
                     </div>
                 </div>
             </div>
@@ -160,7 +163,7 @@
 
                 <select name="year" onchange="this.form.submit()"
                     class="px-4 py-2 bg-gray-100 border border-gray-200 rounded-full text-gray-700 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    <option value="">Semua Tahun</option>
+                <option value="" x-text="$store.lang.t('alumni_all_years')">Semua Tahun</option>
                     @foreach($years as $year)
                     <option value="{{ $year }}" {{ request('year') == $year ? 'selected' : '' }}>{{ $year }}</option>
                     @endforeach
@@ -168,14 +171,14 @@
 
                 <select name="program" onchange="this.form.submit()"
                     class="px-4 py-2 bg-gray-100 border border-gray-200 rounded-full text-gray-700 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    <option value="">Semua Jurusan</option>
+                    <option value="" x-text="$store.lang.t('alumni_all_programs')">Semua Jurusan</option>
                     @foreach($programs as $key => $label)
                     <option value="{{ $key }}" {{ request('program') === $key ? 'selected' : '' }}>{{ $label }}</option>
                     @endforeach
                 </select>
 
                 @if(request()->hasAny(['year', 'program']))
-                <a href="{{ route('alumni.index') }}" class="text-sm text-blue-600 hover:text-blue-800 font-medium">
+                <a href="{{ route('alumni.index') }}" class="text-sm text-blue-600 hover:text-blue-800 font-medium" x-text="$store.lang.t('alumni_reset_filter')">
                     Reset Filter
                 </a>
                 @endif
@@ -282,8 +285,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13-5.803a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold text-gray-800 mb-2">Belum Ada Alumni</h3>
-                <p class="text-gray-500">Data alumni belum tersedia untuk filter yang dipilih.</p>
+                <h3 class="text-xl font-bold text-gray-800 mb-2" x-text="$store.lang.t('alumni_no_alumni')">Belum Ada Alumni</h3>
+                <p class="text-gray-500" x-text="$store.lang.t('alumni_no_alumni_desc')">Data alumni belum tersedia untuk filter yang dipilih.</p>
             </div>
             @endif
         </div>
@@ -292,12 +295,12 @@
     <!-- CTA Section -->
     <section class="bg-gradient-to-r from-[#1E2188] to-[#2a2d9e] py-16">
         <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
-            <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">Jadilah Bagian dari Alumni Sukses!</h2>
-            <p class="text-blue-100 mb-8 max-w-2xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-4" x-text="$store.lang.t('alumni_cta_title')">Jadilah Bagian dari Alumni Sukses!</h2>
+            <p class="text-blue-100 mb-8 max-w-2xl mx-auto" x-text="$store.lang.t('alumni_cta_desc')">
                 Bergabunglah dengan SMK Metland dan bangun karir impianmu bersama kami.
             </p>
             <a href="/ppdb" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#1E2188] font-bold rounded-full hover:bg-blue-50 transition-colors shadow-lg hover:shadow-xl">
-                Daftar Sekarang
+                <span x-text="$store.lang.t('btn_register')">Daftar Sekarang</span>
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>

@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Admin Login - SMK Metland</title>
+    <link rel="icon" href="{{ asset('image/logometland.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('image/logometland.png') }}" type="image/png">
+    <link rel="apple-touch-icon" href="{{ asset('image/logometland.png') }}">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

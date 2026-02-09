@@ -5,9 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metland School - Kurikulum</title>
+    <link rel="icon" href="{{ asset('image/logometland.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('image/logometland.png') }}" type="image/png">
+    <link rel="apple-touch-icon" href="{{ asset('image/logometland.png') }}">
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Translation System -->
+    @include('partials.translations')
 
     <!-- Alpine -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>

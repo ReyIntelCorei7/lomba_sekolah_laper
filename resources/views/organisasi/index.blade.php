@@ -8,6 +8,10 @@
     <title>Organisasi - SMK Metland School</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Translation System -->
+    @include('partials.translations')
+
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -35,7 +39,7 @@
 
         .org-card:hover {
             transform: translateY(-12px);
-            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.25);
+            box-shadow: 0 25px 50px -12px rgba(30, 33, 136, 0.25);
         }
 
         /* Logo pulse animation */
@@ -74,27 +78,27 @@
     </style>
 </head>
 
-<body class="bg-gray-900 text-gray-100 min-h-screen">
+<body class="bg-gray-900 text-gray-100 min-h-screen" x-data>
     <!-- Navbar -->
     @include('components.navbar', ['solidBackground' => true, 'showOnScroll' => false])
 
     <!-- Hero Section -->
     <section class="relative pt-32 pb-20 overflow-hidden">
         <!-- Background -->
-        <div class="absolute inset-0 bg-gradient-to-b from-purple-900/50 via-gray-900 to-gray-900"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#1E2188]/50 via-gray-900 to-gray-900"></div>
         <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%239C92AC\' fill-opacity=\'0.1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
 
         <div class="relative max-w-7xl mx-auto px-6 text-center">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium mb-6">
-                <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
-                {{ $organizations->count() }} Organisasi Aktif
+                <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                {{ $organizations->count() }} <span x-text="$store.lang.t('org_active')">Organisasi Aktif</span>
             </div>
 
             <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
-                Organi<span class="text-purple-400">sasi</span>
+                Organi<span class="text-blue-400">sasi</span>
             </h1>
 
-            <p class="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-12">
+            <p class="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-12" x-text="$store.lang.t('org_subtitle')">
                 Wadah pengembangan karakter dan kepemimpinan siswa melalui berbagai organisasi sekolah
             </p>
 
@@ -102,16 +106,44 @@
             <div class="flex flex-wrap justify-center gap-3">
                 <a href="{{ route('organisasi.index') }}"
                     class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
-                        {{ !request('category') ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
-                    🌟 Semua
+                        {{ !request('category') ? 'bg-[#1E2188] text-white shadow-lg shadow-[#1E2188]/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
+                    🌟 <span x-text="$store.lang.t('org_all')">Semua</span>
                 </a>
-                @foreach($categories as $key => $label)
-                <a href="{{ route('organisasi.index', ['category' => $key]) }}"
+                <a href="{{ route('organisasi.index', ['category' => 'osis']) }}"
                     class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
-                        {{ request('category') === $key ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
-                    {{ $label }}
+                        {{ request('category') === 'osis' ? 'bg-[#1E2188] text-white shadow-lg shadow-[#1E2188]/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
+                    🏛️ <span x-text="$store.lang.t('org_cat_osis')">OSIS</span>
                 </a>
-                @endforeach
+                <a href="{{ route('organisasi.index', ['category' => 'mpk']) }}"
+                    class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
+                        {{ request('category') === 'mpk' ? 'bg-[#1E2188] text-white shadow-lg shadow-[#1E2188]/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
+                    ⚖️ <span x-text="$store.lang.t('org_cat_mpk')">MPK</span>
+                </a>
+                <a href="{{ route('organisasi.index', ['category' => 'pramuka']) }}"
+                    class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
+                        {{ request('category') === 'pramuka' ? 'bg-[#1E2188] text-white shadow-lg shadow-[#1E2188]/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
+                    ⚜️ <span x-text="$store.lang.t('org_cat_pramuka')">Pramuka</span>
+                </a>
+                <a href="{{ route('organisasi.index', ['category' => 'pmr']) }}"
+                    class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
+                        {{ request('category') === 'pmr' ? 'bg-[#1E2188] text-white shadow-lg shadow-[#1E2188]/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
+                    🏥 <span x-text="$store.lang.t('org_cat_pmr')">PMR</span>
+                </a>
+                <a href="{{ route('organisasi.index', ['category' => 'paskibra']) }}"
+                    class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
+                        {{ request('category') === 'paskibra' ? 'bg-[#1E2188] text-white shadow-lg shadow-[#1E2188]/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
+                    🎖️ <span x-text="$store.lang.t('org_cat_paskibra')">Paskibra</span>
+                </a>
+                <a href="{{ route('organisasi.index', ['category' => 'rohis']) }}"
+                    class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
+                        {{ request('category') === 'rohis' ? 'bg-[#1E2188] text-white shadow-lg shadow-[#1E2188]/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
+                    🕌 <span x-text="$store.lang.t('org_cat_rohis')">Rohis</span>
+                </a>
+                <a href="{{ route('organisasi.index', ['category' => 'other']) }}"
+                    class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
+                        {{ request('category') === 'other' ? 'bg-[#1E2188] text-white shadow-lg shadow-[#1E2188]/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
+                    🎯 <span x-text="$store.lang.t('org_cat_other')">Lainnya</span>
+                </a>
             </div>
         </div>
     </section>
@@ -123,7 +155,7 @@
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($organizations as $index => $org)
                 <a href="{{ route('organisasi.show', $org->slug) }}"
-                    class="org-card group relative bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700 hover:border-purple-500/50 animate-fade-in-up"
+                    class="org-card group relative bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700 hover:border-blue-500/50 animate-fade-in-up"
                     style="animation-delay: {{ $index * 0.1 }}s">
 
                     <!-- Image -->
@@ -132,7 +164,7 @@
                         <img src="{{ asset('storage/' . $org->image) }}" alt="{{ $org->name }}"
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                         @else
-                        <div class="w-full h-full bg-gradient-to-br from-purple-900 to-indigo-900 flex items-center justify-center">
+                        <div class="w-full h-full bg-gradient-to-br from-[#1E2188] to-blue-900 flex items-center justify-center">
                             <span class="text-6xl opacity-50">{{ substr($org->category_label, 0, 2) }}</span>
                         </div>
                         @endif
@@ -146,7 +178,7 @@
                             <img src="{{ asset('storage/' . $org->logo) }}" alt="{{ $org->abbreviation ?? $org->name }}" class="w-full h-full object-contain">
                         </div>
                         @else
-                        <div class="absolute top-4 left-4 w-14 h-14 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-xl shadow-2xl flex items-center justify-center">
+                        <div class="absolute top-4 left-4 w-14 h-14 bg-gradient-to-br from-[#1E2188] to-blue-600 rounded-xl shadow-2xl flex items-center justify-center">
                             <span class="text-xl font-bold text-white">{{ $org->abbreviation ? substr($org->abbreviation, 0, 2) : substr($org->name, 0, 2) }}</span>
                         </div>
                         @endif
@@ -161,9 +193,9 @@
                     <div class="p-6">
                         <div class="flex items-start justify-between gap-4 mb-3">
                             <div>
-                                <h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">{{ $org->name }}</h3>
+                                <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">{{ $org->name }}</h3>
                                 @if($org->abbreviation)
-                                <p class="text-purple-400 font-semibold text-sm">{{ $org->abbreviation }}</p>
+                                <p class="text-blue-400 font-semibold text-sm">{{ $org->abbreviation }}</p>
                                 @endif
                             </div>
                         </div>
@@ -182,11 +214,8 @@
                             </p>
                             @endif
 
-                            <span class="text-purple-400 font-medium text-sm flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                            <span class="text-blue-400 font-medium text-sm flex items-center gap-1 group-hover:translate-x-1 transition-transform" x-text="$store.lang.t('org_detail')">
                                 Detail
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                                </svg>
                             </span>
                         </div>
                     </div>
@@ -200,25 +229,25 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-2">Belum Ada Organisasi</h3>
-                <p class="text-gray-400">Organisasi sedang dalam persiapan</p>
+                <h3 class="text-xl font-bold text-white mb-2" x-text="$store.lang.t('org_no_org')">Belum Ada Organisasi</h3>
+                <p class="text-gray-400" x-text="$store.lang.t('org_no_org_desc')">Organisasi sedang dalam persiapan</p>
             </div>
             @endif
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20 bg-gradient-to-b from-gray-900 to-purple-900/50">
+    <section class="py-20 bg-gradient-to-b from-gray-900 to-[#1E2188]/50">
         <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6" x-text="$store.lang.t('org_cta_title')">
                 Jadilah Bagian dari Kami!
             </h2>
-            <p class="text-gray-300 text-lg mb-8">
+            <p class="text-gray-300 text-lg mb-8" x-text="$store.lang.t('org_cta_desc')">
                 Bergabung dengan organisasi siswa dan kembangkan jiwa kepemimpinanmu
             </p>
             <a href="{{ route('ppdb.index') }}"
-                class="inline-flex items-center gap-2 px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-full transition-all hover:scale-105 shadow-lg shadow-purple-600/30">
-                Daftar PPDB
+                class="inline-flex items-center gap-2 px-8 py-4 bg-[#1E2188] hover:bg-blue-800 text-white font-bold rounded-full transition-all hover:scale-105 shadow-lg shadow-[#1E2188]/30">
+                <span x-text="$store.lang.t('org_register_ppdb')">Daftar PPDB</span>
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                 </svg>

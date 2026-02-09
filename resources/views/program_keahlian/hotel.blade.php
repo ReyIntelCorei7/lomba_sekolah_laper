@@ -9,6 +9,10 @@
     <link rel="icon" href="/image/logometland.png" type="image/png">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <!-- Translation System -->
+    @include('partials.translations')
+
+
     <style>
         html {
             scroll-behavior: smooth;

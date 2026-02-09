@@ -16,6 +16,9 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Translation System -->
+    @include('partials.translations')
+
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
@@ -26,7 +29,7 @@
     </style>
 </head>
 
-<body class="bg-gray-50">
+<body class="bg-gray-50" x-data>
     <!-- Navbar Component -->
     <x-navbar :solid-background="true" />
 
@@ -40,15 +43,15 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                         </svg>
                     </div>
-                    <h1 class="text-3xl font-bold text-gray-900">Cek Status Pendaftaran</h1>
-                    <p class="mt-2 text-gray-600">Masukkan nomor pendaftaran dan email untuk melihat status</p>
+                    <h1 class="text-3xl font-bold text-gray-900" x-text="$store.lang.t('ppdb_check_title')">Cek Status Pendaftaran</h1>
+                    <p class="mt-2 text-gray-600" x-text="$store.lang.t('ppdb_check_subtitle')">Masukkan nomor pendaftaran dan email untuk melihat status</p>
                 </div>
 
                 <form method="POST" action="{{ route('ppdb.status') }}" class="space-y-6">
                     @csrf
 
                     <div>
-                        <label for="registration_number" class="block text-sm font-medium text-gray-700">Nomor Pendaftaran</label>
+                        <label for="registration_number" class="block text-sm font-medium text-gray-700" x-text="$store.lang.t('ppdb_check_reg_number')">Nomor Pendaftaran</label>
                         <input type="text" name="registration_number" id="registration_number" required
                             value="{{ old('registration_number') }}"
                             placeholder="Contoh: 20260001"
@@ -59,7 +62,7 @@
                     </div>
 
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <label for="email" class="block text-sm font-medium text-gray-700" x-text="$store.lang.t('ppdb_form_email')">Email</label>
                         <input type="email" name="email" id="email" required
                             value="{{ old('email') }}"
                             placeholder="email@example.com"
@@ -72,32 +75,32 @@
                     <div>
                         <button type="submit"
                             class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                            Cek Status
+                            <span x-text="$store.lang.t('ppdb_check_btn')">Cek Status</span>
                         </button>
                     </div>
                 </form>
 
                 <!-- Information -->
                 <div class="mt-8 bg-gray-50 border border-gray-200 rounded-lg p-6">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">Informasi</h3>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4" x-text="$store.lang.t('ppdb_important_info')">Informasi</h3>
                     <ul class="space-y-2 text-sm text-gray-600">
                         <li class="flex items-start">
-                            <svg class="h-4 w-4 text-gray-400 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="h-4 w-4 text-gray-400 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            Nomor pendaftaran diberikan setelah menyelesaikan formulir pendaftaran
+                            <span x-text="$store.lang.t('ppdb_check_info_1')">Nomor pendaftaran diberikan setelah menyelesaikan formulir pendaftaran</span>
                         </li>
                         <li class="flex items-start">
-                            <svg class="h-4 w-4 text-gray-400 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="h-4 w-4 text-gray-400 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            Gunakan email yang sama dengan saat mendaftar
+                            <span x-text="$store.lang.t('ppdb_check_info_2')">Gunakan email yang sama dengan saat mendaftar</span>
                         </li>
                         <li class="flex items-start">
-                            <svg class="h-4 w-4 text-gray-400 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="h-4 w-4 text-gray-400 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            Status akan diperbarui secara berkala oleh tim admin
+                            <span x-text="$store.lang.t('ppdb_check_info_3')">Status akan diperbarui secara berkala oleh tim admin</span>
                         </li>
                     </ul>
                 </div>
@@ -105,13 +108,13 @@
                 <!-- Contact -->
                 <div class="mt-6 text-center">
                     <p class="text-sm text-gray-600">
-                        Belum mendaftar?
+                        <span x-text="$store.lang.t('ppdb_check_not_registered')">Belum mendaftar?</span>
                         <a href="{{ route('ppdb.create') }}" class="text-blue-600 hover:text-blue-500 font-medium">
-                            Daftar sekarang
+                            <span x-text="$store.lang.t('ppdb_check_register_now')">Daftar sekarang</span>
                         </a>
                     </p>
                     <p class="text-sm text-gray-600 mt-2">
-                        Butuh bantuan? Hubungi kami di
+                        <span x-text="$store.lang.t('ppdb_check_need_help')">Butuh bantuan? Hubungi kami di</span>
                         <a href="tel:+6221234567" class="text-blue-600 hover:text-blue-500">+62 21 1234 5678</a>
                     </p>
                 </div>

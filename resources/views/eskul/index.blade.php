@@ -10,6 +10,9 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Translation System -->
+    @include('partials.translations')
+
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
@@ -81,7 +84,7 @@
     </style>
 </head>
 
-<body class="bg-gray-900 text-gray-100 min-h-screen">
+<body class="bg-gray-900 text-gray-100 min-h-screen" x-data>
     <!-- Navbar -->
     @include('components.navbar', ['solidBackground' => true, 'showOnScroll' => false])
 
@@ -94,31 +97,49 @@
         <div class="relative max-w-7xl mx-auto px-6 text-center">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium mb-6">
                 <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                Lebih dari {{ $extracurriculars->count() }} Kegiatan Aktif
+                {{ $extracurriculars->count() }}+ <span x-text="$store.lang.t('eskul_active')">Kegiatan Aktif</span>
             </div>
 
             <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
                 Ekstra<span class="text-blue-400">kurikuler</span>
             </h1>
 
-            <p class="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-12">
+            <p class="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-12" x-text="$store.lang.t('eskul_subtitle')">
                 Kembangkan bakat dan minatmu melalui berbagai kegiatan ekstrakurikuler yang menarik dan berprestasi
             </p>
 
             <!-- Category Filter Pills -->
-            <div x-data="{ activeCategory: '{{ request('category') }}' }" class="flex flex-wrap justify-center gap-3">
+            <div class="flex flex-wrap justify-center gap-3">
                 <a href="{{ route('eskul.index') }}"
                     class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
                         {{ !request('category') ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
-                    🌟 Semua
+                    🌟 <span x-text="$store.lang.t('eskul_all')">Semua</span>
                 </a>
-                @foreach($categories as $key => $label)
-                <a href="{{ route('eskul.index', ['category' => $key]) }}"
+                <a href="{{ route('eskul.index', ['category' => 'sports']) }}"
                     class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
-                        {{ request('category') === $key ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
-                    {{ $label }}
+                        {{ request('category') === 'sports' ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
+                    ⚽ <span x-text="$store.lang.t('eskul_cat_sports')">Olahraga</span>
                 </a>
-                @endforeach
+                <a href="{{ route('eskul.index', ['category' => 'arts']) }}"
+                    class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
+                        {{ request('category') === 'arts' ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
+                    🎨 <span x-text="$store.lang.t('eskul_cat_arts')">Seni</span>
+                </a>
+                <a href="{{ route('eskul.index', ['category' => 'academic']) }}"
+                    class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
+                        {{ request('category') === 'academic' ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
+                    📚 <span x-text="$store.lang.t('eskul_cat_academic')">Akademik</span>
+                </a>
+                <a href="{{ route('eskul.index', ['category' => 'technology']) }}"
+                    class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
+                        {{ request('category') === 'technology' ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
+                    💻 <span x-text="$store.lang.t('eskul_cat_technology')">Teknologi</span>
+                </a>
+                <a href="{{ route('eskul.index', ['category' => 'other']) }}"
+                    class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
+                        {{ request('category') === 'other' ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
+                    🎯 <span x-text="$store.lang.t('eskul_cat_other')">Lainnya</span>
+                </a>
             </div>
         </div>
     </section>
@@ -211,14 +232,14 @@
 
                             @if($eskul->achievements)
                             <div class="mt-4 pt-4 border-t border-white/20">
-                                <p class="text-xs text-blue-300 font-medium mb-2">🏆 Prestasi</p>
+                                <p class="text-xs text-blue-300 font-medium mb-2">🏆 <span x-text="$store.lang.t('eskul_achievements')">Prestasi</span></p>
                                 <p class="text-gray-300 text-xs line-clamp-2">{{ $eskul->achievements }}</p>
                             </div>
                             @endif
 
                             <a href="{{ route('eskul.show', $eskul->slug) }}"
                                 class="mt-4 block text-center py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-lg font-medium transition-colors">
-                                Lihat Detail →
+                                <span x-text="$store.lang.t('eskul_view_detail')">Lihat Detail →</span>
                             </a>
                         </div>
                     </div>
@@ -232,8 +253,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-2">Belum Ada Eskul</h3>
-                <p class="text-gray-400">Ekstrakurikuler sedang dalam persiapan</p>
+                <h3 class="text-xl font-bold text-white mb-2" x-text="$store.lang.t('eskul_no_eskul')">Belum Ada Eskul</h3>
+                <p class="text-gray-400" x-text="$store.lang.t('eskul_no_eskul_desc')">Ekstrakurikuler sedang dalam persiapan</p>
             </div>
             @endif
         </div>
@@ -242,15 +263,15 @@
     <!-- CTA Section -->
     <section class="py-20 bg-gradient-to-b from-gray-900 to-[#1E2188]">
         <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6" x-text="$store.lang.t('eskul_cta_title')">
                 Siap Bergabung?
             </h2>
-            <p class="text-gray-300 text-lg mb-8">
+            <p class="text-gray-300 text-lg mb-8" x-text="$store.lang.t('eskul_cta_desc')">
                 Daftar sekarang dan kembangkan potensimu bersama kami!
             </p>
             <a href="{{ route('ppdb.index') }}"
                 class="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full transition-all hover:scale-105 shadow-lg shadow-blue-600/30">
-                Daftar PPDB
+                <span x-text="$store.lang.t('org_register_ppdb')">Daftar PPDB</span>
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                 </svg>

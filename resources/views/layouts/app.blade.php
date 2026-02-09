@@ -5,9 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metland School - SMK Pariwisata</title>
+    <link rel="icon" href="{{ asset('image/logometland.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('image/logometland.png') }}" type="image/png">
+    <link rel="apple-touch-icon" href="{{ asset('image/logometland.png') }}">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Translation System (load before Alpine.js) -->
+    <script src="{{ asset('js/translations.js') }}"></script>
+
+    <!-- Alpine.js Global Store for Language -->
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('lang', {
+                current: localStorage.getItem('lang') || 'id',
+                
+                toggle() {
+                    this.current = this.current === 'id' ? 'en' : 'id';
+                    localStorage.setItem('lang', this.current);
+                },
+                
+                set(lang) {
+                    this.current = lang;
+                    localStorage.setItem('lang', this.current);
+                },
+                
+                t(key) {
+                    return window.t ? window.t(key, this.current) : key;
+                }
+            });
+        });
+    </script>
 
     <!-- Alpine.js Intersect Plugin -->
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>

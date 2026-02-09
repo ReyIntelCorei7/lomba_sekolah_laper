@@ -8,6 +8,9 @@
     <title>{{ $program->name }} - SMK Metland</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <!-- Translation System -->
+    @include('partials.translations')
+
     @php
     use Illuminate\Support\Facades\Storage;
 

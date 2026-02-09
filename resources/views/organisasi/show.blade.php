@@ -8,6 +8,10 @@
     <title>{{ $organization->name }} - SMK Metland School</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Translation System -->
+    @include('partials.translations')
+
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -29,7 +33,7 @@
     </style>
 </head>
 
-<body class="bg-gray-900 text-gray-100 min-h-screen">
+<body class="bg-gray-900 text-gray-100 min-h-screen" x-data>
     <!-- Navbar -->
     @include('components.navbar', ['solidBackground' => true, 'showOnScroll' => false])
 
@@ -40,7 +44,7 @@
             <img src="{{ asset('storage/' . $organization->image) }}" alt="{{ $organization->name }}"
                 class="w-full h-full object-cover">
             @else
-            <div class="w-full h-full bg-gradient-to-br from-purple-900 to-indigo-900"></div>
+            <div class="w-full h-full bg-gradient-to-br from-[#1E2188] to-blue-900"></div>
             @endif
             <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
         </div>
@@ -52,7 +56,7 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
-                    Kembali ke Daftar Organisasi
+                    <span x-text="$store.lang.t('org_back_list')">Kembali ke Daftar Organisasi</span>
                 </a>
 
                 <div class="flex items-center gap-6 mb-4">
@@ -62,7 +66,7 @@
                         <img src="{{ asset('storage/' . $organization->logo) }}" alt="{{ $organization->abbreviation ?? $organization->name }}" class="w-full h-full object-contain">
                     </div>
                     @else
-                    <div class="w-20 h-20 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-2xl shadow-2xl flex items-center justify-center flex-shrink-0">
+                    <div class="w-20 h-20 bg-gradient-to-br from-[#1E2188] to-blue-600 rounded-2xl shadow-2xl flex items-center justify-center flex-shrink-0">
                         <span class="text-2xl font-bold text-white">{{ $organization->abbreviation ? substr($organization->abbreviation, 0, 3) : substr($organization->name, 0, 3) }}</span>
                     </div>
                     @endif
@@ -73,17 +77,17 @@
                         </span>
                         <h1 class="text-3xl md:text-4xl font-bold text-white">{{ $organization->name }}</h1>
                         @if($organization->abbreviation)
-                        <p class="text-purple-400 font-semibold text-lg">{{ $organization->abbreviation }}</p>
+                        <p class="text-blue-400 font-semibold text-lg">{{ $organization->abbreviation }}</p>
                         @endif
                     </div>
                 </div>
 
                 @if($organization->advisor)
                 <div class="flex items-center gap-2 text-gray-300">
-                    <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                     </svg>
-                    <span>Pembina: {{ $organization->advisor }}</span>
+                    <span><span x-text="$store.lang.t('org_advisor')">Pembina</span>: {{ $organization->advisor }}</span>
                 </div>
                 @endif
             </div>
@@ -98,7 +102,7 @@
                 <div class="lg:col-span-2 space-y-8">
                     @if($organization->description)
                     <div class="bg-gray-800/50 rounded-2xl p-8 border border-gray-700">
-                        <h2 class="text-xl font-bold text-white mb-4">Tentang Organisasi</h2>
+                        <h2 class="text-xl font-bold text-white mb-4" x-text="$store.lang.t('org_about')">Tentang Organisasi</h2>
                         <p class="text-gray-300 leading-relaxed whitespace-pre-line">{{ $organization->description }}</p>
                     </div>
                     @endif
@@ -106,9 +110,9 @@
                     @if($organization->vision || $organization->mission)
                     <div class="grid md:grid-cols-2 gap-6">
                         @if($organization->vision)
-                        <div class="bg-gradient-to-br from-purple-900/30 to-indigo-900/30 rounded-2xl p-6 border border-purple-700/30">
+                        <div class="bg-gradient-to-br from-[#1E2188]/30 to-blue-900/30 rounded-2xl p-6 border border-blue-700/30">
                             <h3 class="text-lg font-bold text-white mb-3 flex items-center gap-2">
-                                <span class="text-xl">🎯</span> Visi
+                                <span class="text-xl">🎯</span> <span x-text="$store.lang.t('org_vision')">Visi</span>
                             </h3>
                             <p class="text-gray-300 text-sm leading-relaxed">{{ $organization->vision }}</p>
                         </div>
@@ -117,7 +121,7 @@
                         @if($organization->mission)
                         <div class="bg-gradient-to-br from-blue-900/30 to-cyan-900/30 rounded-2xl p-6 border border-blue-700/30">
                             <h3 class="text-lg font-bold text-white mb-3 flex items-center gap-2">
-                                <span class="text-xl">🚀</span> Misi
+                                <span class="text-xl">🚀</span> <span x-text="$store.lang.t('org_mission')">Misi</span>
                             </h3>
                             <div class="text-gray-300 text-sm space-y-2">
                                 @foreach(explode("\n", $organization->mission) as $item)
@@ -139,7 +143,7 @@
                     @if($organization->achievements)
                     <div class="bg-gradient-to-br from-amber-900/30 to-amber-800/20 rounded-2xl p-8 border border-amber-700/30">
                         <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                            <span class="text-2xl">🏆</span> Prestasi
+                            <span class="text-2xl">🏆</span> <span x-text="$store.lang.t('org_achievements')">Prestasi</span>
                         </h2>
                         <div class="text-gray-300 space-y-2">
                             @foreach(explode("\n", $organization->achievements) as $achievement)
@@ -161,28 +165,28 @@
                 <div class="space-y-6">
                     <!-- Info Card -->
                     <div class="bg-gray-800/50 rounded-2xl p-6 border border-gray-700">
-                        <h3 class="text-lg font-bold text-white mb-4">Informasi</h3>
+                        <h3 class="text-lg font-bold text-white mb-4" x-text="$store.lang.t('org_info')">Informasi</h3>
                         <ul class="space-y-4">
                             <li class="flex items-center gap-3 text-gray-300">
-                                <div class="w-10 h-10 rounded-lg bg-purple-600/20 flex items-center justify-center">
-                                    <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="w-10 h-10 rounded-lg bg-blue-600/20 flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="text-xs text-gray-500">Kategori</p>
+                                    <p class="text-xs text-gray-500" x-text="$store.lang.t('org_category')">Kategori</p>
                                     <p class="font-medium">{{ $organization->category_label }}</p>
                                 </div>
                             </li>
                             @if($organization->advisor)
                             <li class="flex items-center gap-3 text-gray-300">
-                                <div class="w-10 h-10 rounded-lg bg-pink-600/20 flex items-center justify-center">
-                                    <svg class="w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="w-10 h-10 rounded-lg bg-blue-600/20 flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="text-xs text-gray-500">Pembina</p>
+                                    <p class="text-xs text-gray-500" x-text="$store.lang.t('org_advisor')">Pembina</p>
                                     <p class="font-medium">{{ $organization->advisor }}</p>
                                 </div>
                             </li>
@@ -195,7 +199,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="text-xs text-gray-500">Singkatan</p>
+                                    <p class="text-xs text-gray-500" x-text="$store.lang.t('org_abbreviation')">Singkatan</p>
                                     <p class="font-medium">{{ $organization->abbreviation }}</p>
                                 </div>
                             </li>
@@ -204,12 +208,12 @@
                     </div>
 
                     <!-- CTA -->
-                    <div class="bg-gradient-to-br from-purple-900 to-indigo-900 rounded-2xl p-6 text-center">
-                        <h3 class="text-lg font-bold text-white mb-2">Tertarik Bergabung?</h3>
-                        <p class="text-gray-300 text-sm mb-4">Daftar menjadi siswa SMK Metland dan ikuti organisasi ini!</p>
+                    <div class="bg-gradient-to-br from-[#1E2188] to-blue-900 rounded-2xl p-6 text-center">
+                        <h3 class="text-lg font-bold text-white mb-2" x-text="$store.lang.t('org_interested')">Tertarik Bergabung?</h3>
+                        <p class="text-gray-300 text-sm mb-4" x-text="$store.lang.t('org_interested_desc')">Daftar menjadi siswa SMK Metland dan ikuti organisasi ini!</p>
                         <a href="{{ route('ppdb.index') }}"
-                            class="inline-block w-full py-3 bg-white text-purple-900 font-bold rounded-xl hover:bg-gray-100 transition-colors">
-                            Daftar Sekarang
+                            class="inline-block w-full py-3 bg-white text-[#1E2188] font-bold rounded-xl hover:bg-gray-100 transition-colors">
+                            <span x-text="$store.lang.t('btn_register')">Daftar Sekarang</span>
                         </a>
                     </div>
                 </div>
@@ -221,11 +225,11 @@
     @if($related->count() > 0)
     <section class="py-16 bg-gray-800/30">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-2xl font-bold text-white mb-8">Organisasi Lainnya</h2>
+            <h2 class="text-2xl font-bold text-white mb-8" x-text="$store.lang.t('org_other')">Organisasi Lainnya</h2>
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($related as $item)
                 <a href="{{ route('organisasi.show', $item->slug) }}"
-                    class="group bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 hover:border-purple-500/50 transition-all">
+                    class="group bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-500/50 transition-all">
                     <div class="h-40 relative overflow-hidden">
                         @if($item->image)
                         <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}"
@@ -247,7 +251,7 @@
                         <div class="absolute bottom-4 left-4 right-4">
                             <h3 class="text-lg font-bold text-white">{{ $item->name }}</h3>
                             @if($item->abbreviation)
-                            <p class="text-purple-400 text-sm font-medium">{{ $item->abbreviation }}</p>
+                            <p class="text-blue-400 text-sm font-medium">{{ $item->abbreviation }}</p>
                             @endif
                         </div>
                     </div>

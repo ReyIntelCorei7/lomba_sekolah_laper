@@ -1,0 +1,340 @@
+/**
+ * SMK Metland School - Translation System
+ * Lightweight translation helper for Indonesian/English toggle
+ */
+
+window.translations = {
+  // ===== NAVBAR & NAVIGATION =====
+  nav_home: { id: 'Beranda', en: 'Home' },
+  nav_about: { id: 'Tentang Sekolah', en: 'About School' },
+  nav_programs: { id: 'Program Keahlian', en: 'Study Programs' },
+  nav_curriculum: { id: 'Kurikulum', en: 'Curriculum' },
+  nav_news: { id: 'Berita Sekolah', en: 'School News' },
+  nav_ppdb: { id: 'Pendaftaran', en: 'Registration' },
+  nav_contact: { id: 'Kontak', en: 'Contact' },
+  
+  // ===== MEGA MENU =====
+  menu_profile: { id: 'Profile Sekolah', en: 'School Profile' },
+  menu_vision: { id: 'Visi dan Misi', en: 'Vision & Mission' },
+  menu_extracurricular: { id: 'Ekstrakurikuler', en: 'Extracurricular' },
+  menu_organization: { id: 'Organisasi', en: 'Organization' },
+  menu_student_work: { id: 'Produk/Karya Siswa', en: 'Student Works' },
+  menu_alumni: { id: 'Tentang Alumni', en: 'About Alumni' },
+  
+  // ===== HOME PAGE - HERO =====
+  hero_badge: { id: 'SMK Pariwisata Unggulan', en: 'Leading Tourism Vocational School' },
+  hero_title_1: { id: 'Selamat Datang di', en: 'Welcome to' },
+  hero_title_2: { id: 'SMK Metland', en: 'Metland School' },
+  hero_subtitle: { id: 'Mencetak Generasi Unggul, Berkarakter, dan Siap Kerja melalui Pendidikan Vokasi Berkualitas', en: 'Creating Excellent, Character-driven, and Work-ready Generation through Quality Vocational Education' },
+  hero_cta_register: { id: 'Daftar Sekarang', en: 'Register Now' },
+  hero_cta_explore: { id: 'Jelajahi Program', en: 'Explore Programs' },
+  
+  // ===== HOME PAGE - STATS =====
+  stats_students: { id: 'Siswa Aktif', en: 'Active Students' },
+  stats_programs: { id: 'Program Keahlian', en: 'Study Programs' },
+  stats_teachers: { id: 'Tenaga Pendidik', en: 'Teachers' },
+  stats_partners: { id: 'Mitra Industri', en: 'Industry Partners' },
+  
+  // ===== HOME PAGE - SECTIONS =====
+  section_programs_title: { id: 'Program Keahlian Kami', en: 'Our Study Programs' },
+  section_programs_subtitle: { id: 'Pilih program keahlian yang sesuai dengan minat dan bakatmu', en: 'Choose the study program that matches your interests and talents' },
+  section_news_title: { id: 'Berita Sekolah', en: 'School News' },
+  section_news_subtitle: { id: 'Informasi terbaru seputar kegiatan dan prestasi sekolah', en: 'Latest information about school activities and achievements' },
+  section_partners_title: { id: 'Mitra Kerja Sama', en: 'Our Partners' },
+  
+  // ===== PROGRAMS =====
+  program_pplg: { id: 'Pengembangan Perangkat Lunak dan Gim', en: 'Software and Game Development' },
+  program_hotel: { id: 'Perhotelan', en: 'Hospitality' },
+  program_kuliner: { id: 'Kuliner', en: 'Culinary Arts' },
+  program_dkv: { id: 'Desain Komunikasi Visual', en: 'Visual Communication Design' },
+  program_akuntansi: { id: 'Akuntansi dan Keuangan Lembaga', en: 'Accounting & Institutional Finance' },
+  program_view_detail: { id: 'Lihat Detail', en: 'View Details' },
+  program_skills: { id: 'Kompetensi', en: 'Skills' },
+  program_careers: { id: 'Prospek Karir', en: 'Career Prospects' },
+  
+  // ===== ABOUT PAGE =====
+  about_title: { id: 'Tentang Sekolah Kami', en: 'About Our School' },
+  about_subtitle: { id: 'Menyelami sejarah, nilai budaya, visi, dan misi Metland School', en: 'Exploring the history, cultural values, vision, and mission of Metland School' },
+  about_history: { id: 'Sejarah', en: 'History' },
+  about_history_title: { id: 'Sejarah Metland School', en: 'History of Metland School' },
+  about_vision_mission: { id: 'Visi & Misi', en: 'Vision & Mission' },
+  about_vision: { id: 'Visi Kami', en: 'Our Vision' },
+  about_mission: { id: 'Misi Kami', en: 'Our Mission' },
+  about_values: { id: 'Nilai Budaya', en: 'Cultural Values' },
+  about_values_title: { id: 'Nilai Budaya Sekolah', en: 'School Cultural Values' },
+  about_gcp: { id: 'Generasi Cinta Prestasi', en: 'Generation of Love for Achievement' },
+  about_established: { id: 'Didirikan', en: 'Established' },
+  about_accreditation: { id: 'Akreditasi', en: 'Accreditation' },
+  
+  // ===== ABOUT - VALUES =====
+  value_love: { id: 'Cinta', en: 'Love' },
+  value_god: { id: 'Cinta Kepada Tuhan', en: 'Love for God' },
+  value_parents: { id: 'Cinta Orang Tua', en: 'Love for Parents' },
+  value_teachers: { id: 'Cinta Kepada Guru', en: 'Love for Teachers' },
+  value_knowledge: { id: 'Cinta Ilmu Pengetahuan', en: 'Love for Knowledge' },
+  value_nation: { id: 'Cinta Bangsa & Tanah Air', en: 'Love for Nation & Country' },
+  value_environment: { id: 'Cinta Lingkungan', en: 'Love for Environment' },
+  value_friends: { id: 'Cinta Sahabat & Sesama', en: 'Love for Friends & Others' },
+  value_self: { id: 'Cinta Diri Sendiri', en: 'Love for Self' },
+  
+  // ===== ABOUT - ACHIEVEMENT VALUES =====
+  achievement_confident: { id: 'Percaya Diri yang Kuat', en: 'Strong Self-Confidence' },
+  achievement_optimistic: { id: 'Riang dan Selalu Optimis', en: 'Cheerful and Always Optimistic' },
+  achievement_empathy: { id: 'Empati', en: 'Empathy' },
+  achievement_healthy: { id: 'Sehat Jiwa dan Raga', en: 'Healthy Mind and Body' },
+  achievement_resilient: { id: 'Tidak Mudah Menyerah dan Putus Asa', en: 'Never Give Up Easily' },
+  achievement_leader: { id: 'Amanah Sebagai Pemimpin', en: 'Trustworthy as a Leader' },
+  achievement_independent: { id: 'Siap Menjadi Pribadi Mandiri', en: 'Ready to be Independent' },
+  achievement_innovative: { id: 'Inovatif Dalam Karya yang Bermanfaat', en: 'Innovative in Beneficial Works' },
+  
+  // ===== CURRICULUM PAGE =====
+  curriculum_title: { id: 'Kurikulum Sekolah', en: 'School Curriculum' },
+  curriculum_subtitle: { id: 'Kurikulum yang dirancang untuk membentuk karakter, kompetensi, dan kesiapan masa depan', en: 'Curriculum designed to build character, competency, and future readiness' },
+  curriculum_about: { id: 'Tentang Kurikulum', en: 'About Curriculum' },
+  curriculum_about_title: { id: 'Kurikulum SMK Metland', en: 'SMK Metland Curriculum' },
+  curriculum_types: { id: 'Jenis Kurikulum', en: 'Curriculum Types' },
+  curriculum_types_title: { id: 'Kurikulum yang Kami Terapkan', en: 'Curriculums We Implement' },
+  curriculum_merdeka: { id: 'Kurikulum Merdeka', en: 'Merdeka Curriculum' },
+  curriculum_teaching_factory: { id: 'Teaching Factory', en: 'Teaching Factory' },
+  curriculum_link_match: { id: 'Link & Match', en: 'Link & Match' },
+  curriculum_methods: { id: 'Metode Pembelajaran', en: 'Learning Methods' },
+  curriculum_methods_title: { id: 'Pendekatan Inovatif dalam Pembelajaran', en: 'Innovative Approach in Learning' },
+  curriculum_pbl: { id: 'Project Based Learning', en: 'Project Based Learning' },
+  curriculum_practice: { id: 'Praktik Langsung', en: 'Hands-on Practice' },
+  curriculum_collaboration: { id: 'Kolaborasi & Presentasi', en: 'Collaboration & Presentation' },
+  curriculum_digital: { id: 'Teknologi Digital', en: 'Digital Technology' },
+  curriculum_industry: { id: 'Kesiapan Industri', en: 'Industry Readiness' },
+  curriculum_industry_title: { id: 'Kurikulum Berbasis Dunia Industri', en: 'Industry-Based Curriculum' },
+  curriculum_internship: { id: 'Program Magang Industri', en: 'Industrial Internship Program' },
+  curriculum_certification: { id: 'Sertifikasi Kompetensi', en: 'Competency Certification' },
+  
+  // ===== NEWS PAGE =====
+  news_title: { id: 'Berita Sekolah', en: 'School News' },
+  news_subtitle: { id: 'Informasi terbaru seputar kegiatan dan prestasi sekolah', en: 'Latest information about school activities and achievements' },
+  news_all: { id: 'Semua', en: 'All' },
+  news_academic: { id: 'Akademik', en: 'Academic' },
+  news_achievement: { id: 'Prestasi', en: 'Achievement' },
+  news_event: { id: 'Kegiatan', en: 'Event' },
+  news_read_more: { id: 'Baca Selengkapnya', en: 'Read More' },
+  news_share: { id: 'Bagikan', en: 'Share' },
+  news_published: { id: 'Dipublikasikan', en: 'Published' },
+  news_empty: { id: 'Belum ada berita', en: 'No news yet' },
+  
+  // ===== PPDB PAGE =====
+  ppdb_title: { id: 'Penerimaan Peserta Didik Baru', en: 'New Student Admission' },
+  ppdb_year: { id: 'SMK Pariwisata Metland School 2026/2027', en: 'SMK Pariwisata Metland School 2026/2027' },
+  ppdb_subtitle: { id: 'Bergabunglah dengan kami dan raih masa depan gemilang di industri pariwisata', en: 'Join us and achieve a bright future in the tourism industry' },
+  ppdb_register_now: { id: 'Daftar Sekarang', en: 'Register Now' },
+  ppdb_online_reg: { id: 'Pendaftaran Online', en: 'Online Registration' },
+  ppdb_online_desc: { id: 'Daftar melalui website', en: 'Register through website' },
+  ppdb_offline_reg: { id: 'Pendaftaran Offline', en: 'Offline Registration' },
+  ppdb_offline_desc: { id: 'Datang langsung ke sekolah', en: 'Come directly to school' },
+  ppdb_important_info: { id: 'Informasi Penting', en: 'Important Information' },
+  ppdb_info_1: { id: 'Pendaftaran gratis dan tidak dipungut biaya apapun', en: 'Registration is free and no fees are charged' },
+  ppdb_info_2: { id: 'Siapkan dokumen: Ijazah/SKHUN, Kartu Keluarga, Akta Kelahiran', en: 'Prepare documents: Certificate/SKHUN, Family Card, Birth Certificate' },
+  ppdb_info_3: { id: 'Foto 3x4 terbaru dan pas foto digital', en: 'Latest 3x4 photo and digital passport photo' },
+  ppdb_info_4: { id: 'Hasil akan diumumkan melalui website dan WhatsApp', en: 'Results will be announced via website and WhatsApp' },
+  ppdb_programs: { id: 'Program Keahlian', en: 'Study Programs' },
+  ppdb_capacity: { id: 'Kapasitas', en: 'Capacity' },
+  ppdb_students: { id: 'siswa', en: 'students' },
+  ppdb_registered: { id: 'terdaftar', en: 'registered' },
+  ppdb_contact: { id: 'Kontak', en: 'Contact' },
+  ppdb_phone: { id: 'Telepon', en: 'Phone' },
+  ppdb_address: { id: 'Alamat', en: 'Address' },
+  ppdb_check_status_title: { id: 'Cek Status Pendaftaran', en: 'Check Registration Status' },
+  ppdb_check_status_desc: { id: 'Sudah mendaftar? Cek status pendaftaran Anda di sini.', en: 'Already registered? Check your registration status here.' },
+  ppdb_check_btn: { id: 'Cek Status', en: 'Check Status' },
+  
+  // PPDB Form
+  ppdb_form_title: { id: 'Formulir Pendaftaran PPDB', en: 'PPDB Registration Form' },
+  ppdb_form_personal: { id: 'Data Pribadi', en: 'Personal Information' },
+  ppdb_form_name: { id: 'Nama Lengkap', en: 'Full Name' },
+  ppdb_form_email: { id: 'Email', en: 'Email' },
+  ppdb_form_phone: { id: 'No. Telepon', en: 'Phone Number' },
+  ppdb_form_gender: { id: 'Jenis Kelamin', en: 'Gender' },
+  ppdb_form_gender_select: { id: 'Pilih Jenis Kelamin', en: 'Select Gender' },
+  ppdb_form_male: { id: 'Laki-laki', en: 'Male' },
+  ppdb_form_female: { id: 'Perempuan', en: 'Female' },
+  ppdb_form_birthdate: { id: 'Tanggal Lahir', en: 'Date of Birth' },
+  ppdb_form_birthplace: { id: 'Tempat Lahir', en: 'Place of Birth' },
+  ppdb_form_address: { id: 'Alamat Lengkap', en: 'Full Address' },
+  ppdb_form_parent: { id: 'Data Orang Tua/Wali', en: 'Parent/Guardian Information' },
+  ppdb_form_parent_name: { id: 'Nama Orang Tua/Wali', en: 'Parent/Guardian Name' },
+  ppdb_form_parent_phone: { id: 'No. Telepon Orang Tua', en: 'Parent Phone Number' },
+  ppdb_form_parent_job: { id: 'Pekerjaan Orang Tua', en: 'Parent Occupation' },
+  ppdb_form_education: { id: 'Data Pendidikan', en: 'Education Information' },
+  ppdb_form_school: { id: 'Asal Sekolah', en: 'Previous School' },
+  ppdb_form_grade: { id: 'Rata-rata Nilai', en: 'Average Grade' },
+  ppdb_form_program: { id: 'Program Keahlian', en: 'Study Program' },
+  ppdb_form_program_select: { id: 'Pilih Program Keahlian', en: 'Select Study Program' },
+  ppdb_form_documents: { id: 'Upload Dokumen', en: 'Upload Documents' },
+  ppdb_form_photo: { id: 'Pas Foto', en: 'Passport Photo' },
+  ppdb_form_certificate: { id: 'Ijazah/SKHUN', en: 'Certificate/SKHUN' },
+  ppdb_form_transcript: { id: 'Transkrip Nilai', en: 'Transcript' },
+  ppdb_form_cancel: { id: 'Batal', en: 'Cancel' },
+  ppdb_form_submit: { id: 'Daftar Sekarang', en: 'Register Now' },
+  
+  // PPDB Check Status
+  ppdb_check_title: { id: 'Cek Status Pendaftaran', en: 'Check Registration Status' },
+  ppdb_check_subtitle: { id: 'Masukkan nomor pendaftaran dan email untuk melihat status', en: 'Enter registration number and email to view status' },
+  ppdb_check_reg_number: { id: 'Nomor Pendaftaran', en: 'Registration Number' },
+  ppdb_check_info_1: { id: 'Nomor pendaftaran diberikan setelah menyelesaikan formulir pendaftaran', en: 'Registration number is given after completing the registration form' },
+  ppdb_check_info_2: { id: 'Gunakan email yang sama dengan saat mendaftar', en: 'Use the same email as when registering' },
+  ppdb_check_info_3: { id: 'Status akan diperbarui secara berkala oleh tim admin', en: 'Status will be updated regularly by the admin team' },
+  ppdb_check_not_registered: { id: 'Belum mendaftar?', en: 'Not registered yet?' },
+  ppdb_check_register_now: { id: 'Daftar sekarang', en: 'Register now' },
+  ppdb_check_need_help: { id: 'Butuh bantuan? Hubungi kami di', en: 'Need help? Contact us at' },
+  
+  // PPDB Status
+  ppdb_status_title: { id: 'Status Pendaftaran', en: 'Registration Status' },
+  ppdb_status_pending: { id: 'Menunggu Verifikasi', en: 'Pending Verification' },
+  ppdb_status_accepted: { id: 'Diterima', en: 'Accepted' },
+  ppdb_status_rejected: { id: 'Tidak Diterima', en: 'Not Accepted' },
+  ppdb_status_waiting: { id: 'Waiting List', en: 'Waiting List' },
+  ppdb_status_data: { id: 'Data Pendaftaran', en: 'Registration Data' },
+  ppdb_status_reg_number: { id: 'Nomor Pendaftaran', en: 'Registration Number' },
+  ppdb_status_date: { id: 'Tanggal Pendaftaran', en: 'Registration Date' },
+  ppdb_status_type: { id: 'Tipe Pendaftaran', en: 'Registration Type' },
+  ppdb_status_pending_msg: { id: 'Pendaftaran Anda sedang diproses. Tim kami sedang memverifikasi data dan dokumen yang Anda kirim. Mohon tunggu beberapa hari kerja untuk hasil verifikasi.', en: 'Your registration is being processed. Our team is verifying the data and documents you submitted. Please wait a few business days for verification results.' },
+  ppdb_status_accepted_msg: { id: 'Selamat! Pendaftaran Anda diterima. Silakan lakukan daftar ulang sesuai dengan jadwal yang telah ditentukan. Informasi lebih lanjut akan dikirim ke email Anda.', en: 'Congratulations! Your registration is accepted. Please re-register according to the scheduled timeline. Further information will be sent to your email.' },
+  ppdb_status_rejected_msg: { id: 'Mohon maaf, pendaftaran Anda tidak dapat kami terima. Untuk informasi lebih lanjut, silakan hubungi bagian PPDB kami.', en: 'We are sorry, your registration cannot be accepted. For more information, please contact our PPDB department.' },
+  ppdb_status_waiting_msg: { id: 'Anda berada dalam waiting list. Jika ada kuota yang tersedia, kami akan menghubungi Anda melalui email atau telepon.', en: 'You are on the waiting list. If there is available quota, we will contact you via email or phone.' },
+  ppdb_status_admin_notes: { id: 'Catatan Admin:', en: 'Admin Notes:' },
+  ppdb_status_check_other: { id: 'Cek Pendaftaran Lain', en: 'Check Other Registration' },
+  ppdb_status_back: { id: 'Kembali ke PPDB', en: 'Back to PPDB' },
+  ppdb_status_questions: { id: 'Ada pertanyaan? Hubungi kami di', en: 'Any questions? Contact us at' },
+  
+  // PPDB Success
+  ppdb_success_title: { id: 'Pendaftaran Berhasil!', en: 'Registration Successful!' },
+  ppdb_success_thanks: { id: 'Terima kasih telah mendaftar di SMK Pariwisata Metland School', en: 'Thank you for registering at SMK Pariwisata Metland School' },
+  ppdb_success_details: { id: 'Detail Pendaftaran', en: 'Registration Details' },
+  ppdb_success_save: { id: 'Simpan nomor pendaftaran Anda:', en: 'Save your registration number:' },
+  ppdb_success_verify: { id: 'Data Anda akan diverifikasi dalam 1-3 hari kerja', en: 'Your data will be verified within 1-3 business days' },
+  ppdb_success_result: { id: 'Hasil seleksi akan dikirim melalui email dan WhatsApp', en: 'Selection results will be sent via email and WhatsApp' },
+  ppdb_success_check: { id: 'Cek status pendaftaran secara berkala di website', en: 'Check registration status regularly on the website' },
+  ppdb_success_help: { id: 'Butuh bantuan?', en: 'Need help?' },
+  ppdb_success_back_website: { id: 'Kembali ke Website', en: 'Back to Website' },
+  
+  // ===== EXTRACURRICULAR =====
+  eskul_title: { id: 'Ekstrakurikuler', en: 'Extracurricular Activities' },
+  eskul_subtitle: { id: 'Kembangkan bakat dan minatmu melalui berbagai kegiatan ekstrakurikuler yang menarik dan berprestasi', en: 'Develop your talents and interests through various exciting and award-winning extracurricular activities' },
+  eskul_view_detail: { id: 'Lihat Detail →', en: 'View Details →' },
+  eskul_active: { id: 'Kegiatan Aktif', en: 'Active Activities' },
+  eskul_all: { id: 'Semua', en: 'All' },
+  eskul_coach: { id: 'Pelatih', en: 'Coach' },
+  eskul_schedule: { id: 'Jadwal', en: 'Schedule' },
+  eskul_achievements: { id: 'Prestasi', en: 'Achievements' },
+  eskul_no_eskul: { id: 'Belum Ada Eskul', en: 'No Extracurriculars Yet' },
+  eskul_no_eskul_desc: { id: 'Ekstrakurikuler sedang dalam persiapan', en: 'Extracurriculars are being prepared' },
+  eskul_cta_title: { id: 'Siap Bergabung?', en: 'Ready to Join?' },
+  eskul_cta_desc: { id: 'Daftar sekarang dan kembangkan potensimu bersama kami!', en: 'Register now and develop your potential with us!' },
+  eskul_back_list: { id: 'Kembali ke Daftar Eskul', en: 'Back to Extracurricular List' },
+  eskul_about: { id: 'Tentang Ekstrakurikuler', en: 'About Extracurricular' },
+  eskul_info: { id: 'Informasi', en: 'Information' },
+  eskul_category: { id: 'Kategori', en: 'Category' },
+  eskul_other: { id: 'Eskul Lainnya', en: 'Other Extracurriculars' },
+  // Eskul Categories
+  eskul_cat_sports: { id: 'Olahraga', en: 'Sports' },
+  eskul_cat_arts: { id: 'Seni', en: 'Arts' },
+  eskul_cat_academic: { id: 'Akademik', en: 'Academic' },
+  eskul_cat_technology: { id: 'Teknologi', en: 'Technology' },
+  eskul_cat_other: { id: 'Lainnya', en: 'Others' },
+  
+  // ===== ORGANIZATION =====
+  org_title: { id: 'Organisasi', en: 'Organizations' },
+  org_subtitle: { id: 'Wadah pengembangan karakter dan kepemimpinan siswa melalui berbagai organisasi sekolah', en: 'Platform for developing student character and leadership through various school organizations' },
+  org_active: { id: 'Organisasi Aktif', en: 'Active Organizations' },
+  org_all: { id: 'Semua', en: 'All' },
+  org_detail: { id: 'Detail', en: 'Details' },
+  org_no_org: { id: 'Belum Ada Organisasi', en: 'No Organizations Yet' },
+  org_no_org_desc: { id: 'Organisasi sedang dalam persiapan', en: 'Organizations are being prepared' },
+  org_cta_title: { id: 'Jadilah Bagian dari Kami!', en: 'Be Part of Us!' },
+  org_cta_desc: { id: 'Bergabung dengan organisasi siswa dan kembangkan jiwa kepemimpinanmu', en: 'Join student organizations and develop your leadership skills' },
+  org_register_ppdb: { id: 'Daftar PPDB', en: 'Register PPDB' },
+  org_back_list: { id: 'Kembali ke Daftar Organisasi', en: 'Back to Organization List' },
+  org_advisor: { id: 'Pembina', en: 'Advisor' },
+  org_about: { id: 'Tentang Organisasi', en: 'About Organization' },
+  org_vision: { id: 'Visi', en: 'Vision' },
+  org_mission: { id: 'Misi', en: 'Mission' },
+  org_achievements: { id: 'Prestasi', en: 'Achievements' },
+  org_info: { id: 'Informasi', en: 'Information' },
+  org_category: { id: 'Kategori', en: 'Category' },
+  org_abbreviation: { id: 'Singkatan', en: 'Abbreviation' },
+  org_interested: { id: 'Tertarik Bergabung?', en: 'Interested in Joining?' },
+  org_interested_desc: { id: 'Daftar menjadi siswa SMK Metland dan ikuti organisasi ini!', en: 'Register as a student at SMK Metland and join this organization!' },
+  org_other: { id: 'Organisasi Lainnya', en: 'Other Organizations' },
+  
+  // Organization Categories
+  org_cat_osis: { id: 'OSIS', en: 'Student Council' },
+  org_cat_mpk: { id: 'MPK', en: 'Student Parliament' },
+  org_cat_pramuka: { id: 'Pramuka', en: 'Scouts' },
+  org_cat_pmr: { id: 'PMR', en: 'Red Cross Youth' },
+  org_cat_paskibra: { id: 'Paskibra', en: 'Flag Hoisting Team' },
+  org_cat_rohis: { id: 'Rohis', en: 'Islamic Spirituality' },
+  org_cat_other: { id: 'Lainnya', en: 'Others' },
+  
+  // ===== ALUMNI =====
+  alumni_title: { id: 'Alumni SMK Metland', en: 'SMK Metland Alumni' },
+  alumni_subtitle: { id: 'Temui para alumni SMK Metland yang telah sukses berkarir di berbagai industri, membuktikan kualitas pendidikan kami.', en: 'Meet the SMK Metland alumni who have had successful careers in various industries, proving the quality of our education.' },
+  alumni_testimony: { id: 'Testimoni Alumni', en: 'Alumni Testimonials' },
+  alumni_work_at: { id: 'Bekerja di', en: 'Works at' },
+  alumni_batch: { id: 'Angkatan', en: 'Batch' },
+  alumni_success_story: { id: 'Cerita Sukses Alumni', en: 'Alumni Success Stories' },
+  alumni_our: { id: 'Alumni Kami', en: 'Our Alumni' },
+  alumni_stats: { id: 'Alumni', en: 'Alumni' },
+  alumni_programs: { id: 'Jurusan', en: 'Programs' },
+  alumni_years: { id: 'Tahun', en: 'Years' },
+  alumni_filter: { id: 'Filter', en: 'Filter' },
+  alumni_all_years: { id: 'Semua Tahun', en: 'All Years' },
+  alumni_all_programs: { id: 'Semua Jurusan', en: 'All Programs' },
+  alumni_reset_filter: { id: 'Reset Filter', en: 'Reset Filter' },
+  alumni_featured: { id: 'Featured', en: 'Featured' },
+  alumni_no_alumni: { id: 'Belum Ada Alumni', en: 'No Alumni Yet' },
+  alumni_no_alumni_desc: { id: 'Data alumni belum tersedia untuk filter yang dipilih.', en: 'Alumni data is not yet available for the selected filter.' },
+  alumni_cta_title: { id: 'Jadilah Bagian dari Alumni Sukses!', en: 'Become Part of Our Successful Alumni!' },
+  alumni_cta_desc: { id: 'Bergabunglah dengan SMK Metland dan bangun karir impianmu bersama kami.', en: 'Join SMK Metland and build your dream career with us.' },
+  
+  // ===== FOOTER =====
+  footer_about: { id: 'Tentang Kami', en: 'About Us' },
+  footer_about_desc: { id: 'SMK Pariwisata Metland adalah sekolah kejuruan unggulan yang berfokus pada pendidikan pariwisata dan teknologi.', en: 'SMK Pariwisata Metland is a leading vocational school focused on tourism and technology education.' },
+  footer_links: { id: 'Tautan Cepat', en: 'Quick Links' },
+  footer_programs: { id: 'Program Keahlian', en: 'Study Programs' },
+  footer_contact: { id: 'Hubungi Kami', en: 'Contact Us' },
+  footer_address: { id: 'Alamat', en: 'Address' },
+  footer_phone: { id: 'Telepon', en: 'Phone' },
+  footer_email: { id: 'Email', en: 'Email' },
+  footer_social: { id: 'Media Sosial', en: 'Social Media' },
+  footer_rights: { id: 'Hak Cipta', en: 'All Rights Reserved' },
+  
+  // ===== COMMON / BUTTONS =====
+  btn_learn_more: { id: 'Pelajari Lebih Lanjut', en: 'Learn More' },
+  btn_register: { id: 'Daftar Sekarang', en: 'Register Now' },
+  btn_view_all: { id: 'Lihat Semua', en: 'View All' },
+  btn_back: { id: 'Kembali', en: 'Back' },
+  btn_submit: { id: 'Kirim', en: 'Submit' },
+  btn_close: { id: 'Tutup', en: 'Close' },
+  btn_download: { id: 'Unduh', en: 'Download' },
+  btn_copy_link: { id: 'Salin Link', en: 'Copy Link' },
+  
+  // ===== ERROR PAGE =====
+  error_404_title: { id: 'Halaman Tidak Ditemukan', en: 'Page Not Found' },
+  error_404_desc: { id: 'Maaf, halaman yang Anda cari tidak ditemukan.', en: 'Sorry, the page you are looking for was not found.' },
+  error_back_home: { id: 'Kembali ke Beranda', en: 'Back to Home' },
+  
+  // ===== CTA SECTIONS =====
+  cta_ready_join: { id: 'Siap Bergabung dengan SMK Metland?', en: 'Ready to Join SMK Metland?' },
+  cta_ready_desc: { id: 'Daftarkan diri Anda dan jadilah bagian dari generasi unggul', en: 'Register yourself and become part of the excellent generation' },
+  cta_view_programs: { id: 'Lihat Program Keahlian', en: 'View Study Programs' },
+};
+
+/**
+ * Get translation by key
+ * @param {string} key - Translation key
+ * @param {string} lang - Language code (id/en)
+ * @returns {string} - Translated text
+ */
+window.t = function(key, lang) {
+  const translation = window.translations[key];
+  if (!translation) return key;
+  return translation[lang] || translation['id'] || key;
+};
