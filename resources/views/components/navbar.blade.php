@@ -28,7 +28,7 @@
     ]">
 
     <!-- Main Header Content -->
-    <div class="max-w-[1400px] mx-auto h-20 flex items-center justify-between gap-16 relative z-50"
+    <div class="max-w-[1400px] mx-auto px-4 md:px-0 h-20 flex items-center justify-between gap-16 relative z-50"
         :class="scrolled || {{ $solidBackground ? 'true' : 'false' }} ? 'h-16' : 'h-24'">
 
         <!-- Logo area -->
