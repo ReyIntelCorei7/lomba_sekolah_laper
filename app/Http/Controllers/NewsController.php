@@ -227,7 +227,7 @@ class NewsController extends Controller
         $data['is_published'] = $request->boolean('is_published');
         $data['is_featured'] = $request->boolean('is_featured');
 
-        // Only one featured news allowed - unfeatured all others
+        // One Featured at a time (News content)
         if ($data['is_featured']) {
             News::where('is_featured', true)->update(['is_featured' => false]);
         }

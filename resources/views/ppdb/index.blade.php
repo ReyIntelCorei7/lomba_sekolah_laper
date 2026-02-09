@@ -191,7 +191,7 @@ z
                     </div>
                 </div>
 
-                <!-- Check Status -->
+                <!-- Status -->
                 <div class="bg-white shadow rounded-lg overflow-hidden">
                     <div class="px-6 py-4 bg-gray-50 border-b">
                         <h3 class="text-lg font-medium text-gray-900">Cek Status Pendaftaran</h3>
