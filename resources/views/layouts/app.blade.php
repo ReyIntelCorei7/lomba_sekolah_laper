@@ -174,6 +174,88 @@
         [x-cloak] {
             display: none !important;
         }
+
+        /* Infinite Marquee Animations */
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes scroll-right {
+            0% {
+                transform: translateX(-50%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .marquee-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-container::before,
+        .marquee-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100px;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .marquee-container::before {
+            left: 0;
+            background: linear-gradient(to right, #ffffff, transparent);
+        }
+
+        .marquee-container::after {
+            right: 0;
+            background: linear-gradient(to left, #ffffff, transparent);
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+        }
+
+        .marquee-track-left {
+            animation: scroll-left 30s linear infinite;
+        }
+
+        .marquee-track-right {
+            animation: scroll-right 30s linear infinite;
+        }
+
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
+        .marquee-item {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 1rem;
+        }
+
+        .marquee-item img {
+            height: 96px;
+            width: auto;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .marquee-item:hover img {
+            opacity: 1;
+            transform: scale(1.1);
+        }
     </style>
 
     <!-- Tailwind Config -->
@@ -500,15 +582,61 @@
         </div>
     </section>
 
+    <!-- Partners/Tech Marquee Section -->
+    <section class="py-5 bg-white">
+        @php
+            // Get all images from industri folder
+            $industriImages = glob(public_path('image/industri/*'));
+            // Get all images from perguran folder
+            $perguranImages = glob(public_path('image/perguran/*'));
+        @endphp
+
+        <!-- Row 1: Scrolls Left - Industri Images -->
+        <div class="marquee-container mb-6">
+            <div class="marquee-track marquee-track-left">
+                <!-- First set of images -->
+                @foreach($industriImages as $image)
+                    <div class="marquee-item">
+                        <img src="{{ asset('image/industri/' . basename($image)) }}" alt="Partner Logo" class="h-18 w-auto object-contain">
+                    </div>
+                @endforeach
+                <!-- Duplicate set for seamless loop -->
+                @foreach($industriImages as $image)
+                    <div class="marquee-item">
+                        <img src="{{ asset('image/industri/' . basename($image)) }}" alt="Partner Logo" class="h-18 w-auto object-contain">
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <!-- Row 2: Scrolls Right - Perguruan Images -->
+        <div class="marquee-container">
+            <div class="marquee-track marquee-track-right">
+                <!-- First set of images -->
+                @foreach($perguranImages as $image)
+                    <div class="marquee-item">
+                        <img src="{{ asset('image/perguran/' . basename($image)) }}" alt="Partner Logo" class="h-12 w-auto object-contain">
+                    </div>
+                @endforeach
+                <!-- Duplicate set for seamless loop -->
+                @foreach($perguranImages as $image)
+                    <div class="marquee-item">
+                        <img src="{{ asset('image/perguran/' . basename($image)) }}" alt="Partner Logo" class="h-12 w-auto object-contain">
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
     <!-- Berita Sekolah -->
-    <section id="berita" class="py-24 bg-gray-50">
+    <section id="berita" class="py-24" style="background-color: #1E2188;">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
                 <div>
-                    <span class="text-blue-600 font-bold tracking-wider uppercase text-sm">Latest Updates</span>
-                    <h2 class="text-4xl font-bold text-gray-900 mt-2">{{ $settings['news_title'] ?? 'Berita Sekolah' }}</h2>
+                    <span class="text-blue-300 font-bold tracking-wider uppercase text-sm">Latest Updates</span>
+                    <h2 class="text-4xl font-bold text-white mt-2">{{ $settings['news_title'] ?? 'Berita Sekolah' }}</h2>
                 </div>
-                <a href="/news" class="hidden md:inline-flex items-center px-6 py-3 rounded-full bg-white border border-gray-200 text-gray-700 font-medium hover:bg-gray-50 hover:shadow-md transition-all">
+                <a href="/news" class="hidden md:inline-flex items-center px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium hover:bg-white/20 hover:shadow-md transition-all">
                     Lihat Semua Berita
                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -556,14 +684,14 @@
                     </div>
                 </article>
                 @empty
-                <div class="col-span-full text-center py-12 text-gray-500">
+                <div class="col-span-full text-center py-12 text-white/60">
                     Belum ada berita terbaru.
                 </div>
                 @endforelse
             </div>
 
             <div class="mt-8 text-center md:hidden">
-                <a href="/news" class="inline-flex items-center px-6 py-3 rounded-full bg-white border border-gray-200 text-gray-700 font-medium hover:bg-gray-50">
+                <a href="/news" class="inline-flex items-center px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium hover:bg-white/20">
                     Lihat Semua Berita
                 </a>
             </div>
