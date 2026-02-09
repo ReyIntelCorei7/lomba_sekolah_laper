@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/image/logometland.png" type="image/png">
     <title>Metland School - Berita Sekolah</title>
+
+
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
