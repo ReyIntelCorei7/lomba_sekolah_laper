@@ -59,7 +59,11 @@ RUN npm run build
 # Expose port
 EXPOSE 8080
 
-# Start command - create storage link, run migrations, then serve
-CMD php artisan storage:link --force 2>/dev/null || true && \
-    php artisan migrate --force && \
-    php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
+# Create startup script to handle PORT as integer
+RUN echo '#!/bin/bash\n\
+php artisan storage:link --force 2>/dev/null || true\n\
+php artisan migrate --force\n\
+php artisan serve --host=0.0.0.0 --port=8080' > /app/start.sh && chmod +x /app/start.sh
+
+# Start command
+CMD ["/bin/bash", "/app/start.sh"]
