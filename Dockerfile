@@ -12,7 +12,8 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     nodejs \
-    npm
+    npm \
+    dos2unix
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -56,14 +57,14 @@ RUN composer dump-autoload --optimize
 # Build frontend assets
 RUN npm run build
 
+# Convert start script to Unix line endings and make executable
+RUN dos2unix /app/docker/start.sh && chmod +x /app/docker/start.sh
+
 # Expose port
 EXPOSE 8080
 
-# Create startup script to handle PORT as integer
-RUN echo '#!/bin/bash\n\
-php artisan storage:link --force 2>/dev/null || true\n\
-php artisan migrate --force\n\
-php artisan serve --host=0.0.0.0 --port=8080' > /app/start.sh && chmod +x /app/start.sh
+# Set PORT environment variable to ensure it's an integer
+ENV PORT=8080
 
 # Start command
-CMD ["/bin/bash", "/app/start.sh"]
+CMD ["/bin/bash", "/app/docker/start.sh"]
