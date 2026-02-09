@@ -173,7 +173,7 @@
                     <div class="space-y-4 mb-8">
                         <div class="flex items-start gap-4">
                             <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
-                                <span class="text-2xl">💻</span>
+                                <svg class="w-6 h-6 text-[#1E2188]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                             </div>
                             <div>
                                 <h3 class="font-bold text-gray-900">Full-Stack Development</h3>
@@ -182,7 +182,7 @@
                         </div>
                         <div class="flex items-start gap-4">
                             <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
-                                <span class="text-2xl">📱</span>
+                                <svg class="w-6 h-6 text-[#1E2188]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
                             </div>
                             <div>
                                 <h3 class="font-bold text-gray-900">Mobile Development</h3>
@@ -191,7 +191,7 @@
                         </div>
                         <div class="flex items-start gap-4">
                             <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
-                                <span class="text-2xl">🎮</span>
+                                <svg class="w-6 h-6 text-[#1E2188]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" /></svg>
                             </div>
                             <div>
                                 <h3 class="font-bold text-gray-900">Game Development</h3>
@@ -210,7 +210,7 @@
                     <div class="absolute -bottom-6 -left-6 md:-left-12 bg-white rounded-2xl shadow-xl p-4 md:p-6 border border-gray-100 pulse-glow">
                         <div class="flex items-center gap-4">
                             <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-[#1E2188] to-blue-600 flex items-center justify-center">
-                                <span class="text-2xl">🚀</span>
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                             </div>
                             <div>
                                 <div class="text-2xl font-bold text-gray-900">Rp 8-25 Jt</div>
@@ -251,7 +251,7 @@
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div class="skill-card bg-white rounded-2xl p-6 border border-gray-100 shadow-lg">
                         <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1E2188] to-blue-600 flex items-center justify-center mb-4">
-                            <span class="text-2xl">🌐</span>
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
                         </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Web Development</h3>
                         <p class="text-gray-600">HTML, CSS, JavaScript, PHP, Laravel, dan framework modern.</p>
@@ -259,7 +259,7 @@
 
                     <div class="skill-card bg-white rounded-2xl p-6 border border-gray-100 shadow-lg">
                         <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center mb-4">
-                            <span class="text-2xl">📱</span>
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
                         </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Mobile Development</h3>
                         <p class="text-gray-600">Flutter, React Native, Android Studio untuk aplikasi mobile.</p>
@@ -267,7 +267,7 @@
 
                     <div class="skill-card bg-white rounded-2xl p-6 border border-gray-100 shadow-lg">
                         <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-blue-700 flex items-center justify-center mb-4">
-                            <span class="text-2xl">🎮</span>
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" /></svg>
                         </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Game Development</h3>
                         <p class="text-gray-600">Unity, Unreal Engine, dan desain game profesional.</p>
@@ -275,7 +275,7 @@
 
                     <div class="skill-card bg-white rounded-2xl p-6 border border-gray-100 shadow-lg">
                         <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1E2188] to-indigo-600 flex items-center justify-center mb-4">
-                            <span class="text-2xl">🗄️</span>
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
                         </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Database</h3>
                         <p class="text-gray-600">MySQL, PostgreSQL, MongoDB, dan manajemen database.</p>
@@ -283,7 +283,7 @@
 
                     <div class="skill-card bg-white rounded-2xl p-6 border border-gray-100 shadow-lg">
                         <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-[#1E2188] flex items-center justify-center mb-4">
-                            <span class="text-2xl">🔧</span>
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                         </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">DevOps & Git</h3>
                         <p class="text-gray-600">Version control, CI/CD, dan deployment aplikasi.</p>
@@ -291,7 +291,7 @@
 
                     <div class="skill-card bg-white rounded-2xl p-6 border border-gray-100 shadow-lg">
                         <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-600 to-blue-500 flex items-center justify-center mb-4">
-                            <span class="text-2xl">🤖</span>
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
                         </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">AI & Machine Learning</h3>
                         <p class="text-gray-600">Pengenalan AI, machine learning, dan otomasi.</p>
@@ -303,42 +303,42 @@
             <div x-show="activeTab === 'karir'" x-transition>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="skill-card bg-gradient-to-br from-[#1E2188] to-blue-700 rounded-2xl p-6 text-white">
-                        <div class="text-4xl mb-4">💻</div>
+                        <div class="w-12 h-12 mb-4"><svg class="w-full h-full text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg></div>
                         <h3 class="text-xl font-bold mb-2">Web Developer</h3>
                         <p class="text-blue-100 text-sm">Frontend & backend development</p>
                     </div>
                     <div class="skill-card bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-6 text-white">
-                        <div class="text-4xl mb-4">📱</div>
+                        <div class="w-12 h-12 mb-4"><svg class="w-full h-full text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg></div>
                         <h3 class="text-xl font-bold mb-2">Mobile Developer</h3>
                         <p class="text-blue-100 text-sm">Android & iOS apps</p>
                     </div>
                     <div class="skill-card bg-gradient-to-br from-indigo-600 to-blue-800 rounded-2xl p-6 text-white">
-                        <div class="text-4xl mb-4">🎮</div>
+                        <div class="w-12 h-12 mb-4"><svg class="w-full h-full text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" /></svg></div>
                         <h3 class="text-xl font-bold mb-2">Game Developer</h3>
                         <p class="text-blue-100 text-sm">Game design & programming</p>
                     </div>
                     <div class="skill-card bg-gradient-to-br from-[#1E2188] to-indigo-600 rounded-2xl p-6 text-white">
-                        <div class="text-4xl mb-4">🔧</div>
+                        <div class="w-12 h-12 mb-4"><svg class="w-full h-full text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg></div>
                         <h3 class="text-xl font-bold mb-2">IT Support</h3>
                         <p class="text-blue-100 text-sm">Technical support specialist</p>
                     </div>
                     <div class="skill-card bg-gradient-to-br from-blue-700 to-[#1E2188] rounded-2xl p-6 text-white">
-                        <div class="text-4xl mb-4">🗄️</div>
+                        <div class="w-12 h-12 mb-4"><svg class="w-full h-full text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg></div>
                         <h3 class="text-xl font-bold mb-2">Database Admin</h3>
                         <p class="text-blue-100 text-sm">Manajemen database perusahaan</p>
                     </div>
                     <div class="skill-card bg-gradient-to-br from-indigo-700 to-blue-600 rounded-2xl p-6 text-white">
-                        <div class="text-4xl mb-4">🚀</div>
+                        <div class="w-12 h-12 mb-4"><svg class="w-full h-full text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg></div>
                         <h3 class="text-xl font-bold mb-2">Startup Founder</h3>
                         <p class="text-blue-100 text-sm">Membangun bisnis teknologi</p>
                     </div>
                     <div class="skill-card bg-gradient-to-br from-blue-600 to-[#1E2188] rounded-2xl p-6 text-white">
-                        <div class="text-4xl mb-4">💼</div>
+                        <div class="w-12 h-12 mb-4"><svg class="w-full h-full text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg></div>
                         <h3 class="text-xl font-bold mb-2">Freelancer</h3>
                         <p class="text-blue-100 text-sm">Bekerja remote dari mana saja</p>
                     </div>
                     <div class="skill-card bg-gradient-to-br from-slate-600 to-slate-800 rounded-2xl p-6 text-white">
-                        <div class="text-4xl mb-4">🎓</div>
+                        <div class="w-12 h-12 mb-4"><svg class="w-full h-full text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /></svg></div>
                         <h3 class="text-xl font-bold mb-2">Kuliah S1</h3>
                         <p class="text-slate-300 text-sm">Teknik Informatika/SI</p>
                     </div>

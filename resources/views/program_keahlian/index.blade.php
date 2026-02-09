@@ -121,64 +121,48 @@
     <!-- Navbar Component -->
     <x-navbar :solid-background="true" :show-on-scroll="false" />
 
-    <!-- Hero Section with Animated Background -->
-    <section class="relative min-h-[500px] md:min-h-[600px] w-full overflow-hidden mt-16">
+    <!-- Hero Section with School Background -->
+    <section class="relative h-[400px] md:h-[500px] w-full overflow-hidden">
+        <!-- Background Image with Ken Burns Effect -->
         <div class="absolute inset-0">
-            <div class="absolute inset-0 bg-gradient-to-br from-[#1E2188] via-[#2a2d9e] to-[#0f1054]"></div>
-
-            <div class="absolute inset-0 hex-pattern opacity-50"></div>
-
-            <div class="particle" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
-            <div class="particle" style="left: 20%; top: 60%; animation-delay: 2s; width: 12px; height: 12px;"></div>
-            <div class="particle" style="left: 70%; top: 30%; animation-delay: 4s;"></div>
-            <div class="particle" style="left: 80%; top: 70%; animation-delay: 6s; width: 10px; height: 10px;"></div>
-            <div class="particle" style="left: 50%; top: 80%; animation-delay: 8s;"></div>
-
-            <div class="absolute top-20 left-10 w-64 h-64 rounded-full bg-blue-500/20 blur-3xl animate-pulse"></div>
-            <div class="absolute bottom-20 right-20 w-80 h-80 rounded-full bg-purple-500/20 blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+            <img src="/image/sekolahsmkmetland.png" class="absolute inset-0 w-full h-full object-cover scale-110 animate-[kenBurns_20s_ease-in-out_infinite_alternate]">
         </div>
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-r from-[#1a1a1a]/95 via-[#1a1a1a]/70 to-[#1a1a1a]/40 md:from-[#1a1a1a]/90 md:via-[#1a1a1a]/60 md:to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/80 via-transparent to-transparent"></div>
 
-        <!-- Content -->
-        <div class="relative z-10 h-full max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24 flex items-center justify-center text-center">
-            <div>
+        <!-- Content - Text on Left -->
+        <div class="relative z-10 h-full max-w-7xl mx-auto px-4 md:px-6 flex items-center">
+            <div class="max-w-2xl mt-16 md:mt-20">
                 <!-- Badge -->
-                <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-medium mb-8 shadow-xl">
-                    <span class="relative flex h-2.5 w-2.5">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-400"></span>
-                    </span>
+                <div class="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-[10px] md:text-xs font-medium mb-4 md:mb-6">
+                    <span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-blue-500 animate-pulse"></span>
                     5 Program Keahlian Unggulan
                 </div>
 
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
-                    Pilih <span class="animated-gradient">Masa Depanmu</span>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 leading-tight">
+                    Program<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Keahlian</span>
                 </h1>
-                <p class="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed mb-10">
+                <p class="text-sm md:text-lg text-gray-300 leading-relaxed max-w-xl">
                     Temukan program keahlian yang sesuai dengan passion dan bakatmu.
                     Kembangkan skill profesional untuk karir cemerlang di industri.
                 </p>
 
-                <!-- Stats -->
-                <div class="flex flex-wrap justify-center gap-6 md:gap-12">
-                    <div class="bg-white/10 backdrop-blur-md rounded-2xl px-6 py-4 border border-white/20">
-                        <div class="text-3xl md:text-4xl font-bold text-white">5</div>
-                        <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider">Program</div>
+                <!-- Quick Stats -->
+                <div class="flex gap-6 md:gap-8 mt-6 md:mt-8">
+                    <div class="text-center">
+                        <div class="text-2xl md:text-3xl font-bold text-white">5</div>
+                        <div class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider">Program</div>
                     </div>
-                    <div class="bg-white/10 backdrop-blur-md rounded-2xl px-6 py-4 border border-white/20">
-                        <div class="text-3xl md:text-4xl font-bold text-white">100+</div>
-                        <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider">Mitra Industri</div>
+                    <div class="text-center">
+                        <div class="text-2xl md:text-3xl font-bold text-white">100+</div>
+                        <div class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider">Mitra Industri</div>
                     </div>
-                    <div class="bg-white/10 backdrop-blur-md rounded-2xl px-6 py-4 border border-white/20">
-                        <div class="text-3xl md:text-4xl font-bold text-white">95%</div>
-                        <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider">Tingkat Kerja</div>
+                    <div class="text-center">
+                        <div class="text-2xl md:text-3xl font-bold text-white">95%</div>
+                        <div class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider">Tingkat Kerja</div>
                     </div>
-                </div>
-
-                <!-- Scroll Indicator -->
-                <div class="mt-12 animate-bounce">
-                    <svg class="w-8 h-8 mx-auto text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
                 </div>
             </div>
         </div>
@@ -204,13 +188,15 @@
                     <div class="program-card-inner glow relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-full">
                         <div class="h-2 bg-gradient-to-r from-[#1E2188] to-blue-600"></div>
                         <div class="pt-8 pb-4 px-6">
-                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-[#1E2188] to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/30 text-3xl">
-                                💰
+                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-[#1E2188] to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/30">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
                             </div>
                         </div>
                         <div class="px-6 pb-8 text-center">
-                            <div class="inline-block px-3 py-1 bg-blue-100/50 text-blue-700 text-xs font-bold rounded-full mb-3">AKL</div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1E2188] transition-colors">Akuntansi & Keuangan Lembaga</h3>
+                            <div class="inline-block px-3 py-1 bg-blue-100/50 text-blue-700 text-xs font-bold rounded-full mb-3">AKT</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1E2188] transition-colors">Akuntansi</h3>
                             <p class="text-gray-600 text-sm mb-4 line-clamp-3">Menjadi ahli keuangan profesional dengan pemahaman akuntansi dan manajemen keuangan yang solid.</p>
                             <div class="flex items-center justify-center gap-1 text-[#1E2188] font-semibold text-sm">
                                 Lihat Detail
@@ -227,8 +213,10 @@
                     <div class="program-card-inner glow relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-full">
                         <div class="h-2 bg-gradient-to-r from-blue-500 to-indigo-600"></div>
                         <div class="pt-8 pb-4 px-6">
-                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/30 text-3xl">
-                                🎨
+                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/30">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                                </svg>
                             </div>
                         </div>
                         <div class="px-6 pb-8 text-center">
@@ -250,8 +238,10 @@
                     <div class="program-card-inner glow relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-full">
                         <div class="h-2 bg-gradient-to-r from-indigo-500 to-blue-700"></div>
                         <div class="pt-8 pb-4 px-6">
-                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-indigo-500 to-blue-700 flex items-center justify-center shadow-lg shadow-indigo-500/30 text-3xl">
-                                🏨
+                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-indigo-500 to-blue-700 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                </svg>
                             </div>
                         </div>
                         <div class="px-6 pb-8 text-center">
@@ -273,8 +263,10 @@
                     <div class="program-card-inner glow relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-full">
                         <div class="h-2 bg-gradient-to-r from-blue-600 to-[#1E2188]"></div>
                         <div class="pt-8 pb-4 px-6">
-                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-blue-600 to-[#1E2188] flex items-center justify-center shadow-lg shadow-blue-500/30 text-3xl">
-                                👨‍🍳
+                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-blue-600 to-[#1E2188] flex items-center justify-center shadow-lg shadow-blue-500/30">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                </svg>
                             </div>
                         </div>
                         <div class="px-6 pb-8 text-center">
@@ -296,8 +288,10 @@
                     <div class="program-card-inner glow relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-full">
                         <div class="h-2 bg-gradient-to-r from-indigo-600 to-blue-600"></div>
                         <div class="pt-8 pb-4 px-6">
-                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-indigo-600 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/30 text-3xl">
-                                💻
+                            <div class="program-icon w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-indigo-600 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/30">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                                </svg>
                             </div>
                         </div>
                         <div class="px-6 pb-8 text-center">
