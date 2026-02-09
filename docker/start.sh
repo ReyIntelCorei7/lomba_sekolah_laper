@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Laravel Railway Startup Script
-# This script runs migrations and starts the server
+# Using PHP built-in server directly (bypasses artisan serve issues)
 
 # Create storage link if not exists
 php artisan storage:link --force 2>/dev/null || true
@@ -9,6 +9,11 @@ php artisan storage:link --force 2>/dev/null || true
 # Run migrations
 php artisan migrate --force
 
-# Start the Laravel development server on port 8080
-# Using hardcoded port to avoid string/int type error
-exec php artisan serve --host=0.0.0.0 --port=8080
+# Cache config for production
+php artisan config:clear
+php artisan cache:clear
+
+# Start PHP built-in server directly (NOT artisan serve)
+# This avoids the ServeCommand.php string/int type error
+cd /app/public
+exec php -S 0.0.0.0:8080 ../artisan serve-static.php 2>/dev/null || exec php -S 0.0.0.0:8080

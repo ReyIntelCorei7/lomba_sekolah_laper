@@ -58,13 +58,14 @@ RUN composer dump-autoload --optimize
 RUN npm run build
 
 # Convert start script to Unix line endings and make executable
-RUN dos2unix /app/docker/start.sh && chmod +x /app/docker/start.sh
+RUN dos2unix /app/docker/start.sh 2>/dev/null || sed -i 's/\r$//' /app/docker/start.sh
+RUN chmod +x /app/docker/start.sh
 
 # Expose port
 EXPOSE 8080
 
-# Set PORT environment variable to ensure it's an integer
+# Set environment
 ENV PORT=8080
 
-# Start command
-CMD ["/bin/bash", "/app/docker/start.sh"]
+# Start using PHP built-in server (NOT artisan serve)
+CMD ["bash", "-c", "php artisan migrate --force && php artisan storage:link --force 2>/dev/null; php -S 0.0.0.0:8080 -t public server.php"]
