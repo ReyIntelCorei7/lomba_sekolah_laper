@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/image/logometland.png" type="image/png">
     <title>{{ $extracurricular->name }} - SMK Metland School</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -21,7 +22,11 @@
             }
         }
     </script>
-    <style>body { font-family: 'Poppins', sans-serif; }</style>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-900 text-gray-100 min-h-screen">
@@ -32,14 +37,14 @@
     <section class="pt-16 relative">
         <div class="h-[50vh] relative overflow-hidden">
             @if($extracurricular->image)
-            <img src="{{ asset('storage/' . $extracurricular->image) }}" alt="{{ $extracurricular->name }}" 
+            <img src="{{ asset('storage/' . $extracurricular->image) }}" alt="{{ $extracurricular->name }}"
                 class="w-full h-full object-cover">
             @else
             <div class="w-full h-full bg-gradient-to-br from-[#1E2188] to-blue-900"></div>
             @endif
             <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
         </div>
-        
+
         <!-- Content Overlay -->
         <div class="absolute bottom-0 left-0 right-0 pb-12">
             <div class="max-w-5xl mx-auto px-6">
@@ -49,13 +54,13 @@
                     </svg>
                     Kembali ke Daftar Eskul
                 </a>
-                
+
                 <span class="inline-block px-4 py-1.5 {{ $extracurricular->category_color }} text-white text-sm font-bold rounded-full mb-4">
                     {{ $extracurricular->category_label }}
                 </span>
-                
+
                 <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">{{ $extracurricular->name }}</h1>
-                
+
                 <div class="flex flex-wrap gap-6 text-gray-300">
                     @if($extracurricular->coach)
                     <div class="flex items-center gap-2">
@@ -65,7 +70,7 @@
                         <span>Pembina: {{ $extracurricular->coach }}</span>
                     </div>
                     @endif
-                    
+
                     @if($extracurricular->schedule)
                     <div class="flex items-center gap-2">
                         <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,7 +96,7 @@
                         <p class="text-gray-300 leading-relaxed whitespace-pre-line">{{ $extracurricular->description }}</p>
                     </div>
                     @endif
-                    
+
                     @if($extracurricular->achievements)
                     <div class="bg-gradient-to-br from-amber-900/30 to-amber-800/20 rounded-2xl p-8 border border-amber-700/30">
                         <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
@@ -112,7 +117,7 @@
                     </div>
                     @endif
                 </div>
-                
+
                 <!-- Sidebar -->
                 <div class="space-y-6">
                     <!-- Info Card -->
@@ -158,12 +163,12 @@
                             @endif
                         </ul>
                     </div>
-                    
+
                     <!-- CTA -->
                     <div class="bg-gradient-to-br from-[#1E2188] to-blue-900 rounded-2xl p-6 text-center">
                         <h3 class="text-lg font-bold text-white mb-2">Tertarik Bergabung?</h3>
                         <p class="text-gray-300 text-sm mb-4">Daftar menjadi siswa SMK Metland dan ikuti eskul ini!</p>
-                        <a href="{{ route('ppdb.index') }}" 
+                        <a href="{{ route('ppdb.index') }}"
                             class="inline-block w-full py-3 bg-white text-[#1E2188] font-bold rounded-xl hover:bg-gray-100 transition-colors">
                             Daftar Sekarang
                         </a>
@@ -180,11 +185,11 @@
             <h2 class="text-2xl font-bold text-white mb-8">Eskul Lainnya</h2>
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($related as $item)
-                <a href="{{ route('eskul.show', $item->slug) }}" 
+                <a href="{{ route('eskul.show', $item->slug) }}"
                     class="group bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-500/50 transition-all">
                     <div class="h-40 relative overflow-hidden">
                         @if($item->image)
-                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" 
+                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}"
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         @else
                         <div class="w-full h-full bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">

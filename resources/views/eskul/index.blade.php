@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/image/logometland.png" type="image/png">
     <title>Ekstrakurikuler - SMK Metland School</title>
 
     <!-- Tailwind CSS -->
@@ -28,20 +29,33 @@
     </script>
 
     <style>
-        body { font-family: 'Poppins', sans-serif; }
-        
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
         /* Card flip animation */
-        .flip-card { perspective: 1000px; }
+        .flip-card {
+            perspective: 1000px;
+        }
+
         .flip-card-inner {
             transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             transform-style: preserve-3d;
         }
-        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
-        .flip-card-front, .flip-card-back {
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
         }
-        .flip-card-back { transform: rotateY(180deg); }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
 
         /* Glow effect */
         .glow-effect:hover {
@@ -54,11 +68,13 @@
                 opacity: 0;
                 transform: translateY(40px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+
         .animate-fade-in-up {
             animation: fadeInUp 0.6s ease-out forwards;
         }
@@ -74,30 +90,30 @@
         <!-- Background -->
         <div class="absolute inset-0 bg-gradient-to-b from-[#1E2188] via-gray-900 to-gray-900"></div>
         <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%239C92AC\' fill-opacity=\'0.1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
-        
+
         <div class="relative max-w-7xl mx-auto px-6 text-center">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium mb-6">
                 <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
                 Lebih dari {{ $extracurriculars->count() }} Kegiatan Aktif
             </div>
-            
+
             <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
                 Ekstra<span class="text-blue-400">kurikuler</span>
             </h1>
-            
+
             <p class="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-12">
                 Kembangkan bakat dan minatmu melalui berbagai kegiatan ekstrakurikuler yang menarik dan berprestasi
             </p>
 
             <!-- Category Filter Pills -->
             <div x-data="{ activeCategory: '{{ request('category') }}' }" class="flex flex-wrap justify-center gap-3">
-                <a href="{{ route('eskul.index') }}" 
+                <a href="{{ route('eskul.index') }}"
                     class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
                         {{ !request('category') ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
                     🌟 Semua
                 </a>
                 @foreach($categories as $key => $label)
-                <a href="{{ route('eskul.index', ['category' => $key]) }}" 
+                <a href="{{ route('eskul.index', ['category' => $key]) }}"
                     class="px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
                         {{ request('category') === $key ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30' : 'bg-white/10 text-gray-300 hover:bg-white/20' }}">
                     {{ $label }}
@@ -120,26 +136,26 @@
                             <!-- Image -->
                             <div class="relative h-full">
                                 @if($eskul->image)
-                                <img src="{{ asset('storage/' . $eskul->image) }}" alt="{{ $eskul->name }}" 
+                                <img src="{{ asset('storage/' . $eskul->image) }}" alt="{{ $eskul->name }}"
                                     class="w-full h-full object-cover">
                                 @else
                                 <div class="w-full h-full bg-gradient-to-br from-[#1E2188] to-blue-900 flex items-center justify-center">
                                     <span class="text-6xl">{{ substr($eskul->category_label, 0, 2) }}</span>
                                 </div>
                                 @endif
-                                
+
                                 <!-- Overlay Gradient -->
                                 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                                
+
                                 <!-- Content -->
                                 <div class="absolute bottom-0 left-0 right-0 p-6">
                                     <!-- Category Badge -->
                                     <span class="inline-block px-3 py-1 {{ $eskul->category_color }} text-white text-xs font-bold rounded-full mb-3">
                                         {{ $eskul->category_label }}
                                     </span>
-                                    
+
                                     <h3 class="text-xl font-bold text-white mb-2">{{ $eskul->name }}</h3>
-                                    
+
                                     @if($eskul->schedule)
                                     <p class="text-gray-300 text-sm flex items-center gap-2">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -149,7 +165,7 @@
                                     </p>
                                     @endif
                                 </div>
-                                
+
                                 <!-- Flip Indicator -->
                                 <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -158,17 +174,17 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Back -->
                         <div class="flip-card-back absolute inset-0 rounded-2xl overflow-hidden bg-gradient-to-br from-[#1E2188] to-blue-900 p-6 flex flex-col">
                             <h3 class="text-xl font-bold text-white mb-4">{{ $eskul->name }}</h3>
-                            
+
                             @if($eskul->description)
                             <p class="text-gray-300 text-sm flex-grow line-clamp-4 mb-4">
                                 {{ $eskul->description }}
                             </p>
                             @endif
-                            
+
                             <div class="space-y-3 text-sm">
                                 @if($eskul->coach)
                                 <div class="flex items-center gap-3 text-gray-300">
@@ -180,7 +196,7 @@
                                     <span>{{ $eskul->coach }}</span>
                                 </div>
                                 @endif
-                                
+
                                 @if($eskul->schedule)
                                 <div class="flex items-center gap-3 text-gray-300">
                                     <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
@@ -192,15 +208,15 @@
                                 </div>
                                 @endif
                             </div>
-                            
+
                             @if($eskul->achievements)
                             <div class="mt-4 pt-4 border-t border-white/20">
                                 <p class="text-xs text-blue-300 font-medium mb-2">🏆 Prestasi</p>
                                 <p class="text-gray-300 text-xs line-clamp-2">{{ $eskul->achievements }}</p>
                             </div>
                             @endif
-                            
-                            <a href="{{ route('eskul.show', $eskul->slug) }}" 
+
+                            <a href="{{ route('eskul.show', $eskul->slug) }}"
                                 class="mt-4 block text-center py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-lg font-medium transition-colors">
                                 Lihat Detail →
                             </a>
@@ -232,7 +248,7 @@
             <p class="text-gray-300 text-lg mb-8">
                 Daftar sekarang dan kembangkan potensimu bersama kami!
             </p>
-            <a href="{{ route('ppdb.index') }}" 
+            <a href="{{ route('ppdb.index') }}"
                 class="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full transition-all hover:scale-105 shadow-lg shadow-blue-600/30">
                 Daftar PPDB
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

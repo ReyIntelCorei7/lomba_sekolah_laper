@@ -10,7 +10,6 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
-        /* Animated Background Particles */
         .particle {
             position: absolute;
             width: 8px;
@@ -44,7 +43,6 @@
             }
         }
 
-        /* 3D Card Effect */
         .program-card {
             perspective: 1000px;
             transform-style: preserve-3d;
@@ -63,7 +61,6 @@
                 0 20px 40px -10px rgba(59, 130, 246, 0.2);
         }
 
-        /* Floating Icon Effect */
         .program-icon {
             transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
@@ -72,7 +69,6 @@
             transform: translateZ(30px) translateY(-10px) scale(1.1);
         }
 
-        /* Glow effect */
         .glow::before {
             content: '';
             position: absolute;
@@ -88,7 +84,6 @@
             opacity: 0.6;
         }
 
-        /* Text gradient animation */
         @keyframes gradient-shift {
             0% {
                 background-position: 0% 50%;
@@ -112,7 +107,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Hexagon pattern background */
         .hex-pattern {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%233b82f6' fill-opacity='0.05'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
@@ -126,21 +120,17 @@
 
     <!-- Hero Section with Animated Background -->
     <section class="relative min-h-[500px] md:min-h-[600px] w-full overflow-hidden mt-16">
-        <!-- Animated Background -->
         <div class="absolute inset-0">
             <div class="absolute inset-0 bg-gradient-to-br from-[#1E2188] via-[#2a2d9e] to-[#0f1054]"></div>
 
-            <!-- Hex Pattern -->
             <div class="absolute inset-0 hex-pattern opacity-50"></div>
 
-            <!-- Floating Particles -->
             <div class="particle" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
             <div class="particle" style="left: 20%; top: 60%; animation-delay: 2s; width: 12px; height: 12px;"></div>
             <div class="particle" style="left: 70%; top: 30%; animation-delay: 4s;"></div>
             <div class="particle" style="left: 80%; top: 70%; animation-delay: 6s; width: 10px; height: 10px;"></div>
             <div class="particle" style="left: 50%; top: 80%; animation-delay: 8s;"></div>
 
-            <!-- Gradient Orbs -->
             <div class="absolute top-20 left-10 w-64 h-64 rounded-full bg-blue-500/20 blur-3xl animate-pulse"></div>
             <div class="absolute bottom-20 right-20 w-80 h-80 rounded-full bg-purple-500/20 blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
         </div>
