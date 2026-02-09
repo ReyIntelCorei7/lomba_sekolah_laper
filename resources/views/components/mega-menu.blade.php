@@ -16,27 +16,27 @@
         </div>
 
         <!-- Grid Content -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 text-white">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 text-white max-w-4xl">
             <!-- Column 1 -->
             <div class="space-y-4 md:space-y-8">
-                <a href="/about" @click="menuOpen=false" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors">Profile Sekolah</a>
-                <a href="/about" @click="menuOpen=false" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors">Visi dan Misi</a>
-                <a href="/prokeh" @click="menuOpen=false" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors">Program Keahlian</a>
-                <a href="/" @click="menuOpen=false" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors">Home</a>
+                <a href="/about" @click="menuOpen=false" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors max-w-fit">Profile Sekolah</a>
+                <a href="/about" @click="menuOpen=false" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors max-w-fit">Visi dan Misi</a>
+                <a href="/prokeh" @click="menuOpen=false" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors max-w-fit">Program Keahlian</a>
+                <a href="/" @click="menuOpen=false" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors max-w-fit">Home</a>
             </div>
 
             <!-- Column 2 -->
             <div class="space-y-4 md:space-y-8">
-                <a href="/eskul" @click="menuOpen=false" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors">Ekstrakurikuler</a>
-                <a href="/organisasi" @click="menuOpen=false" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors">Organisasi</a>
-                <a href="/smile" @click="menuOpen=false" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors">Produk/Karya Siswa</a>
+                <a href="/eskul" @click="menuOpen=false" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors max-w-fit">Ekstrakurikuler</a>
+                <a href="/organisasi" @click="menuOpen=false" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors max-w-fit">Organisasi</a>
+                <a href="/smile" @click="menuOpen=false" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors max-w-fit">Produk/Karya Siswa</a>
             </div>
 
             <!-- Column 3 -->
             <div class="space-y-4 md:space-y-8">
-                <a href="/alumni" @click="menuOpen=false" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors">Tentang Alumni</a>
-                <a href="/news" @click="menuOpen=false" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors">Berita Sekolah</a>
-                <a href="/kurikulum" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors">Kurikulum</a>
+                <a href="/alumni" @click="menuOpen=false" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors max-w-fit">Tentang Alumni</a>
+                <a href="/news" @click="menuOpen=false" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors max-w-fit">Berita Sekolah</a>
+                <a href="/kurikulum" class="block text-base md:text-xl font-bold hover:text-blue-200 transition-colors max-w-fit">Kurikulum</a>
             </div>
         </div>
 
