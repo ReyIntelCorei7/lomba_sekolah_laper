@@ -506,11 +506,116 @@
 
     <!-- CONTENT SECTIONS (Livewire & Others) -->
 
+    <!-- Sambutan Kepala Sekolah -->
+    <section class="py-16 lg:py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+        <!-- Decorative Background Elements -->
+        <div class="absolute top-0 left-0 w-72 h-72 bg-blue-100 rounded-full blur-3xl opacity-40 -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-indigo-100 rounded-full blur-3xl opacity-40 translate-x-1/3 translate-y-1/3"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center mb-10 lg:mb-16">
+                <span class="inline-block px-4 py-1.5 bg-[#1E2188]/10 text-[#1E2188] text-sm font-semibold rounded-full mb-4">
+                    Pesan Kepala Sekolah
+                </span>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">
+                    Sambutan <span class="text-[#1E2188]">Kepala Sekolah</span>
+                </h2>
+            </div>
+            
+            <!-- Content Grid -->
+            <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+                
+                <!-- Photo Column -->
+                <div class="w-full lg:w-2/5 flex justify-center">
+                    <div class="relative">
+                        <!-- Decorative Frame -->
+                        <div class="absolute -inset-4 bg-gradient-to-br from-[#1E2188] to-blue-600 rounded-3xl transform rotate-3 opacity-20"></div>
+                        <div class="absolute -inset-4 bg-gradient-to-br from-blue-600 to-[#1E2188] rounded-3xl transform -rotate-3 opacity-10"></div>
+                        
+                        <!-- Photo Container -->
+                        <div class="relative bg-white p-3 rounded-2xl shadow-2xl">
+                            <div class="relative overflow-hidden rounded-xl">
+                                <img src="{{ asset('image/kepalasekolah.jpg') }}" 
+                                     alt="Kepala Sekolah SMK Metland" 
+                                     class="w-64 h-80 sm:w-72 sm:h-96 lg:w-80 lg:h-[28rem] object-cover object-top"
+                                     onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Kepala+Sekolah&size=400&background=1E2188&color=fff';">
+                            </div>
+                            
+                            <!-- Name Card -->
+                            <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white px-6 py-3 rounded-xl shadow-lg border border-gray-100 text-center min-w-[200px]">
+                                <h3 class="font-bold text-gray-900 text-lg">{{ $settings['principal_name'] ?? 'Dr. Darmawan Sunarja, MM.Par, Drs.' }}</h3>
+                                <p class="text-[#1E2188] text-sm font-medium">Kepala Sekolah</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Message Column -->
+                <div class="w-full lg:w-3/5 mt-8 lg:mt-0">
+                    <div class="bg-white rounded-2xl p-6 sm:p-8 lg:p-10 shadow-xl border border-gray-100 relative">
+                        <!-- Quote Icon -->
+                        <div class="absolute -top-4 -left-2 lg:-left-4 w-12 h-12 lg:w-16 lg:h-16 bg-[#1E2188] rounded-2xl flex items-center justify-center shadow-lg">
+                            <svg class="w-6 h-6 lg:w-8 lg:h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                            </svg>
+                        </div>
+                        
+                        <!-- Welcome Message -->
+                        <div class="pt-6 lg:pt-4">
+                            <p class="text-gray-600 leading-relaxed text-sm sm:text-base font-semibold mb-6">Assalamu’alaikum warahmatullahi wabarakatuh.
+                               Salam sejahtera untuk kita semua.</p>
+                            
+                            <div class="space-y-4 text-gray-600 leading-relaxed text-sm sm:text-base">
+                                <p>
+                                    Puji syukur kita panjatkan ke hadirat Allah SWT atas limpahan rahmat dan karunia-Nya, 
+                                    sehingga SMK Metland Cileungsi terus berkembang menjadi sekolah vokasi yang mampu beradaptasi dan menjawab tantangan zaman. 
+                                    Kehadiran website resmi ini merupakan wujud komitmen kami dalam menghadirkan layanan informasi yang cepat, transparan, 
+                                    dan mudah diakses oleh seluruh peserta didik, orang tua, mitra industri, serta masyarakat luas.
+                                </p>
+                                <p>
+                                    Di era digital yang terus berkembang, transformasi digital menjadi kunci keberhasilan institusi pendidikan. 
+                                    SMK Metland Cileungsi menyadari pentingnya adaptasi terhadap perubahan ini. Oleh karena itu, kami terus berinovasi dalam 
+                                    pengembangan kurikulum, peningkatan kompetensi guru, dan pemanfaatan teknologi dalam proses pembelajaran. 
+                                    Fasilitas modern, laboratorium yang representatif, serta program praktik kerja industri yang terintegrasi 
+                                    dengan dunia usaha dan dunia industri (DUDI) menjadi nilai tambah yang kami tawarkan untuk mempersiapkan lulusan yang 
+                                    siap kerja dan berdaya saing global.
+                                </p>
+                                <p>
+                                    Akhir kata, kami mengajak seluruh siswa, orang tua, guru, dan mitra untuk terus bersinergi dalam membangun masa depan pendidikan vokasi yang lebih baik. Semoga Allah SWT senantiasa memberikan kemudahan dan keberkahan bagi setiap langkah kita.
+                            </div>
+                            
+                            <!-- Signature -->
+                            <div class="mt-6 pt-6 border-t border-gray-100">
+                                <p class="text-[#1E2188] font-semibold italic text-lg">Wassalamu'alaikum Wr. Wb.</p>
+                                <div class="mt-3 flex items-center gap-3">
+                                    <div class="w-12 h-1 bg-[#1E2188] rounded-full"></div>
+                                    <span class="text-gray-500 text-sm">Kepala Sekolah SMK Metland</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
     <!-- About School -->
     @livewire('bawah-hero-section')
 
     <!-- Infografis -->
-    <section id="stats" x-data="statsSection()" x-intersect="startAnimation()" class="py-24 bg-white relative overflow-hidden">
+
+    <section id="berita" class="py-10" style="background-color: #fff;">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between mb-12 gap-6">
+                <div>
+                    <h2 class="text-4xl font-bold text-blue-500 mt-2">Infografis Sekolah</h2>
+                </div>
+            </div>
+    </section>
+     
+    <section id="stats" x-data="statsSection()" x-intersect="startAnimation()" class="py-12 bg-white relative overflow-hidden">
         <div class="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-60 -translate-y-1/2 translate-x-1/2"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-indigo-50 rounded-full blur-3xl opacity-60 translate-y-1/3 -translate-x-1/3"></div>
 
@@ -630,7 +735,7 @@
     <!-- Berita Sekolah -->
     <section id="berita" class="py-24" style="background-color: #fff;">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div class="flex flex-col md:flex-row justify-between mb-12 gap-6">
                 <div>
                     <span class="text-blue-300 font-bold tracking-wider uppercase text-sm">Latest Updates</span>
                     <h2 class="text-4xl font-bold text-blue-500 mt-2">{{ $settings['news_title'] ?? 'Berita Sekolah' }}</h2>
@@ -699,9 +804,9 @@
 
 
     <!-- KerjaSama Industri -->
-    <section id="berita" class="py-14" style="background-color: #fff;">
+    <section id="berita" class="py-12" style="background-color: #fff;">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div class="flex flex-col md:flex-row justify-between gap-6">
                 <div>
                     <h2 class="text-4xl font-bold text-blue-500 mt-2">Kerja Sama Industri Dan Perguran Tinggi</h2>
                 </div>
@@ -709,7 +814,7 @@
     </section>
 
     <!-- Partners/Tech Marquee Section -->
-    <section class="py-20 bg-white">
+    <section class="py-12 bg-white">
         @php
             // Get all images from industri folder
             $industriImages = glob(public_path('image/industri/*'));
