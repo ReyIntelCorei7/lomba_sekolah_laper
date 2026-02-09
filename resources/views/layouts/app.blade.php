@@ -473,7 +473,7 @@
                             </a>
 
                             <a href="#about"
-                                class="px-8 py-4 bg-white/5 backdrop-blur-sm border border-white/10 text-white rounded-full font-semibold hover:bg-white/10 hover:border-white/30 transition-all hover:scale-105"
+                                class="px-8 py-4 bg-white/5 backdrop-blur-sm border border-white/10 text-white rounded-full font-semibold hover:bg-white/10 hover:border-white/30 transition-all hover:scale-105 text-center"
                                 x-text="t[lang].about">
                             </a>
                         </div>
@@ -578,17 +578,27 @@
                         image: '{{ $program->image ? asset('storage/' . $program->image) : asset('image/' . strtolower($program->code) . '1.png') }}' 
                     },
                     @endforeach
-                ]
-            }" x-cloak class="flex flex-col md:flex-row gap-3 h-[700px] md:h-[420px]">
+                ],
+                init() {
+                    window.addEventListener('resize', () => {
+                        this.isMobile = window.innerWidth < 768;
+                        if (this.isMobile) this.active = null;
+                    });
+                }
+            }" x-cloak class="flex flex-col md:flex-row gap-3 min-h-[500px] md:h-[420px]">
                 <template x-for="item in items" :key="item.id">
-                    <div @mouseenter="if (window.innerWidth >= 768) { leaving=null; active=item.id }"
-                        @mouseleave="if (window.innerWidth >= 768) {
+                    <div @mouseenter="if (!isMobile) { leaving=null; active=item.id }"
+                        @mouseleave="if (!isMobile) {
                         leaving=item.id;
                         setTimeout(()=>{ if(leaving===item.id){ active=null; leaving=null }},300)
                     }"
                         @click="active = active === item.id ? null : item.id"
                         class="relative overflow-hidden rounded-xl cursor-pointer transition-[flex,transform] duration-700 ease-in-out"
-                        :class="active === item.id ? 'md:flex-[5]' : active === null ? 'md:flex-1' : 'md:flex-[0.6]'">
+                        :class="[
+                            isMobile ? (active === item.id ? 'flex-[3]' : 'flex-1') : '',
+                            !isMobile ? (active === item.id ? 'md:flex-[5]' : active === null ? 'md:flex-1' : 'md:flex-[0.6]') : ''
+                        ]"
+                        :style="isMobile ? (active === item.id ? 'min-height: 200px' : 'min-height: 80px') : ''">
                         <!-- FOTO BACKGROUND -->
                         <div class="absolute inset-0 bg-cover bg-center transition-all duration-700"
                             :style="'background-image: url(' + item.image + ')'"
@@ -600,10 +610,15 @@
                         </div>
                         <!-- TITLE -->
                         <div class="absolute pointer-events-none transition-all duration-700"
-                            :style="active === item.id ? 'left:2rem;bottom:2rem;transform:none' :
-                                'left:50%;top:50%;transform:translate(-50%,-50%) rotate(-90deg)'">
-                            <h2 class="text-white font-bold transition-all duration-700"
-                                :class="active === item.id ? 'text-3xl' : 'text-xl'" x-text="item.title"></h2>
+                            :style="active === item.id ? 'left:1.5rem;bottom:1.5rem;transform:none' :
+                                (isMobile ? 'left:50%;top:50%;transform:translate(-50%,-50%)' : 'left:50%;top:50%;transform:translate(-50%,-50%) rotate(-90deg)')">
+                            <h2 class="text-white font-bold transition-all duration-700 whitespace-nowrap"
+                                :class="active === item.id ? 'text-2xl md:text-3xl' : 'text-lg md:text-xl'" x-text="item.title"></h2>
+                        </div>
+                        <!-- TAP INDICATOR ON MOBILE -->
+                        <div x-show="isMobile && active !== item.id" class="absolute bottom-2 left-1/2 -translate-x-1/2 text-white/60 text-xs flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+                            <span>Tap</span>
                         </div>
                     </div>
                 </template>
@@ -611,61 +626,16 @@
         </div>
     </section>
 
-    <!-- Partners/Tech Marquee Section -->
-    <section class="py-5 bg-white">
-        @php
-            // Get all images from industri folder
-            $industriImages = glob(public_path('image/industri/*'));
-            // Get all images from perguran folder
-            $perguranImages = glob(public_path('image/perguran/*'));
-        @endphp
-
-        <!-- Row 1: Scrolls Left - Industri Images -->
-        <div class="marquee-container mb-6">
-            <div class="marquee-track marquee-track-left">
-                <!-- First set of images -->
-                @foreach($industriImages as $image)
-                    <div class="marquee-item">
-                        <img src="{{ asset('image/industri/' . basename($image)) }}" alt="Partner Logo" class="h-18 w-auto object-contain">
-                    </div>
-                @endforeach
-                <!-- Duplicate set for seamless loop -->
-                @foreach($industriImages as $image)
-                    <div class="marquee-item">
-                        <img src="{{ asset('image/industri/' . basename($image)) }}" alt="Partner Logo" class="h-18 w-auto object-contain">
-                    </div>
-                @endforeach
-            </div>
-        </div>
-
-        <!-- Row 2: Scrolls Right - Perguruan Images -->
-        <div class="marquee-container">
-            <div class="marquee-track marquee-track-right">
-                <!-- First set of images -->
-                @foreach($perguranImages as $image)
-                    <div class="marquee-item">
-                        <img src="{{ asset('image/perguran/' . basename($image)) }}" alt="Partner Logo" class="h-12 w-auto object-contain">
-                    </div>
-                @endforeach
-                <!-- Duplicate set for seamless loop -->
-                @foreach($perguranImages as $image)
-                    <div class="marquee-item">
-                        <img src="{{ asset('image/perguran/' . basename($image)) }}" alt="Partner Logo" class="h-12 w-auto object-contain">
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
+    
     <!-- Berita Sekolah -->
-    <section id="berita" class="py-24" style="background-color: #1E2188;">
+    <section id="berita" class="py-24" style="background-color: #fff;">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
                 <div>
                     <span class="text-blue-300 font-bold tracking-wider uppercase text-sm">Latest Updates</span>
-                    <h2 class="text-4xl font-bold text-white mt-2">{{ $settings['news_title'] ?? 'Berita Sekolah' }}</h2>
+                    <h2 class="text-4xl font-bold text-blue-500 mt-2">{{ $settings['news_title'] ?? 'Berita Sekolah' }}</h2>
                 </div>
-                <a href="/news" class="hidden md:inline-flex items-center px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium hover:bg-white/20 hover:shadow-md transition-all">
+                <a href="/news" class="hidden md:inline-flex items-center px-6 py-3 rounded-full bg-blue/10 backdrop-blur-sm border border-blue/20 text-blue-500 font-medium hover:bg-blue/20 hover:shadow-md transition-all">
                     Lihat Semua Berita
                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -718,7 +688,7 @@
                 </div>
                 @endforelse
             </div>
-
+            
             <div class="mt-8 text-center md:hidden">
                 <a href="/news" class="inline-flex items-center px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium hover:bg-white/20">
                     Lihat Semua Berita
@@ -727,9 +697,66 @@
         </div>
     </section>
 
+
+    <!-- KerjaSama Industri -->
+    <section id="berita" class="py-14" style="background-color: #fff;">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div>
+                    <h2 class="text-4xl font-bold text-blue-500 mt-2">Kerja Sama Industri Dan Perguran Tinggi</h2>
+                </div>
+            </div>
+    </section>
+
+    <!-- Partners/Tech Marquee Section -->
+    <section class="py-20 bg-white">
+        @php
+            // Get all images from industri folder
+            $industriImages = glob(public_path('image/industri/*'));
+            // Get all images from perguran folder
+            $perguranImages = glob(public_path('image/perguran/*'));
+        @endphp
+
+        <!-- Row 1: Scrolls Left - Industri Images -->
+        <div class="marquee-container mb-6">
+            <div class="marquee-track marquee-track-left">
+                <!-- First set of images -->
+                @foreach($industriImages as $image)
+                    <div class="marquee-item">
+                        <img src="{{ asset('image/industri/' . basename($image)) }}" alt="Partner Logo" class="h-18 w-auto object-contain">
+                    </div>
+                @endforeach
+                <!-- Duplicate set for seamless loop -->
+                @foreach($industriImages as $image)
+                    <div class="marquee-item">
+                        <img src="{{ asset('image/industri/' . basename($image)) }}" alt="Partner Logo" class="h-18 w-auto object-contain">
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <!-- Row 2: Scrolls Right - Perguruan Images -->
+        <div class="marquee-container">
+            <div class="marquee-track marquee-track-right">
+                <!-- First set of images -->
+                @foreach($perguranImages as $image)
+                    <div class="marquee-item">
+                        <img src="{{ asset('image/perguran/' . basename($image)) }}" alt="Partner Logo" class="h-12 w-auto object-contain">
+                    </div>
+                @endforeach
+                <!-- Duplicate set for seamless loop -->
+                @foreach($perguranImages as $image)
+                    <div class="marquee-item">
+                        <img src="{{ asset('image/perguran/' . basename($image)) }}" alt="Partner Logo" class="h-12 w-auto object-contain">
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     @include('components.footer')
-
+    
     <!-- Logika Aplikasi -->
     <script>
         function appData() {
