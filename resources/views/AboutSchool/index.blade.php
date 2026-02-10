@@ -22,6 +22,29 @@
         [x-cloak] {
             display: none !important;
         }
+        
+        /* Blur Fade In Vertical Animation */
+        @keyframes blurFadeInUp {
+            0% {
+                opacity: 0;
+                filter: blur(12px);
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                filter: blur(0);
+                transform: translateY(0);
+            }
+        }
+        
+        .blur-fade-in-up {
+            animation: blurFadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
     </style>
 
     <!-- Tailwind Config warna -->
@@ -115,21 +138,21 @@
             <div class="relative z-10 h-full max-w-7xl mx-auto px-4 md:px-6 flex items-center">
                 <div class="max-w-2xl mt-16 md:mt-20">
                     <!-- Badge -->
-                    <div class="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-[10px] md:text-xs font-medium mb-4 md:mb-6">
+                    <div class="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-[10px] md:text-xs font-medium mb-4 md:mb-6 blur-fade-in-up">
                         <span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-blue-500 animate-pulse"></span>
                         <span x-text="$store.lang.t('hero_badge')">SMK Pariwisata Terbaik</span>
                     </div>
 
-                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 leading-tight">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 leading-tight blur-fade-in-up delay-100">
                         <span x-text="$store.lang.t('about_title_1')">Tentang</span><br>
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400" x-text="$store.lang.t('about_title_2')">Sekolah Kami</span>
                     </h1>
-                    <p class="text-sm md:text-lg text-gray-300 leading-relaxed max-w-xl" x-text="$store.lang.t('about_subtitle')">
+                    <p class="text-sm md:text-lg text-gray-300 leading-relaxed max-w-xl blur-fade-in-up delay-200" x-text="$store.lang.t('about_subtitle')">
                         Menyelami sejarah, nilai budaya, visi, dan misi Metland School dalam membentuk generasi unggul dan berkarakter.
                     </p>
 
                     <!-- Quick Stats -->
-                    <div class="flex gap-6 md:gap-8 mt-6 md:mt-8">
+                    <div class="flex gap-6 md:gap-8 mt-6 md:mt-8 blur-fade-in-up delay-300">
                         <div class="text-center">
                             <div class="text-2xl md:text-3xl font-bold text-white">2014</div>
                             <div class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider" x-text="$store.lang.t('about_established')">Didirikan</div>

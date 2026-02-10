@@ -145,22 +145,22 @@
         <div class="relative z-10 h-full max-w-7xl mx-auto px-4 md:px-6 flex items-center">
             <div class="max-w-2xl mt-16 md:mt-20">
                 <!-- Badge -->
-                <div class="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-[10px] md:text-xs font-medium mb-4 md:mb-6">
+                <div class="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-[10px] md:text-xs font-medium mb-4 md:mb-6 blur-fade-in-up">
                     <span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-blue-500 animate-pulse"></span>
                     <span x-text="$store.lang.t('prokeh_badge')">5 Program Keahlian Unggulan</span>
                 </div>
 
-                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 leading-tight">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 leading-tight blur-fade-in-up delay-100">
                     <span x-text="$store.lang.t('prokeh_title_1')">Program</span><br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400" x-text="$store.lang.t('prokeh_title_2')">Keahlian</span>
                 </h1>
-                <p class="text-sm md:text-lg text-gray-300 leading-relaxed max-w-xl" x-text="$store.lang.t('prokeh_subtitle')">
+                <p class="text-sm md:text-lg text-gray-300 leading-relaxed max-w-xl blur-fade-in-up delay-200" x-text="$store.lang.t('prokeh_subtitle')">
                     Temukan program keahlian yang sesuai dengan passion dan bakatmu.
                     Kembangkan skill profesional untuk karir cemerlang di industri.
                 </p>
 
                 <!-- Quick Stats -->
-                <div class="flex gap-6 md:gap-8 mt-6 md:mt-8">
+                <div class="flex gap-6 md:gap-8 mt-6 md:mt-8 blur-fade-in-up delay-300">
                     <div class="text-center">
                         <div class="text-2xl md:text-3xl font-bold text-white">5</div>
                         <div class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider" x-text="$store.lang.t('prokeh_stats_program')">Program</div>
@@ -179,9 +179,9 @@
         <div class="max-w-7xl mx-auto px-4 md:px-6">
             <!-- Section Header -->
             <div class="text-center mb-16">
-                <span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full mb-4" x-text="$store.lang.t('prokeh_section_badge')">PROGRAM KEAHLIAN</span>
-                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-4" x-text="$store.lang.t('prokeh_section_title')">Jurusan Unggulan Kami</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto text-lg" x-text="$store.lang.t('prokeh_section_desc')">
+                <span class="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full mb-4 blur-fade-in-up" x-text="$store.lang.t('prokeh_section_badge')">PROGRAM KEAHLIAN</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-4 blur-fade-in-up delay-100" x-text="$store.lang.t('prokeh_section_title')">Jurusan Unggulan Kami</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg blur-fade-in-up delay-200" x-text="$store.lang.t('prokeh_section_desc')">
                     Setiap program dirancang untuk membekali siswa dengan skill praktis dan siap kerja
                 </p>
             </div>

@@ -30,6 +30,29 @@
             content: '›';
             margin: 0 8px;
         }
+        
+        /* Blur Fade In Vertical Animation */
+        @keyframes blurFadeInUp {
+            0% {
+                opacity: 0;
+                filter: blur(12px);
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                filter: blur(0);
+                transform: translateY(0);
+            }
+        }
+        
+        .blur-fade-in-up {
+            animation: blurFadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
     </style>
 
     <script>
@@ -224,18 +247,18 @@
         </div>
 
         <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
-            <div id="hero" class="flex items-center text-white/80 mb-4 md:mb-8 text-xs md:text-sm">
+            <div id="hero" class="flex items-center text-white/80 mb-4 md:mb-8 text-xs md:text-sm blur-fade-in-up">
                 <a href="/" class="hover:text-white transition" x-text="t[lang].home"></a>
                 <span class="breadcrumb-arrow"></span>
                 <span class="text-white font-semibold" x-text="t[lang].news"></span>
             </div>
 
-            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight blur-fade-in-up delay-100">
                 <span class="block">BERITA</span>
                 <span class="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">SEKOLAH</span>
             </h1>
 
-            <p class="text-white/80 max-w-xl text-sm md:text-base lg:text-lg mb-6 md:mb-8" x-text="t[lang].newsSubtitle"></p>
+            <p class="text-white/80 max-w-xl text-sm md:text-base lg:text-lg mb-6 md:mb-8 blur-fade-in-up delay-200" x-text="t[lang].newsSubtitle"></p>
 
         </div>
     </section>
@@ -243,8 +266,8 @@
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12 lg:py-16">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-6 mb-6 md:mb-10">
             <div>
-                <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900" x-text="t[lang].latestNews">Berita Terbaru</h2>
-                <p class="text-gray-500 mt-1 md:mt-2 text-sm md:text-base" x-text="t[lang].newsSubtitle"></p>
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 blur-fade-in-up" x-text="t[lang].latestNews">Berita Terbaru</h2>
+                <p class="text-gray-500 mt-1 md:mt-2 text-sm md:text-base blur-fade-in-up delay-100" x-text="t[lang].newsSubtitle"></p>
             </div>
 
             <!-- Category Filter -->

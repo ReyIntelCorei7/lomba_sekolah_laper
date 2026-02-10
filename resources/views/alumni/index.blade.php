@@ -124,20 +124,20 @@
         <div class="relative z-10 h-full max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-center text-center">
             <div>
                 <!-- Badge -->
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-medium mb-6">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-medium mb-6 blur-fade-in-up">
                     <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
                     <span x-text="$store.lang.t('alumni_success_story')">Cerita Sukses Alumni</span>
                 </div>
 
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight blur-fade-in-up delay-100">
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-cyan-300 to-blue-300">Alumni</span> <span x-text="$store.lang.t('nav_home')==='Home' ? '' : 'Kami'">Kami</span>
                 </h1>
-                <p class="text-base md:text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed" x-text="$store.lang.t('alumni_subtitle')">
+                <p class="text-base md:text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed blur-fade-in-up delay-200" x-text="$store.lang.t('alumni_subtitle')">
                     Temui para alumni SMK Metland yang telah sukses berkarir di berbagai industri, membuktikan kualitas pendidikan kami.
                 </p>
 
                 <!-- Stats -->
-                <div class="flex justify-center gap-8 md:gap-12 mt-8">
+                <div class="flex justify-center gap-8 md:gap-12 mt-8 blur-fade-in-up delay-300">
                     <div class="text-center">
                         <div class="text-3xl md:text-4xl font-bold text-white">{{ $alumni->total() }}+</div>
                         <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider" x-text="$store.lang.t('alumni_stats')">Alumni</div>
