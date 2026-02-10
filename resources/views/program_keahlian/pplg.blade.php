@@ -101,7 +101,7 @@
             register: 'Daftar Sekarang',
             learnMore: 'Pelajari Lebih Lanjut',
             stat1: 'Bahasa',
-            stat2: 'Game Dev',
+            stat2: 'Teknologi Informasi',
             stat3: 'Praktik',
             aboutProgram: 'TENTANG PROGRAM',
             overviewTitle: 'Menjadi Developer Profesional',
@@ -124,7 +124,7 @@
             register: 'Register Now',
             learnMore: 'Learn More',
             stat1: 'Languages',
-            stat2: 'Game Dev',
+            stat2: 'Information Technology',
             stat3: 'Practice',
             aboutProgram: 'ABOUT PROGRAM',
             overviewTitle: 'Become a Professional Developer',
@@ -161,7 +161,7 @@ class="bg-gray-50">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-400"></span>
                 </span>
-                <span class="text-sm font-medium" x-text="t[lang].badge">💻 Program Keahlian Teknologi</span>
+                <span class="text-sm font-medium" x-text="t[lang].badge">Program Keahlian Teknologi</span>
             </div>
 
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
@@ -191,8 +191,8 @@ class="bg-gray-50">
                     <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider" x-text="t[lang].stat1">Bahasa</div>
                 </div>
                 <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/20">
-                    <div class="text-3xl md:text-4xl font-bold text-white mb-2">🎮</div>
-                    <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider" x-text="t[lang].stat2">Game Dev</div>
+                    <div class="text-3xl md:text-4xl font-bold text-white mb-2"></div>
+                    <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider font-bold" x-text="t[lang].stat2">Game Dev</div>
                 </div>
                 <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/20">
                     <div class="text-3xl md:text-4xl font-bold text-white mb-2">100%</div>
@@ -256,7 +256,7 @@ class="bg-gray-50">
 
                 <div class="relative">
                     <div class="relative rounded-3xl overflow-hidden shadow-2xl">
-                        <img src="{{ asset('image/pplg2.png') }}" alt="Siswa PPLG" class="w-full h-auto">
+                        <img src="{{ asset('image/pplg 2.png') }}" alt="Siswa PPLG" class="w-full h-auto">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#1E2188]/50 to-transparent"></div>
                     </div>
 
@@ -289,12 +289,12 @@ class="bg-gray-50">
                     <button @click="activeTab = 'materi'"
                         :class="activeTab === 'materi' ? 'bg-white shadow-lg text-[#1E2188]' : 'text-gray-600 hover:text-gray-900'"
                         class="px-6 py-3 rounded-lg font-semibold transition-all" x-text="t[lang].tabMateri">
-                        💻 Materi Pembelajaran
+                        Materi Pembelajaran
                     </button>
                     <button @click="activeTab = 'karir'"
                         :class="activeTab === 'karir' ? 'bg-white shadow-lg text-[#1E2188]' : 'text-gray-600 hover:text-gray-900'"
-                        class="px-6 py-3 rounded-lg font-semibold transition-all" x-text="t[lang].tabKarir">
-                        🚀 Peluang Karir
+                        class="px-6 py-3 rounded-lg font-semibold transition-all">
+                        Peluang Karir
                     </button>
                 </div>
             </div>

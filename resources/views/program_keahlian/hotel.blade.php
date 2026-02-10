@@ -258,7 +258,7 @@ class="bg-gray-50">
 
                 <div class="relative">
                     <div class="relative rounded-3xl overflow-hidden shadow-2xl">
-                        <img src="{{ asset('image/hotel2.png') }}" alt="Siswa Perhotelan" class="w-full h-auto">
+                        <img src="{{ asset('image/hotel 2.png') }}" alt="Siswa Perhotelan" class="w-full h-auto">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#1E2188]/50 to-transparent"></div>
                     </div>
 
