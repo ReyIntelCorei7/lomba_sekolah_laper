@@ -1,15 +1,20 @@
 <?php
 
-// Download Aiven CA certificate for SSL MySQL connection
+// Download CA certificate for SSL MySQL connection (Aiven)
 $caPath = '/tmp/ca.pem';
 if (!file_exists($caPath)) {
-    // Aiven uses the ISRG Root X1 / Let's Encrypt CA
-    // We use the system CA bundle or download it
-    $caContent = @file_get_contents('https://letsencrypt.org/certs/isrg-root-x1-cross-signed.pem');
-    if (!$caContent) {
-        // Fallback: use Mozilla's CA bundle
-        $caContent = @file_get_contents('https://curl.se/ca/cacert.pem');
+    // Try multiple CA sources for Aiven MySQL SSL
+    $caSources = [
+        'https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem',
+        'https://curl.se/ca/cacert.pem',
+    ];
+    
+    $caContent = false;
+    foreach ($caSources as $url) {
+        $caContent = @file_get_contents($url);
+        if ($caContent) break;
     }
+    
     if ($caContent) {
         file_put_contents($caPath, $caContent);
     }
