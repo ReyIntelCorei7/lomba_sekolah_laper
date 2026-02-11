@@ -161,7 +161,7 @@ class="bg-gray-50">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-400"></span>
                 </span>
-                <span class="text-sm font-medium" x-text="t[lang].badge">🍳 Program Keahlian Kuliner</span>
+                <span class="text-sm font-medium" x-text="t[lang].badge">Program Keahlian Kuliner</span>
             </div>
 
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
@@ -187,15 +187,15 @@ class="bg-gray-50">
 
             <div class="grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto">
                 <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/20">
-                    <div class="text-3xl md:text-4xl font-bold text-white">100+</div>
+                    <div class="text-3xl md:text-3xl font-bold text-white mb-2">100+</div>
                     <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider" x-text="t[lang].stat1">Resep</div>
                 </div>
                 <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/20">
-                    <div class="text-3xl md:text-4xl font-bold text-white mb-2">⭐5</div>
+                    <div class="text-3xl md:text-3xl font-bold text-white mb-2">Kerjasama</div>
                     <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider" x-text="t[lang].stat2">Hotel Mitra</div>
                 </div>
                 <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/20">
-                    <div class="text-3xl md:text-4xl font-bold text-white">100%</div>
+                    <div class="text-3xl md:text-3xl font-bold text-white mb-2">100%</div>
                     <div class="text-xs md:text-sm text-blue-200 uppercase tracking-wider" x-text="t[lang].stat3">Praktik</div>
                 </div>
             </div>
@@ -256,7 +256,7 @@ class="bg-gray-50">
 
                 <div class="relative">
                     <div class="relative rounded-3xl overflow-hidden shadow-2xl">
-                        <img src="{{ asset('image/kuliner2.png') }}" alt="Siswa Kuliner" class="w-full h-auto">
+                        <img src="{{ asset('image/kuliner 2.png') }}" alt="Siswa Kuliner" class="w-full h-auto">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#1E2188]/50 to-transparent"></div>
                     </div>
 
@@ -289,12 +289,12 @@ class="bg-gray-50">
                     <button @click="activeTab = 'materi'"
                         :class="activeTab === 'materi' ? 'bg-white shadow-lg text-[#1E2188]' : 'text-gray-600 hover:text-gray-900'"
                         class="px-6 py-3 rounded-lg font-semibold transition-all" x-text="t[lang].tabMateri">
-                        🍳 Materi Pembelajaran
+                        Materi Pembelajaran
                     </button>
                     <button @click="activeTab = 'karir'"
                         :class="activeTab === 'karir' ? 'bg-white shadow-lg text-[#1E2188]' : 'text-gray-600 hover:text-gray-900'"
                         class="px-6 py-3 rounded-lg font-semibold transition-all" x-text="t[lang].tabKarir">
-                        👨‍🍳 Peluang Karir
+                        Peluang Karir
                     </button>
                 </div>
             </div>
