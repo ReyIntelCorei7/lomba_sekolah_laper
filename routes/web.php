@@ -25,12 +25,18 @@ use Illuminate\Support\Facades\Route;
 
 // Homepage 
 Route::get('/', function () {
-    $settings = \App\Models\WebsiteSetting::all()->pluck('value', 'key');
-    $latestNews = \App\Models\News::where('is_published', true)
-        ->latest('published_at')
-        ->limit(3)
-        ->get();
-    $programs = \App\Models\Program::active()->get();
+    try {
+        $settings = \App\Models\WebsiteSetting::all()->pluck('value', 'key');
+        $latestNews = \App\Models\News::where('is_published', true)
+            ->latest('published_at')
+            ->limit(3)
+            ->get();
+        $programs = \App\Models\Program::active()->get();
+    } catch (\Exception $e) {
+        $settings = collect();
+        $latestNews = collect();
+        $programs = collect();
+    }
 
     return view('layouts.app', compact('settings', 'latestNews', 'programs'));
 })->name('home');
@@ -186,6 +192,105 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->name('program-keahlian.careers.destroy');
     });
 });
+
+// ============================================
+// DEPLOYMENT HELPER ROUTES (HAPUS SETELAH SETUP!)
+// ============================================
+
+Route::get('/deploy/migrate/{secret}', function ($secret) {
+    if ($secret !== 'metland2026-deploy-secret') {
+        abort(404);
+    }
+    
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        $output = \Illuminate\Support\Facades\Artisan::output();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Migration completed!',
+            'output' => $output
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage()
+        ], 500);
+    }
+});
+
+Route::get('/deploy/seed/{secret}', function ($secret) {
+    if ($secret !== 'metland2026-deploy-secret') {
+        abort(404);
+    }
+    
+    try {
+        // Create default admin
+        $admin = \App\Models\Admin::firstOrCreate(
+            ['email' => 'admin@metland.sch.id'],
+            [
+                'name' => 'Super Admin',
+                'password' => bcrypt('admin123'),
+                'role' => 'super_admin',
+                'is_active' => true,
+            ]
+        );
+        
+        // Create default website settings
+        $settings = [
+            ['key' => 'site_name', 'value' => 'SMK Metland', 'type' => 'text', 'group' => 'general', 'label' => 'Nama Website'],
+            ['key' => 'site_description', 'value' => 'Website Resmi SMK Metland', 'type' => 'text', 'group' => 'general', 'label' => 'Deskripsi'],
+            ['key' => 'site_logo', 'value' => '', 'type' => 'image', 'group' => 'general', 'label' => 'Logo'],
+            ['key' => 'contact_email', 'value' => 'info@metland.sch.id', 'type' => 'text', 'group' => 'contact', 'label' => 'Email'],
+            ['key' => 'contact_phone', 'value' => '', 'type' => 'text', 'group' => 'contact', 'label' => 'Telepon'],
+            ['key' => 'contact_address', 'value' => '', 'type' => 'textarea', 'group' => 'contact', 'label' => 'Alamat'],
+        ];
+        
+        foreach ($settings as $setting) {
+            \App\Models\WebsiteSetting::firstOrCreate(
+                ['key' => $setting['key']],
+                $setting
+            );
+        }
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Seeding completed!',
+            'admin_email' => 'admin@metland.sch.id',
+            'admin_password' => 'admin123 (GANTI SEGERA!)'
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage()
+        ], 500);
+    }
+});
+
+Route::get('/deploy/status/{secret}', function ($secret) {
+    if ($secret !== 'metland2026-deploy-secret') {
+        abort(404);
+    }
+    
+    try {
+        $tables = \Illuminate\Support\Facades\DB::select('SHOW TABLES');
+        return response()->json([
+            'status' => 'success',
+            'database_connected' => true,
+            'tables' => $tables,
+            'php_version' => PHP_VERSION,
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'database_connected' => false,
+            'message' => $e->getMessage()
+        ], 500);
+    }
+});
+
+// ============================================
+// END DEPLOYMENT HELPER ROUTES
+// ============================================
 
 // Not Found Page
 

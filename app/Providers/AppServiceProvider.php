@@ -23,7 +23,11 @@ class AppServiceProvider extends ServiceProvider
     {
         // Share settings and logoUrl to public views only (exclude admin views)
         View::composer(['layouts.*', 'news.*', 'ppdb.*', 'aboutschool.*', 'kurikulum.*', 'program_keahlian.*', 'errors.*', 'eskul.*'], function ($view) {
-            $settings = WebsiteSetting::all()->pluck('value', 'key');
+            try {
+                $settings = WebsiteSetting::all()->pluck('value', 'key');
+            } catch (\Exception $e) {
+                $settings = collect();
+            }
             $logoUrl = isset($settings['site_logo']) && $settings['site_logo']
                 ? asset('storage/' . $settings['site_logo'])
                 : asset('image/logometland.png');
