@@ -12,8 +12,8 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Translation System (load before Alpine.js) -->
-    <script src="{{ asset('js/translations.js') }}"></script>
+    <!-- Translation System (inlined for Vercel compatibility) -->
+    @include('partials.translations-data')
 
     <!-- Alpine.js Global Store for Language -->
     <script>

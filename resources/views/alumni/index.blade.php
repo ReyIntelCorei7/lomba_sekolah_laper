@@ -7,7 +7,8 @@
     <link rel="icon" href="/image/logometland.png" type="image/png">
     <title>Alumni - SMK Metland School</title>
     <meta name="description" content="Temui para alumni SMK Metland yang telah berhasil di berbagai bidang industri">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <!-- Translation System -->
     @include('partials.translations')

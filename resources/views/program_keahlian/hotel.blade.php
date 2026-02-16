@@ -7,7 +7,8 @@
     <title>Perhotelan - SMK Metland School</title>
     <meta name="description" content="Program keahlian Perhotelan SMK Metland - Kuasai hospitality, front office, housekeeping, dan manajemen hotel">
     <link rel="icon" href="/image/logometland.png" type="image/png">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <!-- Translation System -->
     @include('partials.translations')
