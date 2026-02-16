@@ -224,12 +224,12 @@ Route::get('/deploy/seed/{secret}', function ($secret) {
     }
     
     try {
-        // Create default admin
-        $admin = \App\Models\Admin::firstOrCreate(
+        // Create/update default admin (no bcrypt - model 'hashed' cast handles it)
+        $admin = \App\Models\Admin::updateOrCreate(
             ['email' => 'admin@metland.sch.id'],
             [
                 'name' => 'Super Admin',
-                'password' => bcrypt('admin123'),
+                'password' => 'admin123',
                 'role' => 'super_admin',
                 'is_active' => true,
             ]
