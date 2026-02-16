@@ -32,7 +32,7 @@
             <div class="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden">
                 @if($program->image)
                     <div class="h-64 bg-gray-200 dark:bg-slate-900">
-                        <img src="{{ asset('storage/' . $program->image) }}" alt="{{ $program->name }}" 
+                        <img src="{{ display_image($program->image) }}" alt="{{ $program->name }}" 
                              class="w-full h-full object-cover">
                     </div>
                 @else

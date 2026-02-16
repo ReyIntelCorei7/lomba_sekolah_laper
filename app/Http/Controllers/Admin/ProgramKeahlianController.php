@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\ProgramKeahlian;
 use App\Models\ProgramSkill;
 use App\Models\ProgramCareer;
+use App\Traits\HandlesBase64Images;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProgramKeahlianController extends Controller
 {
+    use HandlesBase64Images;
+
     /**
      * Display a listing of the programs
      */
@@ -62,15 +64,15 @@ class ProgramKeahlianController extends Controller
         ]);
 
         // Handle hero image upload
-        if ($request->hasFile('hero_image')) {
-            $validated['hero_image'] = $request->file('hero_image')
-                ->store('program-keahlian/hero', 'public');
+        $heroBase64 = $this->processImageUpload($request, 'hero_image');
+        if ($heroBase64) {
+            $validated['hero_image'] = $heroBase64;
         }
 
         // Handle overview image upload
-        if ($request->hasFile('overview_image')) {
-            $validated['overview_image'] = $request->file('overview_image')
-                ->store('program-keahlian/overview', 'public');
+        $overviewBase64 = $this->processImageUpload($request, 'overview_image');
+        if ($overviewBase64) {
+            $validated['overview_image'] = $overviewBase64;
         }
 
         $validated['is_active'] = $request->has('is_active');
@@ -127,24 +129,21 @@ class ProgramKeahlianController extends Controller
         ]);
 
         // Handle hero image upload
-        if ($request->hasFile('hero_image')) {
-            // Delete old image
-            if ($program_keahlian->hero_image) {
-                Storage::disk('public')->delete($program_keahlian->hero_image);
-            }
-            $validated['hero_image'] = $request->file('hero_image')
-                ->store('program-keahlian/hero', 'public');
+        $heroBase64 = $this->processImageUpload($request, 'hero_image');
+        if ($heroBase64) {
+            $validated['hero_image'] = $heroBase64;
+        } else {
+            unset($validated['hero_image']);
         }
 
         // Handle overview image upload
-        if ($request->hasFile('overview_image')) {
-            // Delete old image
-            if ($program_keahlian->overview_image) {
-                Storage::disk('public')->delete($program_keahlian->overview_image);
-            }
-            $validated['overview_image'] = $request->file('overview_image')
-                ->store('program-keahlian/overview', 'public');
+        $overviewBase64 = $this->processImageUpload($request, 'overview_image');
+        if ($overviewBase64) {
+            $validated['overview_image'] = $overviewBase64;
+        } else {
+            unset($validated['overview_image']);
         }
+
 
         $validated['is_active'] = $request->has('is_active');
 
@@ -159,14 +158,6 @@ class ProgramKeahlianController extends Controller
      */
     public function destroy(ProgramKeahlian $program_keahlian)
     {
-        // Delete images
-        if ($program_keahlian->hero_image) {
-            Storage::disk('public')->delete($program_keahlian->hero_image);
-        }
-        if ($program_keahlian->overview_image) {
-            Storage::disk('public')->delete($program_keahlian->overview_image);
-        }
-
         $program_keahlian->delete();
 
         return redirect()->route('admin.program-keahlian.index')

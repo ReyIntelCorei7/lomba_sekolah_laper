@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Extracurricular;
+use App\Traits\HandlesBase64Images;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ExtracurricularController extends Controller
 {
+    use HandlesBase64Images;
+
     /**
      * Display a listing of extracurriculars.
      */
@@ -72,7 +74,7 @@ class ExtracurricularController extends Controller
 
         // Handle image upload
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('extracurriculars', 'public');
+            $validated['image'] = $this->convertToBase64($request->file('image'));
         }
 
         $validated['is_active'] = $request->boolean('is_active');
@@ -124,11 +126,7 @@ class ExtracurricularController extends Controller
 
         // Handle image upload
         if ($request->hasFile('image')) {
-            // Delete old image
-            if ($extracurricular->image && Storage::disk('public')->exists($extracurricular->image)) {
-                Storage::disk('public')->delete($extracurricular->image);
-            }
-            $validated['image'] = $request->file('image')->store('extracurriculars', 'public');
+            $validated['image'] = $this->convertToBase64($request->file('image'));
         }
 
         $validated['is_active'] = $request->boolean('is_active');
@@ -145,11 +143,6 @@ class ExtracurricularController extends Controller
      */
     public function destroy(Extracurricular $extracurricular)
     {
-        // Delete image
-        if ($extracurricular->image && Storage::disk('public')->exists($extracurricular->image)) {
-            Storage::disk('public')->delete($extracurricular->image);
-        }
-
         $extracurricular->delete();
 
         return redirect()->route('admin.extracurriculars.index')

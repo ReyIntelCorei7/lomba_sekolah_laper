@@ -157,7 +157,7 @@
                             <!-- Image -->
                             <div class="relative h-full">
                                 @if($eskul->image)
-                                <img src="{{ asset('storage/' . $eskul->image) }}" alt="{{ $eskul->name }}"
+                                <img src="{{ display_image($eskul->image) }}" alt="{{ $eskul->name }}"
                                     class="w-full h-full object-cover">
                                 @else
                                 <div class="w-full h-full bg-gradient-to-br from-[#1E2188] to-blue-900 flex items-center justify-center">

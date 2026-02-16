@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Alumni;
+use App\Traits\HandlesBase64Images;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class AlumniController extends Controller
 {
+    use HandlesBase64Images;
+
     /**
      * Display a listing of alumni.
      */
@@ -83,7 +85,7 @@ class AlumniController extends Controller
 
         // Handle photo upload
         if ($request->hasFile('photo')) {
-            $validated['photo'] = $request->file('photo')->store('alumni', 'public');
+            $validated['photo'] = $this->convertToBase64($request->file('photo'));
         }
 
         $validated['is_featured'] = $request->boolean('is_featured');
@@ -129,11 +131,7 @@ class AlumniController extends Controller
 
         // Handle photo upload
         if ($request->hasFile('photo')) {
-            // Delete old photo
-            if ($alumni->photo && Storage::disk('public')->exists($alumni->photo)) {
-                Storage::disk('public')->delete($alumni->photo);
-            }
-            $validated['photo'] = $request->file('photo')->store('alumni', 'public');
+            $validated['photo'] = $this->convertToBase64($request->file('photo'));
         }
 
         $validated['is_featured'] = $request->boolean('is_featured');
@@ -151,11 +149,6 @@ class AlumniController extends Controller
      */
     public function destroy(Alumni $alumni)
     {
-        // Delete photo
-        if ($alumni->photo && Storage::disk('public')->exists($alumni->photo)) {
-            Storage::disk('public')->delete($alumni->photo);
-        }
-
         $alumni->delete();
 
         return redirect()->route('admin.alumni.index')

@@ -329,7 +329,7 @@
         <div class="text-center relative z-10 flex flex-col items-center">
             @php
             $logoPath = $settings['logo_image'] ?? 'image/logometland.png';
-            $logoUrl = str_starts_with($logoPath, 'settings/') ? asset('storage/' . $logoPath) : asset($logoPath);
+            $logoUrl = display_image($logoPath, 'image/logometland.png');
             @endphp
             <!-- Logo Animation -->
             <div class="relative w-28 h-28 mb-8">
@@ -686,7 +686,7 @@
                     { 
                         id: {{ $program->id }}, 
                         title: '{{ $program->code }}', 
-                        image: '{{ $program->image ? asset('storage/' . $program->image) : asset('image/' . strtolower($program->code) . '1.png') }}' 
+                        image: '{{ $program->image ? display_image($program->image) : asset('image/' . strtolower($program->code) . '1.png') }}' 
                     },
                     @endforeach
                 ],
@@ -760,7 +760,7 @@
                 <article class="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     <div class="relative h-56 overflow-hidden">
                         @if($news->image)
-                        <img src="{{ asset('storage/' . $news->image) }}" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110">
+                        <img src="{{ display_image($news->image) }}" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110">
                         @else
                         <div class="w-full h-full bg-blue-50 flex items-center justify-center">
                             <svg class="w-12 h-12 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -883,9 +883,9 @@
                     $hero2 = $settings['hero_image_2'] ?? 'image/sekolahsmkmetland3.png';
                     $hero3 = $settings['hero_image_3'] ?? 'image/sekolahsmkmetland.png';
 
-                    $hero1Url = str_starts_with($hero1, 'settings/') ? asset('storage/'.$hero1) : asset($hero1);
-                    $hero2Url = str_starts_with($hero2, 'settings/') ? asset('storage/'.$hero2) : asset($hero2);
-                    $hero3Url = str_starts_with($hero3, 'settings/') ? asset('storage/'.$hero3) : asset($hero3);
+                    $hero1Url = display_image($hero1, 'image/sekolahsmkmetland4.png');
+                    $hero2Url = display_image($hero2, 'image/sekolahsmkmetland3.png');
+                    $hero3Url = display_image($hero3, 'image/sekolahsmkmetland.png');
                     @endphp "{{ $hero1Url }}",
                     "{{ $hero2Url }}",
                     "{{ $hero3Url }}"

@@ -58,7 +58,7 @@
             <!-- Image -->
             <div class="h-40 relative overflow-hidden">
                 @if($org->image)
-                <img src="{{ asset('storage/' . $org->image) }}" alt="{{ $org->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <img src="{{ display_image($org->image) }}" alt="{{ $org->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                 @else
                 <div class="w-full h-full bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">
                     <span class="text-4xl">{{ substr($org->category_label, 0, 2) }}</span>
@@ -68,7 +68,7 @@
                 <!-- Logo Badge (Top Left) -->
                 @if($org->logo)
                 <div class="absolute top-3 left-3 w-12 h-12 bg-white rounded-xl shadow-lg p-1.5">
-                    <img src="{{ asset('storage/' . $org->logo) }}" alt="{{ $org->abbreviation ?? $org->name }}" class="w-full h-full object-contain">
+                    <img src="{{ display_image($org->logo) }}" alt="{{ $org->abbreviation ?? $org->name }}" class="w-full h-full object-contain">
                 </div>
                 @endif
 

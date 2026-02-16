@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
+use App\Traits\HandlesBase64Images;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
+    use HandlesBase64Images;
+
     public function showNewsPage()
     {
         $featuredNews = News::where('is_published', true)
@@ -233,7 +235,7 @@ class NewsController extends Controller
         }
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('news', 'public');
+            $data['image'] = $this->convertToBase64($request->file('image'));
         }
 
         if (!$data['published_at'] && $data['is_published']) {
@@ -282,10 +284,7 @@ class NewsController extends Controller
         }
 
         if ($request->hasFile('image')) {
-            if ($news->image) {
-                Storage::delete($news->image);
-            }
-            $data['image'] = $request->file('image')->store('news', 'public');
+            $data['image'] = $this->convertToBase64($request->file('image'));
         }
 
         if (!$data['published_at'] && $data['is_published'] && !$news->published_at) {
@@ -300,10 +299,6 @@ class NewsController extends Controller
 
     public function destroy(News $news)
     {
-        if ($news->image) {
-            Storage::delete($news->image);
-        }
-
         $news->delete();
 
         return redirect()->route('admin.news.index')

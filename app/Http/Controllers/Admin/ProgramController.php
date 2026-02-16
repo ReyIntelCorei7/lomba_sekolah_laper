@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Program;
+use App\Traits\HandlesBase64Images;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ProgramController extends Controller
 {
+    use HandlesBase64Images;
+
     public function index()
     {
         $programs = Program::withCount('students')->paginate(10);
@@ -33,8 +35,9 @@ class ProgramController extends Controller
 
         $data = $request->all();
         
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('programs', 'public');
+        $base64 = $this->processImageUpload($request, 'image');
+        if ($base64) {
+            $data['image'] = $base64;
         }
 
         Program::create($data);
@@ -67,12 +70,9 @@ class ProgramController extends Controller
 
         $data = $request->all();
         
-        if ($request->hasFile('image')) {
-            // Delete old image
-            if ($program->image) {
-                Storage::delete($program->image);
-            }
-            $data['image'] = $request->file('image')->store('programs', 'public');
+        $base64 = $this->processImageUpload($request, 'image');
+        if ($base64) {
+            $data['image'] = $base64;
         }
 
         $program->update($data);
@@ -86,11 +86,6 @@ class ProgramController extends Controller
         // Check if program has students
         if ($program->students()->count() > 0) {
             return back()->withErrors(['error' => 'Cannot delete program with registered students.']);
-        }
-
-        // Delete image
-        if ($program->image) {
-            Storage::delete($program->image);
         }
 
         $program->delete();

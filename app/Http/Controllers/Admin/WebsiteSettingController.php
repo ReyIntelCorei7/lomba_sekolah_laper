@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\WebsiteSetting;
+use App\Traits\HandlesBase64Images;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class WebsiteSettingController extends Controller
 {
+    use HandlesBase64Images;
+
     public function index()
     {
         // Get distinct groups
@@ -38,7 +40,7 @@ class WebsiteSettingController extends Controller
             }
         }
 
-        // Handle image uploads separately 
+        // Handle image uploads - convert to base64 
         if ($request->hasFile('settings')) {
             $files = $request->file('settings');
 
@@ -47,14 +49,9 @@ class WebsiteSettingController extends Controller
                     $setting = WebsiteSetting::where('key', $key)->where('type', 'image')->first();
 
                     if ($setting) {
-                        // Delete old image if it exists and is in storage
-                        if ($setting->value && str_starts_with($setting->value, 'settings/') && Storage::disk('public')->exists($setting->value)) {
-                            Storage::disk('public')->delete($setting->value);
-                        }
-
-                        // Store new image
-                        $newImagePath = $file->store('settings', 'public');
-                        $setting->update(['value' => $newImagePath]);
+                        // Convert to base64 and store in DB
+                        $base64 = $this->convertToBase64($file);
+                        $setting->update(['value' => $base64]);
                     }
                 }
             }

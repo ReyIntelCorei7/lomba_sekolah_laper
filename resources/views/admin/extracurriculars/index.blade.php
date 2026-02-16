@@ -59,7 +59,7 @@
             <!-- Image -->
             <div class="relative h-40 overflow-hidden">
                 @if($eskul->image)
-                <img src="{{ asset('storage/' . $eskul->image) }}" alt="{{ $eskul->name }}" 
+                <img src="{{ display_image($eskul->image) }}" alt="{{ $eskul->name }}" 
                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                 @else
                 <div class="w-full h-full bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">

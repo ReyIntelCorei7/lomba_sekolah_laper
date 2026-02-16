@@ -97,7 +97,7 @@
                         <div>
                             <label class="block text-sm font-medium text-slate-300 mb-2">Hero Image</label>
                             @if($program_keahlian->hero_image)
-                                <img src="{{ Storage::url($program_keahlian->hero_image) }}" class="w-full h-32 object-cover rounded-lg mb-2">
+                                <img src="{{ display_image($program_keahlian->hero_image) }}" class="w-full h-32 object-cover rounded-lg mb-2">
                             @endif
                             <input type="file" name="hero_image" accept="image/*"
                                    class="w-full px-4 py-3 rounded-xl bg-slate-700/50 border border-slate-600 text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-600 file:text-white">
@@ -106,7 +106,7 @@
                         <div>
                             <label class="block text-sm font-medium text-slate-300 mb-2">Overview Image</label>
                             @if($program_keahlian->overview_image)
-                                <img src="{{ Storage::url($program_keahlian->overview_image) }}" class="w-full h-32 object-cover rounded-lg mb-2">
+                                <img src="{{ display_image($program_keahlian->overview_image) }}" class="w-full h-32 object-cover rounded-lg mb-2">
                             @endif
                             <input type="file" name="overview_image" accept="image/*"
                                    class="w-full px-4 py-3 rounded-xl bg-slate-700/50 border border-slate-600 text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-600 file:text-white">

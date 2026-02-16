@@ -89,12 +89,7 @@
                                     @if($setting->value)
                                         <div class="mb-3">
                                             @php
-                                                $imagePath = $setting->value;
-                                                if (str_starts_with($imagePath, 'settings/')) {
-                                                    $imageUrl = asset('storage/' . $imagePath);
-                                                } else {
-                                                    $imageUrl = asset($imagePath);
-                                                }
+                                                $imageUrl = display_image($setting->value);
                                             @endphp
                                             <div class="relative inline-block group">
                                                 <img src="{{ $imageUrl }}" 

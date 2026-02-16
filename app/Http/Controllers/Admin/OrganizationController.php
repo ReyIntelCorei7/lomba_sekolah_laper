@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
+use App\Traits\HandlesBase64Images;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class OrganizationController extends Controller
 {
+    use HandlesBase64Images;
+
     /**
      * Display a listing of organizations.
      */
@@ -75,12 +77,12 @@ class OrganizationController extends Controller
 
         // Handle logo upload
         if ($request->hasFile('logo')) {
-            $validated['logo'] = $request->file('logo')->store('organizations/logos', 'public');
+            $validated['logo'] = $this->convertToBase64($request->file('logo'));
         }
 
         // Handle image upload
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('organizations/images', 'public');
+            $validated['image'] = $this->convertToBase64($request->file('image'));
         }
 
         $validated['is_active'] = $request->boolean('is_active');
@@ -127,18 +129,12 @@ class OrganizationController extends Controller
 
         // Handle logo upload
         if ($request->hasFile('logo')) {
-            if ($organization->logo && Storage::disk('public')->exists($organization->logo)) {
-                Storage::disk('public')->delete($organization->logo);
-            }
-            $validated['logo'] = $request->file('logo')->store('organizations/logos', 'public');
+            $validated['logo'] = $this->convertToBase64($request->file('logo'));
         }
 
         // Handle image upload
         if ($request->hasFile('image')) {
-            if ($organization->image && Storage::disk('public')->exists($organization->image)) {
-                Storage::disk('public')->delete($organization->image);
-            }
-            $validated['image'] = $request->file('image')->store('organizations/images', 'public');
+            $validated['image'] = $this->convertToBase64($request->file('image'));
         }
 
         $validated['is_active'] = $request->boolean('is_active');
@@ -155,16 +151,6 @@ class OrganizationController extends Controller
      */
     public function destroy(Organization $organization)
     {
-        // Delete logo
-        if ($organization->logo && Storage::disk('public')->exists($organization->logo)) {
-            Storage::disk('public')->delete($organization->logo);
-        }
-
-        // Delete image
-        if ($organization->image && Storage::disk('public')->exists($organization->image)) {
-            Storage::disk('public')->delete($organization->image);
-        }
-
         $organization->delete();
 
         return redirect()->route('admin.organizations.index')

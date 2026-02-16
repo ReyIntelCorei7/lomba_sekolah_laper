@@ -41,7 +41,7 @@
     <section class="pt-16 relative">
         <div class="h-[50vh] relative overflow-hidden">
             @if($organization->image)
-            <img src="{{ asset('storage/' . $organization->image) }}" alt="{{ $organization->name }}"
+            <img src="{{ display_image($organization->image) }}" alt="{{ $organization->name }}"
                 class="w-full h-full object-cover">
             @else
             <div class="w-full h-full bg-gradient-to-br from-[#1E2188] to-blue-900"></div>
@@ -63,7 +63,7 @@
                     <!-- Logo -->
                     @if($organization->logo)
                     <div class="w-20 h-20 bg-white rounded-2xl shadow-2xl p-2 flex items-center justify-center flex-shrink-0">
-                        <img src="{{ asset('storage/' . $organization->logo) }}" alt="{{ $organization->abbreviation ?? $organization->name }}" class="w-full h-full object-contain">
+                        <img src="{{ display_image($organization->logo) }}" alt="{{ $organization->abbreviation ?? $organization->name }}" class="w-full h-full object-contain">
                     </div>
                     @else
                     <div class="w-20 h-20 bg-gradient-to-br from-[#1E2188] to-blue-600 rounded-2xl shadow-2xl flex items-center justify-center flex-shrink-0">
@@ -232,7 +232,7 @@
                     class="group bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-500/50 transition-all">
                     <div class="h-40 relative overflow-hidden">
                         @if($item->image)
-                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}"
+                        <img src="{{ display_image($item->image) }}" alt="{{ $item->name }}"
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         @else
                         <div class="w-full h-full bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
@@ -243,7 +243,7 @@
                         <!-- Logo Badge -->
                         @if($item->logo)
                         <div class="absolute top-3 left-3 w-10 h-10 bg-white rounded-lg shadow-lg p-1 flex items-center justify-center">
-                            <img src="{{ asset('storage/' . $item->logo) }}" alt="{{ $item->abbreviation ?? $item->name }}" class="w-full h-full object-contain">
+                            <img src="{{ display_image($item->logo) }}" alt="{{ $item->abbreviation ?? $item->name }}" class="w-full h-full object-contain">
                         </div>
                         @endif
 
