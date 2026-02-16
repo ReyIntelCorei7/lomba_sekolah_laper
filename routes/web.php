@@ -19,7 +19,19 @@ use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 
-
+// Serve uploaded files from /tmp/storage on Vercel (production)
+if (config('app.env') === 'production') {
+    Route::get('/storage/{path}', function ($path) {
+        $fullPath = '/tmp/storage/' . $path;
+        
+        if (!file_exists($fullPath)) {
+            abort(404);
+        }
+        
+        $mimeType = mime_content_type($fullPath);
+        return response()->file($fullPath, ['Content-Type' => $mimeType]);
+    })->where('path', '.*');
+}
 
 // USER ROUTES
 
