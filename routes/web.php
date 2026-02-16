@@ -288,6 +288,46 @@ Route::get('/deploy/status/{secret}', function ($secret) {
     }
 });
 
+Route::get('/deploy/reset-admin/{secret}', function ($secret) {
+    if ($secret !== 'metland2026-deploy-secret') {
+        abort(404);
+    }
+    
+    try {
+        // Force reset password using raw DB to bypass model 'hashed' cast
+        $newPassword = bcrypt('admin123');
+        
+        $affected = \Illuminate\Support\Facades\DB::table('admins')
+            ->where('email', 'admin@metland.sch.id')
+            ->update(['password' => $newPassword]);
+        
+        if ($affected === 0) {
+            // Admin doesn't exist, create directly via DB
+            \Illuminate\Support\Facades\DB::table('admins')->insert([
+                'name' => 'Super Admin',
+                'email' => 'admin@metland.sch.id',
+                'password' => $newPassword,
+                'role' => 'super_admin',
+                'is_active' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            $affected = 1;
+        }
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => "Admin password reset! Email: admin@metland.sch.id, Password: admin123",
+            'rows_affected' => $affected
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage()
+        ], 500);
+    }
+});
+
 // ============================================
 // END DEPLOYMENT HELPER ROUTES
 // ============================================
