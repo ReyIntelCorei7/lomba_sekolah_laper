@@ -21,6 +21,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Force HTTPS on production (Vercel)
+        if (config('app.env') === 'production') {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
+
         // Share settings and logoUrl to public views only (exclude admin views)
         View::composer(['layouts.*', 'news.*', 'ppdb.*', 'aboutschool.*', 'kurikulum.*', 'program_keahlian.*', 'errors.*', 'eskul.*'], function ($view) {
             try {
