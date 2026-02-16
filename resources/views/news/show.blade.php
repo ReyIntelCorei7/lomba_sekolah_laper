@@ -146,7 +146,7 @@
     <section class="relative min-h-[35vh] md:min-h-[45vh] bg-[#1a1a1a] flex items-end pt-20">
         <div class="absolute inset-0">
             @if($news->image)
-            <img src="{{ display_image($news->image) }}" alt="{{ $news->title }}" class="w-full h-full object-cover opacity-40">
+            <img src="{{ img_url($news->image, 'news', $news->id, 'image') }}" alt="{{ $news->title }}" class="w-full h-full object-cover opacity-40">
             @else
             <img src="{{ asset('image/sekolahsmkmetland.png') }}" alt="{{ $news->title }}" class="w-full h-full object-cover opacity-40">
             @endif
@@ -204,7 +204,7 @@
                     <!-- Featured Image -->
                     @if($news->image)
                     <div class="w-full">
-                        <img src="{{ display_image($news->image) }}" alt="{{ $news->title }}" class="w-full h-auto max-h-[500px] object-cover">
+                        <img src="{{ img_url($news->image, 'news', $news->id, 'image') }}" alt="{{ $news->title }}" class="w-full h-auto max-h-[500px] object-cover">
                     </div>
                     @endif
 
@@ -262,7 +262,7 @@
                             <div class="flex gap-4">
                                 <div class="w-20 h-20 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100">
                                     @if($related->image)
-                                    <img src="{{ display_image($related->image) }}" alt="{{ $related->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <img src="{{ img_url($related->image, 'news', $related->id, 'image') }}" alt="{{ $related->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                                     @else
                                     <img src="{{ asset('image/sekolahsmkmetland.png') }}" alt="{{ $related->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                                     @endif

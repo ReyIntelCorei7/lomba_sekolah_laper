@@ -89,7 +89,7 @@
                                     @if($setting->value)
                                         <div class="mb-3">
                                             @php
-                                                $imageUrl = display_image($setting->value);
+                                                $imageUrl = img_url($setting->value, 'website_settings', $setting->id, 'value');
                                             @endphp
                                             <div class="relative inline-block group">
                                                 <img src="{{ $imageUrl }}" 

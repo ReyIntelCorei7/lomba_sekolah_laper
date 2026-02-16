@@ -76,7 +76,7 @@
         <!-- Logo Upload -->
         <div>
             <label class="block text-sm font-medium text-slate-300 mb-2">Logo Organisasi</label>
-            <div x-data="{ logoPreview: '{{ $organization->logo ? display_image($organization->logo) : '' }}' }" class="flex items-center gap-4">
+            <div x-data="{ logoPreview: '{{ $organization->logo ? img_url($organization->logo, 'organizations', $organization->id, 'logo') : '' }}' }" class="flex items-center gap-4">
                 <div class="w-20 h-20 bg-slate-700 border-2 border-dashed border-slate-600 rounded-xl flex items-center justify-center overflow-hidden">
                     <template x-if="logoPreview">
                         <img :src="logoPreview" class="w-full h-full object-contain p-2">
@@ -101,7 +101,7 @@
         <!-- Cover Image Upload -->
         <div>
             <label class="block text-sm font-medium text-slate-300 mb-2">Gambar Cover</label>
-            <div x-data="{ imagePreview: '{{ $organization->image ? display_image($organization->image) : '' }}' }" class="border-2 border-dashed border-slate-600 rounded-xl p-6 text-center hover:border-blue-500 transition-colors">
+            <div x-data="{ imagePreview: '{{ $organization->image ? img_url($organization->image, 'organizations', $organization->id, 'image') : '' }}' }" class="border-2 border-dashed border-slate-600 rounded-xl p-6 text-center hover:border-blue-500 transition-colors">
                 <template x-if="imagePreview">
                     <img :src="imagePreview" class="w-full h-48 object-cover rounded-lg mb-4">
                 </template>

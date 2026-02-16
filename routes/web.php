@@ -19,6 +19,10 @@ use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 
+// Serve images stored as base64 in the database
+Route::get('/img/{table}/{id}/{column}', [\App\Http\Controllers\ImageController::class, 'show'])
+    ->name('image.show');
+
 // Serve uploaded files from /tmp/storage on Vercel (production)
 if (config('app.env') === 'production') {
     Route::get('/storage/{path}', function ($path) {

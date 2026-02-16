@@ -41,7 +41,7 @@
     <section class="pt-16 relative">
         <div class="h-[50vh] relative overflow-hidden">
             @if($extracurricular->image)
-            <img src="{{ display_image($extracurricular->image) }}" alt="{{ $extracurricular->name }}"
+            <img src="{{ img_url($extracurricular->image, 'extracurriculars', $extracurricular->id, 'image') }}" alt="{{ $extracurricular->name }}"
                 class="w-full h-full object-cover">
             @else
             <div class="w-full h-full bg-gradient-to-br from-[#1E2188] to-blue-900"></div>
@@ -193,7 +193,7 @@
                     class="group bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-500/50 transition-all">
                     <div class="h-40 relative overflow-hidden">
                         @if($item->image)
-                        <img src="{{ display_image($item->image) }}" alt="{{ $item->name }}"
+                        <img src="{{ img_url($item->image, 'extracurriculars', $item->id, 'image') }}" alt="{{ $item->name }}"
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         @else
                         <div class="w-full h-full bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">

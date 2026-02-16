@@ -99,7 +99,7 @@
                 <div class="p-4 bg-gray-50 dark:bg-slate-900/50 rounded-lg border border-gray-200 dark:border-slate-700">
                     <label class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-3">Current Image</label>
                     <div class="flex items-center gap-4">
-                        <img src="{{ display_image($program->image) }}" alt="{{ $program->name }}" 
+                        <img src="{{ img_url($program->image, 'programs', $program->id, 'image') }}" alt="{{ $program->name }}" 
                              class="h-24 w-24 object-cover rounded-lg border border-gray-200 dark:border-slate-600 shadow-sm">
                         <div>
                             <p class="text-sm text-gray-500 dark:text-slate-400">Upload a new image below to replace this one</p>

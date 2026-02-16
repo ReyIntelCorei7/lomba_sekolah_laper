@@ -75,7 +75,7 @@
                     <div class="flex items-center min-w-0 flex-1">
                         @if($article->image)
                         <img class="h-16 w-16 rounded-xl object-cover mr-4 border border-gray-200 dark:border-slate-600"
-                            src="{{ display_image($article->image) }}"
+                            src="{{ img_url($article->image, 'news', $article->id, 'image') }}"
                             alt="{{ $article->title }}">
                         @else
                         <div class="h-16 w-16 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center mr-4">

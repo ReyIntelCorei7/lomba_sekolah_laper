@@ -150,7 +150,7 @@
             <div class="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
                 <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Photo</h3>
                 @if($student->photo)
-                    <img src="{{ display_image($student->photo) }}" alt="{{ $student->full_name }}" class="w-full rounded-lg">
+                    <img src="{{ img_url($student->photo, 'students', $student->id, 'photo') }}" alt="{{ $student->full_name }}" class="w-full rounded-lg">
                 @else
                     <div class="w-full aspect-square bg-gray-100 dark:bg-slate-900 rounded-lg flex items-center justify-center">
                         <div class="text-center">

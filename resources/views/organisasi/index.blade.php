@@ -161,7 +161,7 @@
                     <!-- Image -->
                     <div class="h-52 relative overflow-hidden">
                         @if($org->image)
-                        <img src="{{ display_image($org->image) }}" alt="{{ $org->name }}"
+                        <img src="{{ img_url($org->image, 'organizations', $org->id, 'image') }}" alt="{{ $org->name }}"
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                         @else
                         <div class="w-full h-full bg-gradient-to-br from-[#1E2188] to-blue-900 flex items-center justify-center">
@@ -175,7 +175,7 @@
                         <!-- Logo Badge (Top Left) -->
                         @if($org->logo)
                         <div class="logo-badge absolute top-4 left-4 w-14 h-14 bg-white rounded-xl shadow-2xl p-2 flex items-center justify-center">
-                            <img src="{{ display_image($org->logo) }}" alt="{{ $org->abbreviation ?? $org->name }}" class="w-full h-full object-contain">
+                            <img src="{{ img_url($org->logo, 'organizations', $org->id, 'logo') }}" alt="{{ $org->abbreviation ?? $org->name }}" class="w-full h-full object-contain">
                         </div>
                         @else
                         <div class="absolute top-4 left-4 w-14 h-14 bg-gradient-to-br from-[#1E2188] to-blue-600 rounded-xl shadow-2xl flex items-center justify-center">

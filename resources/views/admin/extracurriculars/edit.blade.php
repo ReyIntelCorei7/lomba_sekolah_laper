@@ -88,7 +88,7 @@
                 <div x-data="{ preview: null }" class="space-y-3">
                     @if($extracurricular->image)
                     <div class="flex items-center gap-4 p-4 bg-slate-900 rounded-lg">
-                        <img src="{{ display_image($extracurricular->image) }}" alt="{{ $extracurricular->name }}" class="w-20 h-20 object-cover rounded-lg">
+                        <img src="{{ img_url($extracurricular->image, 'extracurriculars', $extracurricular->id, 'image') }}" alt="{{ $extracurricular->name }}" class="w-20 h-20 object-cover rounded-lg">
                         <div>
                             <p class="text-sm text-slate-300">Gambar saat ini</p>
                             <p class="text-xs text-slate-500">Upload gambar baru untuk mengganti</p>

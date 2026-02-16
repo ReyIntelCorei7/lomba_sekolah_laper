@@ -328,8 +328,10 @@
     <div class="loading-screen" :class="{ 'hidden': !isLoading }">
         <div class="text-center relative z-10 flex flex-col items-center">
             @php
-            $logoPath = $settings['logo_image'] ?? 'image/logometland.png';
-            $logoUrl = display_image($logoPath, 'image/logometland.png');
+            $logoSetting = \App\Models\WebsiteSetting::where('key', 'logo_image')->first();
+            $logoUrl = ($logoSetting && $logoSetting->value) 
+                ? img_url($logoSetting->value, 'website_settings', $logoSetting->id, 'value') 
+                : asset('image/logometland.png');
             @endphp
             <!-- Logo Animation -->
             <div class="relative w-28 h-28 mb-8">
@@ -686,7 +688,7 @@
                     { 
                         id: {{ $program->id }}, 
                         title: '{{ $program->code }}', 
-                        image: '{{ $program->image ? display_image($program->image) : asset('image/' . strtolower($program->code) . '1.png') }}' 
+                        image: '{{ $program->image ? img_url($program->image, 'programs', $program->id, 'image') : asset('image/' . strtolower($program->code) . '1.png') }}' 
                     },
                     @endforeach
                 ],
@@ -760,7 +762,7 @@
                 <article class="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     <div class="relative h-56 overflow-hidden">
                         @if($news->image)
-                        <img src="{{ display_image($news->image) }}" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110">
+                        <img src="{{ img_url($news->image, 'news', $news->id, 'image') }}" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110">
                         @else
                         <div class="w-full h-full bg-blue-50 flex items-center justify-center">
                             <svg class="w-12 h-12 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -879,13 +881,19 @@
                 lang: 'id',
                 heroImages: [
                     @php
-                    $hero1 = $settings['hero_image_1'] ?? 'image/sekolahsmkmetland4.png';
-                    $hero2 = $settings['hero_image_2'] ?? 'image/sekolahsmkmetland3.png';
-                    $hero3 = $settings['hero_image_3'] ?? 'image/sekolahsmkmetland.png';
+                    $heroSetting1 = \App\Models\WebsiteSetting::where('key', 'hero_image_1')->first();
+                    $heroSetting2 = \App\Models\WebsiteSetting::where('key', 'hero_image_2')->first();
+                    $heroSetting3 = \App\Models\WebsiteSetting::where('key', 'hero_image_3')->first();
 
-                    $hero1Url = display_image($hero1, 'image/sekolahsmkmetland4.png');
-                    $hero2Url = display_image($hero2, 'image/sekolahsmkmetland3.png');
-                    $hero3Url = display_image($hero3, 'image/sekolahsmkmetland.png');
+                    $hero1Url = ($heroSetting1 && $heroSetting1->value) 
+                        ? img_url($heroSetting1->value, 'website_settings', $heroSetting1->id, 'value') 
+                        : asset('image/sekolahsmkmetland4.png');
+                    $hero2Url = ($heroSetting2 && $heroSetting2->value) 
+                        ? img_url($heroSetting2->value, 'website_settings', $heroSetting2->id, 'value') 
+                        : asset('image/sekolahsmkmetland3.png');
+                    $hero3Url = ($heroSetting3 && $heroSetting3->value) 
+                        ? img_url($heroSetting3->value, 'website_settings', $heroSetting3->id, 'value') 
+                        : asset('image/sekolahsmkmetland.png');
                     @endphp "{{ $hero1Url }}",
                     "{{ $hero2Url }}",
                     "{{ $hero3Url }}"

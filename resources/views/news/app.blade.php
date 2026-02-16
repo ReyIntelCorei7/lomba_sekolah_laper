@@ -335,7 +335,7 @@
             <a href="{{ route('news.show', $featuredNews->slug) }}" class="sm:col-span-2 lg:row-span-2 group relative overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all duration-300 block" style="border-radius: 5px;">
                 <div class="absolute inset-0">
                     @if($featuredNews->image)
-                    <img src="{{ display_image($featuredNews->image) }}" alt="{{ $featuredNews->title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <img src="{{ img_url($featuredNews->image, 'news', $featuredNews->id, 'image') }}" alt="{{ $featuredNews->title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                     @else
                     <img src="{{ asset('image/sekolahsmkmetland.png') }}" alt="{{ $featuredNews->title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                     @endif
@@ -380,7 +380,7 @@
                 x-transition:enter-end="opacity-100 transform scale-100">
                 <div class="h-40 overflow-hidden">
                     @if($item->image)
-                    <img src="{{ display_image($item->image) }}" alt="{{ $item->title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <img src="{{ img_url($item->image, 'news', $item->id, 'image') }}" alt="{{ $item->title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                     @else
                     <img src="{{ asset('image/sekolahsmkmetland.png') }}" alt="{{ $item->title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                     @endif

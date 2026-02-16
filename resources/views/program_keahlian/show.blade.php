@@ -122,7 +122,7 @@
         <!-- Background Image with Overlay -->
         <div class="absolute inset-0">
             @if($program->hero_image)
-            <img src="{{ display_image($program->hero_image) }}" alt="{{ $program->name }}"
+            <img src="{{ img_url($program->hero_image, 'program_keahlians', $program->id, 'hero_image') }}" alt="{{ $program->name }}"
                 class="w-full h-full object-cover">
             @else
             <img src="{{ asset('image/1.png') }}" alt="{{ $program->name }}"
@@ -264,7 +264,7 @@
                 <div class="relative">
                     <div class="absolute -inset-4 bg-gradient-to-r {{ $colors['btn_gradient'] }} rounded-3xl blur-2xl opacity-20 animate-pulse-glow"></div>
                     @if($program->overview_image)
-                    <img src="{{ display_image($program->overview_image) }}" alt="{{ $program->name }}"
+                    <img src="{{ img_url($program->overview_image, 'program_keahlians', $program->id, 'overview_image') }}" alt="{{ $program->name }}"
                         class="relative rounded-3xl shadow-2xl w-full object-cover aspect-[4/3]">
                     @else
                     <img src="{{ asset('image/1.png') }}" alt="{{ $program->name }}"

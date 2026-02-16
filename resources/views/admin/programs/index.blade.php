@@ -22,7 +22,7 @@
             <div class="bg-white dark:bg-slate-800/50 overflow-hidden rounded-2xl border border-gray-200 dark:border-slate-700 hover:shadow-lg dark:hover:bg-slate-800 transition-all duration-200">
                 @if($program->image)
                     <div class="h-48 bg-gray-200 dark:bg-slate-900">
-                        <img src="{{ display_image($program->image) }}" alt="{{ $program->name }}" 
+                        <img src="{{ img_url($program->image, 'programs', $program->id, 'image') }}" alt="{{ $program->name }}" 
                              class="w-full h-full object-cover">
                     </div>
                 @else
