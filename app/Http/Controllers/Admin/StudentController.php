@@ -75,11 +75,39 @@ class StudentController extends Controller
             'program_id' => 'required|exists:programs,id',
             'status' => 'required|in:pending,accepted,rejected,waiting',
             'notes' => 'nullable|string',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'certificate' => 'nullable|file|mimes:pdf,jpeg,png,jpg|max:5120',
+            'transcript' => 'nullable|file|mimes:pdf,jpeg,png,jpg|max:5120',
         ]);
 
-        $student->update($request->all());
+        $data = $request->except(['photo', 'certificate', 'transcript']);
 
-        return redirect()->route('admin.students.index')
+        // Handle file uploads
+        if ($request->hasFile('photo')) {
+            // Delete old file
+            if ($student->photo) {
+                Storage::disk('public')->delete($student->photo);
+            }
+            $data['photo'] = $request->file('photo')->store('students/photos', 'public');
+        }
+
+        if ($request->hasFile('certificate')) {
+            if ($student->certificate) {
+                Storage::disk('public')->delete($student->certificate);
+            }
+            $data['certificate'] = $request->file('certificate')->store('students/certificates', 'public');
+        }
+
+        if ($request->hasFile('transcript')) {
+            if ($student->transcript) {
+                Storage::disk('public')->delete($student->transcript);
+            }
+            $data['transcript'] = $request->file('transcript')->store('students/transcripts', 'public');
+        }
+
+        $student->update($data);
+
+        return redirect()->route('admin.students.show', $student)
             ->with('success', 'Student updated successfully.');
     }
 
