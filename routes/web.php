@@ -23,19 +23,25 @@ use Illuminate\Support\Facades\Route;
 Route::get('/img/{table}/{id}/{column}', [\App\Http\Controllers\ImageController::class, 'show'])
     ->name('image.show');
 
-// Serve uploaded files from /tmp/storage on Vercel (production)
-if (config('app.env') === 'production') {
-    Route::get('/storage/{path}', function ($path) {
-        $fullPath = '/tmp/storage/' . $path;
-        
-        if (!file_exists($fullPath)) {
-            abort(404);
-        }
-        
-        $mimeType = mime_content_type($fullPath);
-        return response()->file($fullPath, ['Content-Type' => $mimeType]);
-    })->where('path', '.*');
-}
+// Serve uploaded files from storage (works in all environments)
+Route::get('/storage/{path}', function ($path) {
+    // Try local storage first
+    $localPath = storage_path('app/public/' . $path);
+    
+    // Then try /tmp/storage for production (Vercel)
+    $tmpPath = '/tmp/storage/' . $path;
+    
+    if (file_exists($localPath)) {
+        $fullPath = $localPath;
+    } elseif (file_exists($tmpPath)) {
+        $fullPath = $tmpPath;
+    } else {
+        abort(404);
+    }
+    
+    $mimeType = mime_content_type($fullPath);
+    return response()->file($fullPath, ['Content-Type' => $mimeType]);
+})->where('path', '.*')->name('storage.serve');
 
 // USER ROUTES
 

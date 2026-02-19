@@ -142,7 +142,7 @@
                             <label for="photo" class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Pas Foto</label>
                             @if($student->photo)
                                 <div class="mb-2">
-                                    <img src="{{ asset('storage/' . $student->photo) }}" alt="Pas Foto" class="w-full rounded-lg object-cover border border-gray-200 dark:border-slate-600">
+                                    <img src="{{ url('storage/' . $student->photo) }}" alt="Pas Foto" class="w-full rounded-lg object-cover border border-gray-200 dark:border-slate-600">
                                 </div>
                             @endif
                             <input type="file" id="photo" name="photo" accept="image/jpeg,image/png"
@@ -159,9 +159,9 @@
                             @if($student->certificate)
                                 <div class="mb-2">
                                     @if(Str::endsWith(strtolower($student->certificate), ['.jpg', '.jpeg', '.png']))
-                                        <img src="{{ asset('storage/' . $student->certificate) }}" alt="Ijazah/SKHUN" class="w-full rounded-lg object-cover border border-gray-200 dark:border-slate-600">
+                                        <img src="{{ url('storage/' . $student->certificate) }}" alt="Ijazah/SKHUN" class="w-full rounded-lg object-cover border border-gray-200 dark:border-slate-600">
                                     @else
-                                        <a href="{{ asset('storage/' . $student->certificate) }}" target="_blank" class="inline-flex items-center text-sm text-blue-600 dark:text-blue-400 hover:underline">
+                                        <a href="{{ url('storage/' . $student->certificate) }}" target="_blank" class="inline-flex items-center text-sm text-blue-600 dark:text-blue-400 hover:underline">
                                             📄 Lihat Dokumen (PDF)
                                         </a>
                                     @endif
@@ -181,9 +181,9 @@
                             @if($student->transcript)
                                 <div class="mb-2">
                                     @if(Str::endsWith(strtolower($student->transcript), ['.jpg', '.jpeg', '.png']))
-                                        <img src="{{ asset('storage/' . $student->transcript) }}" alt="Transkrip Nilai" class="w-full rounded-lg object-cover border border-gray-200 dark:border-slate-600">
+                                        <img src="{{ url('storage/' . $student->transcript) }}" alt="Transkrip Nilai" class="w-full rounded-lg object-cover border border-gray-200 dark:border-slate-600">
                                     @else
-                                        <a href="{{ asset('storage/' . $student->transcript) }}" target="_blank" class="inline-flex items-center text-sm text-blue-600 dark:text-blue-400 hover:underline">
+                                        <a href="{{ url('storage/' . $student->transcript) }}" target="_blank" class="inline-flex items-center text-sm text-blue-600 dark:text-blue-400 hover:underline">
                                             📄 Lihat Dokumen (PDF)
                                         </a>
                                     @endif
