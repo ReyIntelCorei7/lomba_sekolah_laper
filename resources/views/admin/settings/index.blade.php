@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Website Settings')
+@section('title', 'Homepage')
 
 @section('content')
 <div class="space-y-6">
@@ -23,9 +23,9 @@
     <!-- Header -->
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Website Settings</h1>
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Homepage</h1>
             <p class="mt-1 text-sm text-gray-500 dark:text-slate-400">
-                Configure your website content and appearance
+                Kelola gambar-gambar yang tampil di halaman utama website
             </p>
         </div>
     </div>
@@ -38,7 +38,7 @@
         @foreach($settings as $group => $groupSettings)
             <div class="bg-white dark:bg-slate-800/50 shadow rounded-xl border border-gray-200 dark:border-slate-700 mb-6 overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800/80">
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-white capitalize">{{ str_replace('_', ' ', $group) }} Settings</h3>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white capitalize">{{ str_replace('_', ' ', $group) }}</h3>
                 </div>
                 
                 <div class="px-6 py-6 space-y-6">
