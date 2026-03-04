@@ -1,7 +1,16 @@
 @props([
-    'logoUrl' => asset('image/logometland.png'),
+    'logoUrl' => null,
     'settings' => []
 ])
+
+@php
+    if (!$logoUrl) {
+        $logoSetting = \App\Models\WebsiteSetting::where('key', 'logo_image')->first();
+        $logoUrl = ($logoSetting && $logoSetting->value) 
+            ? img_url($logoSetting->value, 'website_settings', $logoSetting->id, 'value') 
+            : asset('image/logometland.png');
+    }
+@endphp
 
 <!-- Mega Menu Overlay -->
 <div class="fixed inset-0 bg-[#1E2188] z-40 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-y-auto"

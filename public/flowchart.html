@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowchart Website SMK Metland School</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f4f8;
+            color: #1e293b;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .flowchart-page {
+                box-shadow: none !important;
+                border: none !important;
+                border-radius: 0 !important;
+                padding: 10mm;
+                margin: 0;
+            }
+
+            .diagram-wrapper {
+                overflow: visible !important;
+            }
+        }
+
+        .flowchart-page {
+            max-width: 1400px;
+            margin: 24px auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+            padding: 40px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .cover-page {
+            text-align: center;
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1E2188 0%, #2563eb 50%, #1E2188 100%);
+            color: white;
+            border-radius: 16px;
+        }
+
+        .cover-page h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .cover-page .subtitle {
+            font-size: 18px;
+            font-weight: 300;
+            opacity: 0.8;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+
+        .cover-page .divider {
+            width: 80px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.4);
+            margin: 28px auto;
+            border-radius: 2px;
+        }
+
+        .cover-page .info {
+            font-size: 13px;
+            opacity: 0.6;
+            margin-top: 40px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1E2188;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            padding: 0 14px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .badge-user {
+            background: #2563eb;
+        }
+
+        .badge-admin {
+            background: #dc2626;
+        }
+
+        .section-desc {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .diagram-wrapper {
+            overflow: auto;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            background: #fafbfc;
+            padding: 20px;
+        }
+
+        .mermaid {
+            min-width: 100%;
+        }
+
+        .mermaid svg {
+            width: 100%;
+            height: auto;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 16px;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: #475569;
+        }
+
+        .legend-shape {
+            width: 24px;
+            height: 14px;
+            border: 2px solid #64748b;
+        }
+
+        .legend-shape.terminal {
+            border-radius: 7px;
+            background: #dbeafe;
+            border-color: #3b82f6;
+        }
+
+        .legend-shape.process {
+            border-radius: 2px;
+            background: #e0e7ff;
+            border-color: #6366f1;
+        }
+
+        .legend-shape.decision {
+            transform: rotate(45deg);
+            width: 12px;
+            height: 12px;
+            background: #fef3c7;
+            border-color: #f59e0b;
+        }
+
+        .legend-shape.io {
+            transform: skewX(-10deg);
+            background: #d1fae5;
+            border-color: #10b981;
+        }
+
+        .print-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            padding: 12px 24px;
+            background: #1E2188;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(30, 33, 136, 0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .print-btn:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <button class="print-btn no-print" onclick="window.print()">
+        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">
+            </path>
+        </svg>
+        Simpan sebagai PDF
+    </button>
+
+    <!-- COVER -->
+    <div class="flowchart-page cover-page">
+        <h1>Flowchart Website<br>SMK Metland School</h1>
+        <div class="divider"></div>
+        <p class="subtitle">Dokumentasi alur lengkap website sekolah.<br>Terdiri dari 2 flowchart utama: Pengguna dan
+            Admin.</p>
+        <p class="info">Dibuat: Maret 2026 | SMK Metland School | Versi 1.0</p>
+    </div>
+
+    <!-- ==================== FLOWCHART 1: PENGGUNA ==================== -->
+    <div class="flowchart-page page-break">
+        <h2 class="section-title"><span class="badge badge-user">PENGGUNA</span> Flowchart Alur Pengguna / Pengunjung
+            Website</h2>
+        <p class="section-desc">Seluruh alur yang bisa dilakukan oleh pengguna umum (calon siswa, orang tua, pengunjung)
+            di website SMK Metland School, dari membuka homepage hingga mendaftar PPDB.</p>
+
+        <div class="legend">
+            <b style="font-size: 11px; color: #1e293b; width: 100%;">Keterangan:</b>
+            <div class="legend-item">
+                <div class="legend-shape terminal"></div> Mulai / Selesai
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape process"></div> Halaman / Proses
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape decision"></div> Keputusan
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape io"></div> Input Data
+            </div>
+        </div>
+
+        <div class="diagram-wrapper">
+            <div class="mermaid">
+                flowchart TD
+                START(["MULAI\nUser membuka website"]) --> HOME["Halaman Homepage\nURL: /"]
+
+                HOME --> HERO["Section Hero\n3 Gambar Slider Otomatis"]
+                HERO --> SAMBUTAN["Section Sambutan\nKepala Sekolah"]
+                SAMBUTAN --> STATS["Section Statistik\nSiswa, Guru, Staff"]
+                STATS --> PROGSEC["Section Program Keahlian\n5 Foto Interaktif"]
+                PROGSEC --> NEWSSEC["Section Berita Terbaru\n3 Artikel Terbaru"]
+                NEWSSEC --> FOOTER["Section Footer\nLink navigasi lengkap"]
+
+                HOME --> NAV{"Pilih Menu\ndi Navbar"}
+                NAV -->|Beranda| HOME
+                NAV -->|Tentang Sekolah| ABOUT["Halaman Tentang Sekolah\nURL: /about\n\nProfil, Visi Misi,\nStruktur
+                Organisasi"]
+                NAV -->|Program Keahlian| PROKEH["Halaman Daftar Program\nURL: /prokeh"]
+                NAV -->|Kurikulum| KURI["Halaman Kurikulum\nURL: /kurikulum\n\nStruktur Kurikulum,\nMetode
+                Pembelajaran"]
+                NAV -->|Berita| NEWS["Halaman Daftar Berita\nURL: /news"]
+                NAV -->|Tarik Pita Biru| MEGA{"Mega Menu\nOverlay Terbuka"}
+
+                MEGA -->|Profil Sekolah| ABOUT
+                MEGA -->|Visi dan Misi| ABOUT
+                MEGA -->|Program Keahlian| PROKEH
+                MEGA -->|Ekstrakurikuler| ESKUL["Halaman Daftar Eskul\nURL: /eskul"]
+                MEGA -->|Organisasi| ORGP["Halaman Daftar Organisasi\nURL: /organisasi"]
+                MEGA -->|Produk Siswa| SMILE["Redirect ke\nsmile-metschoo.com"]
+                MEGA -->|Alumni| ALUMNI["Halaman Alumni\nURL: /alumni\nFilter Tahun & Jurusan"]
+                MEGA -->|Berita| NEWS
+                MEGA -->|Kurikulum| KURI
+
+                PROKEH --> PJ{"Pilih Jurusan"}
+                PJ --> P1["Detail Akuntansi\n/prokeh/akuntansi"]
+                PJ --> P2["Detail DKV\n/prokeh/dkv"]
+                PJ --> P3["Detail Perhotelan\n/prokeh/hotel"]
+                PJ --> P4["Detail Kuliner\n/prokeh/kuliner"]
+                PJ --> P5["Detail PPLG\n/prokeh/pplg"]
+
+                NEWS --> NA{"Pilih Aksi Berita"}
+                NA -->|Baca Artikel| DETAIL["Detail Berita\n/news/judul-artikel"]
+                NA -->|Filter Kategori| KATEGORI["Berita per Kategori\n/news/kategori/nama"]
+                NA -->|Load More| LOADMORE["Muat Artikel\nLebih Banyak"]
+
+                ESKUL --> ESKULD["Detail Eskul\n/eskul/nama-eskul"]
+                ORGP --> ORGPD["Detail Organisasi\n/organisasi/nama-org"]
+
+                FOOTER -.->|Klik Info PPDB| PPDB["Halaman Info PPDB\nURL: /ppdb\n\nInformasi:\n- 5 Jurusan Tersedia\n-
+                Kuota Pendaftaran\n- Persyaratan"]
+
+                PPDB --> PPDB_AKSI{"Pilih Aksi PPDB"}
+                PPDB_AKSI -->|Daftar Sekarang| REGISTER["Halaman Form Pendaftaran\nURL: /ppdb/register"]
+                PPDB_AKSI -->|Cek Status| CHECK["Halaman Cek Status\nURL: /ppdb/check"]
+
+                REGISTER --> FORM[/"Mengisi Formulir:\n\nData Pribadi:\n- Nama Lengkap, Email\n- No. Telp, Jenis
+                Kelamin\n- Tanggal & Tempat Lahir\n- Alamat Lengkap\n\nData Orang Tua:\n- Nama, No. Telp,
+                Pekerjaan\n\nData Akademik:\n- Asal Sekolah, Nilai Rata-rata\n- Pilih Program Keahlian\n\nUpload
+                Dokumen:\n- Pas Foto, Ijazah, Transkrip"/]
+
+                FORM --> SUBMIT["Klik Tombol Daftar"]
+                SUBMIT --> VALIDASI{"Validasi Server\nData Lengkap &\nFormat Benar?"}
+                VALIDASI -->|Tidak Valid| ERROR["Tampilkan Pesan Error\nUser memperbaiki data"]
+                ERROR --> FORM
+                VALIDASI -->|Valid| PROSES["Server Memproses:\n1. Simpan ke Database\n2. Upload Dokumen\n3. Generate No.
+                Registrasi\n4. Status = PENDING"]
+                PROSES --> SUKSES["Halaman Sukses\n/ppdb/success/REG-xxxxx\n\nTampilkan:\n- Nomor Registrasi\n- Nama &
+                Program\n- Status: Pending"]
+
+                CHECK --> INPUT_CEK[/"Mengisi:\n- Nomor Registrasi\n- Alamat Email"/]
+                INPUT_CEK --> CEK_BTN["Klik Cek Status"]
+                CEK_BTN --> CEK_VALID{"Validasi\nField Lengkap?"}
+                CEK_VALID -->|Kosong| ERR_CEK["Pesan Error:\nField wajib diisi"]
+                ERR_CEK --> INPUT_CEK
+                CEK_VALID -->|Lengkap| CARI["Cari di Database\nCocokkan No. Reg + Email"]
+                CARI --> DITEMUKAN{"Data\nDitemukan?"}
+                DITEMUKAN -->|Tidak| ERR_NOT["Pesan Error:\nPendaftaran tidak ditemukan"]
+                ERR_NOT --> INPUT_CEK
+                DITEMUKAN -->|Ya| TAMPIL_STATUS["Tampilkan Status Pendaftaran\n/ppdb/status"]
+                TAMPIL_STATUS --> STATUS_CEK{"Status Saat Ini"}
+                STATUS_CEK --> PENDING["PENDING\nMenunggu Verifikasi"]
+                STATUS_CEK --> ACCEPTED["ACCEPTED\nDiterima"]
+                STATUS_CEK --> REJECTED["REJECTED\nDitolak"]
+
+                SUKSES --> SELESAI(["SELESAI"])
+                PENDING --> SELESAI
+                ACCEPTED --> SELESAI
+                REJECTED --> SELESAI
+
+                style START fill:#dbeafe,stroke:#3b82f6,stroke-width:2px
+                style SELESAI fill:#dbeafe,stroke:#3b82f6,stroke-width:2px
+                style NAV fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style MEGA fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style PJ fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style NA fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style PPDB_AKSI fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style VALIDASI fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style CEK_VALID fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style DITEMUKAN fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style STATUS_CEK fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style ERROR fill:#fee2e2,stroke:#ef4444,stroke-width:2px
+                style ERR_CEK fill:#fee2e2,stroke:#ef4444,stroke-width:2px
+                style ERR_NOT fill:#fee2e2,stroke:#ef4444,stroke-width:2px
+                style REJECTED fill:#fee2e2,stroke:#ef4444,stroke-width:2px
+                style ACCEPTED fill:#d1fae5,stroke:#10b981,stroke-width:2px
+                style PENDING fill:#fef9c3,stroke:#eab308,stroke-width:2px
+                style SUKSES fill:#d1fae5,stroke:#10b981,stroke-width:2px
+                style PROSES fill:#e0e7ff,stroke:#6366f1,stroke-width:2px
+                style FORM fill:#d1fae5,stroke:#10b981,stroke-width:2px
+                style SMILE fill:#fee2e2,stroke:#ef4444,stroke-width:2px
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== FLOWCHART 2: ADMIN ==================== -->
+    <div class="flowchart-page page-break">
+        <h2 class="section-title"><span class="badge badge-admin">ADMIN</span> Flowchart Alur Admin Panel</h2>
+        <p class="section-desc">Seluruh alur yang bisa dilakukan oleh Admin sekolah di panel administrasi, mulai dari
+            login hingga mengelola semua konten website.</p>
+
+        <div class="legend">
+            <b style="font-size: 11px; color: #1e293b; width: 100%;">Keterangan:</b>
+            <div class="legend-item">
+                <div class="legend-shape terminal"></div> Mulai / Selesai
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape process"></div> Halaman / Proses
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape decision"></div> Keputusan
+            </div>
+            <div class="legend-item">
+                <div class="legend-shape io"></div> Input Data
+            </div>
+        </div>
+
+        <div class="diagram-wrapper">
+            <div class="mermaid">
+                flowchart TD
+                START(["MULAI\nAdmin membuka /admin/login"]) --> LOGIN["Halaman Login Admin"]
+                LOGIN --> INPUT_LOGIN[/"Mengisi:\n- Email Admin\n- Password"/]
+                INPUT_LOGIN --> BTN_LOGIN["Klik Tombol Login"]
+                BTN_LOGIN --> AUTH{"Autentikasi\nEmail & Password Valid?"}
+                AUTH -->|Gagal| ERR_LOGIN["Pesan Error:\nEmail atau Password salah"]
+                ERR_LOGIN --> INPUT_LOGIN
+                AUTH -->|Berhasil| SESSION["Buat Session Admin\nSimpan Auth Token"]
+                SESSION --> DASH["Dashboard Admin\n/admin/dashboard\n\nStatistik:\n- Total Pendaftar\n- Total Berita\n-
+                Total Program\n- Quick Actions"]
+
+                DASH --> MENU{"Pilih Menu\ndi Sidebar Admin"}
+
+                %% ===== STUDENTS =====
+                MENU -->|Students| STD_LIST["Daftar Siswa PPDB\n/admin/students\n\nTabel + Filter + Pencarian"]
+                STD_LIST --> STD_AKSI{"Aksi Siswa"}
+                STD_AKSI -->|Lihat Detail| STD_SHOW["Detail Data Siswa\nData Pribadi, Orang Tua,\nAkademik, Foto,
+                Dokumen"]
+                STD_AKSI -->|Edit| STD_EDIT["Edit Data Siswa\nSemua field bisa diubah"]
+                STD_EDIT --> STD_SAVE["Simpan Perubahan"]
+                STD_SAVE --> STD_LIST
+                STD_AKSI -->|Update Status| STD_STATUS{"Pilih Status Baru"}
+                STD_STATUS --> STD_ACC["Set: ACCEPTED"]
+                STD_STATUS --> STD_REJ["Set: REJECTED"]
+                STD_STATUS --> STD_PEN["Set: PENDING"]
+                STD_ACC --> STD_LIST
+                STD_REJ --> STD_LIST
+                STD_PEN --> STD_LIST
+                STD_AKSI -->|Hapus| STD_DEL{"Konfirmasi Hapus?"}
+                STD_DEL -->|Ya| STD_DELETED["Data Siswa Dihapus"]
+                STD_DEL -->|Batal| STD_LIST
+                STD_DELETED --> STD_LIST
+                STD_AKSI -->|Export| STD_EXP["Download Excel\nSemua Data Siswa"]
+                STD_SHOW --> STD_LIST
+
+                %% ===== NEWS =====
+                MENU -->|News| NEWS_LIST["Daftar Berita\n/admin/news\n\nSemua Artikel + Status"]
+                NEWS_LIST --> NEWS_AKSI{"Aksi Berita"}
+                NEWS_AKSI -->|Tambah Baru| NEWS_CREATE["Buat Berita Baru\nJudul, Konten, Gambar,\nKategori, Ringkasan"]
+                NEWS_CREATE --> NEWS_SIMPAN["Simpan ke Database\nStatus: Draft"]
+                NEWS_SIMPAN --> NEWS_LIST
+                NEWS_AKSI -->|Edit| NEWS_EDIT["Edit Berita\nSemua field bisa diubah"]
+                NEWS_EDIT --> NEWS_UPD["Simpan Perubahan"]
+                NEWS_UPD --> NEWS_LIST
+                NEWS_AKSI -->|Publish / Unpublish| NEWS_TOGGLE["Toggle Status\nDraft ke Published\natau sebaliknya"]
+                NEWS_TOGGLE --> NEWS_LIST
+                NEWS_AKSI -->|Hapus| NEWS_DEL{"Konfirmasi Hapus?"}
+                NEWS_DEL -->|Ya| NEWS_DELETED["Berita Dihapus"]
+                NEWS_DEL -->|Batal| NEWS_LIST
+                NEWS_DELETED --> NEWS_LIST
+
+                %% ===== ESKUL =====
+                MENU -->|Eskul| ESK_LIST["Daftar Ekstrakurikuler\n/admin/extracurriculars"]
+                ESK_LIST --> ESK_AKSI{"Aksi Eskul"}
+                ESK_AKSI -->|Tambah| ESK_CREATE["Buat Eskul Baru\nNama, Deskripsi,\nGambar, Jadwal"]
+                ESK_AKSI -->|Edit| ESK_EDIT["Edit Data Eskul"]
+                ESK_AKSI -->|Toggle Aktif| ESK_TOGGLE["Aktifkan / Nonaktifkan"]
+                ESK_AKSI -->|Hapus| ESK_DEL["Hapus Eskul"]
+                ESK_CREATE --> ESK_LIST
+                ESK_EDIT --> ESK_LIST
+                ESK_TOGGLE --> ESK_LIST
+                ESK_DEL --> ESK_LIST
+
+                %% ===== ORGANISASI =====
+                MENU -->|Organisasi| ORG_LIST["Daftar Organisasi\n/admin/organizations"]
+                ORG_LIST --> ORG_AKSI{"Aksi Organisasi"}
+                ORG_AKSI -->|Tambah| ORG_CREATE["Buat Organisasi Baru\nNama, Deskripsi,\nGambar, Ketua"]
+                ORG_AKSI -->|Edit| ORG_EDIT["Edit Data Organisasi"]
+                ORG_AKSI -->|Toggle Aktif| ORG_TOGGLE["Aktifkan / Nonaktifkan"]
+                ORG_AKSI -->|Hapus| ORG_DEL["Hapus Organisasi"]
+                ORG_CREATE --> ORG_LIST
+                ORG_EDIT --> ORG_LIST
+                ORG_TOGGLE --> ORG_LIST
+                ORG_DEL --> ORG_LIST
+
+                %% ===== ALUMNI =====
+                MENU -->|Alumni| ALM_LIST["Daftar Alumni\n/admin/alumni"]
+                ALM_LIST --> ALM_AKSI{"Aksi Alumni"}
+                ALM_AKSI -->|Tambah| ALM_CREATE["Tambah Alumni Baru\nNama, Jurusan, Tahun,\nPekerjaan, Testimoni, Foto"]
+                ALM_AKSI -->|Edit| ALM_EDIT["Edit Data Alumni"]
+                ALM_AKSI -->|Toggle Aktif| ALM_TOGGLE["Aktifkan / Nonaktifkan"]
+                ALM_AKSI -->|Hapus| ALM_DEL["Hapus Alumni"]
+                ALM_CREATE --> ALM_LIST
+                ALM_EDIT --> ALM_LIST
+                ALM_TOGGLE --> ALM_LIST
+                ALM_DEL --> ALM_LIST
+
+                %% ===== HOMEPAGE =====
+                MENU -->|Homepage| HMP_PAGE["Halaman Kelola Homepage\n/admin/settings\n\nPreview + Upload Gambar"]
+                HMP_PAGE --> HMP_AKSI{"Aksi Homepage"}
+                HMP_AKSI -->|Upload Logo| HMP_LOGO["Ganti Logo Website\nTampil di Navbar"]
+                HMP_AKSI -->|Upload Hero 1| HMP_H1["Ganti Hero Slide 1"]
+                HMP_AKSI -->|Upload Hero 2| HMP_H2["Ganti Hero Slide 2"]
+                HMP_AKSI -->|Upload Hero 3| HMP_H3["Ganti Hero Slide 3"]
+                HMP_LOGO --> HMP_SAVE["Klik Simpan Perubahan"]
+                HMP_H1 --> HMP_SAVE
+                HMP_H2 --> HMP_SAVE
+                HMP_H3 --> HMP_SAVE
+                HMP_SAVE --> HMP_DONE["Gambar Tersimpan\nHomepage Terupdate"]
+                HMP_DONE --> HMP_PAGE
+
+                %% ===== LOGOUT =====
+                DASH --> LOGOUT["Logout\nHapus Session Admin"]
+                LOGOUT --> START
+
+                style START fill:#dbeafe,stroke:#3b82f6,stroke-width:2px
+                style AUTH fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style ERR_LOGIN fill:#fee2e2,stroke:#ef4444,stroke-width:2px
+                style SESSION fill:#e0e7ff,stroke:#6366f1,stroke-width:2px
+                style DASH fill:#d1fae5,stroke:#10b981,stroke-width:2px
+                style MENU fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style STD_AKSI fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style STD_STATUS fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style STD_DEL fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style STD_DELETED fill:#fee2e2,stroke:#ef4444,stroke-width:2px
+                style STD_REJ fill:#fee2e2,stroke:#ef4444,stroke-width:2px
+                style STD_ACC fill:#d1fae5,stroke:#10b981,stroke-width:2px
+                style NEWS_AKSI fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style NEWS_DEL fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style NEWS_DELETED fill:#fee2e2,stroke:#ef4444,stroke-width:2px
+                style ESK_AKSI fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style ESK_DEL fill:#fee2e2,stroke:#ef4444,stroke-width:2px
+                style ORG_AKSI fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style ORG_DEL fill:#fee2e2,stroke:#ef4444,stroke-width:2px
+                style ALM_AKSI fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style ALM_DEL fill:#fee2e2,stroke:#ef4444,stroke-width:2px
+                style HMP_AKSI fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+                style HMP_DONE fill:#d1fae5,stroke:#10b981,stroke-width:2px
+            </div>
+        </div>
+    </div>
+
+    <!-- END PAGE -->
+    <div class="flowchart-page page-break" style="text-align: center; padding: 80px 48px;">
+        <h2 style="font-size: 26px; font-weight: 800; color: #1E2188; margin-bottom: 10px;">Akhir Dokumen</h2>
+        <p style="color: #64748b; font-size: 14px; max-width: 500px; margin: 0 auto; line-height: 1.7;">
+            Dokumen ini mencakup seluruh alur website SMK Metland School,
+            dipisahkan menjadi 2 flowchart utama: Pengguna dan Admin.
+        </p>
+        <div
+            style="margin-top: 40px; padding: 16px 24px; background: #f8fafc; border-radius: 10px; display: inline-block;">
+            <p style="font-size: 12px; color: #94a3b8;">
+                Flowchart Website SMK Metland School<br>
+                Maret 2026 | Versi 1.0 | lomba-ms.test
+            </p>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#e0e7ff',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#6366f1',
+                lineColor: '#94a3b8',
+                secondaryColor: '#f8fafc',
+                tertiaryColor: '#fef3c7',
+                fontSize: '14px',
+                fontFamily: 'Inter, sans-serif'
+            },
+            flowchart: {
+                htmlLabels: true,
+                curve: 'basis',
+                nodeSpacing: 30,
+                rankSpacing: 40,
+                padding: 12,
+                useMaxWidth: false
+            }
+        });
+    </script>
+
+</body>
+
+</html>
