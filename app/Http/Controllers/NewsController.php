@@ -143,7 +143,6 @@ class NewsController extends Controller
             ->limit(3)
             ->get();
 
-        // Recommended news (popular from all categories, excluding current & related)
         $excludeIds = $relatedNews->pluck('id')->push($news->id)->toArray();
         $recommendedNews = News::where('is_published', true)
             ->whereNotIn('id', $excludeIds)
