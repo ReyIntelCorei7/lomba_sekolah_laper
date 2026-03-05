@@ -1,157 +1,217 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Website Settings')
+@section('title', 'Homepage')
 
 @section('content')
 <div class="space-y-6">
-    <!-- Success Message -->
+
+    {{-- Success Message --}}
     @if(session('success'))
-        <div class="bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/20 rounded-lg p-4">
-            <div class="flex">
-                <div class="flex-shrink-0">
-                    <svg class="h-5 w-5 text-green-400 dark:text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                    </svg>
-                </div>
-                <div class="ml-3">
-                    <p class="text-sm font-medium text-green-800 dark:text-green-400">{{ session('success') }}</p>
-                </div>
-            </div>
+        <div class="p-4 bg-green-500/10 border border-green-500/20 rounded-xl text-green-400 flex items-center gap-3">
+            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            {{ session('success') }}
         </div>
     @endif
 
-    <!-- Header -->
+    {{-- Header --}}
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Website Settings</h1>
-            <p class="mt-1 text-sm text-gray-500 dark:text-slate-400">
-                Configure your website content and appearance
-            </p>
+            <h1 class="text-2xl font-bold text-white">Homepage</h1>
+            <p class="mt-1 text-sm text-slate-400">Kelola gambar-gambar yang tampil di halaman utama website</p>
         </div>
+        <a href="{{ url('/') }}" target="_blank"
+           class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-blue-400 border border-blue-500/30 rounded-lg hover:bg-blue-500/10 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+            </svg>
+            Lihat Homepage
+        </a>
     </div>
 
-    @if(count($settings) > 0)
-    <!-- Settings Form -->
+    @php
+        $heroSetting1 = \App\Models\WebsiteSetting::where('key', 'hero_image_1')->first();
+        $heroSetting2 = \App\Models\WebsiteSetting::where('key', 'hero_image_2')->first();
+        $heroSetting3 = \App\Models\WebsiteSetting::where('key', 'hero_image_3')->first();
+        $logoSetting  = \App\Models\WebsiteSetting::where('key', 'logo_image')->first();
+
+        $hero1Url = ($heroSetting1 && $heroSetting1->value) ? img_url($heroSetting1->value, 'website_settings', $heroSetting1->id, 'value') : null;
+        $hero2Url = ($heroSetting2 && $heroSetting2->value) ? img_url($heroSetting2->value, 'website_settings', $heroSetting2->id, 'value') : null;
+        $hero3Url = ($heroSetting3 && $heroSetting3->value) ? img_url($heroSetting3->value, 'website_settings', $heroSetting3->id, 'value') : null;
+        $logoUrl  = ($logoSetting  && $logoSetting->value)  ? img_url($logoSetting->value,  'website_settings', $logoSetting->id,  'value') : null;
+    @endphp
+
     <form method="POST" action="{{ route('admin.settings.update') }}" enctype="multipart/form-data">
         @csrf
-        
-        @foreach($settings as $group => $groupSettings)
-            <div class="bg-white dark:bg-slate-800/50 shadow rounded-xl border border-gray-200 dark:border-slate-700 mb-6 overflow-hidden">
-                <div class="px-6 py-4 border-b border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800/80">
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-white capitalize">{{ str_replace('_', ' ', $group) }} Settings</h3>
+
+        {{-- ============================================================ --}}
+        {{-- LOGO SECTION --}}
+        {{-- ============================================================ --}}
+        <div class="bg-slate-800/50 rounded-2xl border border-slate-700 overflow-hidden mb-6">
+            {{-- Card Header --}}
+            <div class="px-6 py-4 border-b border-slate-700 flex items-center gap-3">
+                <div class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                    <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
                 </div>
-                
-                <div class="px-6 py-6 space-y-6">
-                    @foreach($groupSettings as $setting)
-                        <div>
-                            <label for="settings_{{ $setting->key }}" class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
-                                {{ $setting->label }}
-                                @if($setting->description)
-                                    <span class="text-gray-500 dark:text-slate-500 font-normal text-xs">- {{ $setting->description }}</span>
-                                @endif
-                            </label>
-                            
-                            @if($setting->type === 'text')
-                                <input type="text" 
-                                       name="settings[{{ $setting->key }}]" 
-                                       id="settings_{{ $setting->key }}"
-                                       value="{{ old('settings.' . $setting->key, $setting->value) }}"
-                                       class="block w-full px-4 py-3 bg-white dark:bg-slate-900 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                            
-                            @elseif($setting->type === 'textarea')
-                                <textarea name="settings[{{ $setting->key }}]" 
-                                          id="settings_{{ $setting->key }}"
-                                          rows="4"
-                                          class="block w-full px-4 py-3 bg-white dark:bg-slate-900 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">{{ old('settings.' . $setting->key, $setting->value) }}</textarea>
-                            
-                            @elseif($setting->type === 'boolean')
-                                <div class="mt-1">
-                                    <label class="inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" 
-                                               name="settings[{{ $setting->key }}]" 
-                                               id="settings_{{ $setting->key }}"
-                                               value="true"
-                                               {{ old('settings.' . $setting->key, $setting->value) === 'true' ? 'checked' : '' }}
-                                               class="h-5 w-5 rounded border-gray-300 dark:border-slate-600 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 dark:bg-slate-900">
-                                        <span class="ml-3 text-sm text-gray-700 dark:text-slate-300">Enable</span>
-                                    </label>
-                                </div>
-                            
-                            @elseif($setting->type === 'date')
-                                <input type="date" 
-                                       name="settings[{{ $setting->key }}]" 
-                                       id="settings_{{ $setting->key }}"
-                                       value="{{ old('settings.' . $setting->key, $setting->value) }}"
-                                       class="block w-full px-4 py-3 bg-white dark:bg-slate-900 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
-                            
-                            @elseif($setting->type === 'image')
-                                <div class="mt-1">
-                                    @if($setting->value)
-                                        <div class="mb-3">
-                                            @php
-                                                $imageUrl = img_url($setting->value, 'website_settings', $setting->id, 'value');
-                                            @endphp
-                                            <div class="relative inline-block group">
-                                                <img src="{{ $imageUrl }}" 
-                                                     alt="{{ $setting->label }}" 
-                                                     class="h-24 w-24 object-cover rounded-lg border border-gray-200 dark:border-slate-700 shadow-sm">
-                                            </div>
-                                        </div>
-                                    @endif
-                                    <input type="file" 
-                                           name="settings[{{ $setting->key }}]" 
-                                           id="settings_{{ $setting->key }}"
-                                           accept="image/*"
-                                           class="block w-full text-sm text-gray-500 dark:text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 dark:file:bg-blue-900/30 dark:file:text-blue-400 hover:file:bg-blue-100 dark:hover:file:bg-blue-900/50 transition-colors">
-                                </div>
-                            
-                            @elseif($setting->type === 'color')
-                                <div class="flex items-center gap-4">
-                                    <input type="color" 
-                                           name="settings[{{ $setting->key }}]" 
-                                           id="settings_{{ $setting->key }}"
-                                           value="{{ old('settings.' . $setting->key, $setting->value) }}"
-                                           class="h-12 w-20 p-1 block bg-white dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded-lg cursor-pointer">
-                                    <span class="text-sm font-mono text-gray-600 dark:text-slate-400 bg-gray-100 dark:bg-slate-800 px-3 py-2 rounded-lg border border-gray-200 dark:border-slate-600">
-                                        {{ old('settings.' . $setting->key, $setting->value) }}
+                <div>
+                    <h3 class="font-semibold text-white">Logo Website</h3>
+                    <p class="text-xs text-slate-400">Tampil di pojok kiri atas navigasi</p>
+                </div>
+                @if($logoUrl)
+                    <span class="ml-auto inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-500/15 text-green-400">
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        Sudah ada
+                    </span>
+                @else
+                    <span class="ml-auto inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/15 text-amber-400">
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                        Belum ada
+                    </span>
+                @endif
+            </div>
+
+            <div class="p-6">
+                <div class="flex items-center gap-6">
+                    {{-- Preview --}}
+                    <div class="flex-shrink-0">
+                        @if($logoUrl)
+                            <div class="w-20 h-20 rounded-xl overflow-hidden border-2 border-slate-600 bg-slate-900 flex items-center justify-center">
+                                <img src="{{ $logoUrl }}" alt="Logo" class="w-full h-full object-contain p-1">
+                            </div>
+                        @else
+                            <div class="w-20 h-20 rounded-xl border-2 border-dashed border-slate-600 bg-slate-900 flex flex-col items-center justify-center gap-1">
+                                <svg class="w-8 h-8 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                <span class="text-[10px] text-slate-500">Logo</span>
+                            </div>
+                        @endif
+                    </div>
+
+                    {{-- Upload --}}
+                    <div class="flex-1">
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Upload Logo Baru</label>
+                        <input type="file" name="settings[logo_image]" id="settings_logo_image" accept="image/*"
+                               class="block w-full text-sm text-slate-400
+                                      file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0
+                                      file:text-sm file:font-semibold file:bg-purple-500/20 file:text-purple-400
+                                      hover:file:bg-purple-500/30 transition-colors">
+                        <p class="mt-2 text-xs text-slate-500">Rekomendasi: format PNG/SVG, latar transparan, min. 200×200px</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- ============================================================ --}}
+        {{-- HERO SLIDER SECTION --}}
+        {{-- ============================================================ --}}
+        <div class="bg-slate-800/50 rounded-2xl border border-slate-700 overflow-hidden mb-6">
+            {{-- Card Header --}}
+            <div class="px-6 py-4 border-b border-slate-700 flex items-center gap-3">
+                <div class="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                    <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-white">Gambar Hero Slider</h3>
+                    <p class="text-xs text-slate-400">3 gambar yang berganti otomatis di bagian atas homepage</p>
+                </div>
+            </div>
+
+            <div class="p-6">
+                {{-- Info Box --}}
+                <div class="flex items-start gap-3 p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl mb-6">
+                    <svg class="w-4 h-4 mt-0.5 text-blue-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                    </svg>
+                    <p class="text-xs text-blue-300 leading-relaxed">
+                        Gunakan gambar beresolusi tinggi <strong>(min. 1920×1080)</strong> untuk hasil terbaik.
+                        Ketiga gambar akan tampil sebagai slider otomatis. Jika belum diupload, homepage akan menampilkan gambar default.
+                    </p>
+                </div>
+
+                {{-- 3 Hero Image Cards --}}
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    @php
+                        $heroImages = [
+                            ['key' => 'hero_image_1', 'label' => 'Slide 1', 'url' => $hero1Url, 'color' => 'blue'],
+                            ['key' => 'hero_image_2', 'label' => 'Slide 2', 'url' => $hero2Url, 'color' => 'indigo'],
+                            ['key' => 'hero_image_3', 'label' => 'Slide 3', 'url' => $hero3Url, 'color' => 'violet'],
+                        ];
+                    @endphp
+
+                    @foreach($heroImages as $i => $hero)
+                    <div class="space-y-3">
+                        {{-- Image Preview --}}
+                        <div class="relative rounded-xl overflow-hidden border-2 aspect-video bg-slate-900
+                            {{ $hero['url'] ? 'border-'.$hero['color'].'-500/40' : 'border-dashed border-slate-600' }} group">
+                            @if($hero['url'])
+                                <img src="{{ $hero['url'] }}" alt="{{ $hero['label'] }}" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-3">
+                                    <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-bold bg-white/20 backdrop-blur-sm text-white">
+                                        <svg class="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        {{ $hero['label'] }}
                                     </span>
                                 </div>
-                            
                             @else
-                                <input type="text" 
-                                       name="settings[{{ $setting->key }}]" 
-                                       id="settings_{{ $setting->key }}"
-                                       value="{{ old('settings.' . $setting->key, $setting->value) }}"
-                                       class="block w-full px-4 py-3 bg-white dark:bg-slate-900 border border-gray-300 dark:border-slate-600 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                <div class="w-full h-full flex flex-col items-center justify-center gap-2 text-slate-500">
+                                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                    <span class="text-xs font-medium">{{ $hero['label'] }} — Kosong</span>
+                                    <span class="text-[10px]">Upload gambar di bawah</span>
+                                </div>
                             @endif
                         </div>
+
+                        {{-- Upload + Status --}}
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <label class="text-xs font-medium text-slate-400">{{ $hero['label'] }}</label>
+                                @if($hero['url'])
+                                    <span class="inline-flex items-center gap-1 text-[10px] text-green-400 font-medium">
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        Sudah ada
+                                    </span>
+                                @else
+                                    <span class="inline-flex items-center gap-1 text-[10px] text-amber-400 font-medium">
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                                        Belum ada
+                                    </span>
+                                @endif
+                            </div>
+                            <input type="file"
+                                   name="settings[{{ $hero['key'] }}]"
+                                   id="settings_{{ $hero['key'] }}"
+                                   accept="image/*"
+                                   class="block w-full text-xs text-slate-400
+                                          file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0
+                                          file:text-xs file:font-semibold file:bg-blue-500/20 file:text-blue-400
+                                          hover:file:bg-blue-500/30 transition-colors">
+                        </div>
+                    </div>
                     @endforeach
                 </div>
             </div>
-        @endforeach
-        
-        <!-- Submit Button -->
-        <div class="bg-white dark:bg-slate-800/50 shadow rounded-xl border border-gray-200 dark:border-slate-700 px-6 py-4">
-            <div class="flex justify-end">
-                <button type="submit" 
-                        class="inline-flex items-center px-6 py-3 border border-transparent rounded-lg shadow-lg shadow-blue-600/20 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Save Settings
-                </button>
-            </div>
         </div>
+
+        {{-- ============================================================ --}}
+        {{-- SUBMIT BUTTON --}}
+        {{-- ============================================================ --}}
+        <div class="flex justify-end">
+            <button type="submit"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-xl shadow-lg shadow-blue-600/20 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                Simpan Perubahan
+            </button>
+        </div>
+
     </form>
-    @else
-    <div class="bg-white dark:bg-slate-800/50 shadow rounded-xl border border-gray-200 dark:border-slate-700 p-8 text-center">
-        <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-        </svg>
-        <h3 class="mt-2 text-sm font-bold text-gray-900 dark:text-white">No settings configured</h3>
-        <p class="mt-1 text-sm text-gray-500 dark:text-slate-400">Website settings will appear here once they are configured.</p>
-    </div>
-    @endif
 </div>
 @endsection

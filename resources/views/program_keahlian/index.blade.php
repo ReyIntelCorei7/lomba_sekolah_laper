@@ -188,10 +188,10 @@
             </div>
 
             <!-- Programs Grid - Static -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+            <div class="flex flex-wrap justify-center gap-8 lg:gap-10">
 
                 <!-- Akuntansi -->
-                <a href="{{ route('prokeh.akuntansi') }}" class="program-card group">
+                <a href="{{ route('prokeh.akuntansi') }}" class="program-card group w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.666rem)]">
                     <div class="program-card-inner glow relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-full">
                         <div class="h-2 bg-gradient-to-r from-[#1E2188] to-blue-600"></div>
                         <div class="pt-8 pb-4 px-6">
@@ -216,7 +216,7 @@
                 </a>
 
                 <!-- DKV -->
-                <a href="{{ route('prokeh.dkv') }}" class="program-card group">
+                <a href="{{ route('prokeh.dkv') }}" class="program-card group w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.666rem)]">
                     <div class="program-card-inner glow relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-full">
                         <div class="h-2 bg-gradient-to-r from-blue-500 to-indigo-600"></div>
                         <div class="pt-8 pb-4 px-6">
@@ -241,7 +241,7 @@
                 </a>
 
                 <!-- Perhotelan -->
-                <a href="{{ route('prokeh.hotel') }}" class="program-card group">
+                <a href="{{ route('prokeh.hotel') }}" class="program-card group w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.666rem)]">
                     <div class="program-card-inner glow relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-full">
                         <div class="h-2 bg-gradient-to-r from-indigo-500 to-blue-700"></div>
                         <div class="pt-8 pb-4 px-6">
@@ -266,7 +266,7 @@
                 </a>
 
                 <!-- Kuliner -->
-                <a href="{{ route('prokeh.kuliner') }}" class="program-card group">
+                <a href="{{ route('prokeh.kuliner') }}" class="program-card group w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.666rem)]">
                     <div class="program-card-inner glow relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-full">
                         <div class="h-2 bg-gradient-to-r from-blue-600 to-[#1E2188]"></div>
                         <div class="pt-8 pb-4 px-6">
@@ -291,7 +291,7 @@
                 </a>
 
                 <!-- PPLG -->
-                <a href="{{ route('prokeh.pplg') }}" class="program-card group">
+                <a href="{{ route('prokeh.pplg') }}" class="program-card group w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.666rem)]">
                     <div class="program-card-inner glow relative bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-full">
                         <div class="h-2 bg-gradient-to-r from-indigo-600 to-blue-600"></div>
                         <div class="pt-8 pb-4 px-6">

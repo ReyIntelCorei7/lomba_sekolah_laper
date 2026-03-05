@@ -4,15 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\Auditable;
 
 class Student extends Model
 {
-    use HasFactory;
+    use HasFactory, Auditable;
 
     protected $fillable = [
         'registration_number',
         'full_name',
         'email',
+        'email_verified_at',
+        'email_verification_token',
         'phone',
         'gender',
         'birth_date',
@@ -36,7 +39,8 @@ class Student extends Model
     protected $casts = [
         'birth_date' => 'date',
         'registered_at' => 'datetime',
-        'average_grade' => 'decimal:2'
+        'average_grade' => 'decimal:2',
+        'email_verified_at' => 'datetime',
     ];
 
     // Relationships
@@ -77,6 +81,11 @@ class Student extends Model
         ];
 
         return $badges[$this->status] ?? 'bg-gray-100 text-gray-800';
+    }
+
+    public function isEmailVerified(): bool
+    {
+        return $this->email_verified_at !== null;
     }
 
     // Generate registration number

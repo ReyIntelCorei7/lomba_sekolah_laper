@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use App\Traits\HandlesBase64Images;
+use App\Services\FileUploadScanner;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -244,6 +245,11 @@ class NewsController extends Controller
         }
 
         if ($request->hasFile('image')) {
+            $scanner = new FileUploadScanner();
+            $result = $scanner->scan($request->file('image'), 'image');
+            if (!$result['safe']) {
+                return back()->withErrors(['image' => 'File gambar tidak aman: ' . $result['reason']])->withInput();
+            }
             $data['image'] = $this->convertToBase64($request->file('image'));
         }
 
@@ -293,6 +299,11 @@ class NewsController extends Controller
         }
 
         if ($request->hasFile('image')) {
+            $scanner = new FileUploadScanner();
+            $result = $scanner->scan($request->file('image'), 'image');
+            if (!$result['safe']) {
+                return back()->withErrors(['image' => 'File gambar tidak aman: ' . $result['reason']])->withInput();
+            }
             $data['image'] = $this->convertToBase64($request->file('image'));
         }
 
