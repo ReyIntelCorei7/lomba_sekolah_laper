@@ -202,7 +202,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->name('organizations.toggle-active');
 
         // Alumni
-        Route::resource('alumni', AlumniController::class);
+        Route::resource('alumni', AlumniController::class)->parameters(['alumni' => 'alumni']);
         Route::patch('alumni/{alumni}/toggle-active', [AlumniController::class, 'toggleActive'])
             ->name('alumni.toggle-active');
 
