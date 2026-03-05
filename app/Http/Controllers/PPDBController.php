@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 
 class PPDBController extends Controller
 {
+    use \App\Traits\HandlesBase64Images;
     public function index()
     {
         $programs = Program::active()->get();
@@ -76,17 +77,17 @@ class PPDBController extends Controller
         $data['registered_at'] = now();
         $data['email_verification_token'] = Str::random(64);
 
-        // Handle file uploads
+        // Handle file uploads - convert to base64 for Vercel compatibility
         if ($request->hasFile('photo')) {
-            $data['photo'] = $request->file('photo')->store('students/photos', 'public');
+            $data['photo'] = $this->convertToBase64($request->file('photo'));
         }
 
         if ($request->hasFile('certificate')) {
-            $data['certificate'] = $request->file('certificate')->store('students/certificates', 'public');
+            $data['certificate'] = $this->convertToBase64($request->file('certificate'));
         }
 
         if ($request->hasFile('transcript')) {
-            $data['transcript'] = $request->file('transcript')->store('students/transcripts', 'public');
+            $data['transcript'] = $this->convertToBase64($request->file('transcript'));
         }
 
         $student = Student::create($data);

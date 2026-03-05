@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
+    use \App\Traits\HandlesBase64Images;
+
     public function index(Request $request)
     {
         $query = Student::with('program');
@@ -82,27 +84,17 @@ class StudentController extends Controller
 
         $data = $request->except(['photo', 'certificate', 'transcript']);
 
-        // Handle file uploads
+        // Handle file uploads - convert to base64 for Vercel compatibility
         if ($request->hasFile('photo')) {
-            // Delete old file
-            if ($student->photo) {
-                Storage::disk('public')->delete($student->photo);
-            }
-            $data['photo'] = $request->file('photo')->store('students/photos', 'public');
+            $data['photo'] = $this->convertToBase64($request->file('photo'));
         }
 
         if ($request->hasFile('certificate')) {
-            if ($student->certificate) {
-                Storage::disk('public')->delete($student->certificate);
-            }
-            $data['certificate'] = $request->file('certificate')->store('students/certificates', 'public');
+            $data['certificate'] = $this->convertToBase64($request->file('certificate'));
         }
 
         if ($request->hasFile('transcript')) {
-            if ($student->transcript) {
-                Storage::disk('public')->delete($student->transcript);
-            }
-            $data['transcript'] = $request->file('transcript')->store('students/transcripts', 'public');
+            $data['transcript'] = $this->convertToBase64($request->file('transcript'));
         }
 
         $student->update($data);
@@ -113,17 +105,6 @@ class StudentController extends Controller
 
     public function destroy(Student $student)
     {
-        // Delete associated files
-        if ($student->photo) {
-            Storage::delete($student->photo);
-        }
-        if ($student->certificate) {
-            Storage::delete($student->certificate);
-        }
-        if ($student->transcript) {
-            Storage::delete($student->transcript);
-        }
-
         $student->delete();
 
         return redirect()->route('admin.students.index')
