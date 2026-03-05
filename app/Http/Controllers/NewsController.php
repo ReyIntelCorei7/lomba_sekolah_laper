@@ -142,7 +142,16 @@ class NewsController extends Controller
             ->limit(3)
             ->get();
 
-        return view('news.show', compact('news', 'relatedNews'));
+        // Recommended news (popular from all categories, excluding current & related)
+        $excludeIds = $relatedNews->pluck('id')->push($news->id)->toArray();
+        $recommendedNews = News::where('is_published', true)
+            ->whereNotIn('id', $excludeIds)
+            ->orderBy('views', 'desc')
+            ->orderBy('published_at', 'desc')
+            ->limit(5)
+            ->get();
+
+        return view('news.show', compact('news', 'relatedNews', 'recommendedNews'));
     }
 
     public function category($category)
