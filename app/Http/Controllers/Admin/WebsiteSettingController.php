@@ -29,10 +29,10 @@ class WebsiteSettingController extends Controller
 
     public function update(Request $request)
     {
-        $settings = $request->input('settings', []);
+        $inputSettings = $request->input('settings', []);
 
-        // Handle regular settings first
-        foreach ($settings as $key => $value) {
+        // Handle regular (non-image) settings
+        foreach ($inputSettings as $key => $value) {
             $setting = WebsiteSetting::where('key', $key)->first();
 
             if ($setting && $setting->type !== 'image') {
@@ -40,19 +40,19 @@ class WebsiteSettingController extends Controller
             }
         }
 
-        // Handle image uploads - convert to base64 
-        if ($request->hasFile('settings')) {
-            $files = $request->file('settings');
+        // Handle image uploads - check each image setting individually
+        $imageSettings = WebsiteSetting::where('type', 'image')->get();
 
-            foreach ($files as $key => $file) {
+        foreach ($imageSettings as $setting) {
+            $fileKey = 'settings.' . $setting->key;
+
+            if ($request->hasFile($fileKey)) {
+                $file = $request->file($fileKey);
+
                 if ($file && $file->isValid()) {
-                    $setting = WebsiteSetting::where('key', $key)->where('type', 'image')->first();
-
-                    if ($setting) {
-                        // Convert to base64 and store in DB
-                        $base64 = $this->convertToBase64($file);
-                        $setting->update(['value' => $base64]);
-                    }
+                    // Convert to base64 and store in DB
+                    $base64 = $this->convertToBase64($file);
+                    $setting->update(['value' => $base64]);
                 }
             }
         }
