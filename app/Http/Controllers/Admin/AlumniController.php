@@ -34,7 +34,7 @@ class AlumniController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Alumni::query();
+        $query = Alumni::withoutPhoto();
 
         // Search
         if ($request->filled('search')) {
@@ -117,6 +117,7 @@ class AlumniController extends Controller
 
     /**
      * Show the form for editing the specified alumni.
+     * Note: $alumni is loaded WITHOUT photo column via resolveRouteBinding.
      */
     public function edit(Alumni $alumni)
     {
@@ -125,6 +126,7 @@ class AlumniController extends Controller
 
     /**
      * Update the specified alumni.
+     * Note: $alumni is loaded WITHOUT photo column via resolveRouteBinding.
      */
     public function update(Request $request, Alumni $alumni)
     {

@@ -12,7 +12,7 @@ class AlumniPublicController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Alumni::active();
+        $query = Alumni::withoutPhoto()->active();
 
         // Filter by graduation year
         if ($request->filled('year')) {
