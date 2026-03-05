@@ -39,9 +39,6 @@ class TwoFactorController extends Controller
         );
 
         // Generate QR code as SVG using BaconQrCode
-        $writer = new \BaconQrCode\Writer(
-            new \BaconQrCode\Renderer\Image\SvgImageBackEnd()
-        );
         $renderer = new \BaconQrCode\Renderer\ImageRenderer(
             new \BaconQrCode\Renderer\RendererStyle\RendererStyle(200),
             new \BaconQrCode\Renderer\Image\SvgImageBackEnd()
