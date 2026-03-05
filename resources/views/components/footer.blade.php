@@ -1,9 +1,6 @@
 @php
     if (!isset($logoUrl) || !$logoUrl) {
-        $logoSetting = \App\Models\WebsiteSetting::where('key', 'logo_image')->first();
-        $logoUrl = ($logoSetting && $logoSetting->value) 
-            ? img_url($logoSetting->value, 'website_settings', $logoSetting->id, 'value') 
-            : asset('image/logometland.png');
+        $logoUrl = asset('image/logometland.png');
     }
     $settings = $settings ?? [];
 @endphp

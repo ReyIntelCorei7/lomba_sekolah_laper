@@ -328,10 +328,7 @@
     <div class="loading-screen" :class="{ 'hidden': !isLoading }">
         <div class="text-center relative z-10 flex flex-col items-center">
             @php
-            $logoSetting = \App\Models\WebsiteSetting::where('key', 'logo_image')->first();
-            $logoUrl = ($logoSetting && $logoSetting->value) 
-                ? img_url($logoSetting->value, 'website_settings', $logoSetting->id, 'value') 
-                : asset('image/logometland.png');
+            $logoUrl = asset('image/logometland.png');
             @endphp
             <!-- Logo Animation -->
             <div class="relative w-28 h-28 mb-8">
