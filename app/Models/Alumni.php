@@ -100,6 +100,11 @@ class Alumni extends Model
     public function getPhotoUrlAttribute(): string
     {
         if ($this->photo) {
+            // If stored as base64, use the image serving route
+            if (str_starts_with($this->photo, 'data:')) {
+                return route('image.show', ['table' => 'alumni', 'id' => $this->id, 'column' => 'photo']);
+            }
+            // Otherwise it's a file path
             return asset('storage/' . $this->photo);
         }
         
