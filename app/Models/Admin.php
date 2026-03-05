@@ -20,14 +20,11 @@ class Admin extends Authenticatable
         'role',
         'is_active',
         'last_login_at',
-        'google2fa_secret',
-        'google2fa_enabled',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
-        'google2fa_secret',
     ];
 
     protected $casts = [
@@ -35,7 +32,6 @@ class Admin extends Authenticatable
         'password' => 'hashed',
         'is_active' => 'boolean',
         'last_login_at' => 'datetime',
-        'google2fa_enabled' => 'boolean',
     ];
 
     // Scopes

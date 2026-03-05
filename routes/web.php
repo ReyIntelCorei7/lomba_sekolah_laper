@@ -6,7 +6,7 @@ use App\Http\Controllers\EskulController;
 use App\Http\Controllers\OrganisasiController;
 use App\Http\Controllers\AlumniPublicController;
 use App\Http\Controllers\Admin\Auth\AdminAuthController;
-use App\Http\Controllers\Admin\Auth\TwoFactorController;
+
 use App\Http\Controllers\Admin\AlumniController;
 use App\Http\Controllers\Admin\AuditLogController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -157,24 +157,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/login', [AdminAuthController::class, 'login'])->name('login.post');
     });
 
-    // 2FA Challenge (authenticated but not 2FA verified)
-    Route::middleware(['admin.auth'])->group(function () {
-        Route::get('/2fa/challenge', [TwoFactorController::class, 'showChallenge'])->name('2fa.challenge');
-        Route::post('/2fa/verify', [TwoFactorController::class, 'verifyChallenge'])->name('2fa.verify');
-    });
 
-    // Authenticated + 2FA verified routes
-    Route::middleware(['admin.auth', 'two-factor'])->group(function () {
+
+    // Authenticated routes
+    Route::middleware(['admin.auth'])->group(function () {
         // Logout
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
         // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        // 2FA Setup
-        Route::get('/2fa/setup', [TwoFactorController::class, 'setup'])->name('2fa.setup');
-        Route::post('/2fa/enable', [TwoFactorController::class, 'enable'])->name('2fa.enable');
-        Route::post('/2fa/disable', [TwoFactorController::class, 'disable'])->name('2fa.disable');
+
 
         // Students
         Route::resource('students', StudentController::class)->except(['create', 'store']);
