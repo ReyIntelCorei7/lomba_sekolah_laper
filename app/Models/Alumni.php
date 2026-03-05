@@ -41,7 +41,16 @@ class Alumni extends Model
 
         static::creating(function ($alumni) {
             if (empty($alumni->slug)) {
-                $alumni->slug = Str::slug($alumni->name . '-' . $alumni->graduation_year);
+                $baseSlug = Str::slug($alumni->name . '-' . $alumni->graduation_year);
+                $slug = $baseSlug;
+                $counter = 2;
+
+                while (static::where('slug', $slug)->exists()) {
+                    $slug = $baseSlug . '-' . $counter;
+                    $counter++;
+                }
+
+                $alumni->slug = $slug;
             }
         });
     }

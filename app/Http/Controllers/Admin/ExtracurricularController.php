@@ -13,6 +13,23 @@ class ExtracurricularController extends Controller
     use HandlesBase64Images;
 
     /**
+     * Generate a unique slug for extracurricular.
+     */
+    private function generateUniqueSlug(string $name, ?int $excludeId = null): string
+    {
+        $baseSlug = Str::slug($name);
+        $slug = $baseSlug;
+        $counter = 2;
+
+        while (Extracurricular::where('slug', $slug)->when($excludeId, fn($q) => $q->where('id', '!=', $excludeId))->exists()) {
+            $slug = $baseSlug . '-' . $counter;
+            $counter++;
+        }
+
+        return $slug;
+    }
+
+    /**
      * Display a listing of extracurriculars.
      */
     public function index(Request $request)
@@ -69,8 +86,8 @@ class ExtracurricularController extends Controller
             'order' => 'nullable|integer',
         ]);
 
-        // Generate slug
-        $validated['slug'] = Str::slug($validated['name']);
+        // Generate unique slug
+        $validated['slug'] = $this->generateUniqueSlug($validated['name']);
 
         // Handle image upload
         if ($request->hasFile('image')) {
@@ -121,7 +138,7 @@ class ExtracurricularController extends Controller
 
         // Generate new slug if name changed
         if ($extracurricular->name !== $validated['name']) {
-            $validated['slug'] = Str::slug($validated['name']);
+            $validated['slug'] = $this->generateUniqueSlug($validated['name'], $extracurricular->id);
         }
 
         // Handle image upload

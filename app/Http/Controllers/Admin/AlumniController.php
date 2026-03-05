@@ -13,6 +13,23 @@ class AlumniController extends Controller
     use HandlesBase64Images;
 
     /**
+     * Generate a unique slug for alumni.
+     */
+    private function generateUniqueSlug(string $name, int $year, ?int $excludeId = null): string
+    {
+        $baseSlug = Str::slug($name . '-' . $year);
+        $slug = $baseSlug;
+        $counter = 2;
+
+        while (Alumni::where('slug', $slug)->when($excludeId, fn($q) => $q->where('id', '!=', $excludeId))->exists()) {
+            $slug = $baseSlug . '-' . $counter;
+            $counter++;
+        }
+
+        return $slug;
+    }
+
+    /**
      * Display a listing of alumni.
      */
     public function index(Request $request)
@@ -80,8 +97,8 @@ class AlumniController extends Controller
             'order' => 'nullable|integer',
         ]);
 
-        // Generate slug
-        $validated['slug'] = Str::slug($validated['name'] . '-' . $validated['graduation_year']);
+        // Generate unique slug
+        $validated['slug'] = $this->generateUniqueSlug($validated['name'], $validated['graduation_year']);
 
         // Handle photo upload
         if ($request->hasFile('photo')) {
@@ -126,7 +143,7 @@ class AlumniController extends Controller
 
         // Generate new slug if name or year changed
         if ($alumni->name !== $validated['name'] || $alumni->graduation_year !== $validated['graduation_year']) {
-            $validated['slug'] = Str::slug($validated['name'] . '-' . $validated['graduation_year']);
+            $validated['slug'] = $this->generateUniqueSlug($validated['name'], $validated['graduation_year'], $alumni->id);
         }
 
         // Handle photo upload

@@ -13,6 +13,23 @@ class OrganizationController extends Controller
     use HandlesBase64Images;
 
     /**
+     * Generate a unique slug for organization.
+     */
+    private function generateUniqueSlug(string $name, ?int $excludeId = null): string
+    {
+        $baseSlug = Str::slug($name);
+        $slug = $baseSlug;
+        $counter = 2;
+
+        while (Organization::where('slug', $slug)->when($excludeId, fn($q) => $q->where('id', '!=', $excludeId))->exists()) {
+            $slug = $baseSlug . '-' . $counter;
+            $counter++;
+        }
+
+        return $slug;
+    }
+
+    /**
      * Display a listing of organizations.
      */
     public function index(Request $request)
@@ -72,8 +89,8 @@ class OrganizationController extends Controller
             'order' => 'nullable|integer',
         ]);
 
-        // Generate slug
-        $validated['slug'] = Str::slug($validated['name']);
+        // Generate unique slug
+        $validated['slug'] = $this->generateUniqueSlug($validated['name']);
 
         // Handle logo upload
         if ($request->hasFile('logo')) {
@@ -124,7 +141,7 @@ class OrganizationController extends Controller
 
         // Generate new slug if name changed
         if ($organization->name !== $validated['name']) {
-            $validated['slug'] = Str::slug($validated['name']);
+            $validated['slug'] = $this->generateUniqueSlug($validated['name'], $organization->id);
         }
 
         // Handle logo upload
