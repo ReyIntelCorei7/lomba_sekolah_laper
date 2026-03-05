@@ -288,6 +288,52 @@
                     </div>
                 </div>
                 @endif
+
+                {{-- Recommended News Section --}}
+                @if($recommendedNews->count() > 0)
+                <div class="bg-white rounded-xl shadow-sm p-6 {{ $relatedNews->count() > 0 ? 'mt-6' : 'sticky top-24' }}">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4 pb-3 border-b border-gray-100 flex items-center gap-2">
+                        <i class="fas fa-fire text-orange-500"></i>
+                        <span x-text="lang === 'id' ? 'Rekomendasi Berita' : 'Recommended News'">Rekomendasi Berita</span>
+                    </h3>
+                    <div class="space-y-4">
+                        @foreach($recommendedNews as $index => $recommended)
+                        <a href="{{ route('news.show', $recommended->slug) }}" class="block group">
+                            <div class="flex gap-3 items-start">
+                                {{-- Number badge --}}
+                                <div class="w-7 h-7 flex-shrink-0 rounded-full {{ $index < 3 ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500' }} flex items-center justify-center text-xs font-bold">
+                                    {{ $index + 1 }}
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h4 class="font-semibold text-gray-900 group-hover:text-primary transition line-clamp-2 text-sm mb-1">
+                                        {{ $recommended->title }}
+                                    </h4>
+                                    <div class="flex items-center gap-3 text-xs text-gray-500">
+                                        <span>
+                                            <i class="far fa-calendar-alt mr-1"></i>{{ $recommended->formatted_date }}
+                                        </span>
+                                        <span>
+                                            <i class="far fa-eye mr-1"></i>{{ $recommended->views ?? 0 }}
+                                        </span>
+                                    </div>
+                                </div>
+                                {{-- Thumbnail --}}
+                                <div class="w-16 h-16 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100">
+                                    @if($recommended->image)
+                                    <img src="{{ img_url($recommended->image, 'news', $recommended->id, 'image') }}" alt="{{ $recommended->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    @else
+                                    <img src="{{ asset('image/sekolahsmkmetland.png') }}" alt="{{ $recommended->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    @endif
+                                </div>
+                            </div>
+                        </a>
+                        @if(!$loop->last)
+                        <div class="border-b border-gray-50"></div>
+                        @endif
+                        @endforeach
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </section>
