@@ -176,59 +176,45 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/2fa/enable', [TwoFactorController::class, 'enable'])->name('2fa.enable');
         Route::post('/2fa/disable', [TwoFactorController::class, 'disable'])->name('2fa.disable');
 
-        // Students (with permission check)
-        Route::middleware(['check-permission:manage-students'])->group(function () {
-            Route::resource('students', StudentController::class)->except(['create', 'store']);
-            Route::patch('students/{student}/status', [StudentController::class, 'updateStatus'])
-                ->name('students.update-status');
-            Route::get('students/export', [StudentController::class, 'export'])
-                ->name('students.export');
-        });
+        // Students
+        Route::resource('students', StudentController::class)->except(['create', 'store']);
+        Route::patch('students/{student}/status', [StudentController::class, 'updateStatus'])
+            ->name('students.update-status');
+        Route::get('students/export', [StudentController::class, 'export'])
+            ->name('students.export');
 
-        // News (with permission check)
-        Route::middleware(['check-permission:manage-news'])->group(function () {
-            Route::get('news', [NewsController::class, 'adminIndex'])->name('news.index');
-            Route::get('news/create', [NewsController::class, 'create'])->name('news.create');
-            Route::post('news', [NewsController::class, 'store'])->name('news.store');
-            Route::get('news/{news}', [NewsController::class, 'adminShow'])->name('news.show');
-            Route::get('news/{news}/edit', [NewsController::class, 'edit'])->name('news.edit');
-            Route::put('news/{news}', [NewsController::class, 'update'])->name('news.update');
-            Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
-            Route::patch('news/{news}/toggle-publish', [NewsController::class, 'togglePublish'])
-                ->name('news.toggle-publish');
-        });
+        // News
+        Route::get('news', [NewsController::class, 'adminIndex'])->name('news.index');
+        Route::get('news/create', [NewsController::class, 'create'])->name('news.create');
+        Route::post('news', [NewsController::class, 'store'])->name('news.store');
+        Route::get('news/{news}', [NewsController::class, 'adminShow'])->name('news.show');
+        Route::get('news/{news}/edit', [NewsController::class, 'edit'])->name('news.edit');
+        Route::put('news/{news}', [NewsController::class, 'update'])->name('news.update');
+        Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
+        Route::patch('news/{news}/toggle-publish', [NewsController::class, 'togglePublish'])
+            ->name('news.toggle-publish');
 
-        // Website Settings (with permission check)
-        Route::middleware(['check-permission:manage-settings'])->group(function () {
-            Route::get('settings', [WebsiteSettingController::class, 'index'])->name('settings.index');
-            Route::post('settings', [WebsiteSettingController::class, 'update'])->name('settings.update');
-        });
+        // Website Settings
+        Route::get('settings', [WebsiteSettingController::class, 'index'])->name('settings.index');
+        Route::post('settings', [WebsiteSettingController::class, 'update'])->name('settings.update');
 
-        // Extracurriculars (with permission check)
-        Route::middleware(['check-permission:manage-extracurriculars'])->group(function () {
-            Route::resource('extracurriculars', ExtracurricularController::class);
-            Route::patch('extracurriculars/{extracurricular}/toggle-active', [ExtracurricularController::class, 'toggleActive'])
-                ->name('extracurriculars.toggle-active');
-        });
+        // Extracurriculars
+        Route::resource('extracurriculars', ExtracurricularController::class);
+        Route::patch('extracurriculars/{extracurricular}/toggle-active', [ExtracurricularController::class, 'toggleActive'])
+            ->name('extracurriculars.toggle-active');
 
-        // Organizations (with permission check)
-        Route::middleware(['check-permission:manage-organizations'])->group(function () {
-            Route::resource('organizations', OrganizationController::class);
-            Route::patch('organizations/{organization}/toggle-active', [OrganizationController::class, 'toggleActive'])
-                ->name('organizations.toggle-active');
-        });
+        // Organizations
+        Route::resource('organizations', OrganizationController::class);
+        Route::patch('organizations/{organization}/toggle-active', [OrganizationController::class, 'toggleActive'])
+            ->name('organizations.toggle-active');
 
-        // Alumni (with permission check)
-        Route::middleware(['check-permission:manage-alumni'])->group(function () {
-            Route::resource('alumni', AlumniController::class);
-            Route::patch('alumni/{alumni}/toggle-active', [AlumniController::class, 'toggleActive'])
-                ->name('alumni.toggle-active');
-        });
+        // Alumni
+        Route::resource('alumni', AlumniController::class);
+        Route::patch('alumni/{alumni}/toggle-active', [AlumniController::class, 'toggleActive'])
+            ->name('alumni.toggle-active');
 
-        // Audit Logs (with permission check)
-        Route::middleware(['check-permission:view-audit-logs'])->group(function () {
-            Route::get('audit-logs', [AuditLogController::class, 'index'])->name('audit-logs.index');
-        });
+        // Audit Logs
+        Route::get('audit-logs', [AuditLogController::class, 'index'])->name('audit-logs.index');
 
     });
 });
