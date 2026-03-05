@@ -233,7 +233,7 @@ class NewsController extends Controller
             'is_featured' => 'boolean'
         ]);
 
-        $data = $request->all();
+        $data = $request->except(['image', '_token', '_method']);
         $data['author'] = $data['author'] ?? auth('admin')->user()->name;
         $data['is_published'] = $request->boolean('is_published');
         $data['is_featured'] = $request->boolean('is_featured');
@@ -286,7 +286,7 @@ class NewsController extends Controller
             'is_featured' => 'boolean'
         ]);
 
-        $data = $request->all();
+        $data = $request->except(['image', '_token', '_method']);
         $data['is_published'] = $request->boolean('is_published');
         $data['is_featured'] = $request->boolean('is_featured');
 
