@@ -70,7 +70,7 @@ class PPDBController extends Controller
             }
         }
 
-        $data = $request->all();
+        $data = $request->except(['photo', 'certificate', 'transcript', '_token']);
         $data['registration_type'] = 'online';
         $data['status'] = 'pending';
         $data['registered_at'] = now();

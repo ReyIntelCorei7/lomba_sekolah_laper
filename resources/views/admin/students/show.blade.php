@@ -150,7 +150,7 @@
             <div class="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
                 <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Pas Foto</h3>
                 @if($student->photo)
-                    <img src="{{ url('storage/' . $student->photo) }}" alt="{{ $student->full_name }}" class="w-full rounded-lg object-cover">
+                    <img src="{{ Storage::url($student->photo) }}" alt="{{ $student->full_name }}" class="w-full rounded-lg object-cover">
                 @else
                     <div class="w-full aspect-square bg-gray-100 dark:bg-slate-900 rounded-lg flex items-center justify-center">
                         <div class="text-center">
@@ -172,9 +172,9 @@
                         <p class="text-sm font-medium text-gray-500 dark:text-slate-400 mb-2">Ijazah / SKHUN</p>
                         @if($student->certificate)
                             @if(Str::endsWith(strtolower($student->certificate), ['.jpg', '.jpeg', '.png']))
-                                <img src="{{ url('storage/' . $student->certificate) }}" alt="Ijazah/SKHUN" class="w-full rounded-lg object-cover border border-gray-200 dark:border-slate-600">
+                                <img src="{{ Storage::url($student->certificate) }}" alt="Ijazah/SKHUN" class="w-full rounded-lg object-cover border border-gray-200 dark:border-slate-600">
                             @else
-                                <a href="{{ url('storage/' . $student->certificate) }}" target="_blank" class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 hover:bg-blue-100 dark:hover:bg-blue-500/20 transition-colors">
+                                <a href="{{ Storage::url($student->certificate) }}" target="_blank" class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 hover:bg-blue-100 dark:hover:bg-blue-500/20 transition-colors">
                                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                     </svg>
@@ -191,9 +191,9 @@
                         <p class="text-sm font-medium text-gray-500 dark:text-slate-400 mb-2">Transkrip Nilai</p>
                         @if($student->transcript)
                             @if(Str::endsWith(strtolower($student->transcript), ['.jpg', '.jpeg', '.png']))
-                                <img src="{{ url('storage/' . $student->transcript) }}" alt="Transkrip Nilai" class="w-full rounded-lg object-cover border border-gray-200 dark:border-slate-600">
+                                <img src="{{ Storage::url($student->transcript) }}" alt="Transkrip Nilai" class="w-full rounded-lg object-cover border border-gray-200 dark:border-slate-600">
                             @else
-                                <a href="{{ url('storage/' . $student->transcript) }}" target="_blank" class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 hover:bg-blue-100 dark:hover:bg-blue-500/20 transition-colors">
+                                <a href="{{ Storage::url($student->transcript) }}" target="_blank" class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 hover:bg-blue-100 dark:hover:bg-blue-500/20 transition-colors">
                                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                     </svg>
