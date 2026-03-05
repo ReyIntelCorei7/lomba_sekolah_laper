@@ -149,13 +149,41 @@ class FileUploadScanner
 
     protected function checkFileContent(UploadedFile $file): array
     {
+        $mime = $file->getMimeType();
+        $isImage = str_starts_with($mime, 'image/');
+
         // Read first 8KB to check for dangerous patterns
         $handle = fopen($file->getRealPath(), 'r');
         $content = fread($handle, 8192);
         fclose($handle);
 
-        foreach ($this->dangerousSignatures as $signature) {
-            if (stripos($content, $signature) !== false) {
+        // For text-based dangerous signatures, only check in non-image contexts
+        // or check if they appear at the very start of the file (not randomly in binary data)
+        $textSignatures = ['<?php', '<?=', '<script', '#!/'];
+        $binarySignatures = ['MZ']; // Windows executable
+
+        foreach ($textSignatures as $signature) {
+            if ($isImage) {
+                // For images, only flag if the signature is at the very beginning
+                if (stripos($content, $signature) === 0) {
+                    return [
+                        'safe' => false,
+                        'reason' => 'File contains suspicious content that may indicate it is malicious'
+                    ];
+                }
+            } else {
+                if (stripos($content, $signature) !== false) {
+                    return [
+                        'safe' => false,
+                        'reason' => 'File contains suspicious content that may indicate it is malicious'
+                    ];
+                }
+            }
+        }
+
+        // MZ (Windows executable) - only dangerous at position 0
+        foreach ($binarySignatures as $signature) {
+            if (strpos($content, $signature) === 0) {
                 return [
                     'safe' => false,
                     'reason' => 'File contains suspicious content that may indicate it is malicious'
@@ -163,12 +191,14 @@ class FileUploadScanner
             }
         }
 
-        // Check for null bytes (used in some attacks)
-        if (strpos($content, "\0") !== false && !in_array($file->getMimeType(), ['application/pdf'])) {
-            return [
-                'safe' => false,
-                'reason' => 'File contains suspicious null bytes'
-            ];
+        // Check for null bytes - skip for binary files (images, PDFs) as they naturally contain null bytes
+        if (!$isImage && !in_array($mime, ['application/pdf'])) {
+            if (strpos($content, "\0") !== false) {
+                return [
+                    'safe' => false,
+                    'reason' => 'File contains suspicious null bytes'
+                ];
+            }
         }
 
         return ['safe' => true, 'reason' => ''];
