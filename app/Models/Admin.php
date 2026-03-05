@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Traits\HasRoles;
+use App\Traits\Auditable;
 
 class Admin extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles, Auditable;
 
     protected $fillable = [
         'name',
@@ -17,19 +19,23 @@ class Admin extends Authenticatable
         'password',
         'role',
         'is_active',
-        'last_login_at'
+        'last_login_at',
+        'google2fa_secret',
+        'google2fa_enabled',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
+        'google2fa_secret',
     ];
 
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
         'is_active' => 'boolean',
-        'last_login_at' => 'datetime'
+        'last_login_at' => 'datetime',
+        'google2fa_enabled' => 'boolean',
     ];
 
     // Scopes
@@ -41,12 +47,6 @@ class Admin extends Authenticatable
     public function scopeSuperAdmin($query)
     {
         return $query->where('role', 'super_admin');
-    }
-
-    // Check if admin has role
-    public function hasRole($role)
-    {
-        return $this->role === $role;
     }
 
     // Check if admin is super admin
